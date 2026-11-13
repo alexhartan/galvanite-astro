@@ -30,8 +30,8 @@ const { lead, emphasis, description } = Astro.props;
       data-hero-content
       class="hero-parallax relative flex h-full flex-col opacity-(--hero-content,1) motion-reduce:transform-none"
     >
-      <Container class="flex flex-1 flex-col justify-center pt-56">
-        <h1 class="max-w-headline text-display font-extralight text-white">
+      <Container class="@container flex flex-1 flex-col justify-center pt-56">
+        <h1 class="max-w-headline text-display lg:text-display-half font-extralight text-white">
           {lead} <strong class="font-semibold">{emphasis}</strong>
         </h1>
         <p class="max-w-lead text-lead mt-6 text-white/85">{description}</p>

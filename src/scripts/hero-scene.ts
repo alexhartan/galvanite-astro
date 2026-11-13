@@ -3,6 +3,8 @@ import { FRAGMENT, VERTEX } from './hero-shader';
 
 const SMOOTHING_MS = 140;
 const INTRO_MS = 2200;
+const FADE_START = 0.72;
+const FADE_END = 0.92;
 const MAX_DPR = 1.5;
 const SLOW_FRAME_MS = 40;
 const TARGET_FRAME_MS = 20;
@@ -203,7 +205,10 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
     pointer.x += (pointer.targetX - pointer.x) * ease;
     pointer.y += (pointer.targetY - pointer.y) * ease;
 
-    hero.style.setProperty('--hero-progress', progress.toFixed(4));
+    hero.style.setProperty(
+      '--hero-shift',
+      clamp01(progress / FADE_START).toFixed(4),
+    );
     hero.style.setProperty(
       '--hero-wash',
       smoothstep(0.38, 0.9, progress).toFixed(4),
@@ -214,11 +219,11 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
     );
     hero.style.setProperty(
       '--hero-content',
-      (1 - smoothstep(0.72, 0.92, progress)).toFixed(4),
+      (1 - smoothstep(FADE_START, FADE_END, progress)).toFixed(4),
     );
     hero.style.setProperty(
       '--hero-finale',
-      smoothstep(0.88, 0.98, progress).toFixed(4),
+      smoothstep(FADE_START, FADE_END, progress).toFixed(4),
     );
 
     if (renderer) {
