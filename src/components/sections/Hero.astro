@@ -14,9 +14,9 @@ const { lead, emphasis, description } = Astro.props;
 
 <section
   data-hero
-  class="h-hero-track -mb-hero-overlap from-space-950 to-space-900 relative bg-linear-to-br"
+  class="h-hero-track from-space-950 to-space-900 relative bg-linear-to-br"
 >
-  <div class="sticky top-0 h-svh overflow-hidden">
+  <div data-hero-panel class="sticky top-0 h-svh overflow-hidden">
     <div class="absolute inset-0 bg-white opacity-(--hero-wash,0)"></div>
     <canvas
       data-hero-canvas
@@ -26,7 +26,10 @@ const { lead, emphasis, description } = Astro.props;
     <Container class="absolute inset-0">
       <div class="absolute top-25 bottom-0 left-6 bg-grid/10 w-px"></div>
     </Container>
-    <div class="hero-parallax relative flex h-full flex-col opacity-(--hero-content,1) motion-reduce:transform-none">
+    <div
+      data-hero-content
+      class="hero-parallax relative flex h-full flex-col opacity-(--hero-content,1) motion-reduce:transform-none"
+    >
       <Container class="flex flex-1 flex-col justify-center pt-56">
         <h1 class="max-w-headline text-display font-extralight text-white">
           {lead} <strong class="font-semibold">{emphasis}</strong>
@@ -44,8 +47,28 @@ const { lead, emphasis, description } = Astro.props;
         </Container>
       </div>
     </div>
+    <div data-hero-finale class="absolute inset-0 opacity-(--hero-finale,0)">
+      <slot name="finale" />
+    </div>
   </div>
 </section>
+
+<noscript>
+  <style>
+    [data-hero],
+    [data-hero-panel] {
+      position: static;
+      height: auto;
+    }
+    [data-hero-content] {
+      min-height: 100svh;
+    }
+    [data-hero-finale] {
+      position: static;
+      opacity: 1;
+    }
+  </style>
+</noscript>
 
 <script>
   import { initHeroScene } from '../../scripts/hero-scene';
