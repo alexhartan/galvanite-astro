@@ -23,6 +23,7 @@
   --text-lead--line-height: 1.42;
 
   --container-page: 83rem;
+  --container-page-inset: min(83rem, calc(100% - 8.5rem));
   --container-headline: 8.5em;
   --container-lead: 30rem;
   --container-statement: 16em;
