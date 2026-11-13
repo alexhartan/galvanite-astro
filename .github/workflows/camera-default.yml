@@ -1,0 +1,40 @@
+name: Publish hero animation
+on:
+  workflow_dispatch:
+    inputs:
+      camera:
+        description: Camera path JSON
+        required: true
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: camera-default
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      CAMERA: ${{ inputs.camera }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Validate and write
+        run: |
+          node -e '
+            const c = JSON.parse(process.env.CAMERA);
+            const poses = [c.start, c.end, c.stars];
+            const ok = poses.every((p) => p && Object.values(p).every(Number.isFinite));
+            const easings = ["linear", "ease-in", "ease-out", "ease-in-out"];
+            if (!ok || !easings.includes(c.easing)) process.exit(1);
+            require("fs").writeFileSync("src/scripts/hero-camera.json", JSON.stringify(c, null, 2) + "\n");
+          '
+      - name: Commit and deploy
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Update hero animation default"
+          git push origin main
+          gh workflow run pages.yml --ref main
