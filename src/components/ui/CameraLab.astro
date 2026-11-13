@@ -1,0 +1,310 @@
+---
+const controls = [
+  { key: 'sunrise', label: 'Sunrise', min: -1, max: 1, step: 0.01 },
+  { key: 'x', label: 'Pan X', min: -2, max: 2, step: 0.01 },
+  { key: 'y', label: 'Pan Y', min: -2, max: 2, step: 0.01 },
+  { key: 'rotation', label: 'Rotation', min: -180, max: 180, step: 1 },
+  { key: 'zoom', label: 'Zoom', min: 0.3, max: 3, step: 0.01 },
+];
+const poses = ['start', 'end'];
+const axes = [
+  { key: 'x', label: 'Pan X' },
+  { key: 'y', label: 'Pan Y' },
+  { key: 'rotation', label: 'Rotation' },
+];
+const presets = ['Original', 'Flyover', 'Orbit', 'Push in'];
+const easings = ['linear', 'ease-in', 'ease-out', 'ease-in-out'];
+const button =
+  'min-h-11 rounded-lg bg-white/10 px-3 transition-colors duration-200 ease-out-soft hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white';
+---
+
+<aside
+  data-camera-lab
+  aria-label="Camera controls"
+  class="bg-space-950/85 fixed right-4 bottom-4 z-30 max-h-[calc(100svh-2rem)] w-80 overflow-y-auto rounded-xl p-4 text-sm text-white backdrop-blur-md"
+>
+  <details open>
+    <summary class="flex min-h-11 cursor-pointer items-center font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+      Camera lab
+    </summary>
+    <label class="mt-2 grid grid-cols-[4rem_1fr_3rem] items-center gap-2">
+      Scroll
+      <input
+        data-scrub
+        type="range"
+        min="0"
+        max="1"
+        step="0.001"
+        value="0"
+        class="accent-white"
+      />
+      <output data-scrub-value class="text-right tabular-nums">
+        0%
+      </output>
+    </label>
+    {controls.map(({ key, label, ...range }) => (
+      <div
+        role="group"
+        aria-label={label}
+        class="mt-3 border-t border-white/15 pt-3"
+      >
+        <p class="mb-1 font-semibold">{label}</p>
+        {poses.map((pose) => (
+          <label class="grid grid-cols-[4rem_1fr_3rem] items-center gap-2 capitalize">
+            {pose}
+            <input
+              data-pose={pose}
+              data-key={key}
+              type="range"
+              class="accent-white"
+              {...range}
+            />
+            <output class="text-right tabular-nums" />
+          </label>
+        ))}
+      </div>
+    ))}
+    <div
+      role="group"
+      aria-label="Stars parallax"
+      class="mt-3 border-t border-white/15 pt-3"
+    >
+      <p class="mb-1 font-semibold">Stars parallax</p>
+      {axes.map(({ key, label }) => (
+        <label class="grid grid-cols-[4rem_1fr_3rem] items-center gap-2">
+          {label}
+          <input
+            data-stars={key}
+            type="range"
+            min="-2"
+            max="2"
+            step="0.01"
+            class="accent-white"
+          />
+          <output class="text-right tabular-nums" />
+        </label>
+      ))}
+    </div>
+    <label class="mt-3 grid grid-cols-[4rem_1fr] items-center gap-2 border-t border-white/15 pt-3">
+      Easing
+      <select
+        data-easing
+        class="bg-space-900 min-h-11 rounded-lg px-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+      >
+        {easings.map((easing) => (
+          <option value={easing}>{easing}</option>
+        ))}
+      </select>
+    </label>
+    <p class="mt-3 border-t border-white/15 pt-3 font-semibold">Presets</p>
+    <div class="mt-2 grid grid-cols-2 gap-2">
+      {presets.map((preset) => (
+        <button type="button" data-preset={preset} class={button}>
+          {preset}
+        </button>
+      ))}
+    </div>
+    <button type="button" data-save class:list={[button, 'mt-2 w-full']}>
+      Save as default
+    </button>
+    <label class="mt-3 block border-t border-white/15 pt-3 font-semibold">
+      Paste settings
+      <textarea
+        data-paste
+        rows="3"
+        spellcheck="false"
+        placeholder="Paste copied JSON here"
+        class="bg-space-900 mt-2 block w-full rounded-lg p-2 font-mono text-xs font-normal placeholder:text-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+      ></textarea>
+    </label>
+    <p data-paste-status role="status" class="mt-1 min-h-5 text-xs"></p>
+    <button type="button" data-copy class:list={[button, 'w-full']}>
+      Copy settings
+    </button>
+    <button type="button" data-paste-apply class:list={[button, 'mt-2 w-full']}>
+      Apply pasted settings
+    </button>
+  </details>
+</aside>
+
+<script>
+  import {
+    defaultCamera,
+    setHeroCamera,
+    type CameraPath,
+    type CameraPose,
+  } from '../../scripts/hero-scene';
+
+  const STORAGE_KEY = 'hero-camera';
+  const presets: Record<string, CameraPath> = {
+    Original: {
+      start: { x: 0, y: 0, rotation: 0, zoom: 1, sunrise: 0 },
+      end: { x: -0.35, y: 0.33, rotation: 0, zoom: 1, sunrise: 1 },
+      easing: 'linear',
+      stars: { x: 1, y: 1, rotation: 1 },
+    },
+    Flyover: {
+      start: { x: -0.03, y: 0.08, rotation: -17, zoom: 1, sunrise: -0.22 },
+      end: { x: -0.06, y: 0.44, rotation: -22, zoom: 1, sunrise: 1 },
+      easing: 'linear',
+      stars: { x: 1, y: 1, rotation: 1 },
+    },
+    Orbit: {
+      start: { x: 0, y: 0, rotation: 12, zoom: 0.9, sunrise: 0 },
+      end: { x: -0.1, y: 0.35, rotation: -28, zoom: 1.1, sunrise: 1 },
+      easing: 'ease-out',
+      stars: { x: 1, y: 1, rotation: 1 },
+    },
+    'Push in': {
+      start: { x: -0.15, y: -0.1, rotation: 0, zoom: 0.75, sunrise: 0 },
+      end: { x: 0.2, y: 0.32, rotation: -6, zoom: 1.7, sunrise: 1 },
+      easing: 'ease-in',
+      stars: { x: 1, y: 1, rotation: 1 },
+    },
+  };
+
+  const easingNames = {
+    linear: true,
+    'ease-in': true,
+    'ease-out': true,
+    'ease-in-out': true,
+  };
+  const normalize = (path: Partial<CameraPath>): CameraPath => ({
+    start: { ...defaultCamera.start, ...path.start },
+    end: { ...defaultCamera.end, ...path.end },
+    easing: path.easing ?? defaultCamera.easing,
+    stars:
+      typeof path.stars === 'number'
+        ? { ...defaultCamera.stars, x: path.stars, y: path.stars }
+        : { ...defaultCamera.stars, ...path.stars },
+  });
+
+  const lab = document.querySelector<HTMLElement>('[data-camera-lab]');
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  if (lab && hero) {
+    const sliders = [
+      ...lab.querySelectorAll<HTMLInputElement>('input[data-pose]'),
+    ];
+    const easing = lab.querySelector<HTMLSelectElement>('[data-easing]');
+    const scrub = lab.querySelector<HTMLInputElement>('[data-scrub]');
+    const scrubValue = lab.querySelector('[data-scrub-value]');
+    const stars = [
+      ...lab.querySelectorAll<HTMLInputElement>('input[data-stars]'),
+    ];
+    const copy = lab.querySelector<HTMLButtonElement>('[data-copy]');
+    let camera: CameraPath = structuredClone(defaultCamera);
+
+    const apply = (next: CameraPath) => {
+      camera = structuredClone(next);
+      for (const slider of sliders) {
+        const pose = camera[slider.dataset.pose as 'start' | 'end'];
+        const value = pose[slider.dataset.key as keyof CameraPose];
+        slider.value = String(value);
+        if (slider.nextElementSibling) {
+          slider.nextElementSibling.textContent = String(value);
+        }
+      }
+      if (easing) easing.value = camera.easing;
+      for (const slider of stars) {
+        const value =
+          camera.stars[slider.dataset.stars as keyof CameraPath['stars']];
+        slider.value = String(value);
+        if (slider.nextElementSibling) {
+          slider.nextElementSibling.textContent = String(value);
+        }
+      }
+      setHeroCamera(camera);
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(camera));
+      } catch {}
+    };
+
+    for (const slider of sliders) {
+      slider.addEventListener('input', () => {
+        const pose = camera[slider.dataset.pose as 'start' | 'end'];
+        pose[slider.dataset.key as keyof CameraPose] = slider.valueAsNumber;
+        apply(camera);
+      });
+    }
+    for (const slider of stars) {
+      slider.addEventListener('input', () => {
+        camera.stars[slider.dataset.stars as keyof CameraPath['stars']] =
+          slider.valueAsNumber;
+        apply(camera);
+      });
+    }
+    easing?.addEventListener('change', () => {
+      apply({ ...camera, easing: easing.value as CameraPath['easing'] });
+    });
+    for (const preset of lab.querySelectorAll<HTMLElement>('[data-preset]')) {
+      preset.addEventListener('click', () => {
+        const path = presets[preset.dataset.preset ?? ''];
+        if (path) apply(path);
+      });
+    }
+    const save = lab.querySelector<HTMLButtonElement>('[data-save]');
+    save?.addEventListener('click', async () => {
+      const response = await fetch('/__camera-default', {
+        method: 'POST',
+        body: JSON.stringify(camera),
+      }).catch(() => null);
+      save.textContent = response?.ok ? 'Saved as default' : 'Could not save';
+      setTimeout(() => (save.textContent = 'Save as default'), 1500);
+    });
+    copy?.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(JSON.stringify(camera, null, 2));
+      copy.textContent = 'Copied';
+      setTimeout(() => (copy.textContent = 'Copy settings'), 1500);
+    });
+
+    const paste = lab.querySelector<HTMLTextAreaElement>('[data-paste]');
+    const pasteStatus = lab.querySelector('[data-paste-status]');
+    const applyPaste = () => {
+      if (!paste || !pasteStatus) return;
+      try {
+        const parsed = JSON.parse(paste.value) as Partial<CameraPath>;
+        const next = normalize(parsed);
+        const numeric = [next.start, next.end].every((pose) =>
+          Object.values(pose).every((value) => Number.isFinite(value)),
+        );
+        if (
+          !numeric ||
+          !Number.isFinite(next.stars.x) ||
+          !Number.isFinite(next.stars.y) ||
+          !Number.isFinite(next.stars.rotation) ||
+          !(next.easing in easingNames)
+        )
+          throw new Error();
+        apply(next);
+        pasteStatus.textContent = 'Settings applied.';
+      } catch {
+        pasteStatus.textContent = 'That is not valid settings JSON.';
+      }
+    };
+    lab
+      .querySelector('[data-paste-apply]')
+      ?.addEventListener('click', applyPaste);
+    paste?.addEventListener('paste', () => setTimeout(applyPaste));
+
+    const range = () => hero.offsetHeight - window.innerHeight;
+    scrub?.addEventListener('input', () => {
+      window.scrollTo(0, hero.offsetTop + scrub.valueAsNumber * range());
+    });
+    const syncScrub = () => {
+      const progress = Math.min(
+        1,
+        Math.max(0, (window.scrollY - hero.offsetTop) / range()),
+      );
+      if (scrub) scrub.value = String(progress);
+      if (scrubValue) scrubValue.textContent = `${Math.round(progress * 100)}%`;
+    };
+    window.addEventListener('scroll', syncScrub, { passive: true });
+    syncScrub();
+
+    let saved: CameraPath | null = null;
+    try {
+      saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
+    } catch {}
+    apply(saved ? normalize(saved) : defaultCamera);
+  }
+</script>

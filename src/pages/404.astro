@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+---
+
+<BaseLayout
+  title="Page not found | Galvanite"
+  description="The page you are looking for does not exist."
+>
+  <section class="from-space-900 to-space-800 flex min-h-svh items-center bg-linear-to-br">
+    <Container>
+      <h1 class="text-display font-extralight text-white">Page not found</h1>
+      <p class="text-lead text-white/85 mt-5">
+        <a
+          href="/"
+          class="underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          Return to the homepage
+        </a>
+      </p>
+    </Container>
+  </section>
+</BaseLayout>

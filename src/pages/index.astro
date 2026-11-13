@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Intro from '../components/sections/Intro.astro';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+
+const hero = {
+  lead: 'We make highly technical products feel',
+  emphasis: 'inevitable',
+  description:
+    'A lean creative studio focused on making technical products clear, compelling and easy to choose.',
+};
+const mission = {
+  label: 'Our mission',
+  statement:
+    'We help fast-growing startups close the gap between what they’ve built and how the market sees it, so they become the obvious choice.',
+};
+---
+
+<BaseLayout
+  title="Galvanite | Technical products made inevitable"
+  description={hero.description}
+>
+  <SiteHeader slot="header" />
+  <Hero {...hero} />
+  <Intro {...mission} />
+</BaseLayout>

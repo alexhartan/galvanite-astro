@@ -1,0 +1,41 @@
+---
+import Container from '../ui/Container.astro';
+import GridMark from '../ui/GridMark.astro';
+
+interface Props {
+  id?: string;
+  label: string;
+  statement: string;
+}
+const { id = 'intro', label, statement } = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-label`}
+  class="relative min-h-svh bg-white"
+>
+  <Container class="absolute inset-0">
+    <div class="bg-grid/10 absolute inset-y-0 left-6 w-px"></div>
+    <div class="bg-grid/10 absolute top-54.5 right-6 bottom-0 w-px"></div>
+  </Container>
+  <div class="border-grid/10 absolute inset-x-0 top-54.5 border-t">
+    <Container class="relative">
+      <GridMark class="absolute top-0 left-6" />
+      <div class="absolute top-0 right-6 w-0">
+        <GridMark />
+      </div>
+    </Container>
+    <h2
+      id={`${id}-label`}
+      class="text-ink/60 absolute top-6 left-6.5 text-sm font-medium tracking-widest uppercase"
+    >
+      {label}
+    </h2>
+  </div>
+  <Container class="relative pt-54.5 pb-24">
+    <p class="max-w-statement text-statement text-ink mt-17 font-light">
+      {statement}
+    </p>
+  </Container>
+</section>

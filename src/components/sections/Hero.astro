@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import logos from '../../assets/logos-placeholder.png';
+import Container from '../ui/Container.astro';
+import GridMark from '../ui/GridMark.astro';
+
+interface Props {
+  lead: string;
+  emphasis: string;
+  description: string;
+}
+const { lead, emphasis, description } = Astro.props;
+---
+
+<section
+  data-hero
+  class="h-hero-track from-space-950 to-space-900 relative bg-linear-to-br"
+>
+  <div class="sticky top-0 h-svh overflow-hidden">
+    <div class="absolute inset-0 bg-white opacity-(--hero-wash,0)"></div>
+    <canvas
+      data-hero-canvas
+      aria-hidden="true"
+      class="ease-out-soft absolute inset-0 size-full opacity-0 transition-opacity duration-700 data-ready:opacity-100"
+    ></canvas>
+    <Container class="absolute inset-0">
+      <div class="absolute top-25 bottom-0 left-6 bg-grid/10 w-px"></div>
+    </Container>
+    <div class="hero-parallax relative flex h-full flex-col opacity-(--hero-content,1) motion-reduce:transform-none">
+      <Container class="flex flex-1 flex-col justify-center pt-56">
+        <h1 class="max-w-headline text-display font-extralight text-white">
+          {lead} <strong class="font-semibold">{emphasis}</strong>
+        </h1>
+        <p class="max-w-lead text-lead mt-6 text-white/85">{description}</p>
+      </Container>
+      <div class="border-grid/10 border-t">
+        <Container class="relative py-2.5">
+          <GridMark class="absolute top-0 left-6" />
+          <Image
+            src={logos}
+            alt="Clients: QuotientAI, Selfpay, SQLMesh, SweePay, Tobiko, Common Sense and Lumen Stream"
+            class="ml-7.5 h-30 w-auto max-w-none opacity-80"
+          />
+        </Container>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initHeroScene } from '../../scripts/hero-scene';
+
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  const canvas = hero?.querySelector<HTMLCanvasElement>('[data-hero-canvas]');
+  if (hero && canvas) initHeroScene(hero, canvas);
+</script>

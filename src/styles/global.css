@@ -1,0 +1,37 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --color-space-950: #070a16;
+  --color-space-900: #141a3c;
+  --color-space-800: #1f3166;
+  --color-ink: #1d3961;
+  --color-grid: color-mix(
+    in srgb,
+    var(--color-ink) calc(var(--grid-invert, 0) * 100%),
+    #fff
+  );
+
+  --text-display: clamp(3.25rem, 6.77vw, 8.125rem);
+  --text-display--line-height: 0.9;
+  --text-display--letter-spacing: -0.04em;
+  --text-statement: clamp(2rem, 3.23vw, 3.875rem);
+  --text-statement--line-height: 1.113;
+  --text-statement--letter-spacing: -0.035em;
+  --text-lead: clamp(1.125rem, 1.25vw, 1.5rem);
+  --text-lead--line-height: 1.42;
+
+  --container-page: 83rem;
+  --container-headline: 8.5em;
+  --container-lead: 30rem;
+  --container-statement: 16em;
+
+  --spacing-hero-track: 250svh;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility hero-parallax {
+  transform: translate3d(0, calc(var(--hero-progress, 0) * -50svh), 0);
+}

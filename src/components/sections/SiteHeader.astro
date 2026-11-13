@@ -1,0 +1,18 @@
+---
+import Container from '../ui/Container.astro';
+import GridMark from '../ui/GridMark.astro';
+import Logo from '../ui/Logo.astro';
+---
+
+<header class="pointer-events-none fixed inset-x-0 top-0 z-20 h-25 border-b border-grid/10 pt-7">
+  <Container class="relative h-full">
+    <a
+      href="/"
+      aria-label="Galvanite home"
+      class="pointer-events-auto -m-0.5 inline-flex size-11 items-center justify-center text-grid focus-visible:outline-grid rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2"
+    >
+      <Logo />
+    </a>
+    <GridMark class="absolute top-full left-6" />
+  </Container>
+</header>
