@@ -14,29 +14,29 @@ const { id = 'intro', label, statement, emphasis } = Astro.props;
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  class="relative z-10 h-svh bg-white"
+  class="relative z-10 flex h-svh flex-col justify-center overflow-hidden bg-white"
 >
   <Container class="absolute inset-0">
     <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
-    <div class="bg-ink/10 3xl:block absolute top-54.5 right-6 bottom-0 w-px lg:hidden"></div>
   </Container>
-  <div class="border-ink/10 absolute inset-x-0 top-54.5 border-t">
+  <div class="border-ink/10 relative border-t">
     <Container class="relative">
       <GridMark class="absolute top-0 left-6" />
       <div class="3xl:block absolute top-0 right-6 w-0 lg:hidden">
+        <div class="bg-ink/10 absolute top-0 h-svh w-px"></div>
         <GridMark />
       </div>
+      <p class="max-w-statement text-statement text-ink font-light">
+        {statement} <strong class="font-semibold">{emphasis}</strong>.
+      </p>
     </Container>
+    <div class="text-statement absolute top-0 left-5 flex h-lh items-center">
+      <h2
+        id={`${id}-label`}
+        class="text-ink/60 text-xs font-medium tracking-widest uppercase"
+      >
+        {label}
+      </h2>
+    </div>
   </div>
-  <h2
-    id={`${id}-label`}
-    class="text-ink/60 absolute top-5 left-5 text-xs font-medium tracking-widest uppercase"
-  >
-    {label}
-  </h2>
-  <Container class="relative flex h-full items-center">
-    <p class="max-w-statement text-statement text-ink font-light">
-      {statement} <strong class="font-semibold">{emphasis}</strong>.
-    </p>
-  </Container>
 </section>
