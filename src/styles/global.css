@@ -29,15 +29,12 @@
   --container-page-inset: min(83rem, calc(100% - 8.5rem));
   --container-headline: 8.5em;
   --container-lead: 30rem;
-  --container-statement: 16em;
+  --container-statement: 13.5em;
 
-  --spacing-hero-track: 250svh;
+  --spacing-hero-track: 350svh;
+  --spacing-hero-overlap: 100svh;
 
   --breakpoint-3xl: 100rem;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@utility hero-parallax {
-  transform: translate3d(0, calc(var(--hero-shift, 0) * (22.4375rem - 100svh)), 0);
 }

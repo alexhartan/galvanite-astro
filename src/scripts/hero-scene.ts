@@ -3,8 +3,6 @@ import { FRAGMENT, VERTEX } from './hero-shader';
 
 const SMOOTHING_MS = 140;
 const INTRO_MS = 2200;
-const FADE_START = 0.72;
-const FADE_END = 0.92;
 const MAX_DPR = 1.5;
 const SLOW_FRAME_MS = 40;
 const TARGET_FRAME_MS = 20;
@@ -109,7 +107,6 @@ async function createRenderer(canvas: HTMLCanvasElement) {
   const uniform = (name: string) => gl.getUniformLocation(program, name);
   const uRes = uniform('uRes');
   const uPointer = uniform('uPointer');
-  const uProgress = uniform('uProgress');
   const uSun = uniform('uSun');
   const uStars = uniform('uStars');
   const uStarRot = uniform('uStarRot');
@@ -128,7 +125,6 @@ async function createRenderer(canvas: HTMLCanvasElement) {
       gl.uniform2f(uRes, canvas.width, canvas.height);
     },
     draw(
-      progress: number,
       intro: number,
       time: number,
       pointerX: number,
@@ -142,7 +138,6 @@ async function createRenderer(canvas: HTMLCanvasElement) {
       gl.uniform1f(uCamRot, (pose.rotation * Math.PI) / 180);
       gl.uniform1f(uCamZoom, pose.zoom);
       gl.uniform1f(uSun, pose.sunrise);
-      gl.uniform1f(uProgress, progress);
       gl.uniform1f(uIntro, intro);
       gl.uniform1f(uTime, time);
       gl.uniform2f(uPointer, pointerX, pointerY);
@@ -159,6 +154,7 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
   let frameTotal = 0;
   const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
   let target = 0;
+  let overlap = 0;
   let progress = 0;
   let visible = true;
   let frame = 0;
@@ -170,8 +166,10 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
   let throttled = false;
 
   const measure = () => {
-    const range = hero.offsetHeight - window.innerHeight;
-    target = clamp01(-hero.getBoundingClientRect().top / range);
+    const range = hero.offsetHeight - 2 * window.innerHeight;
+    const scrolled = -hero.getBoundingClientRect().top;
+    target = clamp01(scrolled / range);
+    overlap = clamp01((scrolled - range) / window.innerHeight);
   };
 
   const render = (now: number) => {
@@ -205,25 +203,9 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
     pointer.x += (pointer.targetX - pointer.x) * ease;
     pointer.y += (pointer.targetY - pointer.y) * ease;
 
-    hero.style.setProperty(
-      '--hero-shift',
-      clamp01(progress / FADE_START).toFixed(4),
-    );
-    hero.style.setProperty(
-      '--hero-wash',
-      smoothstep(0.38, 0.9, progress).toFixed(4),
-    );
     document.documentElement.style.setProperty(
       '--grid-invert',
-      smoothstep(0.6, 0.95, progress).toFixed(4),
-    );
-    hero.style.setProperty(
-      '--hero-content',
-      (1 - smoothstep(FADE_START, FADE_END, progress)).toFixed(4),
-    );
-    hero.style.setProperty(
-      '--hero-finale',
-      smoothstep(FADE_START, FADE_END, progress).toFixed(4),
+      smoothstep(0.85, 1, overlap).toFixed(4),
     );
 
     if (renderer) {
@@ -233,7 +215,6 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
         start[key] + (end[key] - start[key]) * t;
       const intro = still ? 1 : clamp01((now - started) / INTRO_MS);
       renderer.draw(
-        progress,
         1 - Math.pow(1 - intro, 3),
         still ? 0 : (now - started) / 1000,
         pointer.x,

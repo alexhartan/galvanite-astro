@@ -12,8 +12,8 @@ const hero = {
 };
 const mission = {
   label: 'Our mission',
-  statement:
-    'We help fast-growing startups close the gap between what they’ve built and how the market sees it, so they become the obvious choice.',
+  statement: 'We create brands and digital experiences that',
+  emphasis: 'bring the value of your product to light',
 };
 ---
 
@@ -22,7 +22,6 @@ const mission = {
   description={hero.description}
 >
   <SiteHeader slot="header" />
-  <Hero {...hero}>
-    <Intro slot="finale" {...mission} />
-  </Hero>
+  <Hero {...hero} />
+  <Intro {...mission} />
 </BaseLayout>
