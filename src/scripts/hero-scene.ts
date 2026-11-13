@@ -5,8 +5,11 @@ const SMOOTHING_MS = 140;
 const INTRO_MS = 2200;
 const MAX_DPR = 1.5;
 const SLOW_FRAME_MS = 40;
+const TARGET_FRAME_MS = 20;
 const SCALE_STEP = 0.7;
 const MIN_SCALE = 0.3;
+const START_SCALE = 0.5;
+const FAST_FRAMES = 30;
 
 export interface CameraPose {
   x: number;
@@ -61,17 +64,34 @@ function createProgram(gl: WebGLRenderingContext) {
     gl.attachShader(program, shader);
   }
   gl.linkProgram(program);
-  return gl.getProgramParameter(program, gl.LINK_STATUS) ? program : null;
+  return program;
 }
 
-function createRenderer(canvas: HTMLCanvasElement) {
+function linked(gl: WebGLRenderingContext, program: WebGLProgram) {
+  const parallel = gl.getExtension('KHR_parallel_shader_compile');
+  return new Promise<boolean>((resolve) => {
+    const check = () => {
+      if (
+        parallel &&
+        !gl.getProgramParameter(program, parallel.COMPLETION_STATUS_KHR)
+      ) {
+        requestAnimationFrame(check);
+        return;
+      }
+      resolve(gl.getProgramParameter(program, gl.LINK_STATUS));
+    };
+    check();
+  });
+}
+
+async function createRenderer(canvas: HTMLCanvasElement) {
   const gl = canvas.getContext('webgl', {
     alpha: false,
     antialias: false,
     powerPreference: 'high-performance',
   });
   const program = gl && createProgram(gl);
-  if (!gl || !program) return null;
+  if (!gl || !program || !(await linked(gl, program))) return null;
 
   gl.useProgram(program);
   gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
@@ -129,9 +149,12 @@ function createRenderer(canvas: HTMLCanvasElement) {
   };
 }
 
+type Renderer = NonNullable<Awaited<ReturnType<typeof createRenderer>>>;
+
 export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const renderer = createRenderer(canvas);
+  let renderer: Renderer | null = null;
+  let frameTotal = 0;
   const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
   let target = 0;
   let progress = 0;
@@ -139,8 +162,10 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
   let frame = 0;
   let last = 0;
   let started = 0;
-  let scale = 1;
+  let scale = START_SCALE;
   let slowFrames = 0;
+  let fastFrames = 0;
+  let throttled = false;
 
   const measure = () => {
     const range = hero.offsetHeight - window.innerHeight;
@@ -149,7 +174,7 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
 
   const render = (now: number) => {
     frame = 0;
-    started ||= now;
+    if (renderer) started ||= now;
     const still = reducedMotion.matches || !visible;
     const ease = still
       ? 1
@@ -157,10 +182,20 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
     const delta = last ? now - last : 0;
     last = now;
     if (renderer && !still && delta > 0 && delta < 1000) {
-      slowFrames = delta > SLOW_FRAME_MS ? slowFrames + 1 : 0;
+      const slow = delta > SLOW_FRAME_MS;
+      slowFrames = slow ? slowFrames + 1 : 0;
+      frameTotal = slow ? frameTotal + delta : 0;
+      fastFrames = delta < TARGET_FRAME_MS ? fastFrames + 1 : 0;
+      if (!throttled && fastFrames >= FAST_FRAMES && scale < 1) {
+        scale = 1;
+        renderer.resize(scale);
+      }
       if (slowFrames >= 2 && scale > MIN_SCALE) {
-        scale = Math.max(MIN_SCALE, scale * SCALE_STEP);
+        throttled = true;
+        const fit = Math.sqrt((TARGET_FRAME_MS * slowFrames) / frameTotal);
+        scale = Math.max(MIN_SCALE, scale * Math.min(fit, SCALE_STEP));
         slowFrames = 0;
+        frameTotal = 0;
         renderer.resize(scale);
       }
     }
@@ -225,10 +260,12 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
 
   invalidate = update;
 
-  if (renderer) {
-    renderer.resize();
+  createRenderer(canvas).then((ready) => {
+    if (!ready) return;
+    renderer = ready;
+    ready.resize(scale);
     new ResizeObserver(() => {
-      renderer.resize(scale);
+      ready.resize(scale);
       update();
     }).observe(canvas);
     window.addEventListener(
@@ -240,7 +277,8 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
       },
       { passive: true },
     );
-  }
+    update();
+  });
 
   new IntersectionObserver(([entry]) => {
     visible = entry?.isIntersecting ?? true;
