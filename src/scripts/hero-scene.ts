@@ -148,13 +148,12 @@ async function createRenderer(canvas: HTMLCanvasElement) {
 
 type Renderer = NonNullable<Awaited<ReturnType<typeof createRenderer>>>;
 
-export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
+export function initHeroScene(canvas: HTMLCanvasElement) {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let renderer: Renderer | null = null;
   let frameTotal = 0;
   const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
   let target = 0;
-  let overlap = 0;
   let progress = 0;
   let visible = true;
   let frame = 0;
@@ -166,10 +165,8 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
   let throttled = false;
 
   const measure = () => {
-    const range = hero.offsetHeight - 2 * window.innerHeight;
-    const scrolled = -hero.getBoundingClientRect().top;
-    target = clamp01(scrolled / range);
-    overlap = clamp01((scrolled - range) / window.innerHeight);
+    target = clamp01(window.scrollY / window.innerHeight);
+    visible = target < 1;
   };
 
   const render = (now: number) => {
@@ -205,7 +202,7 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
 
     document.documentElement.style.setProperty(
       '--grid-invert',
-      smoothstep(0.85, 1, overlap).toFixed(4),
+      smoothstep(0.85, 1, target).toFixed(4),
     );
 
     if (renderer) {
@@ -270,10 +267,6 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
     update();
   });
 
-  new IntersectionObserver(([entry]) => {
-    visible = entry?.isIntersecting ?? true;
-    update();
-  }).observe(hero);
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update, { passive: true });
   document.addEventListener('visibilitychange', update);

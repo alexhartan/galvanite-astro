@@ -14,9 +14,9 @@ const { lead, emphasis, description } = Astro.props;
 
 <section
   data-hero
-  class="h-hero-track -mb-hero-overlap from-space-950 to-space-900 relative bg-linear-to-br"
+  class="from-space-950 to-space-900 fixed inset-0 bg-linear-to-br"
 >
-  <div class="sticky top-0 h-svh overflow-hidden">
+  <div class="h-full overflow-hidden">
     <canvas
       data-hero-canvas
       aria-hidden="true"
@@ -45,11 +45,12 @@ const { lead, emphasis, description } = Astro.props;
     </div>
   </div>
 </section>
+<div aria-hidden="true" class="h-svh"></div>
 
 <script>
   import { initHeroScene } from '../../scripts/hero-scene';
 
   const hero = document.querySelector<HTMLElement>('[data-hero]');
   const canvas = hero?.querySelector<HTMLCanvasElement>('[data-hero-canvas]');
-  if (hero && canvas) initHeroScene(hero, canvas);
+  if (canvas) initHeroScene(canvas);
 </script>
