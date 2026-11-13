@@ -15,8 +15,8 @@
   },
   "easing": "linear",
   "stars": {
-    "x": -0.28,
-    "y": -0.11,
-    "rotation": -2
+    "x": 1,
+    "y": 1,
+    "rotation": 1
   }
 }
