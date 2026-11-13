@@ -37,7 +37,8 @@ const cameraDefault = {
 };
 
 export default defineConfig({
-  site: 'https://www.galvanite.com',
+  site: process.env.SITE_URL ?? 'https://www.galvanite.com',
+  base: process.env.SITE_BASE ?? '/',
   output: 'static',
   trailingSlash: 'always',
   prefetch: { defaultStrategy: 'hover' },
