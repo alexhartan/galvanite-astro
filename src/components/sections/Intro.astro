@@ -6,36 +6,39 @@ interface Props {
   id?: string;
   label: string;
   statement: string;
+  emphasis: string;
 }
-const { id = 'intro', label, statement } = Astro.props;
+const { id = 'intro', label, statement, emphasis } = Astro.props;
 ---
 
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  class="relative min-h-svh bg-white"
+  class="relative z-10 min-h-svh bg-white"
 >
   <Container class="absolute inset-0">
-    <div class="bg-grid/10 absolute inset-y-0 left-6 w-px"></div>
-    <div class="bg-grid/10 3xl:block absolute top-54.5 right-6 bottom-0 w-px lg:hidden"></div>
+    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
+    <div class="bg-ink/10 3xl:block absolute top-54.5 right-6 bottom-0 w-px lg:hidden"></div>
   </Container>
-  <div class="border-grid/10 absolute inset-x-0 top-54.5 border-t">
+  <div class="border-ink/10 absolute inset-x-0 top-54.5 border-t">
     <Container class="relative">
       <GridMark class="absolute top-0 left-6" />
       <div class="3xl:block absolute top-0 right-6 w-0 lg:hidden">
         <GridMark />
       </div>
     </Container>
-    <h2
-      id={`${id}-label`}
-      class="text-ink/60 absolute top-6 left-6.5 text-sm font-medium tracking-widest uppercase"
-    >
-      {label}
-    </h2>
+    <div class="text-statement absolute inset-x-0 top-17 flex h-lh items-center px-6.5">
+      <h2
+        id={`${id}-label`}
+        class="text-ink/60 text-sm font-medium tracking-widest uppercase"
+      >
+        {label}
+      </h2>
+    </div>
   </div>
   <Container class="relative pt-54.5 pb-24">
     <p class="max-w-statement text-statement text-ink mt-17 font-light">
-      {statement}
+      {statement} <strong class="font-semibold">{emphasis}</strong>.
     </p>
   </Container>
 </section>
