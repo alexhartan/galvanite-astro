@@ -7,6 +7,7 @@ export default defineConfig({
   base: process.env.SITE_BASE ?? '/',
   output: 'static',
   trailingSlash: 'always',
+  build: { inlineStylesheets: 'always' },
   prefetch: { defaultStrategy: 'hover' },
   integrations: [sitemap({ filter: (page) => !page.includes('/lab/') })],
   vite: { plugins: [tailwindcss()] },
