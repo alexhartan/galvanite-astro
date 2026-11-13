@@ -12,7 +12,6 @@ const axes = [
   { key: 'y', label: 'Pan Y' },
   { key: 'rotation', label: 'Rotation' },
 ];
-const presets = ['Flyover', 'Orbit', 'Push in'];
 const easings = ['linear', 'ease-in', 'ease-out', 'ease-in-out'];
 const button =
   'min-h-11 rounded-lg bg-white/10 px-3 transition-colors duration-200 ease-out-soft hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white';
@@ -96,15 +95,7 @@ const button =
         ))}
       </select>
     </label>
-    <p class="mt-3 border-t border-white/15 pt-3 font-semibold">Presets</p>
-    <div class="mt-2 grid grid-cols-2 gap-2">
-      {presets.map((preset) => (
-        <button type="button" data-preset={preset} class={button}>
-          {preset}
-        </button>
-      ))}
-    </div>
-    <div class="mt-2 grid grid-cols-2 gap-2">
+    <div class="mt-3 grid grid-cols-2 gap-2 border-t border-white/15 pt-3">
       <button type="button" data-load-default class={button}>
         Load default
       </button>
@@ -148,27 +139,6 @@ const button =
   const TOKEN_KEY = 'github-token';
   const DISPATCH_URL =
     'https://api.github.com/repos/alexhartan/galvanite-astro/actions/workflows/camera-default.yml/dispatches';
-  const presets: Record<string, CameraPath> = {
-    Flyover: {
-      start: { x: -0.03, y: 0.08, rotation: -17, zoom: 1, sunrise: -0.22 },
-      end: { x: -0.06, y: 0.44, rotation: -22, zoom: 1, sunrise: 1 },
-      easing: 'linear',
-      stars: { x: 1, y: 1, rotation: 1 },
-    },
-    Orbit: {
-      start: { x: 0, y: 0, rotation: 12, zoom: 0.9, sunrise: 0 },
-      end: { x: -0.1, y: 0.35, rotation: -28, zoom: 1.1, sunrise: 1 },
-      easing: 'ease-out',
-      stars: { x: 1, y: 1, rotation: 1 },
-    },
-    'Push in': {
-      start: { x: -0.15, y: -0.1, rotation: 0, zoom: 0.75, sunrise: 0 },
-      end: { x: 0.2, y: 0.32, rotation: -6, zoom: 1.7, sunrise: 1 },
-      easing: 'ease-in',
-      stars: { x: 1, y: 1, rotation: 1 },
-    },
-  };
-
   const easingNames = {
     linear: true,
     'ease-in': true,
@@ -242,12 +212,6 @@ const button =
     easing?.addEventListener('change', () => {
       apply({ ...camera, easing: easing.value as CameraPath['easing'] });
     });
-    for (const preset of lab.querySelectorAll<HTMLElement>('[data-preset]')) {
-      preset.addEventListener('click', () => {
-        const path = presets[preset.dataset.preset ?? ''];
-        if (path) apply(path);
-      });
-    }
     const flash = (button: HTMLButtonElement | null, text: string) => {
       if (!button) return;
       const label = button.dataset.label ?? button.textContent ?? '';
