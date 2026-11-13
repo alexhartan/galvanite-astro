@@ -17,12 +17,12 @@ const { id = 'intro', label, statement } = Astro.props;
 >
   <Container class="absolute inset-0">
     <div class="bg-grid/10 absolute inset-y-0 left-6 w-px"></div>
-    <div class="bg-grid/10 absolute top-54.5 right-6 bottom-0 w-px"></div>
+    <div class="bg-grid/10 3xl:block absolute top-54.5 right-6 bottom-0 w-px lg:hidden"></div>
   </Container>
   <div class="border-grid/10 absolute inset-x-0 top-54.5 border-t">
     <Container class="relative">
       <GridMark class="absolute top-0 left-6" />
-      <div class="absolute top-0 right-6 w-0">
+      <div class="3xl:block absolute top-0 right-6 w-0 lg:hidden">
         <GridMark />
       </div>
     </Container>
