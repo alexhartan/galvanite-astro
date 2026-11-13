@@ -4,6 +4,9 @@ import { FRAGMENT, VERTEX } from './hero-shader';
 const SMOOTHING_MS = 140;
 const INTRO_MS = 2200;
 const MAX_DPR = 1.5;
+const SLOW_FRAME_MS = 40;
+const SCALE_STEP = 0.7;
+const MIN_SCALE = 0.3;
 
 export interface CameraPose {
   x: number;
@@ -95,8 +98,8 @@ function createRenderer(canvas: HTMLCanvasElement) {
   const uCamZoom = uniform('uCamZoom');
 
   return {
-    resize() {
-      const dpr = Math.min(window.devicePixelRatio, MAX_DPR);
+    resize(scale = 1) {
+      const dpr = Math.min(window.devicePixelRatio, MAX_DPR) * scale;
       canvas.width = Math.round(canvas.clientWidth * dpr);
       canvas.height = Math.round(canvas.clientHeight * dpr);
       gl.viewport(0, 0, canvas.width, canvas.height);
@@ -136,6 +139,8 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
   let frame = 0;
   let last = 0;
   let started = 0;
+  let scale = 1;
+  let slowFrames = 0;
 
   const measure = () => {
     const range = hero.offsetHeight - window.innerHeight;
@@ -149,7 +154,16 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
     const ease = still
       ? 1
       : 1 - Math.exp(-(now - (last || now)) / SMOOTHING_MS);
+    const delta = last ? now - last : 0;
     last = now;
+    if (renderer && !still && delta > 0 && delta < 1000) {
+      slowFrames = delta > SLOW_FRAME_MS ? slowFrames + 1 : 0;
+      if (slowFrames >= 2 && scale > MIN_SCALE) {
+        scale = Math.max(MIN_SCALE, scale * SCALE_STEP);
+        slowFrames = 0;
+        renderer.resize(scale);
+      }
+    }
     progress += (target - progress) * (still ? 1 : Math.max(ease, 0.02));
     pointer.x += (pointer.targetX - pointer.x) * ease;
     pointer.y += (pointer.targetY - pointer.y) * ease;
@@ -214,7 +228,7 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
   if (renderer) {
     renderer.resize();
     new ResizeObserver(() => {
-      renderer.resize();
+      renderer.resize(scale);
       update();
     }).observe(canvas);
     window.addEventListener(
