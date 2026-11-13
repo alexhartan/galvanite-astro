@@ -31,6 +31,9 @@
   --container-lead: 30rem;
   --container-statement: 13.5em;
 
+  --spacing-cap-statement: 0.191em;
+  --spacing-cap-label: 0.25em;
+
   --breakpoint-3xl: 100rem;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);

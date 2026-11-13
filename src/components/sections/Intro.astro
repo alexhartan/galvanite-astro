@@ -30,10 +30,10 @@ const { id = 'intro', label, statement, emphasis } = Astro.props;
         {statement} <strong class="font-semibold">{emphasis}</strong>.
       </p>
     </Container>
-    <div class="text-statement absolute top-0 left-5 flex h-lh items-center">
+    <div class="text-statement pt-cap-statement absolute top-0 left-5">
       <h2
         id={`${id}-label`}
-        class="text-ink/60 text-xs font-medium tracking-widest uppercase"
+        class="text-ink/60 -mt-cap-label text-xs font-medium tracking-widest uppercase"
       >
         {label}
       </h2>
