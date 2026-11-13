@@ -26,11 +26,11 @@ const { id = 'intro', label, statement, emphasis } = Astro.props;
         <div class="bg-ink/10 absolute top-0 h-svh w-px"></div>
         <GridMark />
       </div>
-      <p class="max-w-statement text-statement text-ink font-light">
+      <p class="max-w-statement text-statement text-ink pt-cap-statement font-light">
         {statement} <strong class="font-semibold">{emphasis}</strong>.
       </p>
     </Container>
-    <div class="text-statement pt-cap-statement absolute top-0 left-5">
+    <div class="text-statement pt-cap-statement mt-cap-statement absolute top-0 left-5">
       <h2
         id={`${id}-label`}
         class="text-ink/60 -mt-cap-label text-xs font-medium tracking-widest uppercase"
