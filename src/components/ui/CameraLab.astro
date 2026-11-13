@@ -305,7 +305,7 @@ const button =
       ?.addEventListener('click', applyPaste);
     paste?.addEventListener('paste', () => setTimeout(applyPaste));
 
-    const range = () => hero.offsetHeight - 2 * window.innerHeight;
+    const range = () => hero.offsetHeight - window.innerHeight;
     scrub?.addEventListener('input', () => {
       window.scrollTo(0, hero.offsetTop + scrub.valueAsNumber * range());
     });

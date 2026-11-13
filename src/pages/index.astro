@@ -22,6 +22,7 @@ const mission = {
   description={hero.description}
 >
   <SiteHeader slot="header" />
-  <Hero {...hero} />
-  <Intro {...mission} />
+  <Hero {...hero}>
+    <Intro slot="finale" {...mission} />
+  </Hero>
 </BaseLayout>

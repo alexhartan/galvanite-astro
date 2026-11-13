@@ -24,7 +24,8 @@ const mission = {
   noindex
 >
   <SiteHeader slot="header" />
-  <Hero {...hero} />
-  <Intro {...mission} />
+  <Hero {...hero}>
+    <Intro slot="finale" {...mission} />
+  </Hero>
   <CameraLab />
 </BaseLayout>

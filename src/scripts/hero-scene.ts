@@ -168,7 +168,7 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
   let throttled = false;
 
   const measure = () => {
-    const range = hero.offsetHeight - 2 * window.innerHeight;
+    const range = hero.offsetHeight - window.innerHeight;
     target = clamp01(-hero.getBoundingClientRect().top / range);
   };
 
@@ -215,6 +215,10 @@ export function initHeroScene(hero: HTMLElement, canvas: HTMLCanvasElement) {
     hero.style.setProperty(
       '--hero-content',
       (1 - smoothstep(0.72, 0.92, progress)).toFixed(4),
+    );
+    hero.style.setProperty(
+      '--hero-finale',
+      smoothstep(0.88, 0.98, progress).toFixed(4),
     );
 
     if (renderer) {
