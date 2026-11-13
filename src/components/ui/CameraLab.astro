@@ -248,7 +248,11 @@ const button =
         method: 'POST',
         body: JSON.stringify(camera),
       }).catch(() => null);
-      save.textContent = response?.ok ? 'Saved as default' : 'Could not save';
+      save.textContent = !response?.ok
+        ? 'Could not save'
+        : response.status === 202
+          ? 'Saved locally, not on main'
+          : 'Published to homepage';
       setTimeout(() => (save.textContent = 'Save as default'), 1500);
     });
     copy?.addEventListener('click', async () => {
