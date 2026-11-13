@@ -1,14 +1,14 @@
 {
   "start": {
     "x": -0.24,
-    "y": 0.24,
+    "y": 0.35,
     "rotation": -4,
     "zoom": 1,
     "sunrise": -0.2
   },
   "end": {
     "x": -0.2,
-    "y": 0.39,
+    "y": 0.45,
     "rotation": -3,
     "zoom": 1,
     "sunrise": 1
