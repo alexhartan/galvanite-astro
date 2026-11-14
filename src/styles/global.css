@@ -8,6 +8,8 @@
   --color-space-800: #1f3166;
   --color-ink: #1d3961;
   --color-ocean: #305785;
+  --color-signal: #2f5bff;
+  --color-signal-strong: #1f47e6;
   --color-ocean-50: #ecf2f9;
   --color-grid: color-mix(
     in srgb,
@@ -59,6 +61,11 @@
 }
 
 @layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
   h1,
   h2,
   h3,
@@ -67,4 +74,8 @@
   h6 {
     text-wrap: balance;
   }
+}
+
+@utility section-link {
+  bottom: calc(2.75rem + var(--slot, 0) * 1.5rem);
 }

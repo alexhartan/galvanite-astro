@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
+import SectionLink from '../components/ui/SectionLink.astro';
 import SiteHeader from '../components/sections/SiteHeader.astro';
 
 const hero = {
@@ -16,6 +17,14 @@ const mission = {
   statement: 'We create brands and digital experiences that',
   emphasis: 'bring the value of your product to light',
 };
+const sections = [
+  { href: '#intro', label: 'Our mission' },
+  { href: '#work', label: 'Featured work' },
+];
+const link = (index: number) => ({
+  ...sections[index]!,
+  position: sections.length - 1 - index,
+});
 ---
 
 <BaseLayout
@@ -24,6 +33,8 @@ const mission = {
 >
   <SiteHeader slot="header" />
   <Hero {...hero} />
+  <SectionLink {...link(0)} />
   <Intro {...mission} />
+  <SectionLink {...link(1)} />
   <FeaturedWork label="Featured work" />
 </BaseLayout>
