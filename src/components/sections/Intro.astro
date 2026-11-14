@@ -21,10 +21,10 @@ const { id = 'intro', label, statement, emphasis } = Astro.props;
   </Container>
   <div class="border-ink/10 relative border-t">
     <Container class="relative">
-      <GridMark class="absolute top-0 left-6" />
+      <GridMark class="absolute top-0 left-6 -mt-px" />
       <div class="3xl:block absolute top-0 right-6 w-0 lg:hidden">
         <div class="bg-ink/10 absolute top-0 h-svh w-px"></div>
-        <GridMark />
+        <GridMark class="-mt-px" />
       </div>
       <p class="max-w-statement text-statement text-ink pt-cap-statement font-light">
         {statement} <strong class="font-semibold">{emphasis}</strong>.
