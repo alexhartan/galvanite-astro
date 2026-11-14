@@ -1,0 +1,20 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  position: number;
+}
+const { href, label, position } = Astro.props;
+---
+
+<div
+  class="section-link sticky z-20 h-0 mix-blend-difference max-lg:hidden"
+  style={`--slot: ${position}`}
+>
+  <a
+    href={href}
+    class="ease-out-soft absolute top-0 left-5 flex h-6 items-center text-xs font-semibold tracking-widest whitespace-nowrap text-white/70 uppercase transition-colors duration-200 hover:text-white focus-visible:outline-2 focus-visible:outline-white"
+  >
+    {label}
+  </a>
+</div>
