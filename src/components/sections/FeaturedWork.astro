@@ -14,8 +14,10 @@ const { id = 'work', label } = Astro.props;
 const cases = (await getCollection('caseStudies')).sort(
   (a, b) => a.data.order - b.data.order,
 );
+const icon =
+  'opacity-80 transition-opacity duration-200 ease-out-soft group-hover:opacity-100 group-disabled:opacity-20';
 const arrow =
-  'relative flex size-8 items-center justify-center border border-ink/10 text-ocean opacity-80 transition-opacity duration-200 ease-out-soft not-disabled:hover:opacity-100 disabled:opacity-20 before:absolute before:-inset-1.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean';
+  'group relative flex size-8 items-center justify-center border border-ink/10 text-ocean before:absolute before:-inset-1.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean';
 ---
 
 <section
@@ -71,7 +73,7 @@ const arrow =
               aria-label="Previous case study"
               class={arrow}
             >
-              <ArrowIcon class="rotate-180" />
+              <ArrowIcon class:list={[icon, 'rotate-180']} />
             </button>
             <button
               type="button"
@@ -79,11 +81,14 @@ const arrow =
               aria-label="Next case study"
               class:list={[arrow, '-ml-px']}
             >
-              <ArrowIcon />
+              <ArrowIcon class={icon} />
             </button>
           </div>
         </div>
-        <div data-viewport class="cursor-grab active:cursor-grabbing lg:w-1/2">
+        <div
+          data-viewport
+          class="clip-left cursor-grab active:cursor-grabbing lg:w-1/2"
+        >
           <div class="pointer-events-none flex touch-pan-y">
             {cases.map(({ data }, index) => (
               <figure

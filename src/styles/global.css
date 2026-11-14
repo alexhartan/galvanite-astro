@@ -48,3 +48,7 @@
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+@utility clip-left {
+  clip-path: inset(0 -100vw 0 0);
+}
