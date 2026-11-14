@@ -15,6 +15,7 @@
     #fff
   );
 
+  --text-xs: 0.65rem;
   --text-display: clamp(3.25rem, 6.77vw, 8.125rem);
   --text-display--line-height: 0.9;
   --text-display--letter-spacing: -0.04em;
