@@ -8,13 +8,41 @@ const { href, label, position } = Astro.props;
 ---
 
 <div
+  data-section-link={href}
   class="section-link sticky z-20 h-0 mix-blend-difference max-lg:hidden"
   style={`--slot: ${position}`}
 >
   <a
     href={href}
-    class="ease-out-soft absolute top-0 left-5 flex h-6 items-center text-xs font-semibold tracking-widest whitespace-nowrap text-white/70 uppercase transition-colors duration-200 hover:text-white focus-visible:outline-2 focus-visible:outline-white"
+    class="ease-out-soft absolute top-(--offset) left-5 text-xs font-semibold tracking-widest whitespace-nowrap text-white/70 uppercase transition-colors duration-200 hover:text-white focus-visible:outline-2 focus-visible:outline-white"
   >
     {label}
   </a>
 </div>
+
+<script>
+  const links = [
+    ...document.querySelectorAll<HTMLElement>('[data-section-link]'),
+  ];
+  const pairs = links.flatMap((link) => {
+    const section = document.querySelector<HTMLElement>(
+      link.dataset.sectionLink ?? '',
+    );
+    const label = section?.querySelector<HTMLElement>('[data-eyebrow]');
+    return section && label ? [{ link, section, label }] : [];
+  });
+  const measure = () => {
+    for (const { link, section, label } of pairs) {
+      const offset =
+        label.getBoundingClientRect().top - section.getBoundingClientRect().top;
+      link.style.setProperty('--offset', `${offset}px`);
+    }
+  };
+  const observer = new ResizeObserver(measure);
+  for (const { section } of pairs) {
+    observer.observe(section);
+    const guide = section.querySelector('[data-guide]');
+    if (guide) observer.observe(guide);
+  }
+  document.fonts.ready.then(measure);
+</script>

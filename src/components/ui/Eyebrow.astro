@@ -8,12 +8,13 @@ const { id, class: className = 'text-statement' } = Astro.props;
 
 <div
   class:list={[
-    'pt-cap-statement mt-cap-statement lg:absolute lg:top-0 lg:left-5 max-lg:pb-6',
+    'pt-cap-statement mt-cap-statement lg:absolute lg:top-0 lg:left-5 lg:opacity-0 max-lg:pb-6',
     className,
   ]}
 >
   <h2
     id={id}
+    data-eyebrow
     class="text-ink/60 -mt-cap-label text-xs font-semibold tracking-widest uppercase"
   >
     <slot />
