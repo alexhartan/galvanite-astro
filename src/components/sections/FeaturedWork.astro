@@ -1,0 +1,132 @@
+---
+import { Picture } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import ArrowIcon from '../ui/ArrowIcon.astro';
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import GridMark from '../ui/GridMark.astro';
+
+interface Props {
+  id?: string;
+  label: string;
+}
+const { id = 'work', label } = Astro.props;
+const cases = (await getCollection('caseStudies')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const arrow =
+  'relative flex size-8 items-center justify-center border border-ink/10 text-ocean opacity-80 transition-opacity duration-200 ease-out-soft not-disabled:hover:opacity-100 disabled:opacity-20 before:absolute before:-inset-1.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean';
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-label`}
+  class="relative z-10 flex min-h-svh flex-col justify-center overflow-hidden bg-white py-32"
+>
+  <Container class="absolute inset-0">
+    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
+    <div class="bg-ink/10 3xl:block absolute inset-y-0 right-6 w-px lg:hidden"></div>
+  </Container>
+  <div class="border-ink/10 relative border-t">
+    <Container class="absolute inset-x-0 top-0">
+      <GridMark class="absolute top-0 left-6 -mt-px" />
+      <div class="3xl:block absolute top-0 right-6 w-0 lg:hidden">
+        <GridMark class="-mt-px" />
+      </div>
+    </Container>
+    <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
+    <Container class="@container relative">
+      <div
+        data-case-slider
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Case studies"
+        class="flex flex-col gap-10 lg:flex-row lg:gap-0"
+      >
+        <div class="flex shrink-0 flex-col max-lg:order-2 lg:w-1/2 lg:pr-10">
+          <div aria-live="polite" class="grid flex-1 items-center">
+            {cases.map(({ data }, index) => (
+              <article
+                data-panel
+                data-active={index === 0 ? '' : undefined}
+                inert={index !== 0}
+                class="ease-out-soft invisible col-start-1 row-start-1 opacity-0 transition-[opacity,visibility] duration-500 data-active:visible data-active:opacity-100"
+              >
+                <h3 class="text-case text-ocean">{data.title}</h3>
+                <ul class="mt-8 flex flex-wrap gap-2.5" aria-label="Scope">
+                  {data.scope.map((item) => (
+                    <li class="bg-ocean-50 text-ocean rounded-sm px-3 py-1.5 text-xs font-medium tracking-wider uppercase">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+          <div class="mt-10 flex lg:mt-0">
+            <button
+              type="button"
+              data-prev
+              disabled
+              aria-label="Previous case study"
+              class={arrow}
+            >
+              <ArrowIcon class="rotate-180" />
+            </button>
+            <button
+              type="button"
+              data-next
+              aria-label="Next case study"
+              class:list={[arrow, '-ml-px']}
+            >
+              <ArrowIcon />
+            </button>
+          </div>
+        </div>
+        <div data-viewport class="cursor-grab active:cursor-grabbing lg:w-1/2">
+          <div class="pointer-events-none flex touch-pan-y">
+            {cases.map(({ data }, index) => (
+              <figure
+                data-slide
+                data-active={index === 0 ? '' : undefined}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${index + 1} of ${cases.length}`}
+                class="group w-slide lg:w-slide-lg 3xl:w-slide-3xl ease-out-soft pointer-events-auto relative mr-5 shrink-0 opacity-50 transition-opacity duration-500 data-active:opacity-100 data-past:pointer-events-none data-past:opacity-0 lg:mr-10"
+              >
+                <Picture
+                  src={data.image}
+                  alt={data.imageAlt}
+                  formats={['avif', 'webp']}
+                  widths={[400, 600, 800, 1200]}
+                  sizes="(min-width: 1600px) 600px, (min-width: 1024px) 40vw, 85vw"
+                  quality={78}
+                  draggable="false"
+                  class="aspect-square w-full object-cover"
+                />
+                <figcaption class="ease-out-soft absolute inset-x-0 bottom-0 flex items-center gap-4 bg-linear-90 from-black/81 from-25% to-transparent px-5 py-5 lg:gap-6 lg:px-8 lg:py-6 opacity-0 transition-opacity duration-500 group-data-active:opacity-100">
+                  <span class="text-kpi font-medium whitespace-nowrap text-white">
+                    {data.kpi}
+                  </span>
+                  <span class="max-w-40 text-xs font-medium tracking-widest text-balance text-white/80 uppercase">
+                    {data.kpiLabel}
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>
+
+<script>
+  import { initCaseSlider } from '../../scripts/case-slider';
+
+  for (const root of document.querySelectorAll<HTMLElement>(
+    '[data-case-slider]',
+  )) {
+    initCaseSlider(root);
+  }
+</script>
