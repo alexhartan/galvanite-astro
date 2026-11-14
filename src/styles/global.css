@@ -44,6 +44,8 @@
   --container-lead: 30rem;
   --container-statement: 13.5em;
 
+  --spacing-nav: 6.25rem;
+  --spacing-nav-line: calc(var(--spacing-nav) - 1px);
   --spacing-cap-statement: 0.191em;
   --spacing-cap-label: 0.25em;
   --spacing-page-bleed: calc((100vw - var(--container-page)) / 2 + 1.5rem);
