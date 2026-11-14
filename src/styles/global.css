@@ -8,8 +8,8 @@
   --color-space-800: #1f3166;
   --color-ink: #1d3961;
   --color-ocean: #305785;
-  --color-signal: #2f5bff;
-  --color-signal-strong: #1f47e6;
+  --color-signal: #ffd23f;
+  --color-signal-strong: #f5c518;
   --color-ocean-50: #ecf2f9;
   --color-grid: color-mix(
     in srgb,
@@ -77,5 +77,5 @@
 }
 
 @utility section-link {
-  bottom: calc(2.75rem + var(--slot, 0) * 1.5rem);
+  bottom: calc(2.75rem + var(--slot, 0) * 1.5rem + var(--offset, 0px));
 }
