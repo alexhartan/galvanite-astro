@@ -15,9 +15,9 @@ const cases = (await getCollection('caseStudies')).sort(
   (a, b) => a.data.order - b.data.order,
 );
 const icon =
-  'opacity-80 transition-opacity duration-200 ease-out-soft group-hover:opacity-100 group-disabled:opacity-20';
+  'opacity-80 transition-opacity duration-200 ease-out-soft group-hover:opacity-100';
 const arrow =
-  'group relative flex size-8 items-center justify-center border border-ink/10 text-ocean before:absolute before:-inset-1.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean';
+  'group relative flex size-8 cursor-pointer items-center justify-center border border-ink/10 text-ocean before:absolute before:-inset-1.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean';
 ---
 
 <section
@@ -36,8 +36,8 @@ const arrow =
         <GridMark class="-mt-px" />
       </div>
     </Container>
-    <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
-    <Container class="@container relative">
+    <Container class="@container">
+      <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
       <div
         data-case-slider
         role="region"
@@ -69,7 +69,6 @@ const arrow =
             <button
               type="button"
               data-prev
-              disabled
               aria-label="Previous case study"
               class={arrow}
             >
@@ -87,17 +86,18 @@ const arrow =
         </div>
         <div
           data-viewport
-          class="clip-left cursor-grab active:cursor-grabbing lg:w-1/2"
+          class="clip-left 3xl:-mr-page-bleed min-w-0 lg:flex-1"
         >
           <div class="pointer-events-none flex touch-pan-y">
             {cases.map(({ data }, index) => (
               <figure
                 data-slide
                 data-active={index === 0 ? '' : undefined}
+                data-past={index > 1 ? '' : undefined}
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${index + 1} of ${cases.length}`}
-                class="group w-slide lg:w-slide-lg 3xl:w-slide-3xl ease-out-soft pointer-events-auto relative mr-5 shrink-0 opacity-50 transition-opacity duration-500 data-active:opacity-100 data-past:pointer-events-none data-past:opacity-0 lg:mr-10"
+                class="group w-slide cursor-pointer lg:w-slide-lg 3xl:w-slide-3xl ease-out-soft pointer-events-auto relative mr-5 shrink-0 opacity-50 transition-opacity duration-500 data-active:opacity-100 data-past:pointer-events-none data-past:opacity-0 lg:mr-10"
               >
                 <Picture
                   src={data.image}

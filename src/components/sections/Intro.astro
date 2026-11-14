@@ -28,9 +28,11 @@ const { id = 'intro', label, statement, emphasis } = Astro.props;
         <GridMark class="-mt-px" />
       </div>
     </Container>
-    <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
-    <Container class="relative">
-      <p class="max-w-statement text-statement text-ink pt-cap-statement font-light">
+    <Container class="@container">
+      <Eyebrow id={`${id}-label`} class="text-display lg:text-display-half">
+        {label}
+      </Eyebrow>
+      <p class="max-w-statement text-display lg:text-display-half leading-statement tracking-statement text-ink pt-cap-statement font-light">
         {statement} <strong class="font-semibold">{emphasis}</strong>.
       </p>
     </Container>

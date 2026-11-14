@@ -33,6 +33,9 @@
   --text-lead: clamp(1.125rem, 1.25vw, 1.5rem);
   --text-lead--line-height: 1.42;
 
+  --leading-statement: 1.113;
+  --tracking-statement: -0.035em;
+
   --container-page: 83rem;
   --container-page-inset: min(83rem, calc(100% - 8.5rem));
   --container-headline: 8.5em;
@@ -41,6 +44,7 @@
 
   --spacing-cap-statement: 0.191em;
   --spacing-cap-label: 0.25em;
+  --spacing-page-bleed: calc((100vw - var(--container-page)) / 2 + 1.5rem);
   --spacing-slide: 85cqi;
   --spacing-slide-lg: calc(50cqi - 7.5rem);
   --spacing-slide-3xl: calc(50cqi - 2.5rem);
@@ -52,4 +56,15 @@
 
 @utility clip-left {
   clip-path: inset(0 -100vw 0 0);
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
 }
