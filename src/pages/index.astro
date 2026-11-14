@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
 import SiteHeader from '../components/sections/SiteHeader.astro';
@@ -24,4 +25,5 @@ const mission = {
   <SiteHeader slot="header" />
   <Hero {...hero} />
   <Intro {...mission} />
+  <FeaturedWork label="Featured work" />
 </BaseLayout>

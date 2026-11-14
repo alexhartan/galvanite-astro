@@ -1,5 +1,6 @@
 ---
 import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
 import GridMark from '../ui/GridMark.astro';
 
 interface Props {
@@ -20,23 +21,18 @@ const { id = 'intro', label, statement, emphasis } = Astro.props;
     <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
   </Container>
   <div class="border-ink/10 relative border-t">
-    <Container class="relative">
+    <Container class="absolute inset-x-0 top-0">
       <GridMark class="absolute top-0 left-6 -mt-px" />
       <div class="3xl:block absolute top-0 right-6 w-0 lg:hidden">
         <div class="bg-ink/10 absolute top-0 h-svh w-px"></div>
         <GridMark class="-mt-px" />
       </div>
+    </Container>
+    <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
+    <Container class="relative">
       <p class="max-w-statement text-statement text-ink pt-cap-statement font-light">
         {statement} <strong class="font-semibold">{emphasis}</strong>.
       </p>
     </Container>
-    <div class="text-statement pt-cap-statement mt-cap-statement absolute top-0 left-5">
-      <h2
-        id={`${id}-label`}
-        class="text-ink/60 -mt-cap-label text-xs font-medium tracking-widest uppercase"
-      >
-        {label}
-      </h2>
-    </div>
   </div>
 </section>

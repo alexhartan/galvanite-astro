@@ -7,6 +7,8 @@
   --color-space-900: #141a3c;
   --color-space-800: #1f3166;
   --color-ink: #1d3961;
+  --color-ocean: #305785;
+  --color-ocean-50: #ecf2f9;
   --color-grid: color-mix(
     in srgb,
     var(--color-ink) calc(var(--grid-invert, 0) * 100%),
@@ -22,6 +24,11 @@
   --text-statement: clamp(2rem, 3.23vw, 3.875rem);
   --text-statement--line-height: 1.113;
   --text-statement--letter-spacing: -0.035em;
+  --text-case: clamp(2rem, 2.9vw, 3.5rem);
+  --text-case--line-height: 1.04;
+  --text-case--letter-spacing: -0.02em;
+  --text-kpi: clamp(1.75rem, 2.3vw, 2.75rem);
+  --text-kpi--line-height: 1;
   --text-lead: clamp(1.125rem, 1.25vw, 1.5rem);
   --text-lead--line-height: 1.42;
 
@@ -33,6 +40,9 @@
 
   --spacing-cap-statement: 0.191em;
   --spacing-cap-label: 0.25em;
+  --spacing-slide: 85cqi;
+  --spacing-slide-lg: calc(50cqi - 7.5rem);
+  --spacing-slide-3xl: calc(50cqi - 2.5rem);
 
   --breakpoint-3xl: 100rem;
 
