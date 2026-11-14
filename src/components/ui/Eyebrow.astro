@@ -1,11 +1,17 @@
 ---
 interface Props {
   id: string;
+  class?: string;
 }
-const { id } = Astro.props;
+const { id, class: className = 'text-statement' } = Astro.props;
 ---
 
-<div class="text-statement pt-cap-statement mt-cap-statement lg:absolute lg:top-0 lg:left-5 max-lg:px-6 max-lg:pb-6">
+<div
+  class:list={[
+    'pt-cap-statement mt-cap-statement lg:absolute lg:top-0 lg:left-5 max-lg:pb-6',
+    className,
+  ]}
+>
   <h2
     id={id}
     class="text-ink/60 -mt-cap-label text-xs font-semibold tracking-widest uppercase"
