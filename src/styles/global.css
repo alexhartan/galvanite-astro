@@ -10,6 +10,7 @@
   --color-ocean: #305785;
   --color-signal: #ffd23f;
   --color-signal-strong: #f5c518;
+  --color-ocean-300: #5c8cc6;
   --color-ocean-50: #ecf2f9;
   --color-grid: color-mix(
     in srgb,
@@ -30,6 +31,9 @@
   --text-case: clamp(2rem, 2.9vw, 3.5rem);
   --text-case--line-height: 1.04;
   --text-case--letter-spacing: -0.02em;
+  --text-card: clamp(1.5rem, 1.6vw, 1.875rem);
+  --text-card--line-height: 1.13;
+  --text-card--letter-spacing: -0.01em;
   --text-kpi: clamp(1.75rem, 2.3vw, 2.75rem);
   --text-kpi--line-height: 1;
   --text-lead-hero: calc(var(--text-display-half) * 0.169);
@@ -46,10 +50,15 @@
   --container-lead: 30rem;
   --container-lead-hero: 25em;
   --container-statement: 13.5em;
+  --container-card: 12em;
 
   --spacing-nav: 6.25rem;
   --spacing-nav-line: calc(var(--spacing-nav) - 1px);
   --spacing-display-baseline: calc(100% - 0.12em);
+  --spacing-benefit-stage: min(28.125rem, calc(62svh - var(--spacing-nav)));
+  --spacing-benefit-tail: calc(
+    100svh - var(--spacing-nav) - var(--spacing-benefit-stage)
+  );
   --spacing-cap-statement: 0.191em;
   --spacing-cap-label: 0.25em;
   --spacing-page-bleed: calc((100vw - var(--container-page)) / 2 + 1.5rem);
@@ -84,4 +93,9 @@
 
 @utility section-link {
   bottom: calc(2.75rem + var(--slot, 0) * 1.5rem + var(--offset, 0px));
+}
+
+@utility bleed-x {
+  left: -100vw;
+  right: -100vw;
 }

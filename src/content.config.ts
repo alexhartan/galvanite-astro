@@ -16,4 +16,15 @@ const caseStudies = defineCollection({
     }),
 });
 
-export const collections = { caseStudies };
+const benefits = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/benefits' }),
+  schema: z.object({
+    title: z.string(),
+    order: z.number(),
+    summary: z.string(),
+    proof: z.string(),
+    proofHref: z.string(),
+  }),
+});
+
+export const collections = { caseStudies, benefits };

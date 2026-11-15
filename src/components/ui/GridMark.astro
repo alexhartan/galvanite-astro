@@ -1,12 +1,17 @@
 ---
 interface Props {
   class?: string;
+  inverted?: boolean;
 }
-const { class: className } = Astro.props;
+const { class: className, inverted = false } = Astro.props;
 ---
 
 <svg
-  class:list={['block size-2.75 -translate-1.25 text-grid/30', className]}
+  class:list={[
+    'block size-2.75 -translate-1.25',
+    inverted ? 'text-white/30' : 'text-grid/30',
+    className,
+  ]}
   viewBox="0 0 11 11"
   fill="none"
   stroke="currentColor"

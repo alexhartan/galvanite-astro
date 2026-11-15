@@ -1,0 +1,115 @@
+---
+import { getCollection } from 'astro:content';
+import ArrowIcon from '../ui/ArrowIcon.astro';
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import GridMark from '../ui/GridMark.astro';
+
+interface Props {
+  id?: string;
+  label: string;
+  contrast: string;
+  statement: string;
+}
+const { id = 'why', label, contrast, statement } = Astro.props;
+const benefits = (await getCollection('benefits')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const backdrop = 'from-space-900 to-space-800 bg-linear-to-b bg-fixed';
+const card =
+  'ease-out-soft border-ink/10 bg-white px-6 py-8 transition-colors duration-500 max-lg:border-b lg:bg-white/60 lg:px-10 lg:py-9 lg:data-active:bg-white';
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-label`}
+  class:list={[
+    backdrop,
+    'pt-nav-line relative z-10 overflow-x-clip text-white max-lg:pb-24',
+  ]}
+>
+  <Container class="absolute inset-0">
+    <div class="absolute inset-y-0 left-6 w-px bg-white/10"></div>
+    <div class="3xl:block absolute inset-y-0 right-6 w-px bg-white/10 lg:hidden"></div>
+  </Container>
+  <div data-guide class="relative border-t border-white/10">
+    <Container class="absolute inset-x-0 top-0">
+      <GridMark inverted class="absolute top-0 left-6 -mt-px" />
+    </Container>
+    <Container class="@container">
+      <Eyebrow id={`${id}-label`} inverted>
+        {label}
+      </Eyebrow>
+      <div data-benefits class="lg:grid lg:grid-cols-2">
+        <div>
+          <div class="lg:top-nav lg:h-benefit-stage relative flex flex-col justify-end pb-12 lg:sticky">
+            <h3 class="text-statement font-light">
+              <span class="text-ocean-300 block">{contrast}</span>
+              {statement}
+            </h3>
+            <GridMark
+              inverted
+              class="absolute top-full left-0 -mt-px max-lg:hidden"
+            />
+            <div class="grid border-white/10 lg:absolute lg:top-full lg:left-0 lg:w-1/2 lg:border-r lg:border-b max-lg:mt-8 max-lg:border">
+              {benefits.map(({ data }, index) => (
+                <a
+                  href={data.proofHref}
+                  data-proof
+                  data-active={index === 0 ? '' : undefined}
+                  inert={index !== 0}
+                  class="ease-out-soft invisible col-start-1 row-start-1 flex items-start gap-4 p-5 text-sm text-white/70 opacity-0 transition-[opacity,visibility,color] duration-500 hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-white data-active:visible data-active:opacity-100"
+                >
+                  <span class="flex-1">{data.proof}</span>
+                  <ArrowIcon class="mt-1 shrink-0 -rotate-45 text-white" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            data-stage
+            class:list={[
+              backdrop,
+              'lg:top-nav lg:h-benefit-stage relative z-10 flex flex-col justify-end max-lg:hidden lg:sticky',
+            ]}
+          >
+            <div class="relative h-5/7 border-x border-t border-white/10">
+              <GridMark inverted class="absolute top-0 left-full -mt-px" />
+            </div>
+            <div class="bleed-x absolute bottom-0 h-px bg-white/10"></div>
+          </div>
+          {benefits.slice(0, -1).map(({ data }, index) => (
+            <article
+              data-card
+              data-active={index === 0 ? '' : undefined}
+              class={card}
+            >
+              <h4 class="text-card text-ink max-w-card">{data.title}</h4>
+              <p class="text-ink mt-3 text-sm">{data.summary}</p>
+            </article>
+          ))}
+        </div>
+        <div class="lg:min-h-benefit-tail lg:col-start-2">
+          {benefits.slice(-1).map(({ data }) => (
+            <article data-card class={card}>
+              <h4 class="text-card text-ink max-w-card">{data.title}</h4>
+              <p class="text-ink mt-3 text-sm">{data.summary}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>
+
+<script>
+  import { initBenefits } from '../../scripts/benefits';
+
+  for (const root of document.querySelectorAll<HTMLElement>(
+    '[data-benefits]',
+  )) {
+    initBenefits(root);
+  }
+</script>
