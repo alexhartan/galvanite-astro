@@ -5,6 +5,7 @@ import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
 import SectionLink from '../components/ui/SectionLink.astro';
 import SiteHeader from '../components/sections/SiteHeader.astro';
+import WhyGalvanite from '../components/sections/WhyGalvanite.astro';
 
 const hero = {
   lead: 'We make highly technical products',
@@ -20,7 +21,13 @@ const mission = {
 const sections = [
   { href: '#intro', label: 'Our mission' },
   { href: '#work', label: 'Featured work' },
+  { href: '#why', label: 'Why Galvanite' },
 ];
+const why = {
+  label: 'Why Galvanite',
+  contrast: 'Other agencies focus on outputs.',
+  statement: 'We deliver results.',
+};
 const link = (index: number) => ({
   ...sections[index]!,
   position: sections.length - 1 - index,
@@ -37,4 +44,6 @@ const link = (index: number) => ({
   <Intro {...mission} />
   <SectionLink {...link(1)} />
   <FeaturedWork label="Featured work" />
+  <SectionLink {...link(2)} />
+  <WhyGalvanite {...why} />
 </BaseLayout>

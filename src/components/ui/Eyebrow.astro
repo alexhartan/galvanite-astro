@@ -2,8 +2,13 @@
 interface Props {
   id: string;
   class?: string;
+  inverted?: boolean;
 }
-const { id, class: className = 'text-statement' } = Astro.props;
+const {
+  id,
+  class: className = 'text-statement',
+  inverted = false,
+} = Astro.props;
 ---
 
 <div
@@ -15,7 +20,10 @@ const { id, class: className = 'text-statement' } = Astro.props;
   <h2
     id={id}
     data-eyebrow
-    class="text-ink/60 -mt-cap-label text-xs font-semibold tracking-widest uppercase"
+    class:list={[
+      '-mt-cap-label text-xs font-semibold tracking-widest uppercase',
+      inverted ? 'text-white/60' : 'text-ink/60',
+    ]}
   >
     <slot />
   </h2>
