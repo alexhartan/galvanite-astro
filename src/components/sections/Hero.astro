@@ -26,13 +26,16 @@ const { lead, emphasis, description } = Astro.props;
       <div class="absolute top-nav bottom-0 left-6 bg-grid/10 w-px"></div>
     </Container>
     <div class="relative flex h-full flex-col">
-      <Container class="@container flex flex-1 flex-col justify-center pt-56">
-        <h1 class="max-w-headline text-display lg:text-display-half font-extralight text-white">
+      <Container class="@container pt-nav flex flex-1 flex-col justify-center max-lg:pt-56 lg:pb-4">
+        <h1 class="max-w-headline text-display lg:text-display-half relative font-extralight text-white">
           {lead} <strong class="font-semibold">{emphasis}</strong>
+          <GridMark class="top-display-baseline absolute left-0" />
         </h1>
-        <p class="max-w-lead text-lead mt-6 text-white/85">{description}</p>
+        <p class="max-w-lead text-lead lg:max-w-lead-hero lg:text-lead-hero mt-6 text-white/85 lg:mt-4.5">
+          {description}
+        </p>
       </Container>
-      <div class="border-grid/10 border-t">
+      <div class="border-grid/10 bg-space-950/50 border-t">
         <Container class="relative py-2.5">
           <GridMark class="absolute top-0 left-6 -mt-px" />
           <Image

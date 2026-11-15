@@ -32,6 +32,8 @@
   --text-case--letter-spacing: -0.02em;
   --text-kpi: clamp(1.75rem, 2.3vw, 2.75rem);
   --text-kpi--line-height: 1;
+  --text-lead-hero: calc(var(--text-display-half) * 0.169);
+  --text-lead-hero--line-height: 1.456;
   --text-lead: clamp(1.125rem, 1.25vw, 1.5rem);
   --text-lead--line-height: 1.42;
 
@@ -42,10 +44,12 @@
   --container-page-inset: min(83rem, calc(100% - 8.5rem));
   --container-headline: 8.5em;
   --container-lead: 30rem;
+  --container-lead-hero: 25em;
   --container-statement: 13.5em;
 
   --spacing-nav: 6.25rem;
   --spacing-nav-line: calc(var(--spacing-nav) - 1px);
+  --spacing-display-baseline: calc(100% - 0.12em);
   --spacing-cap-statement: 0.191em;
   --spacing-cap-label: 0.25em;
   --spacing-page-bleed: calc((100vw - var(--container-page)) / 2 + 1.5rem);
