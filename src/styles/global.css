@@ -11,6 +11,7 @@
   --color-signal: #ffd23f;
   --color-signal-strong: #f5c518;
   --color-ocean-300: #5c8cc6;
+  --color-sky: #72a7db;
   --color-ocean-50: #ecf2f9;
   --color-grid: color-mix(
     in srgb,
@@ -92,7 +93,8 @@
 }
 
 @utility section-link {
-  bottom: calc(2.75rem + var(--slot, 0) * 1.5rem + var(--offset, 0px));
+  top: var(--offset, 0px);
+  bottom: calc(2.75rem + var(--slot, 0) * 1.5rem - 1lh);
 }
 
 @utility bleed-x {

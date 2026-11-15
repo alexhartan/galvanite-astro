@@ -9,40 +9,73 @@ const { href, label, position } = Astro.props;
 
 <div
   data-section-link={href}
-  class="section-link sticky z-20 h-0 mix-blend-difference max-lg:hidden"
+  class="pointer-events-none absolute inset-x-0 top-0 z-20 h-(--end) max-lg:hidden"
   style={`--slot: ${position}`}
 >
+  <div class="h-(--start)"></div>
   <a
     href={href}
-    class="ease-out-soft absolute top-(--offset) left-5 text-xs font-semibold tracking-widest whitespace-nowrap text-white/70 uppercase transition-colors duration-200 hover:text-white focus-visible:outline-2 focus-visible:outline-white"
+    class="section-link ease-out-soft text-sky pointer-events-auto sticky ml-5 block w-fit text-xs font-semibold tracking-widest whitespace-nowrap uppercase opacity-60 transition-opacity duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-current data-current:opacity-100"
   >
     {label}
   </a>
 </div>
 
 <script>
+  const main = document.querySelector<HTMLElement>('main');
   const links = [
     ...document.querySelectorAll<HTMLElement>('[data-section-link]'),
-  ];
-  const pairs = links.flatMap((link) => {
+  ].flatMap((track) => {
     const section = document.querySelector<HTMLElement>(
-      link.dataset.sectionLink ?? '',
+      track.dataset.sectionLink ?? '',
     );
     const label = section?.querySelector<HTMLElement>('[data-eyebrow]');
-    return section && label ? [{ link, section, label }] : [];
+    const anchor = track.querySelector('a');
+    return section && label && anchor
+      ? [{ track, section, label, anchor }]
+      : [];
   });
+  const nav = () =>
+    document.querySelector('header')?.getBoundingClientRect().bottom ?? 0;
+
   const measure = () => {
-    for (const { link, section, label } of pairs) {
-      const offset =
-        label.getBoundingClientRect().top - section.getBoundingClientRect().top;
-      link.style.setProperty('--offset', `${offset}px`);
+    const origin = main?.getBoundingClientRect().top ?? 0;
+    for (const { track, section, label } of links) {
+      const box = section.getBoundingClientRect();
+      const offset = label.getBoundingClientRect().top - box.top;
+      track.style.setProperty('--offset', `${offset}px`);
+      track.style.setProperty('--start', `${box.top - origin + offset}px`);
+      track.style.setProperty('--end', `${box.bottom - origin}px`);
     }
+    highlight();
   };
+
+  let frame = 0;
+  const highlight = () => {
+    frame = 0;
+    const line = nav();
+    let current = -1;
+    links.forEach(({ section }, index) => {
+      const box = section.getBoundingClientRect();
+      if (box.top <= line + 1 && box.bottom > line) current = index;
+    });
+    links.forEach(({ anchor }, index) =>
+      anchor.toggleAttribute('data-current', index === current),
+    );
+  };
+
   const observer = new ResizeObserver(measure);
-  for (const { section } of pairs) {
+  for (const { section } of links) {
     observer.observe(section);
     const guide = section.querySelector('[data-guide]');
     if (guide) observer.observe(guide);
   }
+  window.addEventListener(
+    'scroll',
+    () => {
+      frame ||= requestAnimationFrame(highlight);
+    },
+    { passive: true },
+  );
   document.fonts.ready.then(measure);
 </script>
