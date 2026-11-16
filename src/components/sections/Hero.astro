@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import logos from '../../assets/logos-placeholder.png';
+import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
 import GridMark from '../ui/GridMark.astro';
 
@@ -10,6 +10,9 @@ interface Props {
   description: string;
 }
 const { lead, emphasis, description } = Astro.props;
+const clients = (await getCollection('clients')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <section
@@ -35,14 +38,34 @@ const { lead, emphasis, description } = Astro.props;
           {description}
         </p>
       </Container>
-      <div class="border-grid/10 bg-space-950/50 border-t">
-        <Container class="relative py-2.5">
-          <GridMark class="absolute top-0 left-6 -mt-px" />
-          <Image
-            src={logos}
-            alt="Clients: QuotientAI, Selfpay, SQLMesh, SweePay, Tobiko, Common Sense and Lumen Stream"
-            class="ml-7.5 h-30 w-auto max-w-none opacity-80"
-          />
+      <div class="border-grid/10 bg-space-950/50 overflow-hidden border-t pt-6">
+        <Container class="relative">
+          <GridMark class="absolute -top-6 left-6 -mt-px" />
+          <p class="text-label font-medium tracking-widest text-white/70 uppercase">
+            Trusted by technical teams at:
+          </p>
+          <div class="clip-left mt-1" aria-label="Clients" role="group">
+            <div class="motion-safe:animate-marquee flex w-max">
+              {[0, 1].map((copy) => (
+                <ul
+                  class="flex shrink-0 items-center gap-10 pr-10"
+                  aria-hidden={copy === 1 ? 'true' : undefined}
+                >
+                  {clients.map(({ data }) => (
+                    <li class="shrink-0">
+                      <Image
+                        src={data.logo}
+                        alt={copy === 0 ? data.name : ''}
+                        height={80}
+                        densities={[1, 2]}
+                        class="h-20 w-auto"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
+          </div>
         </Container>
       </div>
     </div>

@@ -81,6 +81,14 @@
   --breakpoint-3xl: 100rem;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 60s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
 }
 
 @utility clip-left {
