@@ -5,14 +5,17 @@ import { accent, flow, pulse, shift } from './tones';
 const fill = 'url(#art-consistency)';
 const mark = [shift, accent.mark, accent.stroke];
 const dots = [
-  { cx: 120, cy: 80, tx: -26, ty: 0 },
-  { cx: 160, cy: 70, tx: 44, ty: -22 },
-  { cx: 160, cy: 90, tx: 34, ty: 20 },
+  { cx: 120, cy: 80, x1: -13, tx: -26, ty: 0 },
+  { cx: 160, cy: 70, x1: 20, tx: 44, ty: -25 },
+  { cx: 160, cy: 90, x1: 20, tx: 34, ty: 26 },
 ];
 ---
 
 <ArtFrame gradient="art-consistency">
-  <path d="M120 80h-26M160 70l44 -22M160 90l34 20" class="stroke-azure"></path>
+  <path
+    d="M120 80h-26M160 70h14a6 6 0 0 0 6 -6v-13a6 6 0 0 1 6 -6h18M160 90h14a6 6 0 0 1 6 6v14a6 6 0 0 0 6 6h8"
+    class="stroke-azure"
+  ></path>
   <g class={pulse}>
     <rect
       x="126"
@@ -78,12 +81,12 @@ const dots = [
   <circle cx="221" cy="38" r="5" class:list={mark}></circle>
   <circle cx="208" cy="110" r="5" class:list={mark}></circle>
   <g stroke="none">
-    {dots.map(({ cx, cy, tx, ty }, index) => (
+    {dots.map(({ cx, cy, x1, tx, ty }, index) => (
       <circle
         cx={cx}
         cy={cy}
         r="2.5"
-        style={`--tx: ${tx}px; --ty: ${ty}px; --delay: ${index * 0.3}s`}
+        style={`--x1: ${x1}px; --tx: ${tx}px; --ty: ${ty}px; --delay: ${index * 0.3}s`}
         class={flow}
       />
     ))}
