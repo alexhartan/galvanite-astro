@@ -164,9 +164,30 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
   let fastFrames = 0;
   let throttled = false;
 
+  const hero = canvas.closest<HTMLElement>('[data-hero]');
+  const zone = document.querySelector<HTMLElement>('[data-scene-path]');
+  const zonePath = zone
+    ? (JSON.parse(zone.dataset.scenePath ?? '') as CameraPath)
+    : null;
+  let zoneActive = false;
+
   const measure = () => {
-    target = clamp01(window.scrollY / window.innerHeight);
-    visible = target < 1;
+    const height = window.innerHeight;
+    const box = zone?.getBoundingClientRect();
+    const active = !!box && box.top < height * 2 && box.bottom > 0;
+    if (active !== zoneActive) {
+      zoneActive = active;
+      hero?.toggleAttribute('data-scene', active);
+      progress = -1;
+    }
+    if (active && box) {
+      target = clamp01((height - box.top) / (box.height + height));
+      visible = true;
+    } else {
+      target = clamp01(window.scrollY / height);
+      visible = target < 1;
+    }
+    if (progress < 0) progress = target;
   };
 
   const render = (now: number) => {
@@ -202,12 +223,13 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
 
     document.documentElement.style.setProperty(
       '--grid-invert',
-      smoothstep(0.85, 1, target).toFixed(4),
+      (zoneActive ? 1 : smoothstep(0.85, 1, target)).toFixed(4),
     );
 
     if (renderer) {
-      const { start, end } = camera;
-      const t = easings[camera.easing](progress);
+      const path = zoneActive && zonePath ? zonePath : camera;
+      const { start, end } = path;
+      const t = easings[path.easing](progress);
       const mix = (key: keyof CameraPose) =>
         start[key] + (end[key] - start[key]) * t;
       const intro = still ? 1 : clamp01((now - started) / INTRO_MS);
@@ -223,7 +245,7 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
           zoom: mix('zoom'),
           sunrise: mix('sunrise'),
         },
-        camera.stars,
+        path.stars,
       );
       canvas.toggleAttribute('data-ready', true);
     }
