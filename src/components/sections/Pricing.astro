@@ -1,0 +1,154 @@
+---
+import { getCollection } from 'astro:content';
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import GridMark from '../ui/GridMark.astro';
+
+interface Props {
+  id?: string;
+  label: string;
+  heading: string;
+  ctaHref?: string;
+}
+const {
+  id = 'engagements',
+  label,
+  heading,
+  ctaHref = '#contact',
+} = Astro.props;
+const engagements = (await getCollection('engagements')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const right = '3xl:block lg:hidden';
+const tiers = {
+  standard: {
+    box: '',
+    name: 'text-white',
+    muted: 'text-white/80',
+    price: 'text-ocean-50',
+    rule: 'border-white/10',
+    item: 'text-white/80',
+    cta: 'bg-ink/60 text-white hover:bg-ink lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100',
+  },
+  featured: {
+    box: 'bg-white',
+    name: 'text-ocean',
+    muted: 'text-ink/70',
+    price: 'text-ink',
+    rule: 'border-ink/10',
+    item: 'text-ink/80',
+    cta: 'bg-signal text-ink hover:bg-signal-strong',
+  },
+  premium: {
+    box: 'bg-abyss/50 border border-white/10',
+    name: 'text-white',
+    muted: 'text-white/80',
+    price: 'text-ocean-50',
+    rule: 'border-white/10',
+    item: 'text-white/80',
+    cta: 'bg-ink/60 text-white hover:bg-ink lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100',
+  },
+};
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-label`}
+  class="bg-space-900 pt-nav-line relative z-10 overflow-hidden pb-32 text-white"
+>
+  <Container class="absolute inset-0">
+    <div class="absolute inset-y-0 left-6 w-px bg-white/10"></div>
+    <div
+      class:list={[right, 'absolute inset-y-0 right-6 w-px bg-white/10']}
+    ></div>
+  </Container>
+  <div data-guide class="relative border-t border-white/10">
+    <Container class="absolute inset-x-0 top-0">
+      <GridMark inverted class="absolute top-0 left-6 -mt-px" />
+      <div class:list={[right, 'absolute top-0 right-6 w-0']}>
+        <GridMark inverted class="-mt-px" />
+      </div>
+    </Container>
+    <Container>
+      <Eyebrow id={`${id}-label`} inverted>
+        {label}
+      </Eyebrow>
+      <h3 class="text-statement mt-20 text-center font-light lg:mt-24">
+        {heading}
+      </h3>
+      <div class="relative mt-14 grid gap-6 lg:grid-cols-3 lg:gap-0">
+        <GridMark inverted class="absolute top-0 left-0 max-lg:hidden" />
+        <GridMark
+          inverted
+          class="absolute top-full left-0 -mt-px max-lg:hidden"
+        />
+        <GridMark
+          inverted
+          class:list={[right, 'absolute top-0 left-full -ml-px max-lg:hidden']}
+        />
+        <GridMark
+          inverted
+          class:list={[
+            right,
+            'absolute top-full left-full -mt-px -ml-px max-lg:hidden',
+          ]}
+        />
+        {engagements.map(({ data }) => {
+          const tier = tiers[data.tier];
+          return (
+            <article
+              class:list={[
+                'group relative flex flex-col px-8 pt-11 pb-6',
+                tier.box,
+              ]}
+            >
+              {data.tier === 'featured' && (
+                <p class="to-ocean-50 text-azure absolute inset-x-0 top-0 bg-linear-to-r from-white px-4 py-2 text-right text-xs font-semibold tracking-widest uppercase">
+                  Most popular
+                </p>
+              )}
+              <h4 class:list={['text-2xl font-semibold', tier.name]}>
+                {data.name}
+              </h4>
+              <p class:list={['mt-1.5', tier.muted]}>{data.audience}</p>
+              <p
+                class:list={[
+                  'text-kpi mt-8 border-b pb-6 font-semibold',
+                  tier.price,
+                  tier.rule,
+                ]}
+              >
+                {data.pricePrefix && (
+                  <span class="font-light">{data.pricePrefix} </span>
+                )}
+                {data.price}
+                <span class="text-azure mt-3 block text-xs tracking-widest uppercase">
+                  {data.duration}
+                </span>
+              </p>
+              <ul class="mt-6 mb-10 space-y-1.5" role="list">
+                {data.features.map((feature) => (
+                  <li class:list={['flex gap-3', tier.item]}>
+                    <span aria-hidden="true" class="text-signal">
+                      +
+                    </span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={ctaHref}
+                class:list={[
+                  'ease-out-soft mt-auto flex h-12 items-center justify-center rounded-sm font-semibold transition-[opacity,background-color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
+                  tier.cta,
+                ]}
+              >
+                Book a Call with Alex
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </Container>
+  </div>
+</section>

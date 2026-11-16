@@ -27,4 +27,18 @@ const benefits = defineCollection({
   }),
 });
 
-export const collections = { caseStudies, benefits };
+const engagements = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/engagements' }),
+  schema: z.object({
+    name: z.string(),
+    order: z.number(),
+    tier: z.enum(['standard', 'featured', 'premium']),
+    audience: z.string(),
+    pricePrefix: z.string().optional(),
+    price: z.string(),
+    duration: z.string(),
+    features: z.array(z.string()),
+  }),
+});
+
+export const collections = { caseStudies, benefits, engagements };
