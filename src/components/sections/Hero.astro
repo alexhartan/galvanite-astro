@@ -38,10 +38,10 @@ const clients = (await getCollection('clients')).sort(
           {description}
         </p>
       </Container>
-      <div class="border-grid/10 bg-space-950/60 overflow-hidden border-t opacity-60 pt-3.75 pb-2.5">
+      <div class="border-grid/10 bg-space-950/60 overflow-x-clip border-t opacity-50 pt-3.75 pb-3">
         <Container class="relative">
           <GridMark class="absolute -top-3.75 left-6 -mt-px" />
-          <p class="text-label text-frost font-light tracking-widest uppercase">
+          <p class="text-frost text-xs font-normal tracking-widest uppercase">
             Trusted by technical teams at:
           </p>
           <div class="clip-left mt-1" aria-label="Clients" role="group">
