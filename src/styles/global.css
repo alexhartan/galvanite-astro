@@ -13,6 +13,7 @@
   --color-ocean-300: #5c8cc6;
   --color-sky: #72a7db;
   --color-azure: #5ba7d9;
+  --color-frost: #ccecff;
   --color-abyss: #00071f;
   --color-ocean-50: #ecf2f9;
   --color-grid: color-mix(
@@ -41,9 +42,9 @@
   --text-card--line-height: 1.13;
   --text-card--letter-spacing: -0.01em;
   --text-label: 0.75rem;
-  --text-kpi-lg: clamp(2.1875rem, 2.875vw, 3.4375rem);
+  --text-kpi-lg: clamp(2.1875rem, 2.75vw, 3.2rem);
   --text-kpi-lg--line-height: 1;
-  --text-kpi: clamp(1.75rem, 2.3vw, 2.75rem);
+  --text-kpi: clamp(1.75rem, 2.1vw, 2.5rem);
   --text-kpi--line-height: 1;
   --text-lead-hero: calc(var(--text-display-half) * 0.169);
   --text-lead-hero--line-height: 1.456;
@@ -52,6 +53,7 @@
 
   --leading-statement: 1.113;
   --tracking-statement: -0.035em;
+  --tracking-price: -0.03em;
 
   --container-page: 83rem;
   --container-page-inset: min(83rem, calc(100% - 8.5rem));

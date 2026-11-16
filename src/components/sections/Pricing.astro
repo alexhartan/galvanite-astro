@@ -22,10 +22,10 @@ const engagements = (await getCollection('engagements')).sort(
 const right = '3xl:block lg:hidden';
 const tiers = {
   standard: {
-    box: '',
+    box: 'ease-out-soft transition-opacity duration-300 lg:opacity-90 lg:hover:opacity-100 lg:focus-within:opacity-100',
     name: 'text-white',
     muted: 'text-white/80',
-    price: 'text-kpi text-ocean-50 mt-price',
+    price: 'text-kpi text-frost mt-price',
     plus: 1.25,
     rule: 'border-white/10',
     item: 'text-white/80',
@@ -42,10 +42,10 @@ const tiers = {
     cta: 'bg-signal text-ink hover:bg-signal-strong',
   },
   premium: {
-    box: 'bg-abyss/50 ring-1 ring-white/10 ring-inset',
+    box: 'bg-abyss/50 ring-1 ring-white/10 ring-inset ease-out-soft transition-opacity duration-300 lg:opacity-90 lg:hover:opacity-100 lg:focus-within:opacity-100',
     name: 'text-white',
     muted: 'text-white/80',
-    price: 'text-kpi text-ocean-50 mt-price',
+    price: 'text-kpi text-frost mt-price',
     plus: 1.25,
     rule: 'border-white/10',
     item: 'text-white/80',
@@ -118,7 +118,7 @@ const tiers = {
               </p>
               <p
                 class:list={[
-                  'border-b pb-6 font-semibold',
+                  'border-b pb-6 font-semibold tracking-price',
                   tier.price,
                   tier.rule,
                 ]}
