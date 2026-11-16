@@ -63,7 +63,6 @@
   --container-mission: 13.3em;
 
   --spacing-nav: 6.25rem;
-  --spacing-nav-line: calc(var(--spacing-nav) - 1px);
   --spacing-display-baseline: calc(100% - 0.12em);
   --spacing-price: 2rem;
   --spacing-price-featured: calc(
@@ -102,7 +101,7 @@
 }
 
 @utility section-link {
-  top: var(--offset, 0px);
+  top: calc(var(--offset, 0px) + var(--spacing-nav));
   bottom: calc(2.75rem + var(--slot, 0) * 1.5rem - 1lh);
 }
 
