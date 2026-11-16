@@ -1,7 +1,7 @@
 ---
 import Container from '../ui/Container.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
-import GridMark from '../ui/GridMark.astro';
 
 interface Props {
   id?: string;
@@ -16,17 +16,8 @@ const { id = 'intro', label, statement } = Astro.props;
   aria-labelledby={`${id}-label`}
   class="scroll-mt-nav relative z-10 overflow-hidden bg-white"
 >
-  <Container class="absolute inset-0">
-    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
-  </Container>
+  <SectionFrame />
   <div data-guide class="border-ink/10 relative border-t">
-    <Container class="absolute inset-x-0 top-0">
-      <GridMark class="absolute top-0 left-6 -mt-px" />
-      <div class="3xl:block absolute top-0 right-6 w-0 lg:hidden">
-        <div class="bg-ink/10 absolute top-0 h-svh w-px"></div>
-        <GridMark class="-mt-px" />
-      </div>
-    </Container>
     <Container class="@container py-32 lg:py-56">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
       <p class="max-w-mission text-statement lg:text-mission text-ink leading-none font-extralight">

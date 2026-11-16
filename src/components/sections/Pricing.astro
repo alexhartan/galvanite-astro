@@ -2,8 +2,8 @@
 import { getCollection } from 'astro:content';
 import camera from '../../scripts/pricing-camera.json';
 import Container from '../ui/Container.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
-import GridMark from '../ui/GridMark.astro';
 
 interface Props {
   id?: string;
@@ -20,7 +20,6 @@ const {
 const engagements = (await getCollection('engagements')).sort(
   (a, b) => a.data.order - b.data.order,
 );
-const right = '3xl:block lg:hidden';
 const tiers = {
   standard: {
     box: 'ease-out-soft transition-opacity duration-300 lg:opacity-90 lg:hover:opacity-100 lg:focus-within:opacity-100',
@@ -61,24 +60,13 @@ const tiers = {
   data-scene-path={JSON.stringify(camera)}
   class="scroll-mt-nav relative z-10 overflow-hidden pb-32 text-white"
 >
-  <Container class="absolute inset-0">
-    <div class="absolute inset-y-0 left-6 w-px bg-white/10"></div>
-    <div
-      class:list={[right, 'absolute inset-y-0 right-6 w-px bg-white/10']}
-    ></div>
-  </Container>
+  <SectionFrame inverted />
   <div data-guide class="relative border-t border-white/10">
-    <Container class="absolute inset-x-0 top-0">
-      <GridMark inverted class="absolute top-0 left-6 -mt-px" />
-      <div class:list={[right, 'absolute top-0 right-6 w-0']}>
-        <GridMark inverted class="-mt-px" />
-      </div>
-    </Container>
     <Container>
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <h3 class="text-statement mt-20 text-center font-light lg:mt-24">
+      <h3 class="text-statement mt-24 text-center font-light lg:mt-36">
         {heading}
       </h3>
       <div class="mt-14 grid gap-6 lg:grid-cols-3 lg:gap-0">

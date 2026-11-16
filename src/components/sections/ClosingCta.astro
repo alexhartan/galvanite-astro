@@ -1,6 +1,6 @@
 ---
 import Container from '../ui/Container.astro';
-import GridMark from '../ui/GridMark.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
 
 interface Props {
   id?: string;
@@ -23,13 +23,8 @@ const {
   aria-labelledby={`${id}-heading`}
   class="scroll-mt-nav relative z-10 overflow-hidden bg-white"
 >
-  <Container class="absolute inset-0">
-    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
-  </Container>
+  <SectionFrame />
   <div class="border-ink/10 relative border-t">
-    <Container class="absolute inset-x-0 top-0">
-      <GridMark class="absolute top-0 left-6 -mt-px" />
-    </Container>
     <Container class="@container py-28 lg:py-44">
       <h2
         id={`${id}-heading`}

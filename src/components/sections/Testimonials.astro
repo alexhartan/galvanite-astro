@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import ArrowIcon from '../ui/ArrowIcon.astro';
 import Container from '../ui/Container.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import GridMark from '../ui/GridMark.astro';
 
@@ -19,7 +20,6 @@ const pages = Array.from(
   { length: Math.ceil(testimonials.length / 2) },
   (_, index) => testimonials.slice(index * 2, index * 2 + 2),
 );
-const right = '3xl:block lg:hidden';
 const icon =
   'opacity-80 transition-opacity duration-200 ease-out-soft group-hover:opacity-100';
 const arrow =
@@ -31,19 +31,8 @@ const arrow =
   aria-labelledby={`${id}-label`}
   class="scroll-mt-nav relative z-10 overflow-hidden text-white"
 >
-  <Container class="absolute inset-0">
-    <div class="absolute inset-y-0 left-6 w-px bg-white/10"></div>
-    <div
-      class:list={[right, 'absolute inset-y-0 right-6 w-px bg-white/10']}
-    ></div>
-  </Container>
+  <SectionFrame inverted />
   <div data-guide class="relative border-t border-white/10">
-    <Container class="absolute inset-x-0 top-0">
-      <GridMark inverted class="absolute top-0 left-6 -mt-px" />
-      <div class:list={[right, 'absolute top-0 right-6 w-0']}>
-        <GridMark inverted class="-mt-px" />
-      </div>
-    </Container>
     <Container class="@container">
       <Eyebrow id={`${id}-label`} inverted>
         {label}
@@ -78,6 +67,10 @@ const arrow =
         <div class="relative border-t border-white/10 pb-40 lg:pb-48">
           <GridMark inverted class="absolute top-0 left-0 -mt-px" />
           <div class="absolute top-0 bottom-0 left-1/2 w-px bg-white/10 max-lg:hidden"></div>
+          <GridMark
+            inverted
+            class="absolute top-full left-1/2 -mt-px max-lg:hidden"
+          />
           <GridMark
             inverted
             class="absolute top-0 left-1/2 -mt-px max-lg:hidden"
