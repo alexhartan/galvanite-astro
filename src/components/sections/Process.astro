@@ -46,18 +46,18 @@ const label_ =
         <h3 class="text-4xl leading-none font-light text-balance lg:w-1/2 lg:pr-8">
           {heading}
         </h3>
-        <p class="text-frost lg:w-1/2">{description}</p>
+        <p class="text-frost font-light lg:w-1/2">{description}</p>
       </div>
       <div class="-mx-6 mt-9 overflow-x-auto px-6 pt-14 lg:mx-0 lg:overflow-visible lg:px-0 lg:pt-0">
         <div
           data-timeline
-          class="bg-space-900 @container relative min-w-3xl border-y border-white/10 py-14"
+          class="bg-abyss/50 @container relative mx-px min-w-3xl border-y border-white/10 py-14"
           style={`--weeks: ${weeks}`}
         >
           <div aria-hidden="true" class="absolute inset-0 flex">
             {Array.from({ length: weeks }, (_, index) => (
               <div
-                class:list={['flex-1', index > 0 && 'border-l border-white/10']}
+                class:list={['flex-1', index > 0 && 'border-l border-white/5']}
               />
             ))}
           </div>
@@ -89,7 +89,7 @@ const label_ =
           <div
             data-tooltip
             aria-hidden="true"
-            class="timeline-tip ease-out-soft text-ink pointer-events-none absolute bottom-full mb-2 flex -translate-x-1/2 translate-y-1 items-center gap-2 rounded-sm bg-white py-1.5 pr-3 pl-1.5 text-sm whitespace-nowrap opacity-0 shadow-lg transition-[opacity,translate] duration-300 data-visible:translate-y-0 data-visible:opacity-100"
+            class="timeline-tip ease-out-soft text-ink pointer-events-none absolute bottom-full -mb-1.5 flex -translate-x-1/2 translate-y-1 items-center gap-2 rounded-sm bg-white py-1.5 pr-3 pl-1.5 text-sm whitespace-nowrap opacity-0 shadow-lg transition-[opacity,translate] duration-300 data-visible:translate-y-0 data-visible:opacity-100"
           >
             <Image
               src={alex}
