@@ -174,14 +174,14 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
   const measure = () => {
     const height = window.innerHeight;
     const box = zone?.getBoundingClientRect();
-    const active = !!box && box.top < height * 2 && box.bottom > 0;
+    const active = !!box && box.top < height * 2;
     if (active !== zoneActive) {
       zoneActive = active;
       hero?.toggleAttribute('data-scene', active);
       progress = -1;
     }
-    if (active && box) {
-      target = clamp01((height - box.top) / (box.height + height));
+    if (active) {
+      target = 0;
       visible = true;
     } else {
       target = clamp01(window.scrollY / height);
