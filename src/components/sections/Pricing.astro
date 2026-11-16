@@ -34,7 +34,7 @@ const tiers = {
   },
   featured: {
     box: 'bg-white',
-    name: 'text-ocean',
+    name: 'text-ink',
     muted: 'text-ink/70',
     price: 'text-kpi-lg text-ink mt-price-featured',
     plus: 2.5,
@@ -81,23 +81,7 @@ const tiers = {
       <h3 class="text-statement mt-20 text-center font-light lg:mt-24">
         {heading}
       </h3>
-      <div class="relative mt-14 grid gap-6 lg:grid-cols-3 lg:gap-0">
-        <GridMark inverted class="absolute top-0 left-0 max-lg:hidden" />
-        <GridMark
-          inverted
-          class="absolute top-full left-0 -mt-px max-lg:hidden"
-        />
-        <GridMark
-          inverted
-          class:list={[right, 'absolute top-0 left-full -ml-px max-lg:hidden']}
-        />
-        <GridMark
-          inverted
-          class:list={[
-            right,
-            'absolute top-full left-full -mt-px -ml-px max-lg:hidden',
-          ]}
-        />
+      <div class="mt-14 grid gap-6 lg:grid-cols-3 lg:gap-0">
         {engagements.map(({ data }) => {
           const tier = tiers[data.tier];
           return (

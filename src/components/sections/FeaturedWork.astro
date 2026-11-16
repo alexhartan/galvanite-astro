@@ -23,7 +23,7 @@ const arrow =
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 min-h-svh overflow-hidden bg-white pb-32"
+  class="scroll-mt-nav relative z-10 overflow-hidden bg-white"
 >
   <Container class="absolute inset-0">
     <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
@@ -43,7 +43,7 @@ const arrow =
         role="region"
         aria-roledescription="carousel"
         aria-label="Case studies"
-        class="flex flex-col gap-10 lg:flex-row lg:gap-0"
+        class="flex flex-col gap-10 py-32 lg:flex-row lg:gap-0 lg:py-48"
       >
         <div class="flex shrink-0 flex-col max-lg:order-2 lg:w-1/2 lg:pr-10">
           <div aria-live="polite" class="grid flex-1 items-center">
@@ -54,10 +54,10 @@ const arrow =
                 inert={index !== 0}
                 class="ease-out-soft invisible col-start-1 row-start-1 opacity-0 transition-[opacity,visibility] duration-500 data-active:visible data-active:opacity-100"
               >
-                <h3 class="text-case text-ocean">{data.title}</h3>
+                <h3 class="text-case text-ink">{data.title}</h3>
                 <ul class="mt-8 flex flex-wrap gap-2.5" aria-label="Scope">
                   {data.scope.map((item) => (
-                    <li class="bg-ocean-50 text-ocean rounded-sm px-3 py-1.5 text-xs font-semibold tracking-wider uppercase">
+                    <li class="bg-ocean-50 text-ocean rounded-sm px-3 py-1.5 text-xs font-medium tracking-wider uppercase">
                       {item}
                     </li>
                   ))}
