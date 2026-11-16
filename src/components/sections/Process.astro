@@ -23,7 +23,7 @@ const {
   stages,
 } = Astro.props;
 const label_ =
-  'text-label absolute inset-0 flex items-center justify-center font-medium tracking-wider uppercase';
+  'text-label absolute inset-0 flex items-center justify-center font-semibold tracking-wider uppercase';
 ---
 
 <section
@@ -70,7 +70,7 @@ const label_ =
                 style={`--start: ${start}; --end: ${end}`}
               >
                 <div class="bg-ink/40 absolute inset-0 rounded-sm border border-white/10">
-                  <span class:list={[label_, 'text-frost/80']}>{name}</span>
+                  <span class:list={[label_, 'text-azure']}>{name}</span>
                 </div>
                 <div
                   aria-hidden="true"
