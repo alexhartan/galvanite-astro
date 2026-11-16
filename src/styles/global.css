@@ -151,8 +151,8 @@
 
 @utility reveal-letter {
   opacity: clamp(
-    0.2,
-    calc(0.2 + 0.8 * (var(--p, 1) * var(--n) - var(--i)) / 12),
+    0.15,
+    calc(0.15 + 0.85 * (var(--p, 1) * var(--n) - var(--i)) / 6),
     1
   );
 }
