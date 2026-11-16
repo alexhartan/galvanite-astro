@@ -25,7 +25,8 @@ const tiers = {
     box: '',
     name: 'text-white',
     muted: 'text-white/80',
-    price: 'text-ocean-50',
+    price: 'text-kpi text-ocean-50',
+    plus: 1.25,
     rule: 'border-white/10',
     item: 'text-white/80',
     cta: 'bg-ink/60 text-white hover:bg-ink lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100',
@@ -34,7 +35,8 @@ const tiers = {
     box: 'bg-white',
     name: 'text-ocean',
     muted: 'text-ink/70',
-    price: 'text-ink',
+    price: 'text-kpi-lg text-ink',
+    plus: 2.5,
     rule: 'border-ink/10',
     item: 'text-ink/80',
     cta: 'bg-signal text-ink hover:bg-signal-strong',
@@ -43,7 +45,8 @@ const tiers = {
     box: 'bg-abyss/50 border border-white/10',
     name: 'text-white',
     muted: 'text-white/80',
-    price: 'text-ocean-50',
+    price: 'text-kpi text-ocean-50',
+    plus: 1.25,
     rule: 'border-white/10',
     item: 'text-white/80',
     cta: 'bg-ink/60 text-white hover:bg-ink lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100',
@@ -103,17 +106,19 @@ const tiers = {
               ]}
             >
               {data.tier === 'featured' && (
-                <p class="to-ocean-50 text-azure absolute inset-x-0 top-0 bg-linear-to-r from-white px-4 py-2 text-right text-xs font-semibold tracking-widest uppercase">
+                <p class="to-ocean-50 text-azure absolute inset-x-0 top-0 bg-linear-to-r from-white text-label px-4 py-2 text-right font-semibold tracking-widest uppercase">
                   Most popular
                 </p>
               )}
               <h4 class:list={['text-2xl font-semibold', tier.name]}>
                 {data.name}
               </h4>
-              <p class:list={['mt-1.5', tier.muted]}>{data.audience}</p>
+              <p class:list={['mt-1.5 text-sm text-balance', tier.muted]}>
+                {data.audience}
+              </p>
               <p
                 class:list={[
-                  'text-kpi mt-8 border-b pb-6 font-semibold',
+                  'mt-8 border-b pb-6 font-semibold',
                   tier.price,
                   tier.rule,
                 ]}
@@ -122,15 +127,26 @@ const tiers = {
                   <span class="font-light">{data.pricePrefix} </span>
                 )}
                 {data.price}
-                <span class="text-azure mt-3 block text-xs tracking-widest uppercase">
+                <span class="text-azure text-label mt-3 block tracking-widest uppercase">
                   {data.duration}
                 </span>
               </p>
               <ul class="mt-6 mb-10 space-y-1.5" role="list">
                 {data.features.map((feature) => (
-                  <li class:list={['flex gap-3', tier.item]}>
-                    <span aria-hidden="true" class="text-signal">
-                      +
+                  <li class:list={['flex gap-3 text-sm', tier.item]}>
+                    <span
+                      aria-hidden="true"
+                      class="flex h-lh shrink-0 items-center"
+                    >
+                      <svg
+                        class="text-signal size-2.5"
+                        viewBox="0 0 10 10"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width={tier.plus}
+                      >
+                        <path d="M5 0v10M0 5h10" />
+                      </svg>
                     </span>
                     {feature}
                   </li>
