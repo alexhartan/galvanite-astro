@@ -38,6 +38,8 @@
   --text-case--line-height: 1.04;
   --text-case--letter-spacing: -0.02em;
   --text-label: 0.75rem;
+  --text-benefit: min(1.25rem, calc(100cqi / 12.4));
+  --text-benefit--line-height: 1.3;
   --text-kpi-lg: clamp(2.1875rem, 2.75vw, 3.2rem);
   --text-kpi-lg--line-height: 1;
   --text-kpi: clamp(1.75rem, 2.1vw, 2.5rem);
