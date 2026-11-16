@@ -38,32 +38,34 @@ const clients = (await getCollection('clients')).sort(
           {description}
         </p>
       </Container>
-      <div class="border-grid/10 bg-space-950/50 overflow-hidden border-t pt-6">
+      <div class="border-grid/10 bg-space-950/50 overflow-hidden border-t pt-4 pb-2.5">
         <Container class="relative">
-          <GridMark class="absolute -top-6 left-6 -mt-px" />
-          <p class="text-label font-medium tracking-widest text-white/70 uppercase">
-            Trusted by technical teams at:
-          </p>
-          <div class="clip-left mt-1" aria-label="Clients" role="group">
-            <div class="motion-safe:animate-marquee flex w-max">
-              {[0, 1].map((copy) => (
-                <ul
-                  class="flex shrink-0 items-center gap-10 pr-10"
-                  aria-hidden={copy === 1 ? 'true' : undefined}
-                >
-                  {clients.map(({ data }) => (
-                    <li class="shrink-0">
-                      <Image
-                        src={data.logo}
-                        alt={copy === 0 ? data.name : ''}
-                        height={80}
-                        densities={[1, 2]}
-                        class="h-20 w-auto"
-                      />
-                    </li>
-                  ))}
-                </ul>
-              ))}
+          <GridMark class="absolute -top-4 left-6 -mt-px" />
+          <div class="opacity-60">
+            <p class="text-label text-frost font-light tracking-widest uppercase">
+              Trusted by technical teams at:
+            </p>
+            <div class="clip-left mt-1" aria-label="Clients" role="group">
+              <div class="motion-safe:animate-marquee flex w-max">
+                {[0, 1].map((copy) => (
+                  <ul
+                    class="flex shrink-0 items-center gap-10 pr-10"
+                    aria-hidden={copy === 1 ? 'true' : undefined}
+                  >
+                    {clients.map(({ data }) => (
+                      <li class="shrink-0">
+                        <Image
+                          src={data.logo}
+                          alt={copy === 0 ? data.name : ''}
+                          height={80}
+                          densities={[1, 2]}
+                          class="h-20 w-auto"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                ))}
+              </div>
             </div>
           </div>
         </Container>
