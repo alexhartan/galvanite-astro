@@ -1,0 +1,48 @@
+---
+import ArtFrame from './ArtFrame.astro';
+
+const type = 'transform-fill origin-left';
+const lines = [
+  { d: 'M62 62h40', tone: 'stroke-frost', step: 'motion-safe:animate-art-2' },
+  { d: 'M74 74h58', tone: 'stroke-sky', step: 'motion-safe:animate-art-2' },
+  { d: 'M138 74h22', tone: 'stroke-signal', step: 'motion-safe:animate-art-2' },
+  { d: 'M74 86h44', tone: 'stroke-sky', step: 'motion-safe:animate-art-3' },
+  { d: 'M86 98h62', tone: 'stroke-azure', step: 'motion-safe:animate-art-3' },
+  { d: 'M74 110h36', tone: 'stroke-sky', step: 'motion-safe:animate-art-4' },
+  { d: 'M62 122h22', tone: 'stroke-frost', step: 'motion-safe:animate-art-4' },
+];
+---
+
+<ArtFrame gradient="art-build">
+  <g class="motion-safe:animate-art-1">
+    <rect
+      x="56"
+      y="32"
+      width="160"
+      height="110"
+      rx="8"
+      fill="url(#art-build)"
+      stroke="none"
+    ></rect>
+    <rect x="48" y="24" width="160" height="110" rx="8"></rect>
+    <path d="M48 44h160M58 34h2M66 34h2M74 34h2"></path>
+  </g>
+  <g stroke-width="3" style="--from: scaleX(0)">
+    {lines.map(({ d, tone, step }, index) => (
+      <path
+        d={d}
+        style={`--delay: ${(index % 3) * 0.2}s`}
+        class:list={[type, tone, step]}
+      />
+    ))}
+  </g>
+  <g
+    style="--from: scale(0.5)"
+    class="stroke-signal transform-fill motion-safe:animate-art-5 origin-center"
+  >
+    <circle cx="208" cy="112" r="24" class="fill-abyss"></circle>
+    <circle cx="208" cy="112" r="24" class="fill-signal/15"></circle>
+    <circle cx="199" cy="112" r="5"></circle>
+    <path d="M204 112h15M214 112v5M219 112v4"></path>
+  </g>
+</ArtFrame>

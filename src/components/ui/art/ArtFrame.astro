@@ -1,0 +1,31 @@
+---
+interface Props {
+  gradient: string;
+}
+const { gradient } = Astro.props;
+---
+
+<svg
+  class="text-frost h-full w-full"
+  viewBox="0 0 280 160"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <defs>
+    <linearGradient
+      id={gradient}
+      x1="0"
+      y1="0"
+      x2="1"
+      y2="1"
+      class="text-azure"
+    >
+      <stop offset="0" stop-color="currentColor" stop-opacity="0"></stop>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0.45"></stop>
+    </linearGradient>
+  </defs>
+  <slot />
+</svg>
