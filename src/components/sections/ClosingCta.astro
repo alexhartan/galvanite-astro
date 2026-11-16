@@ -21,7 +21,7 @@ const {
 <section
   id={id}
   aria-labelledby={`${id}-heading`}
-  class="relative z-10 overflow-hidden bg-white"
+  class="scroll-mt-nav relative z-10 overflow-hidden bg-white"
 >
   <Container class="absolute inset-0">
     <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
@@ -30,10 +30,10 @@ const {
     <Container class="absolute inset-x-0 top-0">
       <GridMark class="absolute top-0 left-6 -mt-px" />
     </Container>
-    <Container class="@container py-24 lg:py-36">
+    <Container class="@container py-28 lg:py-44">
       <h2
         id={`${id}-heading`}
-        class="text-statement lg:text-mission text-ocean font-extralight"
+        class="text-statement lg:text-mission text-ocean leading-none font-extralight"
       >
         {lead} <strong class="block font-medium">{emphasis}</strong>
       </h2>
