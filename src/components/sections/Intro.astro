@@ -9,6 +9,20 @@ interface Props {
   statement: { text: string; strong?: boolean }[];
 }
 const { id = 'intro', label, statement } = Astro.props;
+const fullText = statement.map(({ text }) => text).join('');
+let letterIndex = 0;
+const segments = statement.map(({ text, strong }) => ({
+  strong,
+  words: text.split(/(\s+)/).map((part) =>
+    /^\s+$/.test(part)
+      ? { space: part, letters: [] }
+      : {
+          space: '',
+          letters: [...part].map((char) => ({ char, index: letterIndex++ })),
+        },
+  ),
+}));
+const reveal = letterIndex + 12;
 ---
 
 <section
@@ -20,11 +34,43 @@ const { id = 'intro', label, statement } = Astro.props;
   <div data-guide class="border-ink/10 relative border-t">
     <Container class="@container py-32 lg:py-56">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
-      <p class="max-w-mission text-statement lg:text-mission text-ink leading-none font-extralight">
-        {statement.map(({ text, strong }) =>
-          strong ? <strong class="font-medium">{text}</strong> : text,
-        )}
+      <p
+        data-reveal
+        class="max-w-mission text-statement lg:text-mission text-ink leading-none font-extralight"
+        style={`--n: ${reveal}`}
+      >
+        <span class="sr-only">{fullText}</span>
+        {segments.map(({ strong, words }) => {
+          const Tag = strong ? 'strong' : 'span';
+          return (
+            <Tag class:list={[strong && 'font-medium']} aria-hidden="true">
+              {words.map(({ space, letters }) =>
+                space ? (
+                  space
+                ) : (
+                  <span class="inline-block whitespace-nowrap">
+                    {letters.map(({ char, index }) => (
+                      <span class="reveal-letter" style={`--i: ${index}`}>
+                        {char}
+                      </span>
+                    ))}
+                  </span>
+                ),
+              )}
+            </Tag>
+          );
+        })}
       </p>
     </Container>
   </div>
 </section>
+
+<script>
+  import { initReveal } from '../../scripts/reveal';
+
+  for (const element of document.querySelectorAll<HTMLElement>(
+    '[data-reveal]',
+  )) {
+    initReveal(element);
+  }
+</script>

@@ -45,7 +45,7 @@
   --text-kpi-lg--letter-spacing: -0.015em;
   --text-kpi: clamp(1.75rem, 2.1vw, 2.5rem);
   --text-kpi--line-height: 1;
-  --text-lead-hero: calc(var(--text-display-half) * 0.169);
+  --text-lead-hero: calc(var(--text-display-half) * 0.19);
   --text-lead-hero--line-height: 1.456;
   --text-lead: clamp(1.125rem, 1.25vw, 1.5rem);
   --text-lead--line-height: 1.42;
@@ -147,4 +147,12 @@
 
 @utility timeline-tip {
   left: calc(var(--tip, 0) / var(--weeks) * 100%);
+}
+
+@utility reveal-letter {
+  opacity: clamp(
+    0.2,
+    calc(0.2 + 0.8 * (var(--p, 1) * var(--n) - var(--i)) / 12),
+    1
+  );
 }
