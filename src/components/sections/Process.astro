@@ -1,0 +1,107 @@
+---
+import { Image } from 'astro:assets';
+import alex from '../../assets/process/alex.jpg';
+import CheckIcon from '../ui/CheckIcon.astro';
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import GridMark from '../ui/GridMark.astro';
+
+interface Props {
+  id?: string;
+  label: string;
+  description: string;
+  weeks: number;
+  stages: { name: string; start: number; end: number }[];
+}
+const { id = 'process', label, description, weeks, stages } = Astro.props;
+const label_ =
+  'text-label absolute inset-0 flex items-center justify-center font-medium tracking-wider uppercase';
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-label`}
+  class="scroll-mt-nav relative z-10 overflow-hidden bg-white"
+>
+  <Container class="absolute inset-0">
+    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
+  </Container>
+  <div data-guide class="border-ink/10 relative border-t">
+    <Container class="absolute inset-x-0 top-0">
+      <GridMark class="absolute top-0 left-6 -mt-px" />
+    </Container>
+    <Container class="py-32 lg:py-44">
+      <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
+      <p class="text-ink/70 text-lg text-balance lg:ml-auto lg:w-1/2 lg:pr-16">
+        {description}
+      </p>
+      <div class="-mx-6 mt-12 overflow-x-auto px-6 pt-14 lg:mx-0 lg:overflow-visible lg:px-0">
+        <div
+          data-timeline
+          class="bg-space-900 @container relative min-w-3xl py-14"
+          style={`--weeks: ${weeks}`}
+        >
+          <div aria-hidden="true" class="absolute inset-0 flex">
+            {Array.from({ length: weeks }, (_, index) => (
+              <div
+                class:list={['flex-1', index > 0 && 'border-l border-white/10']}
+              />
+            ))}
+          </div>
+          <ol class="relative space-y-2.5">
+            {stages.map(({ name, start, end }) => (
+              <li
+                data-stage
+                data-end={end / weeks}
+                class="group/stage stage-span relative h-10"
+                style={`--start: ${start}; --end: ${end}`}
+              >
+                <div class="bg-ink/40 absolute inset-0 rounded-sm border border-white/10">
+                  <span class:list={[label_, 'text-frost/80']}>{name}</span>
+                </div>
+                <div
+                  aria-hidden="true"
+                  class="stage-reveal absolute inset-0 rounded-sm bg-white/90"
+                >
+                  <CheckIcon class="ease-out-soft absolute top-1/2 left-2.5 -translate-y-1/2 scale-75 opacity-0 transition-[opacity,scale] duration-300 group-data-complete/stage:scale-100 group-data-complete/stage:opacity-100" />
+                  <span class:list={[label_, 'text-ink']}>{name}</span>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div
+            aria-hidden="true"
+            class="timeline-line absolute inset-y-0 w-px bg-linear-to-b from-white/10 via-white to-white/10"
+          ></div>
+          <div
+            data-tooltip
+            aria-hidden="true"
+            class="timeline-tip ease-out-soft text-ink pointer-events-none absolute bottom-full mb-2 flex -translate-x-1/2 translate-y-1 items-center gap-2 rounded-sm bg-white py-1.5 pr-3 pl-1.5 text-sm whitespace-nowrap opacity-0 shadow-lg transition-[opacity,translate] duration-300 data-visible:translate-y-0 data-visible:opacity-100"
+          >
+            <Image
+              src={alex}
+              alt=""
+              width={20}
+              height={20}
+              densities={[1, 2]}
+              format="webp"
+              class="size-5 rounded-full object-cover"
+            />
+            Weekly Sync
+            <span class="absolute top-full left-1/2 size-2 -translate-x-1/2 -translate-y-1 rotate-45 bg-white"></span>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>
+
+<script>
+  import { initTimeline } from '../../scripts/timeline';
+
+  for (const root of document.querySelectorAll<HTMLElement>(
+    '[data-timeline]',
+  )) {
+    initTimeline(root);
+  }
+</script>

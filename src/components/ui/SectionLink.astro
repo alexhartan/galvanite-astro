@@ -54,10 +54,18 @@ const { href, label, position } = Astro.props;
   const highlight = () => {
     frame = 0;
     const line = nav();
+    const view = window.innerHeight - line;
     let current = -1;
+    let best = 0.5;
     links.forEach(({ section }, index) => {
       const box = section.getBoundingClientRect();
-      if (box.top <= line + 1 && box.bottom > line) current = index;
+      const seen =
+        Math.min(box.bottom, window.innerHeight) - Math.max(box.top, line);
+      const ratio = seen / Math.min(box.height, view);
+      if (ratio > best) {
+        best = ratio;
+        current = index;
+      }
     });
     links.forEach(({ anchor }, index) =>
       anchor.toggleAttribute('data-current', index === current),

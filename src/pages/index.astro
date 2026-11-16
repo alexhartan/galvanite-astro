@@ -5,6 +5,7 @@ import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
 import Pricing from '../components/sections/Pricing.astro';
+import Process from '../components/sections/Process.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import SectionLink from '../components/ui/SectionLink.astro';
 import SiteHeader from '../components/sections/SiteHeader.astro';
@@ -31,6 +32,7 @@ const mission = {
 const sections = [
   { href: '#intro', label: 'Our mission' },
   { href: '#work', label: 'Featured work' },
+  { href: '#process', label: 'The process' },
   { href: '#engagements', label: 'Engagements' },
   { href: '#why', label: 'Why Galvanite' },
   { href: '#testimonials', label: 'Testimonials' },
@@ -53,6 +55,19 @@ const closing = {
   description:
     'Book a 30-minute discovery call. We look at your site together, find where the value gets lost, and agree on the first steps.',
 };
+const process = {
+  label: 'The process',
+  description:
+    'Our sprint-based process is designed for fast-moving startups, with each stage building on the last, and weekly check-ins to maintain momentum.',
+  weeks: 8,
+  stages: [
+    { name: 'Positioning & core messaging', start: 0, end: 2 },
+    { name: 'Wireframes & sitemap', start: 1, end: 3 },
+    { name: 'High-fidelity designs', start: 3, end: 5 },
+    { name: 'Development', start: 5, end: 7 },
+    { name: 'QA & launch', start: 6, end: 8 },
+  ],
+};
 const link = (index: number) => ({
   ...sections[index]!,
   position: sections.length - 1 - index,
@@ -70,10 +85,12 @@ const link = (index: number) => ({
   <SectionLink {...link(1)} />
   <FeaturedWork label="Featured work" />
   <SectionLink {...link(2)} />
-  <Pricing label="Engagements" heading="Ways to work together" />
+  <Process {...process} />
   <SectionLink {...link(3)} />
+  <Pricing label="Engagements" heading="Ways to work together" />
+  <SectionLink {...link(4)} />
   <WhyGalvanite {...why} />
   <ClosingCta {...closing} />
-  <SectionLink {...link(4)} />
+  <SectionLink {...link(5)} />
   <Testimonials label="Testimonials" heading="Don’t take our word for it" />
 </BaseLayout>
