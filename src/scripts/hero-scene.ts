@@ -174,7 +174,7 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
   const measure = () => {
     const height = window.innerHeight;
     const box = zone?.getBoundingClientRect();
-    const active = !!box && box.top < height * 2;
+    const active = !!box && box.top < height * 1.25 && window.scrollY >= height;
     if (active !== zoneActive) {
       zoneActive = active;
       hero?.toggleAttribute('data-scene', active);
