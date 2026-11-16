@@ -22,8 +22,6 @@ const benefits = defineCollection({
     title: z.string(),
     order: z.number(),
     summary: z.string(),
-    proof: z.string(),
-    proofHref: z.string(),
   }),
 });
 
