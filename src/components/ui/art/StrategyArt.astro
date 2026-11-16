@@ -1,0 +1,100 @@
+---
+import ArtFrame from './ArtFrame.astro';
+
+const fill = 'url(#art-strategy)';
+const pop = 'transform-fill origin-center';
+const from = { scale: '--from: scale(0.5)', draw: '--from: scale(0)' };
+---
+
+<ArtFrame gradient="art-strategy">
+  <g class="motion-safe:animate-art-1">
+    <circle cx="48" cy="42" r="12" fill={fill} stroke="none"></circle>
+    <circle cx="44" cy="38" r="12"></circle>
+    <rect x="40" y="34" width="8" height="8" rx="2" class="stroke-sky"></rect>
+  </g>
+  <g class="motion-safe:animate-art-2">
+    <circle cx="48" cy="84" r="12" fill={fill} stroke="none"></circle>
+    <circle cx="44" cy="80" r="12"></circle>
+    <g class="stroke-sky">
+      <circle cx="44" cy="77" r="2.5"></circle>
+      <path d="M39 86a5 5 0 0 1 10 0"></path>
+    </g>
+  </g>
+  <g class="motion-safe:animate-art-3">
+    <circle cx="48" cy="126" r="12" fill={fill} stroke="none"></circle>
+    <circle cx="44" cy="122" r="12"></circle>
+    <path d="M44 117v5l3.5 2" class="stroke-sky"></path>
+  </g>
+  <g class="stroke-azure">
+    <path
+      d="M58 44l46 30"
+      style={from.draw}
+      class="transform-fill motion-safe:animate-art-4 origin-top-left"
+    ></path>
+    <path
+      d="M58 80h44"
+      style="--from: scaleX(0)"
+      class="transform-fill motion-safe:animate-art-4 origin-left"
+    ></path>
+    <path
+      d="M58 116l46 -30"
+      style={from.draw}
+      class="transform-fill motion-safe:animate-art-4 origin-bottom-left"
+    ></path>
+  </g>
+  <g style={from.scale} class:list={[pop, 'motion-safe:animate-art-5']}>
+    <path
+      d="M122 62l18 18l-18 18l-18 -18z"
+      class="fill-signal/15 stroke-signal"
+    ></path>
+    <circle cx="122" cy="80" r="3.5" class="fill-signal" stroke="none"></circle>
+  </g>
+  <path
+    d="M146 80h22m-5 -5l5 5l-5 5"
+    style="--from: scaleX(0); --delay: 0.4s"
+    class="stroke-signal transform-fill motion-safe:animate-art-5 origin-left"
+  ></path>
+  <g class="motion-safe:animate-art-6">
+    <rect
+      x="184"
+      y="40"
+      width="66"
+      height="92"
+      rx="6"
+      fill={fill}
+      stroke="none"
+    ></rect>
+    <rect x="176" y="32" width="66" height="92" rx="6"></rect>
+    <path d="M176 46h66"></path>
+  </g>
+  <g class="stroke-sky">
+    <path
+      d="M184 39h10"
+      style="--delay: 0.15s"
+      class="motion-safe:animate-art-6"
+    ></path>
+    <rect
+      x="184"
+      y="54"
+      width="50"
+      height="24"
+      rx="3"
+      style="--delay: 0.3s"
+      class="fill-azure/15 motion-safe:animate-art-6"
+    ></rect>
+    <path
+      d="M184 88h34M184 96h22"
+      style="--delay: 0.45s"
+      class="motion-safe:animate-art-6"
+    ></path>
+  </g>
+  <rect
+    x="184"
+    y="106"
+    width="24"
+    height="10"
+    rx="3"
+    style="--delay: 0.6s"
+    class="fill-signal stroke-signal motion-safe:animate-art-6"
+  ></rect>
+</ArtFrame>

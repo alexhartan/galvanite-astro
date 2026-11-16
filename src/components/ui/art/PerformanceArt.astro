@@ -1,0 +1,72 @@
+---
+import ArtFrame from './ArtFrame.astro';
+
+const fill = 'url(#art-performance)';
+const rows = [
+  { y: 62, from: 'translateY(52px)', featured: true },
+  { y: 88, from: 'translateY(-26px)', featured: false },
+  { y: 114, from: 'translateY(-26px)', featured: false },
+];
+---
+
+<ArtFrame gradient="art-performance">
+  <g class="motion-safe:animate-art-1">
+    <path d="M38 114a44 44 0 0 1 88 0z" fill={fill} stroke="none"></path>
+    <path d="M32 106a44 44 0 0 1 66 -38.1" class="stroke-frost/40"></path>
+    <path d="M98 67.9a44 44 0 0 1 22 38.1" class="stroke-signal"></path>
+    <path
+      d="M42 106h4M51 73l2.8 2.8M76 62v4M106 106h4"
+      class="stroke-sky"
+    ></path>
+    <g
+      style="--from: rotate(-140deg)"
+      class="transform-fill motion-safe:animate-art-shift origin-center"
+    >
+      <circle cx="76" cy="106" r="32" stroke="none"></circle>
+      <path d="M76 106l27 -15"></path>
+    </g>
+    <circle cx="76" cy="106" r="4" class="fill-frost" stroke="none"></circle>
+  </g>
+  <g class="motion-safe:animate-art-2">
+    <rect x="160" y="26" width="96" height="22" rx="5"></rect>
+    <circle cx="172" cy="36" r="4" class="stroke-sky"></circle>
+    <path d="M175 39l3 3M186 37h34" class="stroke-sky"></path>
+  </g>
+  {rows.map(({ y, from, featured }, index) => (
+    <g style={`--delay: ${index * 0.15}s`} class="motion-safe:animate-art-3">
+      <g style={`--from: ${from}`} class="motion-safe:animate-art-shift">
+        {featured && (
+          <rect
+            x="166"
+            y={y + 6}
+            width="96"
+            height="20"
+            rx="5"
+            fill={fill}
+            stroke="none"
+          />
+        )}
+        <rect
+          x="160"
+          y={y}
+          width="96"
+          height="20"
+          rx="5"
+          class={featured ? 'fill-abyss stroke-signal' : 'stroke-frost/40'}
+        />
+        <rect
+          x="166"
+          y={y + 6}
+          width="8"
+          height="8"
+          rx="2"
+          class={featured ? 'fill-signal stroke-signal' : 'stroke-sky'}
+        />
+        <path
+          d={`M182 ${y + 10}h${featured ? 52 : 36}`}
+          class={featured ? 'stroke-signal' : 'stroke-sky'}
+        />
+      </g>
+    </g>
+  ))}
+</ArtFrame>
