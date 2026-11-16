@@ -16,8 +16,15 @@ const hero = {
 };
 const mission = {
   label: 'Our mission',
-  statement: 'We create brands and digital experiences that',
-  emphasis: 'bring the value of your product to light',
+  statement: [
+    { text: 'We make complex products easier to ' },
+    { text: 'understand', strong: true },
+    { text: ', ' },
+    { text: 'recognize', strong: true },
+    { text: ' and ' },
+    { text: 'choose', strong: true },
+    { text: ' through memorable branding and digital experiences.' },
+  ],
 };
 const sections = [
   { href: '#intro', label: 'Our mission' },

@@ -28,6 +28,9 @@
   --text-display-half: calc(50cqi / 7.4974);
   --text-display-half--line-height: 0.9;
   --text-display-half--letter-spacing: -0.04em;
+  --text-mission: calc(75cqi / 13.1975);
+  --text-mission--line-height: 1.04;
+  --text-mission--letter-spacing: -0.04em;
   --text-statement: clamp(2rem, 3.23vw, 3.875rem);
   --text-statement--line-height: 1.113;
   --text-statement--letter-spacing: -0.035em;
@@ -56,6 +59,7 @@
   --container-lead: 30rem;
   --container-lead-hero: 25em;
   --container-statement: 13.5em;
+  --container-mission: 13.3em;
   --container-card: 12em;
 
   --spacing-nav: 6.25rem;
