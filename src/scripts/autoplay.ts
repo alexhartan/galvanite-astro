@@ -1,22 +1,20 @@
-import type { EmblaCarouselType } from 'embla-carousel';
-
 export function autoplay(
-  embla: EmblaCarouselType,
   root: HTMLElement,
   delay: number,
+  advance: () => void,
 ) {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let timer = 0;
   let paused = false;
   let visible = false;
-  const start = () => {
+  const restart = () => {
     window.clearTimeout(timer);
     if (reduced || paused || !visible || document.hidden) return;
-    timer = window.setTimeout(() => embla.scrollNext(), delay);
+    timer = window.setTimeout(advance, delay);
   };
   const pause = (value: boolean) => {
     paused = value;
-    start();
+    restart();
   };
   root.addEventListener('mouseenter', () => pause(true));
   root.addEventListener('mouseleave', () => pause(false));
@@ -24,11 +22,10 @@ export function autoplay(
     if ((event.target as Element).matches(':focus-visible')) pause(true);
   });
   root.addEventListener('focusout', () => pause(false));
-  document.addEventListener('visibilitychange', start);
+  document.addEventListener('visibilitychange', restart);
   new IntersectionObserver(([entry]) => {
     visible = entry?.isIntersecting ?? false;
-    start();
+    restart();
   }).observe(root);
-  embla.on('select', start);
-  start();
+  return restart;
 }

@@ -46,7 +46,10 @@ export function initCaseSlider(root: HTMLElement) {
     if (event.key === 'ArrowLeft') embla.scrollPrev();
     if (event.key === 'ArrowRight') embla.scrollNext();
   });
-  autoplay(embla, root, AUTOPLAY_MS);
+  embla.on(
+    'select',
+    autoplay(root, AUTOPLAY_MS, () => embla.scrollNext()),
+  );
   embla.on('select', sync);
   embla.on('reInit', sync);
   sync();

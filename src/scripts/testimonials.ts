@@ -1,24 +1,27 @@
-import EmblaCarousel from 'embla-carousel';
 import { autoplay } from './autoplay';
 
 const AUTOPLAY_MS = 10000;
 
 export function initTestimonials(root: HTMLElement) {
-  const viewport = root.querySelector<HTMLElement>('[data-viewport]');
+  const pages = [...root.querySelectorAll<HTMLElement>('[data-page]')];
   const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
   const next = root.querySelector<HTMLButtonElement>('[data-next]');
-  if (!viewport || !prev || !next) return;
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const embla = EmblaCarousel(viewport, {
-    align: 'start',
-    loop: true,
-    duration: reduced ? 1 : 32,
-  });
-  prev.addEventListener('click', () => embla.scrollPrev());
-  next.addEventListener('click', () => embla.scrollNext());
+  if (!prev || !next || pages.length < 2) return;
+  let current = 0;
+  const show = (index: number) => {
+    current = (index + pages.length) % pages.length;
+    pages.forEach((page, i) => {
+      page.toggleAttribute('data-active', i === current);
+      page.inert = i !== current;
+    });
+    restart();
+  };
+  const restart = autoplay(root, AUTOPLAY_MS, () => show(current + 1));
+  prev.addEventListener('click', () => show(current - 1));
+  next.addEventListener('click', () => show(current + 1));
   root.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') embla.scrollPrev();
-    if (event.key === 'ArrowRight') embla.scrollNext();
+    if (event.key === 'ArrowLeft') show(current - 1);
+    if (event.key === 'ArrowRight') show(current + 1);
   });
-  autoplay(embla, root, AUTOPLAY_MS);
+  restart();
 }
