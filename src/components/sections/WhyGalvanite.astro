@@ -8,8 +8,9 @@ interface Props {
   id?: string;
   label: string;
   heading: string;
+  stats: { value: string; label: string }[];
 }
-const { id = 'why', label, heading } = Astro.props;
+const { id = 'why', label, heading, stats } = Astro.props;
 const benefits = (await getCollection('benefits')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -41,13 +42,7 @@ const right = '3xl:block lg:hidden';
       <h3 class="text-kpi-lg mt-28 text-center font-extralight lg:mt-40">
         {heading}
       </h3>
-      <div class="relative mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="bleed-x absolute top-40 h-px bg-white/10 max-lg:hidden"></div>
-        <GridMark inverted class="absolute top-40 left-0 max-lg:hidden" />
-        <GridMark
-          inverted
-          class:list={[right, 'absolute top-40 left-full -ml-px max-lg:hidden']}
-        />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
         {benefits.map(({ data }) => (
           <article class="relative flex flex-col">
             <div
@@ -65,6 +60,26 @@ const right = '3xl:block lg:hidden';
           </article>
         ))}
       </div>
+      <dl class="bg-abyss/50 relative mt-24 grid gap-10 px-8 py-14 sm:grid-cols-3 lg:mt-40">
+        <div class="bleed-x absolute top-0 h-px bg-white/10"></div>
+        <div class="bleed-x absolute bottom-0 h-px bg-white/10"></div>
+        <GridMark inverted class="absolute top-0 left-0" />
+        <GridMark inverted class="absolute top-full left-0 -mt-px" />
+        <GridMark
+          inverted
+          class:list={[right, 'absolute top-0 left-full -ml-px']}
+        />
+        <GridMark
+          inverted
+          class:list={[right, 'absolute top-full left-full -mt-px -ml-px']}
+        />
+        {stats.map(({ value, label }) => (
+          <div class="flex flex-col-reverse gap-3 sm:justify-self-center">
+            <dt class="text-sky max-w-44 text-sm leading-tight">{label}</dt>
+            <dd class="text-kpi-lg font-light">{value}</dd>
+          </div>
+        ))}
+      </dl>
     </Container>
   </div>
 </section>
