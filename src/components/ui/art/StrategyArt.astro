@@ -4,9 +4,9 @@ import { accent, flow, pulse, shift } from './tones';
 
 const fill = 'url(#art-strategy)';
 const dots = [
-  { cx: 58, cy: 44, tx: 46, ty: 30 },
-  { cx: 58, cy: 80, tx: 44, ty: 0 },
-  { cx: 58, cy: 116, tx: 46, ty: -30 },
+  { cx: 56, cy: 38, ty: 42 },
+  { cx: 56, cy: 80, ty: 0 },
+  { cx: 56, cy: 122, ty: -42 },
 ];
 ---
 
@@ -23,14 +23,17 @@ const dots = [
   <circle cx="48" cy="126" r="12" fill={fill} stroke="none"></circle>
   <circle cx="44" cy="122" r="12"></circle>
   <path d="M44 117v5l3.5 2" class="stroke-sky"></path>
-  <path d="M58 44l46 30M58 80h44M58 116l46 -30" class="stroke-azure"></path>
+  <path
+    d="M56 38h18a6 6 0 0 1 6 6v30a6 6 0 0 0 6 6h18M56 80h48M56 122h18a6 6 0 0 0 6 -6v-30a6 6 0 0 1 6 -6"
+    class="stroke-azure"
+  ></path>
   <g stroke="none">
-    {dots.map(({ cx, cy, tx, ty }, index) => (
+    {dots.map(({ cx, cy, ty }, index) => (
       <circle
         cx={cx}
         cy={cy}
         r="2.5"
-        style={`--tx: ${tx}px; --ty: ${ty}px; --delay: ${index * 0.3}s`}
+        style={`--x1: 24px; --tx: 48px; --ty: ${ty}px; --delay: ${index * 0.3}s`}
         class={flow}
       />
     ))}

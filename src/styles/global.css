@@ -84,8 +84,7 @@
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
 
   --animate-marquee: marquee 60s linear infinite;
-  --animate-art-flow: art-flow 1.8s var(--ease-out-soft) var(--delay, 0s)
-    infinite both;
+  --animate-art-flow: art-flow 1.8s linear var(--delay, 0s) infinite both;
   --animate-art-pulse: art-pulse 2s var(--ease-in-out-soft) infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
   --animate-art-wobble: art-wobble 0.9s var(--ease-in-out-soft) 0.5s infinite
@@ -102,14 +101,20 @@
       opacity: 0;
       transform: none;
     }
-    15% {
+    10% {
       opacity: 1;
     }
-    70% {
+    25% {
+      transform: translate(var(--x1), 0);
+    }
+    55% {
+      transform: translate(var(--x1), var(--ty));
+    }
+    75% {
       opacity: 1;
       transform: translate(var(--tx), var(--ty));
     }
-    85%,
+    88%,
     100% {
       opacity: 0;
       transform: translate(var(--tx), var(--ty));
