@@ -9,13 +9,13 @@ const { href, label, position } = Astro.props;
 
 <div
   data-section-link={href}
-  class="pointer-events-none absolute inset-x-0 top-0 z-20 h-(--end) max-lg:hidden"
+  class="pointer-events-none absolute inset-x-0 top-(--top) z-20 h-(--height) max-lg:hidden"
   style={`--slot: ${position}`}
 >
-  <div class="h-(--start)"></div>
+  <div class="h-(--lead)"></div>
   <a
     href={href}
-    class="section-link ease-out-soft text-sky pointer-events-auto sticky ml-5 block w-fit text-label font-medium tracking-widest whitespace-nowrap uppercase opacity-70 transition-opacity duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-current data-current:opacity-100"
+    class="section-link ease-out-soft text-sky pointer-events-auto sticky ml-5 block w-fit text-label font-semibold tracking-widest whitespace-nowrap uppercase opacity-70 transition-opacity duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-current data-current:opacity-100"
   >
     {label}
   </a>
@@ -40,13 +40,20 @@ const { href, label, position } = Astro.props;
 
   const measure = () => {
     const origin = main?.getBoundingClientRect().top ?? 0;
-    for (const { track, section, label } of links) {
+    const pitch =
+      1.5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    let base = 0;
+    links.forEach(({ track, section, label }, index) => {
       const box = section.getBoundingClientRect();
       const offset = label.getBoundingClientRect().top - box.top;
+      const start = box.top - origin + offset;
+      if (index === 0) base = start;
+      const top = Math.min(base + index * pitch, start);
       track.style.setProperty('--offset', `${offset}px`);
-      track.style.setProperty('--start', `${box.top - origin + offset}px`);
-      track.style.setProperty('--end', `${box.bottom - origin}px`);
-    }
+      track.style.setProperty('--top', `${top}px`);
+      track.style.setProperty('--lead', `${start - top}px`);
+      track.style.setProperty('--height', `${box.bottom - origin - top}px`);
+    });
     highlight();
   };
 
