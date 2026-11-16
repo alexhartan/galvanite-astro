@@ -81,17 +81,15 @@
   --breakpoint-3xl: 100rem;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
 
   --animate-marquee: marquee 60s linear infinite;
-  --animate-art-1: art-1 8s var(--ease-out-soft) var(--delay, 0s) infinite both;
-  --animate-art-2: art-2 8s var(--ease-out-soft) var(--delay, 0s) infinite both;
-  --animate-art-3: art-3 8s var(--ease-out-soft) var(--delay, 0s) infinite both;
-  --animate-art-4: art-4 8s var(--ease-out-soft) var(--delay, 0s) infinite both;
-  --animate-art-5: art-5 8s var(--ease-out-soft) var(--delay, 0s) infinite both;
-  --animate-art-6: art-6 8s var(--ease-out-soft) var(--delay, 0s) infinite both;
-  --animate-art-send: art-send 8s var(--ease-out-soft) infinite both;
-  --animate-art-shift: art-shift 8s var(--ease-out-soft) var(--delay, 0s)
+  --animate-art-flow: art-flow 1.8s var(--ease-out-soft) var(--delay, 0s)
     infinite both;
+  --animate-art-pulse: art-pulse 2s var(--ease-in-out-soft) infinite;
+  --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
+  --animate-art-wobble: art-wobble 0.9s var(--ease-in-out-soft) 0.5s infinite
+    alternate both;
 
   @keyframes marquee {
     to {
@@ -99,145 +97,48 @@
     }
   }
 
-  @keyframes art-1 {
-    0%,
-    4% {
-      opacity: 0;
-      transform: var(--from, translateY(6px));
-    }
-    11%,
-    92% {
-      opacity: 1;
-      transform: none;
-    }
-    97%,
-    100% {
+  @keyframes art-flow {
+    0% {
       opacity: 0;
       transform: none;
     }
-  }
-
-  @keyframes art-2 {
-    0%,
-    14% {
-      opacity: 0;
-      transform: var(--from, translateY(6px));
-    }
-    21%,
-    92% {
-      opacity: 1;
-      transform: none;
-    }
-    97%,
-    100% {
-      opacity: 0;
-      transform: none;
-    }
-  }
-
-  @keyframes art-3 {
-    0%,
-    24% {
-      opacity: 0;
-      transform: var(--from, translateY(6px));
-    }
-    31%,
-    92% {
-      opacity: 1;
-      transform: none;
-    }
-    97%,
-    100% {
-      opacity: 0;
-      transform: none;
-    }
-  }
-
-  @keyframes art-4 {
-    0%,
-    34% {
-      opacity: 0;
-      transform: var(--from, translateY(6px));
-    }
-    41%,
-    92% {
-      opacity: 1;
-      transform: none;
-    }
-    97%,
-    100% {
-      opacity: 0;
-      transform: none;
-    }
-  }
-
-  @keyframes art-5 {
-    0%,
-    44% {
-      opacity: 0;
-      transform: var(--from, translateY(6px));
-    }
-    51%,
-    92% {
-      opacity: 1;
-      transform: none;
-    }
-    97%,
-    100% {
-      opacity: 0;
-      transform: none;
-    }
-  }
-
-  @keyframes art-6 {
-    0%,
-    54% {
-      opacity: 0;
-      transform: var(--from, translateY(6px));
-    }
-    61%,
-    92% {
-      opacity: 1;
-      transform: none;
-    }
-    97%,
-    100% {
-      opacity: 0;
-      transform: none;
-    }
-  }
-
-  @keyframes art-send {
-    0%,
-    32% {
-      opacity: 0;
-      transform: none;
-    }
-    34% {
+    15% {
       opacity: 1;
     }
-    42% {
+    70% {
       opacity: 1;
       transform: translate(var(--tx), var(--ty));
     }
-    45%,
+    85%,
     100% {
       opacity: 0;
       transform: translate(var(--tx), var(--ty));
     }
   }
 
-  @keyframes art-shift {
-    0%,
-    46% {
-      transform: var(--from);
+  @keyframes art-pulse {
+    50% {
+      transform: scale(1.08);
     }
-    56%,
-    94% {
+  }
+
+  @keyframes art-blink {
+    0%,
+    45% {
+      opacity: 1;
+    }
+    55%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes art-wobble {
+    from {
       transform: none;
     }
-    100% {
-      transform: var(--from);
+    to {
+      transform: rotate(-5deg);
     }
   }
 }
