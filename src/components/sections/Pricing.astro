@@ -25,7 +25,7 @@ const tiers = {
     box: '',
     name: 'text-white',
     muted: 'text-white/80',
-    price: 'text-kpi text-ocean-50',
+    price: 'text-kpi text-ocean-50 mt-price',
     plus: 1.25,
     rule: 'border-white/10',
     item: 'text-white/80',
@@ -35,17 +35,17 @@ const tiers = {
     box: 'bg-white',
     name: 'text-ocean',
     muted: 'text-ink/70',
-    price: 'text-kpi-lg text-ink',
+    price: 'text-kpi-lg text-ink mt-price-featured',
     plus: 2.5,
     rule: 'border-ink/10',
     item: 'text-ink/80',
     cta: 'bg-signal text-ink hover:bg-signal-strong',
   },
   premium: {
-    box: 'bg-abyss/50 border border-white/10',
+    box: 'bg-abyss/50 ring-1 ring-white/10 ring-inset',
     name: 'text-white',
     muted: 'text-white/80',
-    price: 'text-kpi text-ocean-50',
+    price: 'text-kpi text-ocean-50 mt-price',
     plus: 1.25,
     rule: 'border-white/10',
     item: 'text-white/80',
@@ -118,7 +118,7 @@ const tiers = {
               </p>
               <p
                 class:list={[
-                  'mt-8 border-b pb-6 font-semibold',
+                  'border-b pb-6 font-semibold',
                   tier.price,
                   tier.rule,
                 ]}
@@ -131,7 +131,7 @@ const tiers = {
                   {data.duration}
                 </span>
               </p>
-              <ul class="mt-6 mb-10 space-y-1.5" role="list">
+              <ul class="mt-6 mb-6 space-y-1.5" role="list">
                 {data.features.map((feature) => (
                   <li class:list={['flex gap-3 text-sm', tier.item]}>
                     <span
