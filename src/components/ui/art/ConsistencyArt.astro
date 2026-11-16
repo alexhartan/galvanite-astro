@@ -1,34 +1,19 @@
 ---
 import ArtFrame from './ArtFrame.astro';
+import { accent, flow, pulse, shift } from './tones';
 
 const fill = 'url(#art-consistency)';
-const lit =
-  'fill-signal stroke-signal transform-fill origin-center motion-safe:animate-art-5';
-const dot = 'fill-signal motion-safe:animate-art-send motion-reduce:hidden';
+const mark = [shift, accent.mark, accent.stroke];
+const dots = [
+  { cx: 120, cy: 80, tx: -26, ty: 0 },
+  { cx: 160, cy: 70, tx: 44, ty: -22 },
+  { cx: 160, cy: 90, tx: 34, ty: 20 },
+];
 ---
 
 <ArtFrame gradient="art-consistency">
-  <g class="stroke-azure">
-    <path
-      d="M120 80h-26"
-      style="--from: scaleX(0)"
-      class="transform-fill motion-safe:animate-art-3 origin-right"
-    ></path>
-    <path
-      d="M160 70l44 -22"
-      style="--from: scale(0)"
-      class="transform-fill motion-safe:animate-art-3 origin-bottom-left"
-    ></path>
-    <path
-      d="M160 90l34 20"
-      style="--from: scale(0)"
-      class="transform-fill motion-safe:animate-art-3 origin-top-left"
-    ></path>
-  </g>
-  <g
-    style="--from: scale(0.5)"
-    class="transform-fill motion-safe:animate-art-1 origin-center"
-  >
+  <path d="M120 80h-26M160 70l44 -22M160 90l34 20" class="stroke-azure"></path>
+  <g class={pulse}>
     <rect
       x="126"
       y="66"
@@ -44,80 +29,63 @@ const dot = 'fill-signal motion-safe:animate-art-send motion-reduce:hidden';
       width="40"
       height="40"
       rx="8"
-      class="fill-signal/15 stroke-signal"
+      class:list={[shift, accent.tint, accent.stroke]}
     ></rect>
-    <circle cx="140" cy="80" r="6" class="fill-signal" stroke="none"></circle>
-  </g>
-  <g class="motion-safe:animate-art-2">
-    <rect
-      x="26"
-      y="56"
-      width="76"
-      height="60"
-      rx="6"
-      fill={fill}
-      stroke="none"
-    ></rect>
-    <rect x="18" y="48" width="76" height="60" rx="6"></rect>
-    <path d="M18 62h76M26 55h2M33 55h2"></path>
-    <circle cx="32" cy="76" r="5" class="stroke-sky"></circle>
-    <path d="M44 74h36M44 80h22M26 94h52" class="stroke-sky"></path>
-  </g>
-  <g style="--delay: 0.15s" class="motion-safe:animate-art-2">
-    <rect
-      x="212"
-      y="24"
-      width="34"
-      height="58"
-      rx="6"
-      fill={fill}
-      stroke="none"
-    ></rect>
-    <rect x="204" y="16" width="34" height="58" rx="6"></rect>
-    <path d="M217 23h8"></path>
-    <circle cx="221" cy="38" r="5" class="stroke-sky"></circle>
-    <path d="M212 52h18M212 59h12" class="stroke-sky"></path>
-  </g>
-  <g style="--delay: 0.3s" class="motion-safe:animate-art-2">
-    <rect
-      x="202"
-      y="104"
-      width="64"
-      height="40"
-      rx="6"
-      fill={fill}
-      stroke="none"
-    ></rect>
-    <rect x="194" y="96" width="64" height="40" rx="6"></rect>
-    <circle cx="208" cy="110" r="5" class="stroke-sky"></circle>
-    <path d="M220 108h28M220 114h16M203 126h44" class="stroke-sky"></path>
-  </g>
-  <g stroke="none">
     <circle
-      cx="120"
+      cx="140"
       cy="80"
-      r="2.5"
-      style="--tx: -26px; --ty: 0px"
-      class={dot}
-    ></circle>
-    <circle
-      cx="160"
-      cy="70"
-      r="2.5"
-      style="--tx: 44px; --ty: -22px"
-      class={dot}
-    ></circle>
-    <circle
-      cx="160"
-      cy="90"
-      r="2.5"
-      style="--tx: 34px; --ty: 20px"
-      class={dot}
+      r="6"
+      stroke="none"
+      class:list={[shift, accent.fill]}
     ></circle>
   </g>
-  <g style="--from: scale(0)">
-    <circle cx="32" cy="76" r="5" class={lit}></circle>
-    <circle cx="221" cy="38" r="5" style="--delay: 0.1s" class={lit}></circle>
-    <circle cx="208" cy="110" r="5" style="--delay: 0.2s" class={lit}></circle>
+  <rect
+    x="26"
+    y="56"
+    width="76"
+    height="60"
+    rx="6"
+    fill={fill}
+    stroke="none"
+  ></rect>
+  <rect x="18" y="48" width="76" height="60" rx="6"></rect>
+  <path d="M18 62h76M26 55h2M33 55h2"></path>
+  <path d="M44 74h36M44 80h22M26 94h52" class="stroke-sky"></path>
+  <rect
+    x="212"
+    y="24"
+    width="34"
+    height="58"
+    rx="6"
+    fill={fill}
+    stroke="none"
+  ></rect>
+  <rect x="204" y="16" width="34" height="58" rx="6"></rect>
+  <path d="M217 23h8"></path>
+  <path d="M212 52h18M212 59h12" class="stroke-sky"></path>
+  <rect
+    x="202"
+    y="104"
+    width="64"
+    height="40"
+    rx="6"
+    fill={fill}
+    stroke="none"
+  ></rect>
+  <rect x="194" y="96" width="64" height="40" rx="6"></rect>
+  <path d="M220 108h28M220 114h16M203 126h44" class="stroke-sky"></path>
+  <circle cx="32" cy="76" r="5" class:list={mark}></circle>
+  <circle cx="221" cy="38" r="5" class:list={mark}></circle>
+  <circle cx="208" cy="110" r="5" class:list={mark}></circle>
+  <g stroke="none">
+    {dots.map(({ cx, cy, tx, ty }, index) => (
+      <circle
+        cx={cx}
+        cy={cy}
+        r="2.5"
+        style={`--tx: ${tx}px; --ty: ${ty}px; --delay: ${index * 0.3}s`}
+        class={flow}
+      />
+    ))}
   </g>
 </ArtFrame>
