@@ -14,12 +14,12 @@ const { id = 'intro', label, statement } = Astro.props;
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 flex h-svh flex-col overflow-hidden bg-white"
+  class="scroll-mt-nav relative z-10 overflow-hidden bg-white"
 >
   <Container class="absolute inset-0">
     <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
   </Container>
-  <div data-guide class="border-ink/10 relative flex flex-1 flex-col border-t">
+  <div data-guide class="border-ink/10 relative border-t">
     <Container class="absolute inset-x-0 top-0">
       <GridMark class="absolute top-0 left-6 -mt-px" />
       <div class="3xl:block absolute top-0 right-6 w-0 lg:hidden">
@@ -27,9 +27,9 @@ const { id = 'intro', label, statement } = Astro.props;
         <GridMark class="-mt-px" />
       </div>
     </Container>
-    <Container class="@container flex flex-1 flex-col justify-center">
+    <Container class="@container py-32 lg:py-56">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
-      <p class="max-w-mission text-statement lg:text-mission text-ocean leading-none font-extralight">
+      <p class="max-w-mission text-statement lg:text-mission text-ink leading-none font-extralight">
         {statement.map(({ text, strong }) =>
           strong ? <strong class="font-medium">{text}</strong> : text,
         )}
