@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import GridMark from '../ui/GridMark.astro';
 
@@ -22,19 +23,8 @@ const right = '3xl:block lg:hidden';
   aria-labelledby={`${id}-label`}
   class="scroll-mt-nav relative z-10 overflow-x-clip pb-40 text-white lg:pb-56"
 >
-  <Container class="absolute inset-0">
-    <div class="absolute inset-y-0 left-6 w-px bg-white/10"></div>
-    <div
-      class:list={[right, 'absolute inset-y-0 right-6 w-px bg-white/10']}
-    ></div>
-  </Container>
+  <SectionFrame inverted />
   <div data-guide class="relative border-t border-white/10">
-    <Container class="absolute inset-x-0 top-0">
-      <GridMark inverted class="absolute top-0 left-6 -mt-px" />
-      <div class:list={[right, 'absolute top-0 right-6 w-0']}>
-        <GridMark inverted class="-mt-px" />
-      </div>
-    </Container>
     <Container>
       <Eyebrow id={`${id}-label`} inverted>
         {label}

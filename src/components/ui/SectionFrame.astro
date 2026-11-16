@@ -1,0 +1,37 @@
+---
+import Container from './Container.astro';
+import GridMark from './GridMark.astro';
+
+interface Props {
+  inverted?: boolean;
+  bottom?: boolean;
+}
+const { inverted = false, bottom = false } = Astro.props;
+const line = inverted ? 'bg-white/10' : 'bg-ink/10';
+const right = '3xl:block lg:hidden';
+---
+
+<Container class="pointer-events-none absolute inset-0">
+  <div class:list={['absolute inset-y-0 left-6 w-px', line]}></div>
+  <div class:list={[right, 'absolute inset-y-0 right-6 w-px', line]}></div>
+  <GridMark inverted={inverted} class="absolute top-0 left-6" />
+  <GridMark
+    inverted={inverted}
+    class:list={[right, 'absolute top-0 right-6 translate-x-1.25']}
+  />
+  {bottom && (
+    <>
+      <GridMark
+        inverted={inverted}
+        class="absolute bottom-0 left-6 translate-y-1.25"
+      />
+      <GridMark
+        inverted={inverted}
+        class:list={[
+          right,
+          'absolute right-6 bottom-0 translate-x-1.25 translate-y-1.25',
+        ]}
+      />
+    </>
+  )}
+</Container>
