@@ -109,3 +109,31 @@
   left: -100vw;
   right: -100vw;
 }
+
+@utility stage-span {
+  margin-left: calc(var(--start) / var(--weeks) * 100cqi);
+  width: calc((var(--end) - var(--start)) / var(--weeks) * 100cqi);
+}
+
+@utility stage-reveal {
+  clip-path: inset(
+    0
+      calc(
+        100% -
+          clamp(
+            0px,
+            var(--p, 0.5) * 100cqi - var(--start) / var(--weeks) * 100cqi,
+            100%
+          )
+      )
+      0 0
+  );
+}
+
+@utility timeline-line {
+  left: calc(var(--p, 0.5) * 100%);
+}
+
+@utility timeline-tip {
+  left: calc(var(--tip, 0) / var(--weeks) * 100%);
+}
