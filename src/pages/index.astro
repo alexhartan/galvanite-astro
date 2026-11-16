@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ClosingCta from '../components/sections/ClosingCta.astro';
 import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
@@ -44,6 +45,12 @@ const why = {
     },
   ],
 };
+const closing = {
+  lead: 'It’s time to give your product',
+  emphasis: 'the brand it deserves',
+  description:
+    'Book a 30-minute discovery call. We look at your site together, find where the value gets lost, and agree on the first steps.',
+};
 const link = (index: number) => ({
   ...sections[index]!,
   position: sections.length - 1 - index,
@@ -64,4 +71,5 @@ const link = (index: number) => ({
   <Pricing label="Engagements" heading="Ways to work together" />
   <SectionLink {...link(3)} />
   <WhyGalvanite {...why} />
+  <ClosingCta {...closing} />
 </BaseLayout>
