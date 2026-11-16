@@ -5,6 +5,7 @@ import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
 import Pricing from '../components/sections/Pricing.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
 import SectionLink from '../components/ui/SectionLink.astro';
 import SiteHeader from '../components/sections/SiteHeader.astro';
 import WhyGalvanite from '../components/sections/WhyGalvanite.astro';
@@ -32,6 +33,7 @@ const sections = [
   { href: '#work', label: 'Featured work' },
   { href: '#engagements', label: 'Engagements' },
   { href: '#why', label: 'Why Galvanite' },
+  { href: '#testimonials', label: 'Testimonials' },
 ];
 const why = {
   label: 'Why Galvanite',
@@ -71,5 +73,7 @@ const link = (index: number) => ({
   <Pricing label="Engagements" heading="Ways to work together" />
   <SectionLink {...link(3)} />
   <WhyGalvanite {...why} />
+  <SectionLink {...link(4)} />
+  <Testimonials label="Testimonials" heading="Don’t take our word for it" />
   <ClosingCta {...closing} />
 </BaseLayout>
