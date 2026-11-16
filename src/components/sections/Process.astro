@@ -21,18 +21,20 @@ const label_ =
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 overflow-hidden bg-white"
+  class="scroll-mt-nav relative z-10 overflow-hidden text-white"
 >
   <Container class="absolute inset-0">
-    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
+    <div class="absolute inset-y-0 left-6 w-px bg-white/10"></div>
   </Container>
-  <div data-guide class="border-ink/10 relative border-t">
+  <div data-guide class="relative border-t border-white/10">
     <Container class="absolute inset-x-0 top-0">
-      <GridMark class="absolute top-0 left-6 -mt-px" />
+      <GridMark inverted class="absolute top-0 left-6 -mt-px" />
     </Container>
     <Container class="py-32 lg:py-44">
-      <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
-      <p class="text-ink/70 text-lg text-balance lg:ml-auto lg:w-1/2 lg:pr-16">
+      <Eyebrow id={`${id}-label`} inverted>
+        {label}
+      </Eyebrow>
+      <p class="text-frost text-lg text-balance lg:ml-auto lg:w-1/2 lg:pr-16">
         {description}
       </p>
       <div class="-mx-6 mt-12 overflow-x-auto px-6 pt-14 lg:mx-0 lg:overflow-visible lg:px-0">
