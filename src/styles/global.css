@@ -71,8 +71,6 @@
   --spacing-cap-statement: 0.191em;
   --spacing-cap-label: 0.25em;
   --spacing-page-bleed: calc((100vw - var(--container-page)) / 2 + 1.5rem);
-  --spacing-quote: 100cqi;
-  --spacing-quote-lg: 50cqi;
   --spacing-slide: 85cqi;
   --spacing-slide-lg: calc(50cqi - 7.5rem);
   --spacing-slide-3xl: calc(50cqi - 2.5rem);
