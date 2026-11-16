@@ -1,0 +1,50 @@
+---
+import Container from '../ui/Container.astro';
+import GridMark from '../ui/GridMark.astro';
+
+interface Props {
+  id?: string;
+  lead: string;
+  emphasis: string;
+  description: string;
+  ctaHref?: string;
+}
+const {
+  id = 'contact',
+  lead,
+  emphasis,
+  description,
+  ctaHref = '#contact',
+} = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-heading`}
+  class="pt-nav-line relative z-10 flex min-h-svh flex-col overflow-hidden bg-white"
+>
+  <Container class="absolute inset-0">
+    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
+  </Container>
+  <div class="border-ink/10 relative flex flex-1 flex-col border-t">
+    <Container class="absolute inset-x-0 top-0">
+      <GridMark class="absolute top-0 left-6 -mt-px" />
+    </Container>
+    <Container class="@container pb-nav flex flex-1 flex-col justify-center">
+      <h2
+        id={`${id}-heading`}
+        class="text-statement lg:text-mission text-ocean font-extralight"
+      >
+        {lead}
+        <strong class="block font-medium">{emphasis}</strong>
+      </h2>
+      <p class="text-ink/70 mt-4 max-w-lead">{description}</p>
+      <a
+        href={ctaHref}
+        class="bg-signal hover:bg-signal-strong text-ink ease-out-soft focus-visible:outline-ink mt-8 flex h-12 w-full max-w-80 items-center justify-center rounded-sm font-semibold transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
+      >
+        Book a Call with Alex
+      </a>
+    </Container>
+  </div>
+</section>
