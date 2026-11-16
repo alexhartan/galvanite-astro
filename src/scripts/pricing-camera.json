@@ -1,0 +1,12 @@
+{
+  "start": {
+    "x": -0.51,
+    "y": 0.01,
+    "rotation": 117,
+    "zoom": 1,
+    "sunrise": 0.21
+  },
+  "end": { "x": -0.35, "y": 0.12, "rotation": 0, "zoom": 1, "sunrise": 1 },
+  "easing": "linear",
+  "stars": { "x": 1, "y": 1, "rotation": 1 }
+}
