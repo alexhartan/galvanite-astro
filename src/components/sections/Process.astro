@@ -9,11 +9,19 @@ import GridMark from '../ui/GridMark.astro';
 interface Props {
   id?: string;
   label: string;
+  heading: string;
   description: string;
   weeks: number;
   stages: { name: string; start: number; end: number }[];
 }
-const { id = 'process', label, description, weeks, stages } = Astro.props;
+const {
+  id = 'process',
+  label,
+  heading,
+  description,
+  weeks,
+  stages,
+} = Astro.props;
 const label_ =
   'text-label absolute inset-0 flex items-center justify-center font-medium tracking-wider uppercase';
 ---
@@ -30,17 +38,20 @@ const label_ =
     <Container class="absolute inset-x-0 top-0">
       <GridMark inverted class="absolute top-0 left-6 -mt-px" />
     </Container>
-    <Container class="py-32 lg:py-44">
+    <Container class="py-32 lg:pt-34 lg:pb-44">
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <p class="text-frost text-lg text-balance lg:ml-auto lg:w-1/2 lg:pr-16">
-        {description}
-      </p>
-      <div class="-mx-6 mt-12 overflow-x-auto px-6 pt-14 lg:mx-0 lg:overflow-visible lg:px-0">
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:gap-0">
+        <h3 class="text-4xl leading-none font-light text-balance lg:w-1/2 lg:pr-8">
+          {heading}
+        </h3>
+        <p class="text-frost lg:w-1/2">{description}</p>
+      </div>
+      <div class="-mx-6 mt-9 overflow-x-auto px-6 pt-14 lg:mx-0 lg:overflow-visible lg:px-0 lg:pt-0">
         <div
           data-timeline
-          class="bg-space-900 @container relative min-w-3xl py-14"
+          class="bg-space-900 @container relative min-w-3xl border-y border-white/10 py-14"
           style={`--weeks: ${weeks}`}
         >
           <div aria-hidden="true" class="absolute inset-0 flex">
