@@ -65,6 +65,10 @@
   --spacing-benefit-tail: calc(
     100svh - var(--spacing-nav) - var(--spacing-benefit-stage)
   );
+  --spacing-price: 2rem;
+  --spacing-price-featured: calc(
+    var(--spacing-price) - var(--text-kpi-lg) + var(--text-kpi)
+  );
   --spacing-cap-statement: 0.191em;
   --spacing-cap-label: 0.25em;
   --spacing-page-bleed: calc((100vw - var(--container-page)) / 2 + 1.5rem);
