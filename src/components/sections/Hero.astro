@@ -30,15 +30,15 @@ const clients = (
     </Container>
     <div class="relative flex h-full flex-col group-data-scene:invisible">
       <Container class="@container pt-nav flex flex-1 flex-col justify-center max-lg:pt-56 lg:pb-4">
-        <h1 class="max-w-headline text-display lg:text-display-half relative font-extralight text-white">
+        <h1 class="max-w-headline text-display lg:text-display-half 4xl:text-display-hero relative font-extralight text-white">
           {lead} <strong class="font-semibold">{emphasis}</strong>
-          <GridMark class="top-display-baseline absolute left-0" />
+          <GridMark class="top-display-baseline 4xl:hidden absolute left-0" />
         </h1>
-        <p class="max-w-lead text-lead lg:max-w-lead-hero lg:text-lead-hero mt-6 text-white/85 lg:mt-4.5">
+        <p class="max-w-lead text-lead lg:max-w-lead-hero lg:text-lead-hero 4xl:text-lead-hero-xl mt-6 text-white/85 lg:mt-4.5">
           {description}
         </p>
       </Container>
-      <div class="border-grid/10 bg-space-950/60 overflow-x-clip border-t opacity-50 pt-3.75 pb-3">
+      <div class="border-grid/10 bg-space-950 overflow-x-clip border-t opacity-50 pt-3.75 pb-3">
         <Container class="relative">
           <GridMark class="absolute -top-3.75 left-6 -mt-px" />
           <p class="text-frost text-xs font-normal tracking-widest uppercase">

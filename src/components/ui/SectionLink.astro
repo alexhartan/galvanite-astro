@@ -9,7 +9,7 @@ const { href, label, position } = Astro.props;
 
 <div
   data-section-link={href}
-  class="pointer-events-none absolute inset-x-0 top-(--top) z-20 h-(--height) max-lg:hidden"
+  class="pointer-events-none absolute inset-x-0 top-(--top) z-20 h-(--height) pb-(--offset) max-lg:hidden"
   style={`--slot: ${position}`}
 >
   <div class="h-(--lead)"></div>

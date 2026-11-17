@@ -47,8 +47,13 @@
   --text-kpi-lg--letter-spacing: -0.015em;
   --text-kpi: clamp(1.75rem, 2.1vw, 2.5rem);
   --text-kpi--line-height: 1;
+  --text-display-hero: calc(var(--text-display-half) * 1.4);
+  --text-display-hero--line-height: 0.9;
+  --text-display-hero--letter-spacing: -0.04em;
   --text-lead-hero: calc(var(--text-display-half) * 0.19);
   --text-lead-hero--line-height: 1.456;
+  --text-lead-hero-xl: calc(var(--text-lead-hero) * 1.2);
+  --text-lead-hero-xl--line-height: 1.456;
   --text-lead: clamp(1.125rem, 1.25vw, 1.5rem);
   --text-lead--line-height: 1.42;
 
@@ -64,7 +69,7 @@
   --container-statement: 13.5em;
   --container-mission: 14.5em;
 
-  --spacing-nav: 6.25rem;
+  --spacing-nav: 5.5rem;
   --spacing-display-baseline: calc(100% - 0.12em);
   --spacing-price: 2rem;
   --spacing-price-featured: calc(
@@ -81,6 +86,7 @@
   --spacing-slide-3xl: calc(50cqi - 2.5rem);
 
   --breakpoint-3xl: 100rem;
+  --breakpoint-4xl: 120rem;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);

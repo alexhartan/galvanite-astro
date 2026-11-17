@@ -11,9 +11,19 @@ interface Props {
   label: string;
 }
 const { id = 'work', label } = Astro.props;
-const cases = (await getCollection('caseStudies')).sort(
-  (a, b) => a.data.order - b.data.order,
-);
+const twoLines = (text: string) => {
+  const words = text.split(' ');
+  let best = [text, ''];
+  for (let i = 1; i < words.length; i++) {
+    const pair = [words.slice(0, i).join(' '), words.slice(i).join(' ')];
+    const width = (lines: string[]) => Math.max(...lines.map((l) => l.length));
+    if (!best[1] || width(pair) < width(best)) best = pair;
+  }
+  return best;
+};
+const cases = (await getCollection('caseStudies'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({ ...entry, lines: twoLines(entry.data.kpiLabel) }));
 const icon =
   'opacity-80 transition-opacity duration-200 ease-out-soft group-hover:opacity-100';
 const arrow =
@@ -80,7 +90,7 @@ const arrow =
           class="clip-left 3xl:-mr-page-bleed min-w-0 lg:flex-1"
         >
           <div class="pointer-events-none flex touch-pan-y">
-            {cases.map(({ data }, index) => (
+            {cases.map(({ data, lines }, index) => (
               <figure
                 data-slide
                 data-active={index === 0 ? '' : undefined}
@@ -104,8 +114,10 @@ const arrow =
                   <span class="text-kpi font-medium whitespace-nowrap text-white">
                     {data.kpi}
                   </span>
-                  <span class="text-label max-w-44 font-semibold tracking-widest text-balance text-white/80 uppercase">
-                    {data.kpiLabel}
+                  <span class="text-label leading-tight font-semibold tracking-widest whitespace-nowrap text-white/80 uppercase">
+                    {lines[0]}
+                    <br />
+                    {lines[1]}
                   </span>
                 </figcaption>
               </figure>
