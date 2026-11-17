@@ -26,8 +26,8 @@ const confetti = Array.from({ length: 8 }, (_, index) => {
   const angle = (index / 8) * Math.PI * 2;
   const reach = index % 2 ? 22 : 17;
   return {
-    style: `--dx: ${(Math.cos(angle) * reach).toFixed(1)}px; --dy: ${(Math.sin(angle) * reach * 0.75).toFixed(1)}px`,
-    tone: ['bg-signal', 'bg-azure', 'bg-sky', 'bg-ocean'][index % 4],
+    style: `--dx: ${(Math.cos(angle) * reach).toFixed(1)}px; --dy: ${(Math.sin(angle) * reach * 0.75).toFixed(1)}px; --r: ${(index * 47) % 90}deg; --r-end: ${((index * 47) % 90) + (index % 2 ? 160 : -140)}deg`,
+    tone: ['bg-success', 'bg-success-strong', 'bg-success-soft'][index % 3],
   };
 });
 const label_ =
@@ -85,7 +85,7 @@ const label_ =
                       <span
                         style={style}
                         class:list={[
-                          'absolute -top-0.5 -left-0.5 size-1 rounded-full opacity-0 motion-safe:group-data-complete/stage:animate-confetti',
+                          'absolute -top-0.75 -left-0.75 size-1.5 opacity-0 motion-safe:group-data-complete/stage:animate-confetti',
                           tone,
                         ]}
                       />

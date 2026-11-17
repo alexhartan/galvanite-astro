@@ -5,11 +5,12 @@ import Container from '../ui/Container.astro';
 import GridMark from '../ui/GridMark.astro';
 
 interface Props {
+  eyebrow: string;
   lead: string;
   emphasis: string;
   description: string;
 }
-const { lead, emphasis, description } = Astro.props;
+const { eyebrow, lead, emphasis, description } = Astro.props;
 const clients = (
   await getCollection('clients', ({ data }) => !data.hidden)
 ).sort((a, b) => a.data.order - b.data.order);
@@ -30,6 +31,9 @@ const clients = (
     </Container>
     <div class="relative flex h-full flex-col group-data-scene:invisible">
       <Container class="@container pt-nav flex flex-1 flex-col justify-center max-lg:pt-56 lg:pb-4">
+        <p class="text-sky mb-5 text-sm font-semibold tracking-widest uppercase opacity-70 lg:mb-6">
+          {eyebrow}
+        </p>
         <h1 class="max-w-headline text-display lg:text-display-half 4xl:text-display-hero relative font-extralight text-white">
           {lead} <strong class="font-semibold">{emphasis}</strong>
           <GridMark class="top-display-baseline 4xl:hidden absolute left-0" />
@@ -38,7 +42,7 @@ const clients = (
           {description}
         </p>
       </Container>
-      <div class="border-grid/10 bg-space-950 overflow-x-clip border-t opacity-50 pt-3.75 pb-3">
+      <div class="border-grid/10 bg-space-950 backdrop-blur-bar overflow-x-clip border-t opacity-50 pt-3.75 pb-3">
         <Container class="relative">
           <GridMark class="absolute -top-3.75 left-6 -mt-px" />
           <p class="text-frost text-xs font-normal tracking-widest uppercase">
