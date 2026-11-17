@@ -102,8 +102,7 @@
 
   --animate-marquee: marquee 80s linear infinite;
   --animate-confetti: confetti 700ms var(--ease-out-soft) 150ms both;
-  --animate-ripple: ripple 1.2s ease-in-out;
-  --animate-hover-float: hover-float 1.2s;
+  --animate-dolly: dolly 1s ease-in-out;
   --animate-art-flow: art-flow 1.8s linear var(--delay, 0s) infinite both;
   --animate-art-pulse: art-pulse 2s var(--ease-in-out-soft) infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
@@ -130,28 +129,9 @@
     }
   }
 
-  @keyframes ripple {
-    from {
-      opacity: var(--from);
-      transform: none;
-    }
-    to {
-      opacity: var(--to);
-      transform: scale(1.43);
-    }
-  }
-
-  @keyframes hover-float {
-    0% {
-      transform: none;
-      animation-timing-function: ease-in;
-    }
+  @keyframes dolly {
     50% {
-      transform: translateY(-6px);
-      animation-timing-function: ease-in;
-    }
-    100% {
-      transform: none;
+      transform: scale(var(--depth));
     }
   }
 

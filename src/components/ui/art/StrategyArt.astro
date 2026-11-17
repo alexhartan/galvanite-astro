@@ -2,13 +2,11 @@
 import { Image } from 'astro:assets';
 import spark from '../../../assets/benefits/spark.png';
 
-const rings = [0, 1, 0.85, 0.7, 0.55, 0.4, 0.25, 0.1].map(
-  (from, index, list) => ({
-    r: (51.05 * 1.43 ** index).toFixed(2),
-    from,
-    to: list[index + 1] ?? 0,
-  }),
-);
+const rings = [1, 0.85, 0.7, 0.55, 0.4, 0.25, 0.1].map((opacity, index) => ({
+  r: (73 * 1.43 ** index).toFixed(2),
+  opacity,
+  depth: (0.95 - (0.35 * index) / 6).toFixed(3),
+}));
 ---
 
 <div class="ease-out-soft absolute inset-0 opacity-75 transition-opacity duration-300 group-hover:opacity-100">
@@ -30,7 +28,7 @@ const rings = [0, 1, 0.85, 0.7, 0.55, 0.4, 0.25, 0.1].map(
         ></stop>
       </radialGradient>
     </defs>
-    {rings.map(({ r, from, to }) => (
+    {rings.map(({ r, opacity, depth }) => (
       <circle
         cx="150"
         cy={178.5 - Number(r)}
@@ -38,13 +36,13 @@ const rings = [0, 1, 0.85, 0.7, 0.55, 0.4, 0.25, 0.1].map(
         stroke="url(#art-strategy-ring)"
         stroke-width="2"
         vector-effect="non-scaling-stroke"
-        opacity={from}
-        style={`--from: ${from}; --to: ${to}`}
-        class="transform-fill motion-safe:group-hover:animate-ripple origin-bottom"
+        opacity={opacity}
+        style={`--depth: ${depth}`}
+        class="transform-fill motion-safe:group-hover:animate-dolly origin-bottom"
       />
     ))}
   </svg>
-  <div class="motion-safe:group-hover:animate-hover-float absolute bottom-7 left-1/2 -translate-x-1/2">
+  <div class="absolute bottom-7 left-1/2 -translate-x-1/2">
     <Image
       src={spark}
       alt=""
