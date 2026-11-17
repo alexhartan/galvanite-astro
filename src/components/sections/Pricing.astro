@@ -4,6 +4,7 @@ import camera from '../../scripts/pricing-camera.json';
 import Container from '../ui/Container.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import GridMark from '../ui/GridMark.astro';
 
 interface Props {
   id?: string;
@@ -27,7 +28,7 @@ const tiers = {
     muted: 'text-white/80',
     price: 'text-kpi text-frost mt-price',
     plus: 1.25,
-    rule: 'border-white/10',
+    rule: 'max-lg:border-b border-white/10',
     item: 'text-frost',
     cta: 'bg-ink/60 text-white hover:bg-ink lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100',
   },
@@ -37,17 +38,17 @@ const tiers = {
     muted: 'text-ink',
     price: 'text-kpi-lg text-ink mt-price-featured',
     plus: 2.5,
-    rule: 'border-ink/10',
+    rule: 'border-b border-ink/10',
     item: 'text-ocean',
     cta: 'bg-signal text-ink hover:bg-signal-strong',
   },
   premium: {
-    box: 'bg-abyss/50 ring-1 ring-white/10 ring-inset ease-out-soft transition-opacity duration-300 lg:opacity-90 lg:hover:opacity-100 lg:focus-within:opacity-100',
+    box: 'ease-out-soft transition-opacity duration-300 lg:opacity-90 lg:hover:opacity-100 lg:focus-within:opacity-100',
     name: 'text-white',
     muted: 'text-white/80',
     price: 'text-kpi text-frost mt-price',
     plus: 2.5,
-    rule: 'border-white/10',
+    rule: 'max-lg:border-b border-white/10',
     item: 'text-frost',
     cta: 'bg-ink/60 text-white hover:bg-ink lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100',
   },
@@ -69,67 +70,94 @@ const tiers = {
       <h3 class="text-statement mt-32 text-center font-light lg:mt-48">
         {heading}
       </h3>
-      <div class="mt-14 grid gap-6 lg:grid-cols-3 lg:gap-0">
-        {engagements.map(({ data }) => {
+      <div class="lg:grid-rows-offer mt-14 grid gap-6 lg:grid-cols-3 lg:gap-0">
+        {engagements.map(({ data }, index) => {
           const tier = tiers[data.tier];
+          const first = index === 0;
+          const last = index === engagements.length - 1;
+          const guide = (
+            <>
+              {first && (
+                <>
+                  <div class="bleed-x absolute bottom-0 h-px bg-white/10 max-lg:hidden" />
+                  <GridMark
+                    inverted
+                    class="absolute top-full left-0 -mt-px max-lg:hidden"
+                  />
+                </>
+              )}
+              {last && (
+                <GridMark
+                  inverted
+                  class="3xl:block absolute top-full left-full -mt-px -ml-px hidden"
+                />
+              )}
+            </>
+          );
           return (
             <article
               class:list={[
-                'group relative flex flex-col px-8 pt-11 pb-6',
+                'group relative flex flex-col lg:row-span-3 lg:grid lg:grid-rows-subgrid',
                 tier.box,
               ]}
             >
-              {data.tier === 'featured' && (
-                <p class="to-ocean-50 text-azure absolute inset-x-0 top-0 bg-linear-to-r from-white text-label px-4 py-2 text-right font-semibold tracking-widest uppercase">
-                  Most popular
-                </p>
-              )}
-              <h4 class:list={['text-2xl font-semibold', tier.name]}>
-                {data.name}
-              </h4>
-              <p class:list={['mt-1.5 text-sm text-balance', tier.muted]}>
-                {data.audience}
-              </p>
-              <p
-                class:list={[
-                  'border-b pb-6 font-semibold tracking-price',
-                  tier.price,
-                  tier.rule,
-                ]}
-              >
-                {data.pricePrefix && (
-                  <span class="font-light">{data.pricePrefix} </span>
+              <div class="relative px-8 pt-11">
+                {data.tier === 'featured' && (
+                  <p class="to-ocean-50 text-azure absolute inset-x-0 top-0 bg-linear-to-r from-white text-label px-4 py-2 text-right font-semibold tracking-widest uppercase">
+                    Most popular
+                  </p>
                 )}
-                {data.price}
-                <span class="text-azure text-label mt-3 block tracking-widest uppercase">
-                  {data.duration}
-                </span>
-              </p>
-              <ul class="mt-6 mb-6 space-y-1.5" role="list">
-                {data.features.map((feature) => (
-                  <li class:list={['flex gap-3 text-sm', tier.item]}>
-                    <span
-                      aria-hidden="true"
-                      class="flex h-lh shrink-0 items-center"
-                    >
-                      <svg
-                        class="text-signal size-2.5"
-                        viewBox="0 0 10 10"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width={tier.plus}
+                <h4 class:list={['text-2xl font-semibold', tier.name]}>
+                  {data.name}
+                </h4>
+                <p class:list={['mt-1.5 text-sm text-balance', tier.muted]}>
+                  {data.audience}
+                </p>
+                <p
+                  class:list={[
+                    'pb-6 font-semibold tracking-price',
+                    tier.price,
+                    tier.rule,
+                  ]}
+                >
+                  {data.pricePrefix && (
+                    <span class="font-light">{data.pricePrefix} </span>
+                  )}
+                  {data.price}
+                  <span class="text-azure text-label mt-3 block tracking-widest uppercase">
+                    {data.duration}
+                  </span>
+                </p>
+                {guide}
+              </div>
+              <div class="relative px-8">
+                <ul class="space-y-1.5 py-6" role="list">
+                  {data.features.map((feature) => (
+                    <li class:list={['flex gap-3 text-sm', tier.item]}>
+                      <span
+                        aria-hidden="true"
+                        class="flex h-lh shrink-0 items-center"
                       >
-                        <path d="M5 0v10M0 5h10" />
-                      </svg>
-                    </span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+                        <svg
+                          class="text-signal size-2.5"
+                          viewBox="0 0 10 10"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width={tier.plus}
+                        >
+                          <path d="M5 0v10M0 5h10" />
+                        </svg>
+                      </span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                {guide}
+              </div>
               <a
                 href={ctaHref}
                 class:list={[
-                  'ease-out-soft mt-auto flex h-12 items-center justify-center rounded-sm font-semibold transition-[opacity,background-color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
+                  'ease-out-soft mt-auto flex h-12 items-center justify-center font-semibold transition-[opacity,background-color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
                   tier.cta,
                 ]}
               >

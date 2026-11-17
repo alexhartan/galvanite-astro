@@ -80,7 +80,7 @@
   --spacing-display-baseline: calc(100% - 0.12em);
   --spacing-price: 2rem;
   --spacing-price-featured: calc(
-    var(--spacing-price) - var(--text-kpi-lg) + var(--text-kpi)
+    var(--spacing-price) - 0.84 * (var(--text-kpi-lg) - var(--text-kpi))
   );
   --spacing-cap-statement: 0.191em;
   --spacing-cap-label: 0.25em;
@@ -102,8 +102,8 @@
 
   --animate-marquee: marquee 80s linear infinite;
   --animate-confetti: confetti 700ms var(--ease-out-soft) 150ms both;
-  --animate-ripple: ripple 2s ease-in-out;
-  --animate-hover-float: hover-float 2s;
+  --animate-ripple: ripple 1.2s ease-in-out;
+  --animate-hover-float: hover-float 1.2s;
   --animate-art-flow: art-flow 1.8s linear var(--delay, 0s) infinite both;
   --animate-art-pulse: art-pulse 2s var(--ease-in-out-soft) infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
@@ -230,6 +230,10 @@
 @utility section-link {
   top: calc(var(--offset, 0px) + var(--spacing-nav));
   bottom: calc(2.75rem + var(--slot, 0) * 1.5rem - 1lh);
+}
+
+@utility grid-rows-offer {
+  grid-template-rows: auto auto auto;
 }
 
 @utility bleed-x {

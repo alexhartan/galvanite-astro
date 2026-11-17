@@ -42,35 +42,38 @@ const clients = (
           {description}
         </p>
       </Container>
-      <div class="border-grid/10 bg-space-950 backdrop-blur-bar overflow-x-clip border-t opacity-50 pt-3.75 pb-3">
-        <Container class="relative">
-          <GridMark class="absolute -top-3.75 left-6 -mt-px" />
-          <p class="text-frost text-xs font-normal tracking-widest uppercase">
-            Trusted by technical teams at:
-          </p>
-          <div class="clip-left mt-1" aria-label="Clients" role="group">
-            <div class="motion-safe:animate-marquee flex w-max">
-              {[0, 1].map((copy) => (
-                <ul
-                  class="flex shrink-0 items-center gap-10 pr-10"
-                  aria-hidden={copy === 1 ? 'true' : undefined}
-                >
-                  {clients.map(({ data }) => (
-                    <li class="shrink-0">
-                      <Image
-                        src={data.logo}
-                        alt={copy === 0 ? data.name : ''}
-                        height={80}
-                        densities={[1, 2]}
-                        class="h-20 w-auto"
-                      />
-                    </li>
-                  ))}
-                </ul>
-              ))}
+      <div class="relative overflow-x-clip">
+        <div class="backdrop-blur-bar absolute inset-0"></div>
+        <div class="border-grid/10 bg-space-950 relative border-t opacity-50 pt-3.75 pb-3">
+          <Container class="relative">
+            <GridMark class="absolute -top-3.75 left-6 -mt-px" />
+            <p class="text-frost text-xs font-normal tracking-widest uppercase">
+              Trusted by technical teams at:
+            </p>
+            <div class="clip-left mt-1" aria-label="Clients" role="group">
+              <div class="motion-safe:animate-marquee flex w-max">
+                {[0, 1].map((copy) => (
+                  <ul
+                    class="flex shrink-0 items-center gap-10 pr-10"
+                    aria-hidden={copy === 1 ? 'true' : undefined}
+                  >
+                    {clients.map(({ data }) => (
+                      <li class="shrink-0">
+                        <Image
+                          src={data.logo}
+                          alt={copy === 0 ? data.name : ''}
+                          height={80}
+                          densities={[1, 2]}
+                          class="h-20 w-auto"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                ))}
+              </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </div>
       </div>
     </div>
   </div>
