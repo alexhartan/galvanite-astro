@@ -17,6 +17,10 @@
   --color-night: #1b2540;
   --color-abyss: #04091b;
   --color-ocean-50: #ecf2f9;
+  --color-azure-deep: #2e6aa3;
+  --color-deep-950: #0d1326;
+  --color-deep-900: #151c33;
+  --color-deep-800: #1c294d;
   --color-success: #29cc7a;
   --color-success-strong: #1fa863;
   --color-success-soft: #7ee3ad;
@@ -98,6 +102,8 @@
 
   --animate-marquee: marquee 80s linear infinite;
   --animate-confetti: confetti 700ms var(--ease-out-soft) 150ms both;
+  --animate-ripple: ripple 1s ease infinite;
+  --animate-hover-float: hover-float 1s ease-in-out infinite;
   --animate-art-flow: art-flow 1.8s linear var(--delay, 0s) infinite both;
   --animate-art-pulse: art-pulse 2s var(--ease-in-out-soft) infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
@@ -121,6 +127,23 @@
     100% {
       opacity: 0;
       transform: translate(var(--dx), var(--dy)) rotate(var(--r-end));
+    }
+  }
+
+  @keyframes ripple {
+    from {
+      opacity: var(--from);
+      transform: none;
+    }
+    to {
+      opacity: var(--to);
+      transform: scale(1.43);
+    }
+  }
+
+  @keyframes hover-float {
+    50% {
+      transform: translateY(-6px);
     }
   }
 
