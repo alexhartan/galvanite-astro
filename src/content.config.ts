@@ -60,6 +60,7 @@ const clients = defineCollection({
       name: z.string(),
       order: z.number(),
       logo: image(),
+      hidden: z.boolean().default(false),
     }),
 });
 
