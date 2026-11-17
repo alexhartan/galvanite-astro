@@ -102,8 +102,8 @@
 
   --animate-marquee: marquee 80s linear infinite;
   --animate-confetti: confetti 700ms var(--ease-out-soft) 150ms both;
-  --animate-ripple: ripple 1s ease infinite;
-  --animate-hover-float: hover-float 1s ease-in-out infinite;
+  --animate-ripple: ripple 2s ease-in-out;
+  --animate-hover-float: hover-float 2s;
   --animate-art-flow: art-flow 1.8s linear var(--delay, 0s) infinite both;
   --animate-art-pulse: art-pulse 2s var(--ease-in-out-soft) infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
@@ -142,8 +142,16 @@
   }
 
   @keyframes hover-float {
+    0% {
+      transform: none;
+      animation-timing-function: ease-in;
+    }
     50% {
       transform: translateY(-6px);
+      animation-timing-function: ease-in;
+    }
+    100% {
+      transform: none;
     }
   }
 
