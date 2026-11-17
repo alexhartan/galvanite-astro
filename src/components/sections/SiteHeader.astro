@@ -9,13 +9,16 @@ interface Props {
 const { ctaHref = '#contact' } = Astro.props;
 ---
 
-<header class="pointer-events-none fixed inset-x-0 top-0 z-30 h-nav border-b border-grid/10 pt-5.5">
-  <div class="absolute inset-0 -z-10 bg-white opacity-(--grid-invert,0)"></div>
+<header
+  data-nav
+  class="group pointer-events-none fixed inset-x-0 top-0 z-30 h-nav border-b border-grid/10 pt-5.5 backdrop-blur-nav"
+>
   <Container class="relative h-full">
     <a
       href={import.meta.env.BASE_URL}
       aria-label="Galvanite home"
-      class="pointer-events-auto -m-0.5 inline-flex size-11 items-center justify-center text-grid focus-visible:outline-grid rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2"
+      data-nav-logo
+      class="pointer-events-auto -m-0.5 inline-flex size-11 items-center justify-center text-white transition-colors duration-300 ease-out-soft group-data-light:text-ink focus-visible:outline-current rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2"
     >
       <Logo />
     </a>
@@ -28,3 +31,10 @@ const { ctaHref = '#contact' } = Astro.props;
     <GridMark class="absolute top-full left-6" />
   </Container>
 </header>
+
+<script>
+  import { initNavTone } from '../../scripts/nav-tone';
+
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  if (nav) initNavTone(nav);
+</script>
