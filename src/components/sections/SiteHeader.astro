@@ -11,8 +11,21 @@ const { ctaHref = '#contact' } = Astro.props;
 
 <header
   data-nav
-  class="group pointer-events-none fixed inset-x-0 top-0 z-30 h-nav border-b border-grid/10 pt-5.5 backdrop-blur-nav"
+  class="group pointer-events-none fixed inset-x-0 top-0 z-30 h-nav border-b border-grid/10 pt-5.5"
 >
+  <div
+    aria-hidden="true"
+    class="from-space-950 to-space-900 absolute inset-0 -z-10 bg-linear-to-br bg-fixed"
+  >
+    <canvas
+      data-nav-window
+      class="ease-out-soft size-full opacity-0 transition-opacity duration-700 data-ready:opacity-100"
+    ></canvas>
+  </div>
+  <div
+    aria-hidden="true"
+    class="ease-out-soft absolute inset-0 -z-10 bg-white opacity-0 transition-opacity duration-300 group-data-light:opacity-100"
+  ></div>
   <Container class="relative h-full">
     <a
       href={import.meta.env.BASE_URL}
