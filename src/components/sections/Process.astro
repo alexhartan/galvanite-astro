@@ -22,6 +22,14 @@ const {
   weeks,
   stages,
 } = Astro.props;
+const confetti = Array.from({ length: 8 }, (_, index) => {
+  const angle = (index / 8) * Math.PI * 2;
+  const reach = index % 2 ? 22 : 17;
+  return {
+    style: `--dx: ${(Math.cos(angle) * reach).toFixed(1)}px; --dy: ${(Math.sin(angle) * reach * 0.75).toFixed(1)}px`,
+    tone: ['bg-signal', 'bg-azure', 'bg-sky', 'bg-ocean'][index % 4],
+  };
+});
 const label_ =
   'text-label absolute inset-0 flex items-center justify-center font-semibold tracking-wider uppercase';
 ---
@@ -72,6 +80,17 @@ const label_ =
                   class="stage-reveal absolute inset-0 overflow-hidden rounded-sm bg-white/90"
                 >
                   <div class="timeline-trail from-frost via-chalk to-night/0 absolute inset-y-0 bg-linear-to-l via-15% mix-blend-multiply" />
+                  <span class="absolute top-1/2 left-5">
+                    {confetti.map(({ style, tone }) => (
+                      <span
+                        style={style}
+                        class:list={[
+                          'absolute -top-0.5 -left-0.5 size-1 rounded-full opacity-0 motion-safe:group-data-complete/stage:animate-confetti',
+                          tone,
+                        ]}
+                      />
+                    ))}
+                  </span>
                   <CheckIcon class="ease-out-soft absolute top-1/2 left-2.5 -translate-y-1/2 scale-75 opacity-0 transition-[opacity,scale] duration-300 group-data-complete/stage:scale-100 group-data-complete/stage:opacity-100" />
                   <span class:list={[label_, 'text-ink']}>{name}</span>
                 </div>
@@ -85,19 +104,18 @@ const label_ =
           <div
             data-tooltip
             aria-hidden="true"
-            class="timeline-tip ease-out-soft text-ink pointer-events-none absolute bottom-full -mb-1.5 flex -translate-x-1/2 translate-y-1 items-center gap-2 rounded-sm bg-white py-1.5 pr-3 pl-1.5 text-sm whitespace-nowrap opacity-0 shadow-lg transition-[opacity,translate] duration-300 data-visible:translate-y-0 data-visible:opacity-100"
+            class="timeline-tip ease-out-soft text-sky text-xs pointer-events-none absolute bottom-2 ml-2 flex translate-y-1 items-center gap-2 leading-tight opacity-0 transition-[opacity,translate] duration-300 data-visible:translate-y-0 data-visible:opacity-100"
           >
             <Image
               src={alex}
               alt=""
-              width={20}
-              height={20}
+              width={24}
+              height={24}
               densities={[1, 2]}
               format="webp"
-              class="size-5 rounded-full object-cover"
+              class="size-6 rounded-sm object-cover"
             />
-            Weekly Sync
-            <span class="absolute top-full left-1/2 size-2 -translate-x-1/2 -translate-y-1 rotate-45 bg-white"></span>
+            <span class="w-min">Weekly Sync</span>
           </div>
         </div>
       </div>
