@@ -86,6 +86,7 @@
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
 
   --animate-marquee: marquee 60s linear infinite;
+  --animate-confetti: confetti 700ms var(--ease-out-soft) 150ms both;
   --animate-art-flow: art-flow 1.8s linear var(--delay, 0s) infinite both;
   --animate-art-pulse: art-pulse 2s var(--ease-in-out-soft) infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
@@ -95,6 +96,20 @@
   @keyframes marquee {
     to {
       transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes confetti {
+    0% {
+      opacity: 1;
+      transform: scale(0.4);
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--dx), var(--dy));
     }
   }
 
