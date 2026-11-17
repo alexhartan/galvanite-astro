@@ -1,88 +1,57 @@
 ---
-import ArtFrame from './ArtFrame.astro';
-import { accent, flow, pulse, shift } from './tones';
+import { Image } from 'astro:assets';
+import spark from '../../../assets/benefits/spark.png';
 
-const fill = 'url(#art-strategy)';
-const dots = [
-  { cx: 56, cy: 38, ty: 42 },
-  { cx: 56, cy: 80, ty: 0 },
-  { cx: 56, cy: 122, ty: -42 },
-];
+const rings = [0, 1, 0.85, 0.7, 0.55, 0.4, 0.25, 0.1].map(
+  (from, index, list) => ({
+    r: (51.05 * 1.43 ** index).toFixed(2),
+    from,
+    to: list[index + 1] ?? 0,
+  }),
+);
 ---
 
-<ArtFrame gradient="art-strategy">
-  <circle cx="48" cy="42" r="12" fill={fill} stroke="none"></circle>
-  <circle cx="44" cy="38" r="12"></circle>
-  <rect x="40" y="34" width="8" height="8" rx="2" class="stroke-sky"></rect>
-  <circle cx="48" cy="84" r="12" fill={fill} stroke="none"></circle>
-  <circle cx="44" cy="80" r="12"></circle>
-  <g class="stroke-sky">
-    <circle cx="44" cy="77" r="2.5"></circle>
-    <path d="M39 86a5 5 0 0 1 10 0"></path>
-  </g>
-  <circle cx="48" cy="126" r="12" fill={fill} stroke="none"></circle>
-  <circle cx="44" cy="122" r="12"></circle>
-  <path d="M44 117v5l3.5 2" class="stroke-sky"></path>
-  <path
-    d="M56 38h18a6 6 0 0 1 6 6v30a6 6 0 0 0 6 6h18M56 80h48M56 122h18a6 6 0 0 0 6 -6v-30a6 6 0 0 1 6 -6"
-    class="stroke-azure"
-  ></path>
-  <g stroke="none">
-    {dots.map(({ cx, cy, ty }, index) => (
+<div class="ease-out-soft absolute inset-0 opacity-75 transition-opacity duration-300 group-hover:opacity-100">
+  <svg
+    class="absolute bottom-0 left-1/2 -translate-x-1/2 overflow-visible"
+    width="300"
+    height="180"
+    viewBox="0 0 300 180"
+    fill="none"
+  >
+    <defs>
+      <radialGradient id="art-strategy-ring" cx="0.5" cy="1" r="1">
+        <stop offset="0.35" stop-color="currentColor" class="text-azure"></stop>
+        <stop
+          offset="1"
+          stop-color="currentColor"
+          stop-opacity="0"
+          class="text-azure-deep"
+        ></stop>
+      </radialGradient>
+    </defs>
+    {rings.map(({ r, from, to }) => (
       <circle
-        cx={cx}
-        cy={cy}
-        r="2.5"
-        style={`--x1: 24px; --tx: 48px; --ty: ${ty}px; --delay: ${index * 0.3}s`}
-        class={flow}
+        cx="150"
+        cy={178.5 - Number(r)}
+        r={r}
+        stroke="url(#art-strategy-ring)"
+        stroke-width="3"
+        vector-effect="non-scaling-stroke"
+        opacity={from}
+        style={`--from: ${from}; --to: ${to}`}
+        class="transform-fill motion-safe:group-hover:animate-ripple origin-bottom"
       />
     ))}
-  </g>
-  <g class={pulse}>
-    <path
-      d="M122 62l18 18l-18 18l-18 -18z"
-      class:list={[shift, accent.tint, accent.stroke]}
-    ></path>
-    <circle
-      cx="122"
-      cy="80"
-      r="3.5"
-      stroke="none"
-      class:list={[shift, accent.fill]}
-    ></circle>
-  </g>
-  <path
-    d="M146 80h22m-5 -5l5 5l-5 5"
-    class:list={[shift, accent.stroke]}
-  ></path>
-  <rect
-    x="184"
-    y="40"
-    width="66"
-    height="92"
-    rx="6"
-    fill={fill}
-    stroke="none"
-  ></rect>
-  <rect x="176" y="32" width="66" height="92" rx="6"></rect>
-  <path d="M176 46h66"></path>
-  <g class="stroke-sky">
-    <path d="M184 39h10M184 88h34M184 96h22"></path>
-    <rect
-      x="184"
-      y="54"
-      width="50"
-      height="24"
-      rx="3"
-      class="fill-azure/15"
-    ></rect>
-  </g>
-  <rect
-    x="184"
-    y="106"
-    width="24"
-    height="10"
-    rx="3"
-    class:list={[shift, accent.fill, accent.stroke]}
-  ></rect>
-</ArtFrame>
+  </svg>
+  <div class="motion-safe:group-hover:animate-hover-float absolute bottom-7 left-1/2 -translate-x-1/2">
+    <Image
+      src={spark}
+      alt=""
+      width={47}
+      height={47}
+      densities={[1, 2]}
+      class="-rotate-45"
+    />
+  </div>
+</div>
