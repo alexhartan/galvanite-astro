@@ -84,6 +84,7 @@ void main() {
   float p = max(uSun, 0.0);
   float dusk = clamp(1.0 + uSun, 0.0, 1.0);
   float rise = smoothstep(0.0, 0.6, p);
+  float eclipse = 1.0 - smoothstep(0.0, 0.2, p);
 
   vec2 centre = vec2(aspect + 0.13, 1.25) + uPointer * 0.004;
   vec2 rel = q - centre;
@@ -121,7 +122,7 @@ void main() {
   float height = max(d, 0.0);
   vec3 air = mix(vec3(0.1, 0.32, 1.0), vec3(0.55, 0.8, 1.0), exp(-height * 60.0));
   float shell = exp(-height * mix(22.0, 8.0, p)) * 0.9 + exp(-height * 90.0) * 0.8;
-  col += air * shell * lit * glow * (0.5 + 1.6 * p);
+  col += air * shell * lit * glow * (0.5 + 1.6 * p) * mix(1.0, 0.6, eclipse);
 
   if (d < 0.002) {
     float z = sqrt(max(RADIUS * RADIUS - dist * dist, 0.0));
@@ -138,13 +139,13 @@ void main() {
 
     vec3 planet = vec3(0.004, 0.006, 0.016);
     planet += vec3(0.012, 0.022, 0.06) * exp(d * 2.5);
-    planet += albedo * day * glow * (1.1 + 2.0 * p);
-    planet += vec3(0.1, 0.36, 0.9) * exp(d * mix(11.0, 5.0, p)) * lit * glow * (1.8 + 1.6 * p);
+    planet += albedo * day * glow * (1.1 + 2.0 * p) * mix(1.0, 0.6, eclipse);
+    planet += vec3(0.1, 0.36, 0.9) * exp(d * mix(11.0, 5.0, p)) * lit * glow * (1.8 + 1.6 * p) * mix(1.0, 0.6, eclipse);
     col = mix(col, planet, smoothstep(0.0015, -0.0015, d));
   }
 
   float rim = band(d, mix(0.003, 0.011, p)) * (0.1 + lit) * (glow + 2.0 * p);
-  col += vec3(0.72, 0.89, 1.0) * rim * 1.5;
+  col += vec3(0.72, 0.89, 1.0) * rim * 1.5 * mix(1.0, 0.65, eclipse);
   col += vec3(0.45, 0.7, 1.0) * band(d, 0.035) * lit * p * 1.2;
   col += vec3(1.0, 0.55, 0.25) * band(d, 0.012) * exp(-ds * 9.0) * power * 0.9;
 
