@@ -85,7 +85,7 @@
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
 
-  --animate-marquee: marquee 60s linear infinite;
+  --animate-marquee: marquee 80s linear infinite;
   --animate-confetti: confetti 700ms var(--ease-out-soft) 150ms both;
   --animate-art-flow: art-flow 1.8s linear var(--delay, 0s) infinite both;
   --animate-art-pulse: art-pulse 2s var(--ease-in-out-soft) infinite;
