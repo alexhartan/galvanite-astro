@@ -1,7 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import spark from '../../../assets/benefits/spark.png';
-
+const path =
+  'M2.06204 34.7207C-0.692009 34.2347 -0.692 30.2828 2.06205 29.7968L13.5702 27.766C20.8135 26.4878 26.4844 20.8168 27.7627 13.5735L29.7935 2.06535C30.2795 -0.688699 34.2314 -0.688691 34.7174 2.06536L36.7483 13.5735C38.0265 20.8168 43.6975 26.4878 50.9408 27.766L62.4489 29.7968C65.203 30.2828 65.203 34.2347 62.4489 34.7207L50.9408 36.7516C43.6975 38.0298 38.0265 43.7008 36.7483 50.9441L34.7174 62.4522C34.2314 65.2063 30.2795 65.2063 29.7935 62.4522L27.7627 50.9441C26.4844 43.7008 20.8135 38.0298 13.5702 36.7516L2.06204 34.7207Z';
 const rings = [1, 0.85, 0.7, 0.55, 0.4, 0.25, 0.1].map((opacity, index) => ({
   r: (73 * 1.43 ** index).toFixed(2),
   opacity,
@@ -38,18 +37,45 @@ const rings = [1, 0.85, 0.7, 0.55, 0.4, 0.25, 0.1].map((opacity, index) => ({
         vector-effect="non-scaling-stroke"
         opacity={opacity}
         style={`--depth: ${depth}`}
-        class="transform-fill motion-safe:group-hover:animate-dolly origin-bottom"
+        class="transform-fill ease-in-out origin-bottom transition-transform duration-500 motion-safe:group-hover:scale-(--depth)"
       />
     ))}
   </svg>
-  <div class="absolute bottom-7 left-1/2 -translate-x-1/2">
-    <Image
-      src={spark}
-      alt=""
-      width={47}
-      height={47}
-      densities={[1, 2]}
-      class="-rotate-45"
-    />
-  </div>
+  <svg
+    class="absolute bottom-4.5 left-1/2 -translate-x-1/2"
+    width="100"
+    height="100"
+    viewBox="0 0 65 65"
+  >
+    <defs>
+      <clipPath id="art-strategy-spark">
+        <path d={path}></path>
+      </clipPath>
+      <linearGradient
+        id="art-strategy-spark-fill"
+        x1="0"
+        y1="0"
+        x2="500"
+        y2="500"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0.15" stop-color="currentColor" class="text-white"></stop>
+        <stop offset="0.35" stop-color="currentColor" class="text-frost"></stop>
+        <stop offset="1" stop-color="currentColor" class="text-azure"></stop>
+      </linearGradient>
+    </defs>
+    <g clip-path="url(#art-strategy-spark)">
+      <g transform="matrix(0 0.0344358 -0.0344358 0 32.2555 32.2588)">
+        {['', 'scale(1 -1)', 'scale(-1 1)', 'scale(-1)'].map((flip) => (
+          <rect
+            width="979.811"
+            height="979.811"
+            transform={flip || undefined}
+            fill="url(#art-strategy-spark-fill)"
+            shape-rendering="crispEdges"
+          />
+        ))}
+      </g>
+    </g>
+  </svg>
 </div>
