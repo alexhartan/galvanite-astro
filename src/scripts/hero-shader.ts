@@ -92,7 +92,7 @@ void main() {
   float d = dist - RADIUS;
   vec2 normal = rel / dist;
 
-  float angle = radians(mix(26.5, 3.0, p));
+  float angle = radians(mix(37.7, 3.0, p));
   vec2 sunDir = vec2(-cos(angle), -sin(angle));
   float lift = mix(-0.05, -0.006, uIntro) + 0.05 * rise - 0.09 * (1.0 - dusk);
   vec2 sun = centre + sunDir * (RADIUS + lift);
@@ -119,9 +119,10 @@ void main() {
   col += vec3(0.12, 0.3, 0.8) * scatter * 1.3;
   col += vec3(0.05, 0.13, 0.36) * rise * power * 0.1;
 
+  float arc = mix(1.0, smoothstep(cos(radians(42.0)), cos(radians(28.0)), dot(normal, sunDir)), eclipse);
   float height = max(d, 0.0);
   vec3 air = mix(vec3(0.1, 0.32, 1.0), vec3(0.55, 0.8, 1.0), exp(-height * 60.0));
-  float shell = exp(-height * mix(22.0, 8.0, p)) * 0.9 + exp(-height * 90.0) * 0.8;
+  float shell = exp(-height * mix(22.0, 8.0, p)) * 0.9 + exp(-height * 90.0) * 0.8 * arc;
   col += air * shell * lit * glow * (0.5 + 1.6 * p) * mix(1.0, 0.6, eclipse);
 
   if (d < 0.002) {
@@ -145,7 +146,7 @@ void main() {
   }
 
   float rim = band(d, mix(0.003, 0.011, p)) * (0.1 + lit) * (glow + 2.0 * p);
-  col += vec3(0.72, 0.89, 1.0) * rim * 1.5 * mix(1.0, 0.65, eclipse);
+  col += vec3(0.72, 0.89, 1.0) * rim * 1.5 * mix(1.0, 0.65, eclipse) * arc;
   col += vec3(0.45, 0.7, 1.0) * band(d, 0.035) * lit * p * 1.2;
   col += vec3(1.0, 0.55, 0.25) * band(d, 0.012) * exp(-ds * 9.0) * power * 0.9;
 
