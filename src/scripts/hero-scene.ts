@@ -148,7 +148,36 @@ async function createRenderer(canvas: HTMLCanvasElement) {
 
 type Renderer = NonNullable<Awaited<ReturnType<typeof createRenderer>>>;
 
-export function initHeroScene(canvas: HTMLCanvasElement) {
+function createMirror(source: HTMLCanvasElement, target: HTMLCanvasElement) {
+  const context = target.getContext('2d');
+  return () => {
+    if (!context || !source.width) return;
+    const ratio = source.width / source.clientWidth;
+    const height = Math.round(target.clientHeight * ratio);
+    if (target.width !== source.width || target.height !== height) {
+      target.width = source.width;
+      target.height = height;
+    }
+    context.drawImage(
+      source,
+      0,
+      0,
+      source.width,
+      height,
+      0,
+      0,
+      source.width,
+      height,
+    );
+    target.toggleAttribute('data-ready', true);
+  };
+}
+
+export function initHeroScene(
+  canvas: HTMLCanvasElement,
+  window_?: HTMLCanvasElement | null,
+) {
+  const mirror = window_ ? createMirror(canvas, window_) : null;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let renderer: Renderer | null = null;
   let frameTotal = 0;
@@ -247,6 +276,7 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
         },
         path.stars,
       );
+      mirror?.();
       canvas.toggleAttribute('data-ready', true);
     }
 
