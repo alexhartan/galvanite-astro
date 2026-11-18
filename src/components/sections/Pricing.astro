@@ -1,4 +1,5 @@
 ---
+import CtaButton from '../ui/CtaButton.astro';
 import { getCollection } from 'astro:content';
 import camera from '../../scripts/pricing-camera.json';
 import Container from '../ui/Container.astro';
@@ -42,7 +43,7 @@ const tiers = {
     plus: 2.5,
     rule: 'border-b border-ink/10 -mx-8 px-8',
     item: 'text-ocean',
-    cta: 'bg-signal text-ink hover:bg-signal-strong',
+    cta: '',
   },
   premium: {
     box: 'ease-out-soft transition-opacity duration-300 lg:opacity-90 lg:hover:opacity-100 lg:focus-within:opacity-100',
@@ -157,15 +158,21 @@ const tiers = {
                 </ul>
                 {guide}
               </div>
-              <a
-                href={ctaHref}
-                class:list={[
-                  'ease-out-soft mt-auto flex h-12 items-center justify-center font-semibold transition-[opacity,background-color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
-                  tier.cta,
-                ]}
-              >
-                Book a Call with Alex
-              </a>
+              {data.tier === 'featured' ? (
+                <CtaButton href={ctaHref} class="relative mt-auto">
+                  Book a Call with Alex
+                </CtaButton>
+              ) : (
+                <a
+                  href={ctaHref}
+                  class:list={[
+                    'ease-out-soft mt-auto flex h-12 items-center justify-center font-semibold transition-[opacity,background-color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
+                    tier.cta,
+                  ]}
+                >
+                  Book a Call with Alex
+                </a>
+              )}
             </article>
           );
         })}
