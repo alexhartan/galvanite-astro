@@ -53,7 +53,7 @@
   --text-kpi-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
   --text-kpi-lg--line-height: 1;
   --text-kpi-lg--letter-spacing: -0.015em;
-  --text-stat: clamp(2.8875rem, 3.63vw, 4.125rem);
+  --text-stat: clamp(2.65rem, 3.34vw, 3.8rem);
   --text-stat--line-height: 1;
   --text-stat--letter-spacing: -0.04em;
   --text-stat-label: 0.9625rem;

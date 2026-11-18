@@ -1,6 +1,6 @@
 ---
-title: 'Fast & discoverable'
+title: 'Performance that scales'
 art: performance
 order: 4
-summary: 'Fast, accessible and optimized for SEO, AEO and AI agents. Built on a robust foundation that scales as you grow and extends as the product evolves.'
+summary: 'Lightning-fast builds, optimized for visibility across search engines and AI platforms. A flexible foundation that grows and evolves with your product.'
 ---
