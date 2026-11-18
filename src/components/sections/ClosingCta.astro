@@ -26,18 +26,30 @@ const {
   class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <SectionFrame />
-  <div class="border-ink/10 relative border-t">
-    <Container class="@container py-28 lg:py-44">
-      <h2
-        id={`${id}-heading`}
-        class="text-statement lg:text-mission text-ink leading-none font-extralight"
-      >
-        {lead} <strong class="block font-medium">{emphasis}</strong>
-      </h2>
-      <p class="text-ink/70 mt-4 max-w-lead">{description}</p>
-      <CtaButton href={ctaHref} class="relative mt-8 w-full max-w-80">
-        Book a Call with Alex
-      </CtaButton>
+  <div class="border-ink/10 relative overflow-clip border-t">
+    <Container class="@container py-40 lg:py-60">
+      <div data-parallax class="translate-y-(--shift)">
+        <h2
+          id={`${id}-heading`}
+          class="text-statement lg:text-mission text-ink leading-none font-extralight"
+        >
+          {lead} <strong class="block font-medium">{emphasis}</strong>
+        </h2>
+        <p class="text-ink/70 mt-4 max-w-lead">{description}</p>
+        <CtaButton href={ctaHref} class="relative mt-8 w-full max-w-80">
+          Book a Call with Alex
+        </CtaButton>
+      </div>
     </Container>
   </div>
 </section>
+
+<script>
+  import { initParallax } from '../../scripts/parallax';
+
+  for (const element of document.querySelectorAll<HTMLElement>(
+    '[data-parallax]',
+  )) {
+    initParallax(element, 0.25);
+  }
+</script>
