@@ -47,6 +47,9 @@
   --text-case: clamp(1.7rem, 2.465vw, 2.975rem);
   --text-case--line-height: 1.04;
   --text-case--letter-spacing: -0.04em;
+  --text-card: clamp(1.25rem, 1.6vw, 1.625rem);
+  --text-card--line-height: 1.25;
+  --text-card--letter-spacing: -0.02em;
   --text-label: 0.75rem;
   --text-benefit: min(1.25rem, calc(100cqi / 12.4));
   --text-benefit--line-height: 1.3;

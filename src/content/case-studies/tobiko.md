@@ -1,5 +1,6 @@
 ---
 title: How the Tobiko Data rebrand set the stage for their successful exit
+client: Tobiko Data
 order: 1
 scope: [Brand strategy, Web design & collateral, Web development]
 image: ../../assets/case-studies/tobiko.jpg

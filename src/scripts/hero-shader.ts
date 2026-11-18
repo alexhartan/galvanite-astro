@@ -155,7 +155,7 @@ void main() {
   float halo = 1.0 / (1.0 + pow(ds / (0.04 + 0.3 * p), 2.0));
   col += vec3(1.0, 0.97, 0.94) * (core * 2.6 + halo * 0.4) * power * occlusion;
 
-  float theta = atan(lens.y, lens.x) + uTime * 0.02;
+  float theta = atan(lens.y, lens.x) + uTime * 0.04;
   float spikes = pow(abs(cos(theta * 3.0 + 0.5)), 90.0) * 0.7 + pow(abs(cos(theta * 2.0 - 0.3)), 240.0) * 0.5;
   float fine = 0.5 + 0.5 * sin(theta * 26.0 + 2.0 * sin(theta * 7.0 + uTime * 0.12));
   float rays = (spikes + fine * fine * 0.22) * exp(-ds * mix(11.0, 3.2, rise));
