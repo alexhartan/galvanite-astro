@@ -32,46 +32,54 @@ const reveal = letterIndex + 6;
   class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <SectionFrame />
-  <div data-guide class="border-ink/10 relative border-t">
-    <Container class="@container py-32 lg:py-56">
+  <div data-guide class="border-ink/10 relative overflow-clip border-t">
+    <Container class="@container py-40 lg:py-64">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
-      <p
-        data-reveal
-        class="max-w-mission text-statement lg:text-mission text-ink leading-none font-extralight"
-        style={`--n: ${reveal}`}
-      >
-        <span class="sr-only">{fullText}</span>
-        {segments.map(({ strong, words }) => {
-          const Tag = strong ? 'strong' : 'span';
-          return (
-            <Tag class:list={[strong && 'font-medium']} aria-hidden="true">
-              {words.map(({ space, letters }) =>
-                space ? (
-                  space
-                ) : (
-                  <span class="inline-block whitespace-nowrap">
-                    {letters.map(({ char, index }) => (
-                      <span class="reveal-letter" style={`--i: ${index}`}>
-                        {char}
-                      </span>
-                    ))}
-                  </span>
-                ),
-              )}
-            </Tag>
-          );
-        })}
-      </p>
+      <div data-parallax class="translate-y-(--shift)">
+        <p
+          data-reveal
+          class="max-w-mission text-statement lg:text-mission text-ink leading-none font-extralight"
+          style={`--n: ${reveal}`}
+        >
+          <span class="sr-only">{fullText}</span>
+          {segments.map(({ strong, words }) => {
+            const Tag = strong ? 'strong' : 'span';
+            return (
+              <Tag class:list={[strong && 'font-medium']} aria-hidden="true">
+                {words.map(({ space, letters }) =>
+                  space ? (
+                    space
+                  ) : (
+                    <span class="inline-block whitespace-nowrap">
+                      {letters.map(({ char, index }) => (
+                        <span class="reveal-letter" style={`--i: ${index}`}>
+                          {char}
+                        </span>
+                      ))}
+                    </span>
+                  ),
+                )}
+              </Tag>
+            );
+          })}
+        </p>
+      </div>
     </Container>
   </div>
 </section>
 
 <script>
+  import { initParallax } from '../../scripts/parallax';
   import { initReveal } from '../../scripts/reveal';
 
   for (const element of document.querySelectorAll<HTMLElement>(
     '[data-reveal]',
   )) {
     initReveal(element);
+  }
+  for (const element of document.querySelectorAll<HTMLElement>(
+    '#intro [data-parallax]',
+  )) {
+    initParallax(element, 0.25);
   }
 </script>
