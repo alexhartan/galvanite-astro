@@ -52,6 +52,7 @@
   --text-card--letter-spacing: -0.02em;
   --text-nav-label: 0.875rem;
   --text-tag: 0.65625rem;
+  --text-stage: 0.6875rem;
   --text-label: 0.75rem;
   --text-benefit: min(1.25rem, calc(100cqi / 12.4));
   --text-benefit--line-height: 1.3;
