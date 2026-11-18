@@ -1,81 +1,116 @@
 ---
 const path =
-  'M2.06204 34.7207C-0.692009 34.2347 -0.692 30.2828 2.06205 29.7968L13.5702 27.766C20.8135 26.4878 26.4844 20.8168 27.7627 13.5735L29.7935 2.06535C30.2795 -0.688699 34.2314 -0.688691 34.7174 2.06536L36.7483 13.5735C38.0265 20.8168 43.6975 26.4878 50.9408 27.766L62.4489 29.7968C65.203 30.2828 65.203 34.2347 62.4489 34.7207L50.9408 36.7516C43.6975 38.0298 38.0265 43.7008 36.7483 50.9441L34.7174 62.4522C34.2314 65.2063 30.2795 65.2063 29.7935 62.4522L27.7627 50.9441C26.4844 43.7008 20.8135 38.0298 13.5702 36.7516L2.06204 34.7207Z';
-const rings = [1, 0.85, 0.7, 0.55, 0.4, 0.25, 0.1].map((opacity, index) => ({
-  r: (73 * 1.43 ** index).toFixed(2),
-  opacity,
-  depth: (0.95 - (0.35 * index) / 6).toFixed(3),
-}));
+  'M2.06553 34.7209C-0.688517 34.2349 -0.688508 30.283 2.06554 29.797L13.5737 27.7662C20.817 26.4879 26.4879 20.817 27.7662 13.5737L29.797 2.06553C30.283 -0.688518 34.2349 -0.688507 34.7209 2.06554L36.7518 13.5737C38.03 20.817 43.701 26.4879 50.9443 27.7662L62.4524 29.797C65.2065 30.283 65.2065 34.2349 62.4524 34.7209L50.9442 36.7518C43.701 38.03 38.03 43.701 36.7518 50.9442L34.7209 62.4524C34.2349 65.2065 30.283 65.2065 29.797 62.4524L27.7662 50.9442C26.4879 43.701 20.817 38.03 13.5737 36.7518L2.06553 34.7209Z';
+const rings = [
+  { r: 75, opacity: 'opacity-100' },
+  { r: 112.5, opacity: 'opacity-80' },
+  { r: 168.75, opacity: 'opacity-60' },
+  { r: 253.125, opacity: 'opacity-40' },
+  { r: 379.688, opacity: 'opacity-20' },
+];
+const flips = ['', 'scale(1 -1)', 'scale(-1 1)', 'scale(-1)'];
+const sparks = [
+  {
+    id: 'art-strategy-spark-cool',
+    layer: 'opacity-75 group-hover:opacity-0',
+    stops: [
+      { offset: '0.15', tone: 'text-white' },
+      { offset: '0.35', tone: 'text-frost' },
+      { offset: '1', tone: 'text-azure' },
+    ],
+  },
+  {
+    id: 'art-strategy-spark-warm',
+    layer: 'opacity-0 group-hover:opacity-100',
+    stops: [
+      { offset: '0.331731', tone: 'text-white' },
+      { offset: '1', tone: 'text-spark' },
+    ],
+  },
+];
+const motion =
+  'ease-standard transition duration-500 motion-reduce:transition-none';
 ---
 
-<div class="ease-out-soft absolute inset-0 opacity-75 transition-opacity duration-300 group-hover:opacity-100">
-  <svg
-    class="absolute bottom-0 left-1/2 -translate-x-1/2 overflow-visible"
-    width="300"
-    height="180"
-    viewBox="0 0 300 180"
-    fill="none"
-  >
-    <defs>
-      <radialGradient id="art-strategy-ring" cx="0.5" cy="1" r="1">
-        <stop offset="0.35" stop-color="currentColor" class="text-azure"></stop>
-        <stop
-          offset="1"
-          stop-color="currentColor"
-          stop-opacity="0"
-          class="text-azure-deep"
-        ></stop>
-      </radialGradient>
-    </defs>
-    {rings.map(({ r, opacity, depth }) => (
-      <circle
-        cx="150"
-        cy={178.5 - Number(r)}
-        r={r}
-        stroke="url(#art-strategy-ring)"
-        stroke-width="2"
-        vector-effect="non-scaling-stroke"
-        opacity={opacity}
-        style={`--depth: ${depth}`}
-        class="transform-fill ease-in-out origin-bottom transition-transform duration-500 motion-safe:group-hover:scale-(--depth)"
-      />
-    ))}
-  </svg>
-  <svg
-    class="absolute bottom-4.5 left-1/2 -translate-x-1/2"
-    width="100"
-    height="100"
-    viewBox="0 0 65 65"
-  >
-    <defs>
-      <clipPath id="art-strategy-spark">
-        <path d={path}></path>
-      </clipPath>
+<svg
+  class="absolute bottom-0 left-1/2 -translate-x-1/2 overflow-visible"
+  width="300"
+  height="180"
+  viewBox="0 0 300 180"
+  fill="none"
+>
+  <defs>
+    <radialGradient id="art-strategy-ring" cx="0.5" cy="1" r="1">
+      <stop
+        offset="0.35"
+        stop-color="currentColor"
+        class:list={['text-azure group-hover:text-chalk', motion]}
+      ></stop>
+      <stop
+        offset="1"
+        stop-color="currentColor"
+        stop-opacity="0"
+        class="text-azure-deep"
+      ></stop>
+    </radialGradient>
+  </defs>
+  {rings.map(({ r, opacity }) => (
+    <circle
+      cx="150"
+      cy={179 - r}
+      r={r}
+      stroke="url(#art-strategy-ring)"
+      stroke-width="2"
+      class:list={[
+        'transform-fill origin-bottom group-hover:scale-150 group-hover:opacity-100',
+        opacity,
+        motion,
+      ]}
+    />
+  ))}
+</svg>
+<svg
+  class:list={[
+    'absolute bottom-5 left-1/2 origin-bottom -translate-x-1/2 overflow-visible group-hover:scale-150',
+    motion,
+  ]}
+  width="65"
+  height="65"
+  viewBox="0 0 65 65"
+>
+  <defs>
+    <clipPath id="art-strategy-spark">
+      <path d={path}></path>
+    </clipPath>
+    {sparks.map(({ id, stops }) => (
       <linearGradient
-        id="art-strategy-spark-fill"
+        id={id}
         x1="0"
         y1="0"
         x2="500"
         y2="500"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.15" stop-color="currentColor" class="text-white"></stop>
-        <stop offset="0.35" stop-color="currentColor" class="text-frost"></stop>
-        <stop offset="1" stop-color="currentColor" class="text-azure"></stop>
+        {stops.map(({ offset, tone }) => (
+          <stop offset={offset} stop-color="currentColor" class={tone} />
+        ))}
       </linearGradient>
-    </defs>
-    <g clip-path="url(#art-strategy-spark)">
+    ))}
+  </defs>
+  {sparks.map(({ id, layer }) => (
+    <g clip-path="url(#art-strategy-spark)" class:list={[layer, motion]}>
       <g transform="matrix(0 0.0344358 -0.0344358 0 32.2555 32.2588)">
-        {['', 'scale(1 -1)', 'scale(-1 1)', 'scale(-1)'].map((flip) => (
+        {flips.map((flip) => (
           <rect
-            width="979.811"
-            height="979.811"
+            x="-8"
+            y="-8"
+            width="953.308"
+            height="953.404"
             transform={flip || undefined}
-            fill="url(#art-strategy-spark-fill)"
-            shape-rendering="crispEdges"
+            fill={`url(#${id})`}
           />
         ))}
       </g>
     </g>
-  </svg>
-</div>
+  ))}
+</svg>
