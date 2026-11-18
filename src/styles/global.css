@@ -207,6 +207,16 @@
   bottom: calc(2.75rem + var(--slot, 0) * 1.5rem - 1lh);
 }
 
+@utility sweep {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition-property: stroke-dashoffset;
+}
+
+@utility sweep-full {
+  stroke-dashoffset: 0;
+}
+
 @utility grid-rows-offer {
   grid-template-rows: auto auto auto;
 }
