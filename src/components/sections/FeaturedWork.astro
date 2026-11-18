@@ -9,25 +9,16 @@ import Eyebrow from '../ui/Eyebrow.astro';
 interface Props {
   id?: string;
   label: string;
+  heading: string;
 }
-const { id = 'work', label } = Astro.props;
-const twoLines = (text: string) => {
-  const words = text.split(' ');
-  let best = [text, ''];
-  for (let i = 1; i < words.length; i++) {
-    const pair = [words.slice(0, i).join(' '), words.slice(i).join(' ')];
-    const width = (lines: string[]) => Math.max(...lines.map((l) => l.length));
-    if (!best[1] || width(pair) < width(best)) best = pair;
-  }
-  return best;
-};
-const cases = (await getCollection('caseStudies'))
-  .sort((a, b) => a.data.order - b.data.order)
-  .map((entry) => ({ ...entry, lines: twoLines(entry.data.kpiLabel) }));
+const { id = 'work', label, heading } = Astro.props;
+const cases = (await getCollection('caseStudies')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 const icon =
   'opacity-80 transition-opacity duration-200 ease-out-soft group-hover:opacity-100';
 const arrow =
-  'group relative flex size-8 cursor-pointer items-center justify-center border border-ink/10 text-ocean before:absolute before:-inset-1.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean';
+  'group relative flex size-11 cursor-pointer items-center justify-center border border-ink/10 text-ocean transition-opacity duration-200 ease-out-soft disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean';
 ---
 
 <section
@@ -38,36 +29,19 @@ const arrow =
 >
   <SectionFrame />
   <div data-guide class="border-ink/10 relative border-t">
-    <Container class="@container">
+    <Container class="py-32 lg:py-48">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
       <div
         data-case-slider
         role="region"
         aria-roledescription="carousel"
         aria-label="Case studies"
-        class="flex flex-col gap-10 py-32 lg:flex-row lg:gap-0 lg:py-48"
       >
-        <div class="flex shrink-0 flex-col max-lg:order-2 lg:w-1/2 lg:pr-10">
-          <div aria-live="polite" class="grid flex-1 items-center">
-            {cases.map(({ data }, index) => (
-              <article
-                data-panel
-                data-active={index === 0 ? '' : undefined}
-                inert={index !== 0}
-                class="ease-out-soft invisible col-start-1 row-start-1 opacity-0 transition-[opacity,visibility] duration-500 data-active:visible data-active:opacity-100"
-              >
-                <h3 class="text-case text-ink">{data.title}</h3>
-                <ul class="mt-8 flex flex-wrap gap-2.5" aria-label="Scope">
-                  {data.scope.map((item) => (
-                    <li class="bg-ocean-50 text-azure-deep rounded-sm px-3 py-1.5 text-xs font-normal tracking-wider uppercase">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-          <div class="mt-10 flex lg:mt-0">
+        <div class="flex flex-wrap items-end justify-between gap-8">
+          <h3 class="text-kpi-lg text-ink max-w-3xl font-extralight text-balance">
+            {heading}
+          </h3>
+          <div class="flex">
             <button
               type="button"
               data-prev
@@ -88,41 +62,61 @@ const arrow =
         </div>
         <div
           data-viewport
-          class="clip-left 3xl:-mr-page-bleed min-w-0 lg:flex-1"
+          class="clip-left 3xl:-mr-page-bleed -mr-6 mt-12 lg:mt-16"
         >
-          <div class="pointer-events-none flex touch-pan-y">
-            {cases.map(({ data, lines }, index) => (
-              <figure
-                data-slide
-                data-active={index === 0 ? '' : undefined}
-                data-past={index > 1 ? '' : undefined}
-                role="group"
-                aria-roledescription="slide"
-                aria-label={`${index + 1} of ${cases.length}`}
-                class="group w-slide cursor-pointer lg:w-slide-lg 3xl:w-slide-3xl ease-out-soft pointer-events-auto relative mr-5 shrink-0 opacity-50 transition-opacity duration-500 data-active:opacity-100 data-past:pointer-events-none data-past:opacity-0 lg:mr-10"
-              >
-                <Picture
-                  src={data.image}
-                  alt={data.imageAlt}
-                  formats={['avif', 'webp']}
-                  widths={[400, 600, 800, 1200]}
-                  sizes="(min-width: 1600px) 600px, (min-width: 1024px) 40vw, 85vw"
-                  quality={78}
-                  draggable="false"
-                  class="aspect-square w-full object-cover"
-                />
-                <figcaption class="ease-out-soft absolute right-0 bottom-0 flex items-center gap-4 bg-black/66 px-4 py-4 opacity-0 transition-opacity duration-500 group-data-active:opacity-100 lg:gap-6 lg:px-6.5 lg:py-4.75">
-                  <span class="text-kpi-case tracking-display font-light whitespace-nowrap text-white">
-                    {data.kpi}
-                  </span>
-                  <span class="text-label leading-tight font-semibold tracking-widest whitespace-nowrap text-white/80 uppercase">
-                    {lines[0]}
-                    <br />
-                    {lines[1]}
-                  </span>
-                </figcaption>
-              </figure>
-            ))}
+          <div class="flex touch-pan-y gap-6 pr-6 lg:gap-10">
+            {cases.map(({ data }, index) => {
+              const Tag = data.href ? 'a' : 'div';
+              return (
+                <article
+                  data-slide
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label={`${index + 1} of ${cases.length}`}
+                  class="group w-5/6 shrink-0 sm:w-3/5 lg:w-5/12"
+                >
+                  <Tag href={data.href} class="block">
+                    <div class="overflow-hidden">
+                      <Picture
+                        src={data.image}
+                        alt={data.imageAlt}
+                        formats={['avif', 'webp']}
+                        widths={[400, 600, 800, 1200]}
+                        sizes="(min-width: 1024px) 40vw, (min-width: 640px) 60vw, 85vw"
+                        quality={78}
+                        draggable="false"
+                        class="ease-out-soft aspect-4/3 w-full object-cover transition-transform duration-300 group-hover:scale-102"
+                      />
+                    </div>
+                    <div class="border-ink/10 mt-6 flex items-baseline justify-between gap-4 border-b pb-4">
+                      <p class="text-ink shrink-0 text-sm font-semibold">
+                        {data.client}
+                      </p>
+                      <p class="text-ink/70 text-right text-sm">
+                        <span class="text-ink font-semibold">{data.kpi}</span>{' '}
+                        {data.kpiLabel.toLowerCase()}
+                      </p>
+                    </div>
+                    <h4 class="text-card text-ink mt-5 font-medium text-balance">
+                      {data.title}
+                    </h4>
+                    <ul class="mt-4 flex flex-wrap gap-2.5" aria-label="Scope">
+                      {data.scope.map((item) => (
+                        <li class="bg-ocean-50 text-azure-deep rounded-sm px-3 py-1.5 text-xs tracking-wider uppercase">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    {data.href && (
+                      <span class="text-ink border-ink mt-6 inline-flex items-center gap-2 border-b-2 pb-1 text-sm font-semibold">
+                        Read the case study
+                        <ArrowIcon />
+                      </span>
+                    )}
+                  </Tag>
+                </article>
+              );
+            })}
           </div>
         </div>
       </div>
