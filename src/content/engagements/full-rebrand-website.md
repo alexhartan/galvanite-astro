@@ -13,4 +13,6 @@ features:
   - 'Branded decks, social kits and one-pagers'
   - 'Expanded site: product, docs, integrations'
   - 'Complete brand kit for your team and AI'
+  - 'Custom Slackbot for your team'
+  - 'Custom tools that extend your team, built around how they already work'
 ---

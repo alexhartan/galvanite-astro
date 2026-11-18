@@ -62,121 +62,137 @@ const tiers = {
   id={id}
   aria-labelledby={`${id}-label`}
   data-scene-path={JSON.stringify(camera)}
-  class="scroll-mt-nav relative z-10 overflow-x-clip pb-40 text-white lg:pb-56"
+  class="scroll-mt-nav relative z-10 overflow-x-clip text-white"
 >
   <SectionFrame inverted />
   <div data-guide class="relative border-t border-white/10">
-    <Container>
+    <Container class="overflow-y-clip pb-52 lg:pb-72">
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <h3 class="text-kpi-lg mt-32 text-center font-extralight lg:mt-48">
-        {heading}
-        {emphasis && (
-          <>
-            {' '}
-            <strong class="font-normal">{emphasis}</strong>
-          </>
-        )}
-      </h3>
-      <div class="lg:grid-rows-offer mt-14 grid gap-6 lg:grid-cols-3 lg:gap-0">
-        {engagements.map(({ data }, index) => {
-          const tier = tiers[data.tier];
-          const first = index === 0;
-          const last = index === engagements.length - 1;
-          const guide = (
+      <div data-parallax class="translate-y-(--shift) pt-40 lg:pt-60">
+        <h3 class="text-kpi-lg text-center font-extralight">
+          {heading}
+          {emphasis && (
             <>
-              {first && (
-                <>
-                  <div class="bleed-x absolute bottom-0 h-px bg-white/10 max-lg:hidden" />
+              {' '}
+              <strong class="font-normal">{emphasis}</strong>
+            </>
+          )}
+        </h3>
+        <div class="lg:grid-rows-offer mt-14 grid gap-6 lg:grid-cols-3 lg:gap-0">
+          {engagements.map(({ data }, index) => {
+            const tier = tiers[data.tier];
+            const first = index === 0;
+            const last = index === engagements.length - 1;
+            const guide = (
+              <>
+                {first && (
+                  <>
+                    <div class="bleed-x absolute bottom-0 h-px bg-white/10 max-lg:hidden" />
+                    <GridMark
+                      inverted
+                      class="absolute top-full left-0 -mt-px max-lg:hidden"
+                    />
+                  </>
+                )}
+                {last && (
                   <GridMark
                     inverted
-                    class="absolute top-full left-0 -mt-px max-lg:hidden"
+                    class="3xl:block absolute top-full left-full -mt-px -ml-px hidden"
                   />
-                </>
-              )}
-              {last && (
-                <GridMark
-                  inverted
-                  class="3xl:block absolute top-full left-full -mt-px -ml-px hidden"
-                />
-              )}
-            </>
-          );
-          return (
-            <article
-              style={data.tier === 'featured' ? '--origin: 50% 46%' : undefined}
-              class:list={[
-                'group relative flex flex-col text-balance lg:row-span-3 lg:grid lg:grid-rows-subgrid',
-                tier.box,
-              ]}
-            >
-              <div class="relative px-8 pt-11">
-                {data.tier === 'featured' && (
-                  <p class="to-ocean-50 text-azure absolute inset-x-0 top-0 bg-linear-to-r from-white text-label px-4 py-2 text-right font-semibold tracking-widest uppercase">
-                    Most popular
-                  </p>
                 )}
-                <h4 class:list={['text-2xl font-semibold', tier.name]}>
-                  {data.name}
-                </h4>
-                <p class:list={['mt-1.5 text-sm text-balance', tier.muted]}>
-                  {data.audience}
-                </p>
-                <p class:list={['pb-6 tracking-price', tier.price, tier.rule]}>
-                  {data.pricePrefix && (
-                    <span class="font-light">{data.pricePrefix} </span>
+              </>
+            );
+            return (
+              <article
+                style={
+                  data.tier === 'featured' ? '--origin: 50% 46%' : undefined
+                }
+                class:list={[
+                  'group relative flex flex-col text-balance lg:row-span-3 lg:grid lg:grid-rows-subgrid',
+                  tier.box,
+                ]}
+              >
+                <div class="relative px-8 pt-11">
+                  {data.tier === 'featured' && (
+                    <p class="to-ocean-50 text-azure absolute inset-x-0 top-0 bg-linear-to-r from-white text-label px-4 py-2 text-right font-semibold tracking-widest uppercase">
+                      Most popular
+                    </p>
                   )}
-                  {data.price}
-                  <span class="text-azure text-label mt-3 block tracking-widest uppercase">
-                    {data.duration}
-                  </span>
-                </p>
-                {guide}
-              </div>
-              <div class="relative px-8">
-                <ul class="space-y-1.5 py-6" role="list">
-                  {data.features.map((feature) => (
-                    <li class:list={['flex gap-3 text-sm', tier.item]}>
-                      <span
-                        aria-hidden="true"
-                        class="flex h-lh shrink-0 items-center"
-                      >
-                        <svg
-                          class="text-signal size-2.5"
-                          viewBox="0 0 10 10"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width={tier.plus}
+                  <h4 class:list={['text-2xl font-semibold', tier.name]}>
+                    {data.name}
+                  </h4>
+                  <p class:list={['mt-1.5 text-sm text-balance', tier.muted]}>
+                    {data.audience}
+                  </p>
+                  <p
+                    class:list={['pb-6 tracking-price', tier.price, tier.rule]}
+                  >
+                    {data.pricePrefix && (
+                      <span class="font-light">{data.pricePrefix} </span>
+                    )}
+                    {data.price}
+                    <span class="text-azure text-label mt-3 block tracking-widest uppercase">
+                      {data.duration}
+                    </span>
+                  </p>
+                  {guide}
+                </div>
+                <div class="relative px-8">
+                  <ul class="space-y-1.5 py-6" role="list">
+                    {data.features.map((feature) => (
+                      <li class:list={['flex gap-3 text-sm', tier.item]}>
+                        <span
+                          aria-hidden="true"
+                          class="flex h-lh shrink-0 items-center"
                         >
-                          <path d="M5 0v10M0 5h10" />
-                        </svg>
-                      </span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                {guide}
-              </div>
-              {data.tier === 'featured' ? (
-                <CtaButton href={ctaHref} class="relative mt-auto">
-                  Book a Call with Alex
-                </CtaButton>
-              ) : (
-                <a
-                  href={ctaHref}
-                  class:list={[
-                    'ease-out-soft mt-auto flex h-12 items-center justify-center font-semibold transition-[opacity,background-color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
-                    tier.cta,
-                  ]}
-                >
-                  Book a Call with Alex
-                </a>
-              )}
-            </article>
-          );
-        })}
+                          <svg
+                            class="text-signal size-2.5"
+                            viewBox="0 0 10 10"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width={tier.plus}
+                          >
+                            <path d="M5 0v10M0 5h10" />
+                          </svg>
+                        </span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  {guide}
+                </div>
+                {data.tier === 'featured' ? (
+                  <CtaButton href={ctaHref} class="relative mt-auto">
+                    Book a Call with Alex
+                  </CtaButton>
+                ) : (
+                  <a
+                    href={ctaHref}
+                    class:list={[
+                      'ease-out-soft mt-auto flex h-12 items-center justify-center font-semibold transition-[opacity,background-color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
+                      tier.cta,
+                    ]}
+                  >
+                    Book a Call with Alex
+                  </a>
+                )}
+              </article>
+            );
+          })}
+        </div>
       </div>
     </Container>
   </div>
 </section>
+
+<script>
+  import { initParallax } from '../../scripts/parallax';
+
+  for (const element of document.querySelectorAll<HTMLElement>(
+    '#engagements [data-parallax]',
+  )) {
+    initParallax(element, 0.125);
+  }
+</script>

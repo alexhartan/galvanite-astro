@@ -1,5 +1,5 @@
 const SNAP_PX = 6;
-const OMEGA = 3;
+const OMEGA = 6;
 
 export function initTimeline(root: HTMLElement) {
   const tooltip = root.querySelector<HTMLElement>('[data-tooltip]');
