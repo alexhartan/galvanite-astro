@@ -33,7 +33,6 @@ const tiers = {
     plus: 1.25,
     rule: 'max-lg:border-b border-white/10',
     item: 'text-frost',
-    cta: 'bg-ink/60 text-white hover:bg-ink lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100',
   },
   featured: {
     box: 'bg-white z-10 ease-standard origin-(--origin) transition-transform duration-300 hover:scale-105',
@@ -43,7 +42,6 @@ const tiers = {
     plus: 2.5,
     rule: 'border-b border-ink/10 -mx-8 px-8',
     item: 'text-ocean',
-    cta: '',
   },
   premium: {
     box: 'ease-out-soft transition-opacity duration-300 lg:opacity-90 lg:hover:opacity-100 lg:focus-within:opacity-100',
@@ -53,7 +51,6 @@ const tiers = {
     plus: 2.5,
     rule: 'max-lg:border-b border-white/10',
     item: 'text-frost',
-    cta: 'bg-ink/60 text-white hover:bg-ink lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100',
   },
 };
 ---
@@ -168,15 +165,14 @@ const tiers = {
                     Book a Call with Alex
                   </CtaButton>
                 ) : (
-                  <a
+                  <CtaButton
                     href={ctaHref}
-                    class:list={[
-                      'ease-out-soft mt-auto flex h-12 items-center justify-center font-semibold transition-[opacity,background-color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
-                      tier.cta,
-                    ]}
+                    variant="secondary"
+                    mark="text-white/30"
+                    class="ease-out-soft relative mt-auto transition-opacity duration-300 lg:opacity-0 lg:group-focus-within:opacity-100 lg:group-hover:opacity-100"
                   >
                     Book a Call with Alex
-                  </a>
+                  </CtaButton>
                 )}
               </article>
             );

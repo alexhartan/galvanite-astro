@@ -50,7 +50,7 @@
   --text-card: clamp(1.25rem, 1.6vw, 1.625rem);
   --text-card--line-height: 1.25;
   --text-card--letter-spacing: -0.02em;
-  --text-nav-label: 0.9375rem;
+  --text-nav-label: 0.875rem;
   --text-label: 0.75rem;
   --text-benefit: min(1.25rem, calc(100cqi / 12.4));
   --text-benefit--line-height: 1.3;
