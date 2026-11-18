@@ -1,94 +1,188 @@
 ---
-import ArtFrame from './ArtFrame.astro';
-import { accent, flow, pulse, shift } from './tones';
-
-const fill = 'url(#art-consistency)';
-const mark = [shift, accent.mark, accent.stroke];
-const dots = [
-  { cx: 120, cy: 80, x1: -13, tx: -26, ty: 0 },
-  { cx: 160, cy: 70, x1: 20, tx: 44, ty: -25 },
-  { cx: 160, cy: 90, x1: 20, tx: 34, ty: 26 },
+const spark =
+  'M0.619301 8.8391C-0.206831 8.69331 -0.206833 7.50786 0.619299 7.36207L3.24881 6.89804C5.11118 6.56939 6.56929 5.11128 6.89794 3.24891L7.36197 0.619405C7.50776 -0.206728 8.69321 -0.20673 8.839 0.619403L9.30303 3.24891C9.63168 5.11128 11.0898 6.56939 12.9522 6.89804L15.5817 7.36207C16.4078 7.50786 16.4078 8.69331 15.5817 8.8391L12.9522 9.30313C11.0898 9.63178 9.63168 11.0899 9.30303 12.9523L8.839 15.5818C8.69321 16.4079 7.50776 16.4079 7.36197 15.5818L6.89794 12.9523C6.56929 11.0899 5.11118 9.63178 3.24881 9.30313L0.619301 8.8391Z';
+const rays =
+  'M227.584 61.9996H-83.5156M222.285 21.7408L-78.2143 102.259M206.746 -15.7746L-62.6744 139.775M182.03 -47.9899L-37.9512 171.991M149.816 -72.7104L-5.73392 196.71M112.303 -88.2512L31.7846 212.248M72.041 -93.5537L72.0411 217.546M31.7789 -88.2545L112.298 212.245M-5.73396 -72.7154L149.816 196.705M-37.9476 -47.9965L182.033 171.984M-62.6707 -15.7829L206.75 139.767M-78.2097 21.7325L222.29 102.251';
+const flips = ['', 'scale(1 -1)', 'scale(-1 1)', 'scale(-1)'];
+const sparks = [
+  {
+    id: 'art-consistency-spark-cool',
+    layer: 'opacity-100 group-hover:opacity-0',
+    stops: [
+      { offset: '0.15', tone: 'text-white' },
+      { offset: '0.35', tone: 'text-frost' },
+      { offset: '1', tone: 'text-azure' },
+    ],
+  },
+  {
+    id: 'art-consistency-spark-warm',
+    layer: 'opacity-0 group-hover:opacity-100',
+    stops: [
+      { offset: '0.25', tone: 'text-white' },
+      { offset: '1', tone: 'text-signal' },
+    ],
+  },
 ];
+const motion =
+  'ease-standard transition duration-500 motion-reduce:transition-none';
 ---
 
-<ArtFrame gradient="art-consistency">
-  <path
-    d="M120 80h-26M160 70h14a6 6 0 0 0 6 -6v-13a6 6 0 0 1 6 -6h18M160 90h14a6 6 0 0 1 6 6v14a6 6 0 0 0 6 6h8"
-    class="stroke-azure"
-  ></path>
-  <g class={pulse}>
-    <rect
-      x="126"
-      y="66"
-      width="40"
-      height="40"
-      rx="8"
-      fill={fill}
-      stroke="none"
-    ></rect>
-    <rect
-      x="120"
-      y="60"
-      width="40"
-      height="40"
-      rx="8"
-      class:list={[shift, accent.tint, accent.stroke]}
-    ></rect>
-    <circle
-      cx="140"
-      cy="80"
-      r="6"
-      stroke="none"
-      class:list={[shift, accent.fill]}
-    ></circle>
-  </g>
-  <rect
-    x="26"
-    y="56"
-    width="76"
-    height="60"
-    rx="6"
-    fill={fill}
-    stroke="none"
-  ></rect>
-  <rect x="18" y="48" width="76" height="60" rx="6"></rect>
-  <path d="M18 62h76M26 55h2M33 55h2"></path>
-  <path d="M44 74h36M44 80h22M26 94h52" class="stroke-sky"></path>
-  <rect
-    x="212"
-    y="24"
-    width="34"
-    height="58"
-    rx="6"
-    fill={fill}
-    stroke="none"
-  ></rect>
-  <rect x="204" y="16" width="34" height="58" rx="6"></rect>
-  <path d="M217 23h8"></path>
-  <path d="M212 52h18M212 59h12" class="stroke-sky"></path>
-  <rect
-    x="202"
-    y="104"
-    width="64"
-    height="40"
-    rx="6"
-    fill={fill}
-    stroke="none"
-  ></rect>
-  <rect x="194" y="96" width="64" height="40" rx="6"></rect>
-  <path d="M220 108h28M220 114h16M203 126h44" class="stroke-sky"></path>
-  <circle cx="32" cy="76" r="5" class:list={mark}></circle>
-  <circle cx="221" cy="38" r="5" class:list={mark}></circle>
-  <circle cx="208" cy="110" r="5" class:list={mark}></circle>
-  <g stroke="none">
-    {dots.map(({ cx, cy, x1, tx, ty }, index) => (
-      <circle
-        cx={cx}
-        cy={cy}
-        r="2.5"
-        style={`--x1: ${x1}px; --tx: ${tx}px; --ty: ${ty}px; --delay: ${index * 0.3}s`}
-        class={flow}
-      />
+<svg
+  class="absolute top-1/2 left-1/2 -translate-1/2 overflow-visible"
+  width="300"
+  height="180"
+  viewBox="0 0 300 180"
+  fill="none"
+>
+  <defs>
+    <linearGradient
+      id="art-consistency-stand"
+      x1="18.4421"
+      y1="18.75"
+      x2="18.4421"
+      y2="-0.75"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="currentColor" class="text-deep-700"></stop>
+      <stop offset="1" stop-color="currentColor" class="text-azure"></stop>
+    </linearGradient>
+    <radialGradient
+      id="art-consistency-monitor"
+      cx="0"
+      cy="0"
+      r="1"
+      gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(69 93.7449) rotate(-90) scale(92.2449 159.891)"
+    >
+      <stop stop-color="currentColor" class="text-azure"></stop>
+      <stop offset="1" stop-color="currentColor" class="text-ink"></stop>
+    </radialGradient>
+    <linearGradient
+      id="art-consistency-screen"
+      x1="38.3182"
+      y1="59"
+      x2="38.3182"
+      y2="1.5"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="currentColor" class="text-azure"></stop>
+      <stop offset="1" stop-color="currentColor" class="text-ink"></stop>
+    </linearGradient>
+    <radialGradient
+      id="art-consistency-rays"
+      cx="0"
+      cy="0"
+      r="1"
+      gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(71.7577 61.3987) scale(150.781 150.781)"
+    >
+      <stop
+        offset="0.1"
+        stop-color="currentColor"
+        stop-opacity="0"
+        class="text-ink"
+      ></stop>
+      <stop offset="0.5" stop-color="currentColor" class="text-frost"></stop>
+      <stop
+        offset="1"
+        stop-color="currentColor"
+        stop-opacity="0"
+        class="text-ink"
+      ></stop>
+    </radialGradient>
+    <mask id="art-consistency-mask" maskUnits="userSpaceOnUse">
+      <path
+        d="M217.041 82H90.0414V34H62.0414V0H217.041V82Z"
+        fill="white"
+      ></path>
+      <path
+        d="M0.085704 42.9521L52.5606 43.044L52.4749 91.9973L0 91.9054L0.085704 42.9521Z"
+        fill="white"
+      ></path>
+    </mask>
+    <clipPath id="art-consistency-spark-clip">
+      <path d={spark}></path>
+    </clipPath>
+    {sparks.map(({ id, stops }) => (
+      <linearGradient
+        id={id}
+        x1="0"
+        y1="0"
+        x2="500"
+        y2="500"
+        gradientUnits="userSpaceOnUse"
+      >
+        {stops.map(({ offset, tone }) => (
+          <stop offset={offset} stop-color="currentColor" class={tone} />
+        ))}
+      </linearGradient>
     ))}
+  </defs>
+  <g stroke-width="3">
+    <path
+      transform="rotate(180 188 143.75) translate(165.5579 133.75)"
+      d="M5.68064 18.5V5.1C5.68064 3.11178 0.442112 1.5 0.442112 1.5L44.4421 1.5C44.4421 1.5 39.1952 3.11178 39.1952 5.1V18.5"
+      stroke="url(#art-consistency-stand)"
+    ></path>
+    <path
+      transform="translate(369 0) scale(-1 1) translate(100.5 39.5)"
+      d="M133.5 94H4.5C2.84314 94 1.5 92.6569 1.5 91V4.5C1.5 2.84315 2.84315 1.5 4.5 1.5H163.5C165.157 1.5 166.5 2.84315 166.5 4.5V91C166.5 92.6569 165.157 94 163.5 94H143.25"
+      stroke="url(#art-consistency-monitor)"
+    ></path>
+    <path
+      transform="translate(171 0) scale(-1 1) translate(39 83)"
+      d="M34.5 1.5H88.5C90.1569 1.5 91.5 2.84315 91.5 4.5V59H1.5V4.5C1.5 2.84315 2.84315 1.5 4.5 1.5H25.5"
+      stroke="url(#art-consistency-screen)"
+    ></path>
+    <path
+      transform="translate(32.8611 141.0447)"
+      d="M7.63906 0.955322L2.19568 7.54468C0.579603 9.50098 1.97108 12.4553 4.50857 12.4553H100.77C103.307 12.4553 104.699 9.50099 103.082 7.54468L97.6391 0.955322"
+      class="stroke-azure"
+    ></path>
   </g>
-</ArtFrame>
+  <path
+    transform="translate(74.38 150)"
+    d="M20.3288 0C21.0171 0 21.6171 0.468446 21.784 1.1362L22.25 3H0L0.465951 1.1362C0.632889 0.468445 1.23286 0 1.92116 0H20.3288Z"
+    class="fill-azure"
+  ></path>
+  <circle cx="116.84" cy="128" r="2" class="fill-azure-deep"></circle>
+  <g transform="translate(44.96 46)" mask="url(#art-consistency-mask)">
+    <path
+      d={rays}
+      stroke="url(#art-consistency-rays)"
+      stroke-width="2"
+      class:list={[
+        'transform-fill origin-center opacity-0 group-hover:rotate-15 group-hover:opacity-100',
+        motion,
+      ]}
+    ></path>
+  </g>
+  <g transform="translate(108.56 99.9)">
+    <g
+      class:list={[
+        'transform-fill origin-center group-hover:scale-122',
+        motion,
+      ]}
+    >
+      {sparks.map(({ id, layer }) => (
+        <g
+          clip-path="url(#art-consistency-spark-clip)"
+          class:list={[layer, motion]}
+        >
+          <g transform="matrix(0 0.00809957 -0.00809957 0 8.10001 8.10102)">
+            {flips.map((flip) => (
+              <rect
+                x="-8"
+                y="-8"
+                width="1093.8"
+                height="1093.81"
+                transform={flip || undefined}
+                fill={`url(#${id})`}
+              />
+            ))}
+          </g>
+        </g>
+      ))}
+    </g>
+  </g>
+</svg>
