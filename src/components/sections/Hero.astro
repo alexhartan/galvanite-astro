@@ -29,7 +29,10 @@ const clients = (
     <Container class="pointer-events-none absolute inset-0 z-10 group-data-scene:invisible">
       <div class="absolute top-nav bottom-0 left-6 bg-grid/10 w-px"></div>
     </Container>
-    <div class="relative flex h-full flex-col group-data-scene:invisible">
+    <div
+      data-hero-content
+      class="relative flex h-full translate-y-(--shift) flex-col group-data-scene:invisible"
+    >
       <Container class="@container pt-nav flex flex-1 flex-col justify-center max-lg:pt-56 lg:pb-4">
         <p class="text-sky mb-2.5 text-sm font-semibold tracking-widest uppercase lg:mb-3">
           {eyebrow}

@@ -215,24 +215,6 @@
   bottom: calc(2.75rem + var(--slot, 0) * 1.5rem - 1lh);
 }
 
-@utility cta-marks {
-  transition:
-    translate 300ms ease 150ms,
-    opacity 150ms ease;
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
-}
-
-@utility cta-marks-on {
-  transition:
-    translate 300ms ease,
-    opacity 150ms ease 300ms;
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
-}
-
 @utility sweep {
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
