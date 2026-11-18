@@ -1,5 +1,6 @@
 const SNAP_PX = 6;
 const OMEGA = 6;
+const MAX_SPEED = 0.4;
 
 export function initTimeline(root: HTMLElement) {
   const tooltip = root.querySelector<HTMLElement>('[data-tooltip]');
@@ -48,6 +49,7 @@ export function initTimeline(root: HTMLElement) {
     last = now;
     velocity +=
       (OMEGA * OMEGA * (target - position) - 2 * OMEGA * velocity) * dt;
+    velocity = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, velocity));
     position += velocity * dt;
     if (Math.abs(target - position) < 0.0005 && Math.abs(velocity) < 0.001) {
       position = target;
