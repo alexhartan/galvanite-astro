@@ -1,4 +1,5 @@
 ---
+import CtaButton from '../ui/CtaButton.astro';
 import Container from '../ui/Container.astro';
 import GridMark from '../ui/GridMark.astro';
 import Logo from '../ui/Logo.astro';
@@ -35,12 +36,14 @@ const { ctaHref = '#contact' } = Astro.props;
     >
       <Logo />
     </a>
-    <a
+    <CtaButton
       href={ctaHref}
-      class="bg-signal hover:bg-signal-strong ease-out-soft focus-visible:outline-grid pointer-events-auto absolute top-0 right-6 -mt-0.5 inline-flex h-11 items-center px-5 text-ink text-sm font-semibold transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
+      class="pointer-events-auto absolute top-0 right-6 -mt-0.5"
+      link="h-11 px-5 text-sm"
+      mark="text-white/30 group-data-light:text-ink/30"
     >
       Book a Call
-    </a>
+    </CtaButton>
     <GridMark
       inverted
       class="ease-out-soft group-data-light:text-ink/30 absolute top-full left-6 transition-colors duration-300"

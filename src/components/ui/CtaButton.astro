@@ -1,0 +1,60 @@
+---
+import GridMark from './GridMark.astro';
+
+interface Props {
+  href: string;
+  class?: string;
+  link?: string;
+  mark?: string;
+}
+const {
+  href,
+  class: className,
+  link = 'h-12',
+  mark = 'text-ink/30',
+} = Astro.props;
+const motion =
+  'ease-standard transition duration-300 motion-reduce:transition-none';
+---
+
+<span class:list={['group/cta flex', className]}>
+  <span
+    aria-hidden="true"
+    class:list={[
+      'pointer-events-none absolute inset-0 group-hover/cta:translate-x-full group-hover/cta:opacity-0 group-focus-within/cta:translate-x-full group-focus-within/cta:opacity-0',
+      motion,
+    ]}
+  >
+    <GridMark class:list={[mark, 'absolute top-0 left-0']} />
+    <GridMark class:list={[mark, 'absolute top-full left-0 -mt-px']} />
+  </span>
+  <span
+    aria-hidden="true"
+    class:list={[
+      'pointer-events-none absolute inset-0 group-hover/cta:opacity-0 group-focus-within/cta:opacity-0',
+      motion,
+    ]}
+  >
+    <GridMark class:list={[mark, 'absolute top-0 left-full -ml-px']} />
+    <GridMark
+      class:list={[mark, 'absolute top-full left-full -mt-px -ml-px']}
+    />
+  </span>
+  <a
+    href={href}
+    class:list={[
+      'bg-signal text-ink relative isolate z-10 flex w-full items-center justify-center font-semibold group-hover/cta:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
+      motion,
+      link,
+    ]}
+  >
+    <span
+      aria-hidden="true"
+      class:list={[
+        'bg-space-900 absolute inset-0 -z-10 origin-left scale-x-0 group-hover/cta:scale-x-100 group-focus-within/cta:scale-x-100',
+        motion,
+      ]}
+    ></span>
+    <slot />
+  </a>
+</span>
