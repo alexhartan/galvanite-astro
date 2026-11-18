@@ -38,7 +38,7 @@ const arrow =
 >
   <SectionFrame />
   <div data-guide class="border-ink/10 relative border-t">
-    <Container class="py-32 lg:py-48">
+    <Container class="pt-12 pb-32 lg:pt-16 lg:pb-48">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
       <div
         data-case-slider
@@ -103,15 +103,15 @@ const arrow =
                       </div>
                     </div>
                     <div class="ease-out-soft transition-opacity duration-500 group-data-peek:opacity-0">
-                      <h4 class="text-card text-ink mt-6 font-medium text-balance">
+                      <h4 class="text-card text-ink mt-6 font-normal text-balance">
                         {data.title}
                       </h4>
                       <ul
-                        class="mt-4 flex flex-wrap gap-2.5"
+                        class="mt-4 flex flex-wrap gap-2.25"
                         aria-label="Scope"
                       >
                         {data.scope.map((item) => (
-                          <li class="bg-ocean-50 text-azure-deep rounded-sm px-3 py-1.5 text-xs tracking-wider uppercase">
+                          <li class="bg-ocean-50 text-azure-deep text-tag rounded-sm px-2.5 py-1.25 font-medium tracking-wider uppercase">
                             {item}
                           </li>
                         ))}
