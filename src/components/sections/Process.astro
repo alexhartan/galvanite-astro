@@ -37,7 +37,7 @@ const label_ =
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 overflow-hidden text-white"
+  class="scroll-mt-nav relative z-10 overflow-x-clip text-white"
 >
   <SectionFrame inverted bottom />
   <div data-guide class="relative border-t border-white/10">
@@ -51,10 +51,10 @@ const label_ =
         </h3>
         <p class="text-azure text-balance lg:w-1/2">{description}</p>
       </div>
-      <div class="mt-9 pt-14 lg:pt-0">
+      <div class="mt-9">
         <div
           data-timeline
-          class="bg-abyss/50 @container relative mx-px border-y border-white/10 py-14"
+          class="bg-abyss/50 @container relative mx-px border-y border-white/10 py-3.5 lg:py-14"
           style={`--weeks: ${weeks}`}
         >
           <div aria-hidden="true" class="absolute inset-0 flex">
@@ -69,7 +69,7 @@ const label_ =
               <li
                 data-stage
                 data-end={end / weeks}
-                class="group/stage stage-span relative h-10"
+                class="group/stage stage-span relative h-8 lg:h-10"
                 style={`--start: ${start}; --end: ${end}`}
               >
                 <div class="bg-ink/40 absolute inset-0 rounded-sm border border-white/10">
@@ -122,7 +122,7 @@ const label_ =
           <div
             data-tooltip
             aria-hidden="true"
-            class="timeline-tip ease-out-soft text-sky text-xs pointer-events-none absolute bottom-2 ml-2 flex translate-y-1 items-center gap-2 leading-tight opacity-0 transition-[opacity,translate] duration-300 data-visible:translate-y-0 data-visible:opacity-100"
+            class="max-lg:hidden timeline-tip ease-out-soft text-sky text-xs pointer-events-none absolute bottom-2 ml-2 flex translate-y-1 items-center gap-2 leading-tight opacity-0 transition-[opacity,translate] duration-300 data-visible:translate-y-0 data-visible:opacity-100"
           >
             <Image
               src={alex}

@@ -1,6 +1,6 @@
 ---
-title: 'Strategy first, every time'
+title: 'Rooted in strategy'
 art: strategy
 order: 1
-summary: "We start by getting clear: what you've built, who it's for, and why it matters now. Then every design decision follows from that."
+summary: "Before we lay a single pixel, we take the time to understand the product, who it's for, and what it needs to achieve, so we have a clear direction before we get into the work."
 ---

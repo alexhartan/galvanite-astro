@@ -58,6 +58,8 @@
   --text-stat--letter-spacing: -0.04em;
   --text-stat-label: 0.9625rem;
   --text-stat-label--line-height: 1.25;
+  --text-kpi-case: calc(var(--text-kpi) * 1.15);
+  --text-kpi-case--line-height: 1;
   --text-kpi: clamp(1.75rem, 2.1vw, 2.5rem);
   --text-kpi--line-height: 1;
   --text-display-hero: calc(var(--text-display-half) * 1.4);

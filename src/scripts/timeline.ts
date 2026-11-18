@@ -38,13 +38,45 @@ export function initTimeline(root: HTMLElement) {
     frame ||= requestAnimationFrame(step);
   };
 
+  const mobile = window.matchMedia('(max-width: 63.999rem)');
+  const scrolled = () => {
+    const box = root.getBoundingClientRect();
+    const start = window.innerHeight;
+    const bottom =
+      document.documentElement.scrollHeight -
+      window.innerHeight -
+      window.scrollY;
+    const end = Math.max(
+      window.innerHeight / 2 - box.height / 2,
+      box.top - bottom,
+    );
+    return Math.min(1, Math.max(0, (start - box.top) / (start - end)));
+  };
+  const follow = () => {
+    if (!mobile.matches) return;
+    target = scrolled();
+    schedule();
+  };
+  const sync = () => {
+    target = mobile.matches ? scrolled() : 0.5;
+    schedule();
+  };
+  window.addEventListener('scroll', follow, { passive: true });
+  window.addEventListener('resize', follow, { passive: true });
+  mobile.addEventListener('change', sync);
+  if (mobile.matches) {
+    position = target = scrolled();
+  }
+
   root.addEventListener('pointermove', (event) => {
+    if (mobile.matches) return;
     const box = root.getBoundingClientRect();
     hovering = true;
     target = Math.min(1, Math.max(0, (event.clientX - box.left) / box.width));
     schedule();
   });
   root.addEventListener('pointerleave', () => {
+    if (mobile.matches) return;
     hovering = false;
     target = 0.5;
     schedule();
