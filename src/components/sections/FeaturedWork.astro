@@ -34,7 +34,7 @@ const arrow =
   id={id}
   aria-labelledby={`${id}-label`}
   data-tone="light"
-  class="scroll-mt-nav relative z-10 overflow-hidden bg-white"
+  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <SectionFrame />
   <div data-guide class="border-ink/10 relative border-t">
@@ -59,7 +59,7 @@ const arrow =
                 <h3 class="text-case text-ink">{data.title}</h3>
                 <ul class="mt-8 flex flex-wrap gap-2.5" aria-label="Scope">
                   {data.scope.map((item) => (
-                    <li class="bg-ocean-50 text-ocean rounded-sm px-3 py-1.5 text-xs font-medium tracking-wider uppercase">
+                    <li class="bg-ocean-50 text-azure-deep rounded-sm px-3 py-1.5 text-xs font-normal tracking-wider uppercase">
                       {item}
                     </li>
                   ))}
@@ -111,8 +111,8 @@ const arrow =
                   draggable="false"
                   class="aspect-square w-full object-cover"
                 />
-                <figcaption class="ease-out-soft absolute right-0 bottom-0 flex items-center gap-4 bg-black/66 px-5 py-5 opacity-0 transition-opacity duration-500 group-data-active:opacity-100 lg:gap-6 lg:px-8 lg:py-6">
-                  <span class="text-kpi tracking-display font-light whitespace-nowrap text-white">
+                <figcaption class="ease-out-soft absolute right-0 bottom-0 flex items-center gap-4 bg-black/66 px-4 py-4 opacity-0 transition-opacity duration-500 group-data-active:opacity-100 lg:gap-6 lg:px-6.5 lg:py-4.75">
+                  <span class="text-kpi-case tracking-display font-light whitespace-nowrap text-white">
                     {data.kpi}
                   </span>
                   <span class="text-label leading-tight font-semibold tracking-widest whitespace-nowrap text-white/80 uppercase">
