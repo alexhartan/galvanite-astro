@@ -44,18 +44,20 @@
   --text-statement: clamp(2rem, 3.23vw, 3.875rem);
   --text-statement--line-height: 1.113;
   --text-statement--letter-spacing: -0.035em;
-  --text-case: clamp(2rem, 2.9vw, 3.5rem);
+  --text-case: clamp(1.7rem, 2.465vw, 2.975rem);
   --text-case--line-height: 1.04;
-  --text-case--letter-spacing: -0.02em;
+  --text-case--letter-spacing: -0.04em;
   --text-label: 0.75rem;
   --text-benefit: min(1.25rem, calc(100cqi / 12.4));
   --text-benefit--line-height: 1.3;
   --text-kpi-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
   --text-kpi-lg--line-height: 1;
   --text-kpi-lg--letter-spacing: -0.015em;
-  --text-stat: clamp(2.625rem, 3.3vw, 3.75rem);
+  --text-stat: clamp(2.8875rem, 3.63vw, 4.125rem);
   --text-stat--line-height: 1;
-  --text-stat--letter-spacing: -0.015em;
+  --text-stat--letter-spacing: -0.04em;
+  --text-stat-label: 0.9625rem;
+  --text-stat-label--line-height: 1.25;
   --text-kpi: clamp(1.75rem, 2.1vw, 2.5rem);
   --text-kpi--line-height: 1;
   --text-display-hero: calc(var(--text-display-half) * 1.4);
@@ -71,6 +73,7 @@
   --leading-statement: 1.113;
   --tracking-statement: -0.035em;
   --tracking-price: -0.03em;
+  --tracking-display: -0.04em;
 
   --container-page: 83rem;
   --container-page-inset: min(83rem, calc(100% - 8.5rem));

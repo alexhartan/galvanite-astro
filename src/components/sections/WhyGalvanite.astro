@@ -81,8 +81,8 @@ const right = '3xl:block lg:hidden';
         />
         {stats.map(({ value, label }) => (
           <div class="flex flex-col-reverse gap-2 sm:justify-self-center">
-            <dt class="text-sky max-w-44 text-sm leading-tight">{label}</dt>
-            <dd class="text-stat font-light">{value}</dd>
+            <dt class="text-sky text-stat-label max-w-48">{label}</dt>
+            <dd class="text-stat font-extralight">{value}</dd>
           </div>
         ))}
       </dl>
