@@ -59,9 +59,14 @@ const process = {
     'Our sprint-based process is designed for fast-moving startups, with each stage building on the last, and weekly check-ins to maintain momentum.',
   weeks: 6,
   stages: [
-    { name: 'Positioning & core messaging', start: 0, end: 2 },
-    { name: 'Wireframes', start: 1, end: 3 },
-    { name: 'High-fidelity designs', start: 2, end: 4 },
+    {
+      name: 'Positioning & core messaging',
+      short: 'Positioning',
+      start: 0,
+      end: 2,
+    },
+    { name: 'Wireframes & sitemap', short: 'Wireframes', start: 1, end: 3 },
+    { name: 'High-fidelity designs', short: 'Designs', start: 2, end: 4 },
     { name: 'Development', start: 3, end: 5 },
     { name: 'QA & launch', start: 4, end: 6 },
   ],

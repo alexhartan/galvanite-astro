@@ -12,7 +12,7 @@ interface Props {
   heading: string;
   description: string;
   weeks: number;
-  stages: { name: string; start: number; end: number }[];
+  stages: { name: string; short?: string; start: number; end: number }[];
 }
 const {
   id = 'process',
@@ -49,12 +49,12 @@ const label_ =
         <h3 class="text-4xl leading-none font-light text-balance lg:w-1/2 lg:pr-8">
           {heading}
         </h3>
-        <p class="text-azure font-light text-balance lg:w-1/2">{description}</p>
+        <p class="text-azure text-balance lg:w-1/2">{description}</p>
       </div>
-      <div class="-mx-6 mt-9 overflow-x-auto px-6 pt-14 lg:mx-0 lg:overflow-visible lg:px-0 lg:pt-0">
+      <div class="mt-9 pt-14 lg:pt-0">
         <div
           data-timeline
-          class="bg-abyss/50 @container relative mx-px min-w-3xl border-y border-white/10 py-14"
+          class="bg-abyss/50 @container relative mx-px border-y border-white/10 py-14"
           style={`--weeks: ${weeks}`}
         >
           <div aria-hidden="true" class="absolute inset-0 flex">
@@ -65,7 +65,7 @@ const label_ =
             ))}
           </div>
           <ol class="relative space-y-2.5">
-            {stages.map(({ name, start, end }) => (
+            {stages.map(({ name, short, start, end }) => (
               <li
                 data-stage
                 data-end={end / weeks}
@@ -73,14 +73,23 @@ const label_ =
                 style={`--start: ${start}; --end: ${end}`}
               >
                 <div class="bg-ink/40 absolute inset-0 rounded-sm border border-white/10">
-                  <span class:list={[label_, 'text-azure']}>{name}</span>
+                  <span class:list={[label_, 'text-azure']}>
+                    {short ? (
+                      <>
+                        <span class="lg:hidden">{short}</span>
+                        <span class="max-lg:hidden">{name}</span>
+                      </>
+                    ) : (
+                      name
+                    )}
+                  </span>
                 </div>
                 <div
                   aria-hidden="true"
                   class="stage-reveal absolute inset-0 overflow-hidden rounded-sm bg-white/90"
                 >
                   <div class="timeline-trail from-frost via-chalk to-night/0 absolute inset-y-0 bg-linear-to-l via-15% mix-blend-multiply" />
-                  <span class="absolute top-1/2 left-5">
+                  <span class="absolute top-1/2 left-5 max-lg:hidden">
                     {confetti.map(({ style, tone }) => (
                       <span
                         style={style}
@@ -91,8 +100,17 @@ const label_ =
                       />
                     ))}
                   </span>
-                  <CheckIcon class="ease-out-soft absolute top-1/2 left-2.5 -translate-y-1/2 scale-75 opacity-0 transition-[opacity,scale] duration-300 group-data-complete/stage:scale-100 group-data-complete/stage:opacity-100" />
-                  <span class:list={[label_, 'text-ink']}>{name}</span>
+                  <CheckIcon class="ease-out-soft absolute max-lg:hidden top-1/2 left-2.5 -translate-y-1/2 scale-75 opacity-0 transition-[opacity,scale] duration-300 group-data-complete/stage:scale-100 group-data-complete/stage:opacity-100" />
+                  <span class:list={[label_, 'text-ink']}>
+                    {short ? (
+                      <>
+                        <span class="lg:hidden">{short}</span>
+                        <span class="max-lg:hidden">{name}</span>
+                      </>
+                    ) : (
+                      name
+                    )}
+                  </span>
                 </div>
               </li>
             ))}
