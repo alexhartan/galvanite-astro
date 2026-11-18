@@ -21,8 +21,9 @@ const hero = {
 const mission = {
   label: 'Our mission',
   statement: [
-    { text: 'Memorable brands and websites', strong: true },
-    { text: ' for technical products that outgrew their story.' },
+    { text: 'Memorable brands and websites for technical products that ' },
+    { text: 'outgrew their story', strong: true },
+    { text: '.' },
   ],
 };
 const sections = [
@@ -85,10 +86,7 @@ const link = (index: number) => ({
   <SectionLink {...link(0)} />
   <Intro {...mission} />
   <SectionLink {...link(1)} />
-  <FeaturedWork
-    label="Featured work"
-    heading="Brands built for the moments founders raise, sell and scale"
-  />
+  <FeaturedWork label="Featured work" />
   <SectionLink {...link(2)} />
   <Pricing
     label="Where to start"

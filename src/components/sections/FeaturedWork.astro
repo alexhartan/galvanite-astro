@@ -9,9 +9,18 @@ import Eyebrow from '../ui/Eyebrow.astro';
 interface Props {
   id?: string;
   label: string;
-  heading: string;
 }
-const { id = 'work', label, heading } = Astro.props;
+const { id = 'work', label } = Astro.props;
+const twoLines = (text: string) => {
+  const words = text.split(' ');
+  let best = [text, ''];
+  for (let i = 1; i < words.length; i++) {
+    const pair = [words.slice(0, i).join(' '), words.slice(i).join(' ')];
+    const width = (lines: string[]) => Math.max(...lines.map((l) => l.length));
+    if (!best[1] || width(pair) < width(best)) best = pair;
+  }
+  return best;
+};
 const cases = (await getCollection('caseStudies')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -37,10 +46,7 @@ const arrow =
         aria-roledescription="carousel"
         aria-label="Case studies"
       >
-        <div class="flex flex-wrap items-end justify-between gap-8">
-          <h3 class="text-kpi-lg text-ink max-w-3xl font-extralight text-balance">
-            {heading}
-          </h3>
+        <div class="flex justify-end">
           <div class="flex">
             <button
               type="button"
@@ -60,23 +66,21 @@ const arrow =
             </button>
           </div>
         </div>
-        <div
-          data-viewport
-          class="clip-left 3xl:-mr-page-bleed -mr-6 mt-12 lg:mt-16"
-        >
+        <div data-viewport class="clip-left 3xl:-mr-page-bleed -mr-6 mt-8">
           <div class="flex touch-pan-y gap-6 pr-6 lg:gap-10">
             {cases.map(({ data }, index) => {
               const Tag = data.href ? 'a' : 'div';
+              const lines = twoLines(data.kpiLabel);
               return (
                 <article
                   data-slide
                   role="group"
                   aria-roledescription="slide"
                   aria-label={`${index + 1} of ${cases.length}`}
-                  class="group w-5/6 shrink-0 sm:w-3/5 lg:w-5/12"
+                  class="group w-5/6 shrink-0 data-peek:cursor-pointer sm:w-3/5 lg:w-5/12"
                 >
                   <Tag href={data.href} class="block">
-                    <div class="overflow-hidden">
+                    <div class="ease-out-soft relative overflow-hidden transition-opacity duration-500 group-data-peek:opacity-50">
                       <Picture
                         src={data.image}
                         alt={data.imageAlt}
@@ -87,32 +91,38 @@ const arrow =
                         draggable="false"
                         class="ease-out-soft aspect-4/3 w-full object-cover transition-transform duration-300 group-hover:scale-102"
                       />
+                      <div class="ease-out-soft absolute right-0 bottom-0 flex translate-y-4 items-center gap-4 bg-black/66 px-4 py-4 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-data-peek:hidden motion-reduce:translate-y-0 lg:gap-6 lg:px-6.5 lg:py-4.75">
+                        <span class="text-kpi-case tracking-display font-light whitespace-nowrap text-white">
+                          {data.kpi}
+                        </span>
+                        <span class="text-label leading-tight font-semibold tracking-widest whitespace-nowrap text-white/80 uppercase">
+                          {lines[0]}
+                          <br />
+                          {lines[1]}
+                        </span>
+                      </div>
                     </div>
-                    <div class="border-ink/10 mt-6 flex items-baseline justify-between gap-4 border-b pb-4">
-                      <p class="text-ink shrink-0 text-sm font-semibold">
-                        {data.client}
-                      </p>
-                      <p class="text-ink/70 text-right text-sm">
-                        <span class="text-ink font-semibold">{data.kpi}</span>{' '}
-                        {data.kpiLabel.toLowerCase()}
-                      </p>
+                    <div class="ease-out-soft transition-opacity duration-500 group-data-peek:opacity-0">
+                      <h4 class="text-card text-ink mt-6 font-medium text-balance">
+                        {data.title}
+                      </h4>
+                      <ul
+                        class="mt-4 flex flex-wrap gap-2.5"
+                        aria-label="Scope"
+                      >
+                        {data.scope.map((item) => (
+                          <li class="bg-ocean-50 text-azure-deep rounded-sm px-3 py-1.5 text-xs tracking-wider uppercase">
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                      {data.href && (
+                        <span class="text-ink border-ink mt-6 inline-flex items-center gap-2 border-b-2 pb-1 text-sm font-semibold">
+                          Read the case study
+                          <ArrowIcon />
+                        </span>
+                      )}
                     </div>
-                    <h4 class="text-card text-ink mt-5 font-medium text-balance">
-                      {data.title}
-                    </h4>
-                    <ul class="mt-4 flex flex-wrap gap-2.5" aria-label="Scope">
-                      {data.scope.map((item) => (
-                        <li class="bg-ocean-50 text-azure-deep rounded-sm px-3 py-1.5 text-xs tracking-wider uppercase">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                    {data.href && (
-                      <span class="text-ink border-ink mt-6 inline-flex items-center gap-2 border-b-2 pb-1 text-sm font-semibold">
-                        Read the case study
-                        <ArrowIcon />
-                      </span>
-                    )}
                   </Tag>
                 </article>
               );
