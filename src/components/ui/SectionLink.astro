@@ -17,8 +17,8 @@ const { href, label, position, dark = false } = Astro.props;
   <a
     href={href}
     class:list={[
-      dark ? 'text-sky' : 'text-ocean',
-      'section-link ease-out-soft text-nav-label data-current:before:bg-signal pointer-events-auto sticky ml-5 block w-fit whitespace-nowrap opacity-70 transition-opacity duration-200 before:absolute before:-inset-y-4 before:-left-5 before:w-0.75 before:transition-colors before:duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-current data-current:opacity-100',
+      dark ? 'data-current:text-sky' : 'data-current:text-ocean',
+      'section-link ease-out-soft text-nav-label text-azure-deep data-current:before:bg-azure-deep pointer-events-auto sticky ml-5 block w-fit whitespace-nowrap opacity-80 transition-[opacity,color] duration-200 before:absolute before:-inset-y-4 before:-left-5 before:w-0.75 before:transition-colors before:duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-current data-current:opacity-100',
     ]}
   >
     {label}
