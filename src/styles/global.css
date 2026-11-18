@@ -21,6 +21,7 @@
   --color-deep-950: #0d1326;
   --color-deep-900: #151c33;
   --color-deep-800: #1c294d;
+  --color-spark: #ffd400;
   --color-success: #29cc7a;
   --color-success-strong: #1fa863;
   --color-success-soft: #7ee3ad;
@@ -97,6 +98,7 @@
 
   --blur-bar: 10px;
 
+  --ease-standard: ease;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
 
