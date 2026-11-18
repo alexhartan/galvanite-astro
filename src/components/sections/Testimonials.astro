@@ -1,4 +1,5 @@
 ---
+import CtaButton from '../ui/CtaButton.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import ArrowIcon from '../ui/ArrowIcon.astro';
@@ -112,12 +113,15 @@ const arrow =
                         </p>
                       </div>
                       {data.caseStudyHref && (
-                        <a
+                        <CtaButton
                           href={data.caseStudyHref}
-                          class="bg-ink/60 hover:bg-ink ease-out-soft flex h-11 items-center px-8 text-sm font-semibold transition-[opacity,background-color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:opacity-0 lg:group-focus-within:opacity-100 lg:group-hover:opacity-100"
+                          variant="secondary"
+                          mark="text-white/30"
+                          link="h-11 px-8 text-sm"
+                          class="ease-out-soft relative transition-opacity duration-300 lg:opacity-0 lg:group-focus-within:opacity-100 lg:group-hover:opacity-100"
                         >
                           Read Case Study
-                        </a>
+                        </CtaButton>
                       )}
                     </figcaption>
                   </figure>

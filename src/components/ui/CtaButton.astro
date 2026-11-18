@@ -6,13 +6,19 @@ interface Props {
   class?: string;
   link?: string;
   mark?: string;
+  variant?: 'primary' | 'secondary';
 }
 const {
   href,
   class: className,
   link = 'h-12',
   mark = 'text-ink/30',
+  variant = 'primary',
 } = Astro.props;
+const tone = {
+  primary: { base: 'bg-signal text-ink', fill: 'bg-space-900' },
+  secondary: { base: 'bg-ink/60 text-frost', fill: 'bg-ink' },
+}[variant];
 const motion =
   'ease-standard transition duration-300 motion-reduce:transition-none';
 ---
@@ -22,22 +28,23 @@ const motion =
     aria-hidden="true"
     class:list={['pointer-events-none absolute inset-0']}
   >
-    <GridMark class:list={[mark, 'absolute top-0 left-0']} />
-    <GridMark class:list={[mark, 'absolute top-full left-0 -mt-px']} />
+    <GridMark class:list={[mark, 'scale-75 absolute top-0 left-0']} />
+    <GridMark class:list={[mark, 'scale-75 absolute top-full left-0 -mt-px']} />
   </span>
   <span
     aria-hidden="true"
     class:list={['pointer-events-none absolute inset-0']}
   >
-    <GridMark class:list={[mark, 'absolute top-0 left-full -ml-px']} />
+    <GridMark class:list={[mark, 'scale-75 absolute top-0 left-full -ml-px']} />
     <GridMark
-      class:list={[mark, 'absolute top-full left-full -mt-px -ml-px']}
+      class:list={[mark, 'absolute top-full left-full -mt-px -ml-px scale-75']}
     />
   </span>
   <a
     href={href}
     class:list={[
-      'bg-signal text-ink relative isolate z-10 flex w-full items-center justify-center font-semibold group-hover/cta:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
+      'relative isolate z-10 flex w-full items-center justify-center font-semibold group-hover/cta:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
+      tone.base,
       motion,
       link,
     ]}
@@ -45,7 +52,8 @@ const motion =
     <span
       aria-hidden="true"
       class:list={[
-        'bg-space-900 absolute inset-0 -z-10 origin-left scale-x-0 group-hover/cta:scale-x-100 group-focus-within/cta:scale-x-100',
+        'absolute inset-0 -z-10 origin-left scale-x-0 group-hover/cta:scale-x-100 group-focus-within/cta:scale-x-100',
+        tone.fill,
         motion,
       ]}
     ></span>
