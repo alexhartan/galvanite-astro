@@ -1,18 +1,14 @@
 ---
-import GridMark from './GridMark.astro';
-
 interface Props {
   href: string;
   class?: string;
   link?: string;
-  mark?: string;
   variant?: 'primary' | 'secondary';
 }
 const {
   href,
   class: className,
   link = 'h-12',
-  mark = 'text-ink/30',
   variant = 'primary',
 } = Astro.props;
 const tone = {
@@ -24,22 +20,6 @@ const motion =
 ---
 
 <span class:list={['group/cta flex', className]}>
-  <span
-    aria-hidden="true"
-    class:list={['pointer-events-none absolute inset-0']}
-  >
-    <GridMark class:list={[mark, 'scale-75 absolute top-0 left-0']} />
-    <GridMark class:list={[mark, 'scale-75 absolute top-full left-0 -mt-px']} />
-  </span>
-  <span
-    aria-hidden="true"
-    class:list={['pointer-events-none absolute inset-0']}
-  >
-    <GridMark class:list={[mark, 'scale-75 absolute top-0 left-full -ml-px']} />
-    <GridMark
-      class:list={[mark, 'absolute top-full left-full -mt-px -ml-px scale-75']}
-    />
-  </span>
   <a
     href={href}
     class:list={[

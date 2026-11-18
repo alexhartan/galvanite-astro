@@ -72,12 +72,6 @@ const arrow =
             inverted
             class="3xl:block absolute top-full left-full -ml-px lg:hidden"
           />
-          <div class="absolute top-0 bottom-0 left-1/2 w-px bg-white/10 max-lg:hidden"></div>
-          <GridMark inverted class="absolute top-full left-1/2 max-lg:hidden" />
-          <GridMark
-            inverted
-            class="absolute top-0 left-1/2 -mt-px max-lg:hidden"
-          />
           <div class="grid">
             {pages.map((page, index) => (
               <div
@@ -116,7 +110,6 @@ const arrow =
                         <CtaButton
                           href={data.caseStudyHref}
                           variant="secondary"
-                          mark="text-white/30"
                           link="h-11 px-8 text-sm"
                           class="ease-out-soft relative transition-opacity duration-300 lg:opacity-0 lg:group-focus-within:opacity-100 lg:group-hover:opacity-100"
                         >
