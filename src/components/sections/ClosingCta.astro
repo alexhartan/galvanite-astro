@@ -48,7 +48,7 @@ const {
   import { initParallax } from '../../scripts/parallax';
 
   for (const element of document.querySelectorAll<HTMLElement>(
-    '[data-parallax]',
+    '#contact [data-parallax]',
   )) {
     initParallax(element, 0.25);
   }
