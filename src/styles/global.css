@@ -22,6 +22,7 @@
   --color-deep-900: #151c33;
   --color-deep-800: #1c294d;
   --color-deep-700: #1a2b4d;
+  --color-edge: #9ec2e6;
   --color-success: #29cc7a;
   --color-success-strong: #1fa863;
   --color-success-soft: #7ee3ad;
@@ -50,6 +51,7 @@
   --text-card: clamp(1.25rem, 1.6vw, 1.625rem);
   --text-card--line-height: 1.25;
   --text-card--letter-spacing: -0.02em;
+  --text-nav-label: 0.9375rem;
   --text-label: 0.75rem;
   --text-benefit: min(1.25rem, calc(100cqi / 12.4));
   --text-benefit--line-height: 1.3;
