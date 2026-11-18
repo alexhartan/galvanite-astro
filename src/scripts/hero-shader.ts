@@ -163,7 +163,7 @@ void main() {
   float streak = exp(-abs(lens.y) * mix(190.0, 80.0, p)) * exp(-abs(lens.x) * mix(4.0, 2.2, rise));
   col += vec3(0.4, 0.62, 1.0) * streak * power * 0.32;
 
-  vec2 axis = pivot + uPointer * 0.05 - sunScreen;
+  vec2 axis = pivot + uPointer * 0.08 - sunScreen;
   float flare = uIntro * breath * emerge;
   float spread = smoothstep(0.2, 0.6, p);
   vec3 pink = vec3(1.0, 0.8, 0.86);
