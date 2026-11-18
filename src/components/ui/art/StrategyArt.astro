@@ -56,13 +56,14 @@ const motion =
   </defs>
   {rings.map(({ r, opacity }) => (
     <circle
+      style={`--grow: ${(1 + 0.2 * (r / 75)).toFixed(3)}`}
       cx="150"
       cy={179 - r}
       r={r}
       stroke="url(#art-strategy-ring)"
       stroke-width="2"
       class:list={[
-        'transform-fill origin-bottom group-hover:scale-120 group-hover:opacity-100',
+        'transform-fill origin-bottom group-hover:scale-(--grow) group-hover:opacity-100',
         opacity,
         motion,
       ]}
