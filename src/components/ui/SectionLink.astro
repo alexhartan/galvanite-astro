@@ -3,8 +3,9 @@ interface Props {
   href: string;
   label: string;
   position: number;
+  dark?: boolean;
 }
-const { href, label, position } = Astro.props;
+const { href, label, position, dark = false } = Astro.props;
 ---
 
 <div
@@ -15,7 +16,10 @@ const { href, label, position } = Astro.props;
   <div class="h-(--lead)"></div>
   <a
     href={href}
-    class="section-link ease-out-soft text-sky pointer-events-auto sticky ml-5 block w-fit text-label font-semibold tracking-widest whitespace-nowrap uppercase opacity-70 transition-opacity duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-current data-current:opacity-100"
+    class:list={[
+      dark ? 'text-sky' : 'text-ocean',
+      'section-link ease-out-soft text-nav-label data-current:before:bg-signal pointer-events-auto sticky ml-5 block w-fit whitespace-nowrap opacity-70 transition-opacity duration-200 before:absolute before:-inset-y-4 before:-left-5 before:w-0.75 before:transition-colors before:duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-current data-current:opacity-100',
+    ]}
   >
     {label}
   </a>
