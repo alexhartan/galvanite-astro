@@ -6,13 +6,11 @@ audience: For teams heading into a round or a category push, rebuilding from the
 price: 'Custom'
 duration: 8+ weeks
 features:
-  - 'Everything in Positioning + Website'
   - 'Messaging framework and positioning'
   - 'Complete identity system and style guide'
   - 'Custom illustrations and iconography'
   - 'Branded decks, social kits and one-pagers'
-  - 'Expanded site: product, docs, integrations'
   - 'Complete brand kit for your team and AI'
   - 'Custom Slackbot for your team'
-  - 'Custom tools that extend your team, built around how they already work'
+  - 'Custom apps & integrations'
 ---
