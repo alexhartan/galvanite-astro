@@ -53,6 +53,9 @@
   --text-kpi-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
   --text-kpi-lg--line-height: 1;
   --text-kpi-lg--letter-spacing: -0.015em;
+  --text-stat: clamp(2.625rem, 3.3vw, 3.75rem);
+  --text-stat--line-height: 1;
+  --text-stat--letter-spacing: -0.015em;
   --text-kpi: clamp(1.75rem, 2.1vw, 2.5rem);
   --text-kpi--line-height: 1;
   --text-display-hero: calc(var(--text-display-half) * 1.4);
