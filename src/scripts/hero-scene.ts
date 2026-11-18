@@ -200,7 +200,14 @@ export function initHeroScene(
     : null;
   let zoneActive = false;
 
+  const content = hero?.querySelector<HTMLElement>('[data-hero-content]');
   const measure = () => {
+    if (content) {
+      const shift = reducedMotion.matches
+        ? 0
+        : Math.min(window.scrollY, window.innerHeight) * 0.5;
+      content.style.setProperty('--shift', `${(-shift).toFixed(1)}px`);
+    }
     const height = window.innerHeight;
     const box = zone?.getBoundingClientRect();
     const active = !!box && box.top < height * 1.25 && window.scrollY >= height;

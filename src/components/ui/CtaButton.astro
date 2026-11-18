@@ -20,18 +20,14 @@ const motion =
 <span class:list={['group/cta flex', className]}>
   <span
     aria-hidden="true"
-    class:list={[
-      'cta-marks group-hover/cta:cta-marks-on group-focus-within/cta:cta-marks-on pointer-events-none absolute inset-0 group-hover/cta:translate-x-full group-hover/cta:opacity-0 group-focus-within/cta:translate-x-full group-focus-within/cta:opacity-0',
-    ]}
+    class:list={['pointer-events-none absolute inset-0']}
   >
     <GridMark class:list={[mark, 'absolute top-0 left-0']} />
     <GridMark class:list={[mark, 'absolute top-full left-0 -mt-px']} />
   </span>
   <span
     aria-hidden="true"
-    class:list={[
-      'cta-marks group-hover/cta:cta-marks-on group-focus-within/cta:cta-marks-on pointer-events-none absolute inset-0 group-hover/cta:opacity-0 group-focus-within/cta:opacity-0',
-    ]}
+    class:list={['pointer-events-none absolute inset-0']}
   >
     <GridMark class:list={[mark, 'absolute top-0 left-full -ml-px']} />
     <GridMark
@@ -55,7 +51,7 @@ const motion =
     ></span>
     <span
       aria-hidden="true"
-      class="ring-signal pointer-events-none absolute inset-0 ring-1 ring-inset"
+      class="pointer-events-none absolute inset-0 ring-1 ring-white/10 ring-inset"
     ></span>
     <slot />
   </a>
