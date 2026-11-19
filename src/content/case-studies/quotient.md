@@ -1,9 +1,10 @@
 ---
-title: How QuotientAI turned a research product into a category leader
+title: 'Quotient AI: From rebrand to successful exit in under two months'
 client: QuotientAI
 order: 2
-scope: [Positioning, Web design, Web development]
-image: ../../assets/case-studies/quotient.jpg
-imageAlt: QuotientAI website shown in a browser window
-stat: 3x more demo requests in 90 days
+scope: [Positioning, Full Website Revamp]
+image: ../../assets/case-studies/quotient.webp
+imageAlt: Quotient AI homepage on a laptop, reading “Turn your AI agents into experts”
+stats:
+  - Acquired by Databricks, 2 months after the revamp
 ---
