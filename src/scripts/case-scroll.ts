@@ -1,6 +1,5 @@
 const RATE = 1.6;
 const SMOOTHING = 5;
-const GAP = 32;
 const ease = (t: number) => t * t * (3 - 2 * t);
 
 export function initCaseScroll(root: HTMLElement) {
@@ -29,10 +28,7 @@ export function initCaseScroll(root: HTMLElement) {
       '--scroll-height',
       `${sticky.offsetHeight + range}px`,
     );
-    root.style.removeProperty('--sticky-top');
-    const nav = parseFloat(getComputedStyle(sticky).top) || 0;
-    offset = Math.min(nav + GAP, window.innerHeight - sticky.offsetHeight - GAP);
-    root.style.setProperty('--sticky-top', `${offset}px`);
+    offset = parseFloat(getComputedStyle(sticky).top) || 0;
   };
   const read = () => {
     const top = root.getBoundingClientRect().top;

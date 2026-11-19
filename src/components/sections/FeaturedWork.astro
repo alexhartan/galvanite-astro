@@ -32,13 +32,13 @@ const cases = (await getCollection('caseStudies')).sort(
   data-tone="light"
   class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
-  <SectionFrame />
+  <SectionFrame edge={false} />
   <div data-guide class="border-ink/10 relative border-t pb-32 lg:pb-48">
     <Container class="pt-12 lg:pt-16">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
     </Container>
     <div data-case-scroll class="relative mt-8 h-(--scroll-height,auto)">
-      <div data-sticky class="sticky top-(--sticky-top,var(--spacing-nav))">
+      <div data-sticky class="top-nav sticky">
         <Container>
           <div class="clip-left">
             <div data-track class="flex translate-x-(--x,0) gap-6 lg:gap-10">
@@ -65,7 +65,7 @@ const cases = (await getCollection('caseStudies')).sort(
                               sizes="(min-width: 1024px) 40vw, (min-width: 640px) 60vw, 85vw"
                               quality={78}
                               draggable="false"
-                              class="ease-out-soft aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-102"
+                              class="ease-out-soft 4xl:aspect-square aspect-4/3 w-full object-cover transition-transform duration-300 group-hover:scale-102"
                             />
                           </div>
                         </div>
