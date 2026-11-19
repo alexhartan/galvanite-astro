@@ -8,7 +8,7 @@ export function initImageReveal(root: HTMLElement) {
       root.dataset.revealState = 'shown';
       observer.disconnect();
     },
-    { rootMargin: '0px 0px -15% 0px' },
+    { rootMargin: '0px 0px -40% 0px' },
   );
   observer.observe(root);
 }

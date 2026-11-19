@@ -199,7 +199,7 @@
 
 @utility reveal-mask {
   clip-path: inset(0);
-  transition: clip-path 1.2s var(--ease-out-expo) var(--delay, 0ms);
+  transition: clip-path 1.6s var(--ease-out-expo) var(--delay, 0ms);
   @media (prefers-reduced-motion: no-preference) {
     [data-reveal-state='hidden'] & {
       clip-path: inset(100% 0 0 0);
@@ -209,7 +209,7 @@
 }
 
 @utility reveal-zoom {
-  transition: scale 1.4s var(--ease-out-expo) var(--delay, 0ms);
+  transition: scale 1.8s var(--ease-out-expo) var(--delay, 0ms);
   @media (prefers-reduced-motion: no-preference) {
     [data-reveal-state='hidden'] & {
       scale: 1.08;
