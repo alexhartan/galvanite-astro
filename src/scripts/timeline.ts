@@ -1,15 +1,15 @@
 const SNAP_PX = 6;
-const OMEGA = 6;
-const MAX_SPEED = 0.4;
+const DURATION_S = 7;
 
 export function initTimeline(root: HTMLElement) {
   const tooltip = root.querySelector<HTMLElement>('[data-tooltip]');
   const stages = [...root.querySelectorAll<HTMLElement>('[data-stage]')];
   const weeks = Number(getComputedStyle(root).getPropertyValue('--weeks')) || 8;
+  const trigger = root.closest<HTMLElement>('[data-process]') ?? root;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
   let position = 0;
-  let velocity = 0;
-  let target = 0;
+  let playing = false;
   let last = 0;
   let frame = 0;
 
@@ -30,52 +30,35 @@ export function initTimeline(root: HTMLElement) {
     root.toggleAttribute('data-done', position >= 0.995);
   };
 
-  const scrolled = () => {
-    const box = root.getBoundingClientRect();
-    const start = window.innerHeight;
-    const bottom =
-      document.documentElement.scrollHeight -
-      window.innerHeight -
-      window.scrollY;
-    const end = Math.max(
-      window.innerHeight / 2 - box.height / 2,
-      box.top - bottom,
-    );
-    const value = (start - box.top) / (start - end);
-    return value > 0.998 ? 1 : Math.max(0, value);
-  };
-
   const step = (now: number) => {
     const dt = Math.min((now - last) / 1000, 1 / 30);
     last = now;
-    velocity +=
-      (OMEGA * OMEGA * (target - position) - 2 * OMEGA * velocity) * dt;
-    velocity = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, velocity));
-    position += velocity * dt;
-    if (Math.abs(target - position) < 0.0005 && Math.abs(velocity) < 0.001) {
-      position = target;
-      velocity = 0;
-      frame = 0;
-    } else {
-      frame = requestAnimationFrame(step);
-    }
+    position = Math.min(1, position + dt / DURATION_S);
     paint();
+    frame = playing && position < 1 ? requestAnimationFrame(step) : 0;
   };
 
-  const follow = () => {
-    target = scrolled();
-    if (reduced.matches) {
-      position = target;
-      paint();
-      return;
-    }
-    if (frame) return;
+  const play = (on: boolean) => {
+    playing = on;
+    if (!on || frame || position >= 1) return;
     last = performance.now();
     frame = requestAnimationFrame(step);
   };
 
-  window.addEventListener('scroll', follow, { passive: true });
-  window.addEventListener('resize', follow, { passive: true });
-  position = target = scrolled();
+  if (reduced.matches) {
+    position = 1;
+    paint();
+    return;
+  }
+  trigger.addEventListener('pointerenter', () => hover.matches && play(true));
+  trigger.addEventListener('pointerleave', () => hover.matches && play(false));
+  trigger.addEventListener('focusin', () => play(true));
+  trigger.addEventListener('focusout', () => play(false));
+  new IntersectionObserver(
+    ([entry]) => {
+      if (!hover.matches) play(Boolean(entry?.isIntersecting));
+    },
+    { threshold: 0.6 },
+  ).observe(root);
   paint();
 }
