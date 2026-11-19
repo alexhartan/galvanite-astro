@@ -46,8 +46,11 @@ const clients = (
         </p>
       </Container>
       <div class="relative overflow-x-clip">
-        <div class="backdrop-blur-bar absolute inset-0"></div>
-        <div class="border-grid/10 bg-space-950 relative border-t opacity-50 pt-3.75 pb-6">
+        <Container class="pointer-events-none absolute inset-0">
+          <div class="backdrop-blur-bar 3xl:-right-page-bleed absolute inset-y-0 right-0 left-6"></div>
+          <div class="border-grid/5 bg-space-950/50 3xl:-right-page-bleed absolute inset-y-0 right-0 left-6 border-t"></div>
+        </Container>
+        <div class="relative opacity-50 pt-3.75 pb-6">
           <Container class="relative">
             <GridMark class="absolute -top-3.75 left-6 -mt-px" />
             <p class="text-frost text-xs font-normal tracking-widest uppercase">

@@ -1,5 +1,6 @@
 const RATE = 1.6;
 const SMOOTHING = 5;
+const HOLD = 0.2;
 const ease = (t: number) => t * t * (3 - 2 * t);
 
 export function initCaseScroll(root: HTMLElement) {
@@ -10,6 +11,7 @@ export function initCaseScroll(root: HTMLElement) {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let distance = 0;
   let range = 0;
+  let hold = 0;
   let offset = 0;
   let target = 0;
   let position = 0;
@@ -24,15 +26,18 @@ export function initCaseScroll(root: HTMLElement) {
       ? Math.max(0, end.offsetLeft + end.offsetWidth - track.clientWidth)
       : 0;
     range = distance * RATE;
+    hold = distance ? window.innerHeight * HOLD : 0;
     root.style.setProperty(
       '--scroll-height',
-      `${sticky.offsetHeight + range}px`,
+      `${sticky.offsetHeight + range + hold * 2}px`,
     );
     offset = parseFloat(getComputedStyle(sticky).top) || 0;
   };
   const read = () => {
     const top = root.getBoundingClientRect().top;
-    target = range ? ease(Math.min(1, Math.max(0, (offset - top) / range))) : 0;
+    target = range
+      ? ease(Math.min(1, Math.max(0, (offset - top - hold) / range)))
+      : 0;
   };
   const step = (now: number) => {
     const dt = Math.min((now - last) / 1000, 1 / 30);
@@ -68,7 +73,7 @@ export function initCaseScroll(root: HTMLElement) {
       if (box.left >= 0 && box.right <= window.innerWidth) return;
       const progress = index === 0 ? 0 : 1;
       const scroll = window.scrollY + root.getBoundingClientRect().top - offset;
-      window.scrollTo({ top: scroll + progress * range });
+      window.scrollTo({ top: scroll + hold + progress * range });
     }),
   );
   window.addEventListener('scroll', update, { passive: true });
