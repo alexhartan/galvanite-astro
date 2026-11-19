@@ -26,6 +26,11 @@ const { id = 'why', label, heading, description, process } = Astro.props;
 const benefits = (await getCollection('benefits')).sort(
   (a, b) => a.data.order - b.data.order,
 );
+const offset: Record<string, string> = {
+  consistency: '--art-x: 4px; --art-y: 16px',
+  build: '--art-x: -18px; --art-y: 22px',
+  performance: '--art-x: -19px; --art-y: 21px',
+};
 const art = {
   strategy: StrategyArt,
   consistency: ConsistencyArt,
@@ -33,7 +38,7 @@ const art = {
   performance: PerformanceArt,
 };
 const card =
-  'ease-out-soft pointer-events-none absolute inset-0 rounded-sm border border-white/10 bg-space-950/50 shadow-card backdrop-blur-bar opacity-0 transition duration-300';
+  'ease-out-soft pointer-events-none absolute inset-0 rounded-lg border border-white/20 bg-space-950/50 shadow-card backdrop-blur-bar opacity-0 transition duration-300';
 const line = 'bleed-x absolute top-0 h-px bg-white/10';
 const right = '3xl:block lg:hidden';
 ---
@@ -81,9 +86,10 @@ const right = '3xl:block lg:hidden';
               <div aria-hidden="true" class="relative h-36 overflow-hidden">
                 <div
                   class:list={[
-                    'absolute bottom-0 left-0 h-45 w-full origin-bottom-left',
-                    data.art === 'strategy' ? 'scale-60' : 'scale-80',
+                    'absolute bottom-0 left-0 h-45 origin-bottom-left translate-x-(--art-x,0) translate-y-(--art-y,0) scale-60',
+                    data.art === 'strategy' ? 'w-full' : 'w-75',
                   ]}
+                  style={offset[data.art]}
                 >
                   <Art />
                 </div>
