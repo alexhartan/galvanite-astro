@@ -39,13 +39,11 @@ const cases = (await getCollection('caseStudies')).sort(
                   <article
                     data-slide
                     class="group w-5/6 shrink-0 sm:w-3/5 lg:w-case"
+                    style={`--delay: ${Math.min(index, 3) * 160}ms`}
                   >
                     <Tag href={data.href} class="block">
                       <div class="relative overflow-hidden">
-                        <div
-                          class="reveal-mask"
-                          style={`--delay: ${Math.min(index, 3) * 160}ms`}
-                        >
+                        <div class="reveal-mask">
                           <div class="reveal-zoom">
                             <Picture
                               src={data.image}
@@ -74,12 +72,15 @@ const cases = (await getCollection('caseStudies')).sort(
                           </svg>
                         </div>
                       </div>
-                      <p class="border-ink/10 text-ink/80 ease-out-soft flex items-center gap-2.5 border-b px-3 py-3.5 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+                      <p class="border-ink/10 text-ink/80 ease-out-soft flex items-center font-medium gap-2.5 border-b px-3 py-3.5 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
                         <SparkIcon class="text-signal size-5 shrink-0" />
                         {data.stat}
                       </p>
                       <div>
-                        <h4 class="text-card text-ink ease-out-soft mt-3 font-normal text-balance opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+                        <h4
+                          data-split
+                          class="text-card text-ink ease-out-soft mt-3 font-normal text-balance opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+                        >
                           {data.title}
                         </h4>
                         <ul
@@ -114,10 +115,14 @@ const cases = (await getCollection('caseStudies')).sort(
 <script>
   import { initCaseScroll } from '../../scripts/case-scroll';
   import { initImageReveal } from '../../scripts/image-reveal';
+  import { splitLines } from '../../scripts/split-lines';
 
   for (const root of document.querySelectorAll<HTMLElement>(
     '[data-case-scroll]',
   )) {
+    root
+      .querySelectorAll<HTMLElement>('[data-split]')
+      .forEach((el) => splitLines(el));
     initCaseScroll(root);
     initImageReveal(root);
   }
