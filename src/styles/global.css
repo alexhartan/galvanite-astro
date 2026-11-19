@@ -218,7 +218,7 @@
 
 @utility reveal-line {
   transition: translate 1s var(--ease-out-expo)
-    calc(var(--delay, 0ms) + 0.8s + var(--line, 0) * 75ms);
+    calc(var(--delay, 0ms) + 0.5s + var(--line, 0) * 75ms);
   @media (prefers-reduced-motion: no-preference) {
     [data-reveal-state='hidden'] & {
       translate: 0 110%;
