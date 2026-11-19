@@ -44,7 +44,7 @@ const motion =
       <stop
         offset="0.35"
         stop-color="currentColor"
-        class:list={['text-azure group-hover:text-chalk', motion]}
+        class:list={['text-azure group-hover:text-sky', motion]}
       ></stop>
       <stop
         offset="1"
@@ -53,22 +53,50 @@ const motion =
         class="text-azure-deep"
       ></stop>
     </radialGradient>
-  </defs>
-  {rings.map(({ r, opacity }) => (
-    <circle
-      style={`--grow: ${(1 + 0.2 * (r / 75)).toFixed(3)}`}
+    <radialGradient
+      id="art-strategy-fade-fill"
       cx="150"
-      cy={179 - r}
-      r={r}
-      stroke="url(#art-strategy-ring)"
-      stroke-width="2"
-      class:list={[
-        'transform-fill origin-bottom group-hover:scale-(--grow) group-hover:opacity-100',
-        opacity,
-        motion,
-      ]}
-    />
-  ))}
+      cy="104"
+      r="330"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0.227" stop-color="white"></stop>
+      <stop offset="1" stop-color="white" stop-opacity="0"></stop>
+    </radialGradient>
+    <mask
+      id="art-strategy-fade"
+      maskUnits="userSpaceOnUse"
+      x="-300"
+      y="-500"
+      width="900"
+      height="700"
+    >
+      <rect
+        x="-300"
+        y="-500"
+        width="900"
+        height="700"
+        fill="url(#art-strategy-fade-fill)"
+      ></rect>
+    </mask>
+  </defs>
+  <g mask="url(#art-strategy-fade)">
+    {rings.map(({ r, opacity }) => (
+      <circle
+        style={`--grow: ${(1 + 0.2 * (r / 75)).toFixed(3)}`}
+        cx="150"
+        cy={179 - r}
+        r={r}
+        stroke="url(#art-strategy-ring)"
+        stroke-width="2"
+        class:list={[
+          'transform-fill origin-bottom group-hover:scale-(--grow) group-hover:opacity-100',
+          opacity,
+          motion,
+        ]}
+      />
+    ))}
+  </g>
 </svg>
 <svg
   class:list={[
