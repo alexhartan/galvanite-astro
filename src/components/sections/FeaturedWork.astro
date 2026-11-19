@@ -11,16 +11,6 @@ interface Props {
   label: string;
 }
 const { id = 'work', label } = Astro.props;
-const twoLines = (text: string) => {
-  const words = text.split(' ');
-  let best = [text, ''];
-  for (let i = 1; i < words.length; i++) {
-    const pair = [words.slice(0, i).join(' '), words.slice(i).join(' ')];
-    const width = (lines: string[]) => Math.max(...lines.map((l) => l.length));
-    if (!best[1] || width(pair) < width(best)) best = pair;
-  }
-  return best;
-};
 const cases = (await getCollection('caseStudies')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -44,7 +34,6 @@ const cases = (await getCollection('caseStudies')).sort(
             <div data-track class="flex translate-x-(--x,0) gap-6 lg:gap-10">
               {cases.map(({ data }, index) => {
                 const Tag = data.href ? 'a' : 'div';
-                const lines = twoLines(data.kpiLabel);
                 return (
                   <article
                     data-slide
@@ -65,27 +54,41 @@ const cases = (await getCollection('caseStudies')).sort(
                               sizes="(min-width: 1024px) 40vw, (min-width: 640px) 60vw, 85vw"
                               quality={78}
                               draggable="false"
-                              class="ease-out-soft 4xl:aspect-square aspect-4/3 w-full object-cover transition-transform duration-300 group-hover:scale-102"
+                              class="ease-out-soft 4xl:aspect-square aspect-4/3 w-full object-cover transition-transform duration-500 group-hover:scale-104"
                             />
                           </div>
                         </div>
-                        <div class="ease-out-soft absolute right-0 bottom-0 flex translate-y-4 items-center gap-4 bg-black/66 px-4 py-4 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0 lg:gap-6 lg:px-6.5 lg:py-4.75">
-                          <span class="text-kpi-case tracking-display font-light whitespace-nowrap text-white">
-                            {data.kpi}
-                          </span>
-                          <span class="text-label leading-tight font-semibold tracking-widest whitespace-nowrap text-white/80 uppercase">
-                            {lines[0]}
-                            <br />
-                            {lines[1]}
-                          </span>
+                        <div
+                          aria-hidden="true"
+                          class="ease-in-soft absolute top-8 right-8 opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:top-10 lg:right-10"
+                        >
+                          <svg
+                            viewBox="0 0 56 56"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            class="ease-standard size-10 -translate-x-full translate-y-full text-white transition-transform duration-500 group-hover:translate-0 motion-reduce:translate-0 lg:size-14"
+                          >
+                            <path d="M2 54 54 2M14 2h40v40"></path>
+                          </svg>
                         </div>
                       </div>
+                      <p class="border-ink/10 text-ink/70 ease-out-soft flex items-center gap-2.5 border-b px-3 py-3.5 opacity-80 transition-opacity duration-300 group-hover:opacity-100">
+                        <svg
+                          viewBox="0 0 20 20"
+                          aria-hidden="true"
+                          class="fill-signal size-5 shrink-0"
+                        >
+                          <path d="M10 0c.6 5.4 4 9.4 10 10-6 .6-9.4 4.6-10 10-.6-5.4-4-9.4-10-10 6-.6 9.4-4.6 10-10Z"></path>
+                        </svg>
+                        {data.stat}
+                      </p>
                       <div>
-                        <h4 class="text-card text-ink mt-6 font-normal text-balance">
+                        <h4 class="text-card text-ink ease-out-soft mt-4 font-normal text-balance opacity-80 transition-opacity duration-300 group-hover:opacity-100">
                           {data.title}
                         </h4>
                         <ul
-                          class="mt-4 flex flex-wrap gap-2.25"
+                          class="ease-out-soft mt-4 flex -translate-y-2 flex-wrap gap-2.25 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0"
                           aria-label="Scope"
                         >
                           {data.scope.map((item) => (

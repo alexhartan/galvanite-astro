@@ -63,8 +63,6 @@
   --text-stat--letter-spacing: -0.04em;
   --text-stat-label: 0.9625rem;
   --text-stat-label--line-height: 1.25;
-  --text-kpi-case: calc(var(--text-kpi) * 1.15);
-  --text-kpi-case--line-height: 1;
   --text-kpi: clamp(1.75rem, 2.1vw, 2.5rem);
   --text-kpi--line-height: 1;
   --text-display-hero: calc(var(--text-display-half) * 1.4);
@@ -115,6 +113,7 @@
   --ease-standard: ease;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in-soft: cubic-bezier(0.32, 0, 0.67, 0);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-marquee: marquee 80s linear infinite;

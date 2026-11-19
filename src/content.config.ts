@@ -13,8 +13,7 @@ const caseStudies = defineCollection({
       href: z.string().optional(),
       image: image(),
       imageAlt: z.string(),
-      kpi: z.string(),
-      kpiLabel: z.string(),
+      stat: z.string(),
     }),
 });
 
