@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import ArrowIcon from '../ui/ArrowIcon.astro';
 import Container from '../ui/Container.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
+import SparkIcon from '../ui/SparkIcon.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 
 interface Props {
@@ -54,7 +55,7 @@ const cases = (await getCollection('caseStudies')).sort(
                               sizes="(min-width: 1024px) 40vw, (min-width: 640px) 60vw, 85vw"
                               quality={78}
                               draggable="false"
-                              class="ease-out-soft 4xl:aspect-square aspect-4/3 w-full object-cover transition-transform duration-500 group-hover:scale-104"
+                              class="ease-out-soft 4xl:aspect-square aspect-4/3 w-full object-cover transition-transform duration-700 group-hover:scale-104"
                             />
                           </div>
                         </div>
@@ -67,24 +68,18 @@ const cases = (await getCollection('caseStudies')).sort(
                             fill="none"
                             stroke="currentColor"
                             stroke-width="3"
-                            class="ease-standard size-10 -translate-x-full translate-y-full text-white transition-transform duration-500 group-hover:translate-0 motion-reduce:translate-0 lg:size-14"
+                            class="ease-out-soft size-10 -translate-x-1/2 translate-y-1/2 text-white transition-transform duration-700 group-hover:translate-0 motion-reduce:translate-0 lg:size-14"
                           >
                             <path d="M2 54 54 2M14 2h40v40"></path>
                           </svg>
                         </div>
                       </div>
-                      <p class="border-ink/10 text-ink/70 ease-out-soft flex items-center gap-2.5 border-b px-3 py-3.5 opacity-80 transition-opacity duration-300 group-hover:opacity-100">
-                        <svg
-                          viewBox="0 0 20 20"
-                          aria-hidden="true"
-                          class="fill-signal size-5 shrink-0"
-                        >
-                          <path d="M10 0c.6 5.4 4 9.4 10 10-6 .6-9.4 4.6-10 10-.6-5.4-4-9.4-10-10 6-.6 9.4-4.6 10-10Z"></path>
-                        </svg>
+                      <p class="border-ink/10 text-ink/80 ease-out-soft flex items-center gap-2.5 border-b px-3 py-3.5 opacity-80 transition-opacity duration-300 group-hover:opacity-100">
+                        <SparkIcon class="text-signal size-5 shrink-0" />
                         {data.stat}
                       </p>
                       <div>
-                        <h4 class="text-card text-ink ease-out-soft mt-4 font-normal text-balance opacity-80 transition-opacity duration-300 group-hover:opacity-100">
+                        <h4 class="text-card text-ink ease-out-soft mt-3 font-normal text-balance opacity-80 transition-opacity duration-300 group-hover:opacity-100">
                           {data.title}
                         </h4>
                         <ul
