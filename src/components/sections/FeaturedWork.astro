@@ -25,7 +25,10 @@ const cases = (await getCollection('caseStudies')).sort(
   class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <SectionFrame edge={false} />
-  <div data-guide class="border-ink/10 relative border-t pb-32 lg:pb-48">
+  <div
+    data-guide
+    class="border-ink/10 relative overflow-y-clip border-t pb-32 lg:pb-48"
+  >
     <Container class="pt-12 lg:pt-16">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
     </Container>
@@ -76,7 +79,7 @@ const cases = (await getCollection('caseStudies')).sort(
                       <div class="relative">
                         <span
                           aria-hidden="true"
-                          class="bg-ink/10 absolute inset-y-0 left-0 w-px"
+                          class="bg-ink/10 -bottom-viewport absolute top-0 left-0 w-px"
                         />
                         <p class="relative text-ink/80 ease-out-soft flex items-center font-medium gap-2.5 px-3 py-3.5 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
                           <span
@@ -95,7 +98,7 @@ const cases = (await getCollection('caseStudies')).sort(
                             {data.title}
                           </h4>
                           <ul
-                            class="ease-out-soft mt-4 flex -translate-y-2 flex-wrap gap-2.25 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0"
+                            class="reveal-after ease-out-soft mt-4 flex -translate-y-2 flex-wrap gap-2.25 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0"
                             aria-label="Scope"
                           >
                             {data.scope.map((item) => (
