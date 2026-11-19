@@ -25,11 +25,6 @@ const label_ =
   class="group/timeline @container relative py-3.5 lg:py-6.25"
   style={`--weeks: ${weeks}`}
 >
-  <div aria-hidden="true" class="absolute inset-0 flex">
-    {Array.from({ length: weeks }, (_, index) => (
-      <div class:list={['flex-1', index > 0 && 'border-l border-white/5']} />
-    ))}
-  </div>
   <ol class="relative space-y-2.5 lg:space-y-1.25">
     {stages.map(({ name, short, start, end }) => (
       <li
