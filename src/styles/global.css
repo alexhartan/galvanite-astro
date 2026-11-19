@@ -44,9 +44,9 @@
   --text-case: clamp(1.7rem, 2.465vw, 2.975rem);
   --text-case--line-height: 1.04;
   --text-case--letter-spacing: -0.04em;
-  --text-card: clamp(1.625rem, 2.08vw, 2.1125rem);
+  --text-card: clamp(1.95rem, 2.496vw, 2.535rem);
   --text-card--line-height: 1.15;
-  --text-card--letter-spacing: -0.025em;
+  --text-card--letter-spacing: -0.03em;
   --text-nav-label: 0.875rem;
   --text-tag: 0.65625rem;
   --text-stage: 0.6875rem;
@@ -211,6 +211,26 @@
   @media (prefers-reduced-motion: no-preference) {
     [data-reveal-state='hidden'] & {
       scale: 1.08;
+      transition: none;
+    }
+  }
+}
+
+@utility reveal-rise {
+  transition: translate 1.6s var(--ease-out-expo) var(--delay, 0ms);
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal-state='hidden'] & {
+      translate: 0 100%;
+      transition: none;
+    }
+  }
+}
+
+@utility reveal-fade {
+  transition: opacity 600ms var(--ease-out-soft) var(--delay, 0ms);
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal-state='hidden'] & {
+      opacity: 0;
       transition: none;
     }
   }

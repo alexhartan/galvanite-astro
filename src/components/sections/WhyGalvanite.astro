@@ -66,7 +66,10 @@ const right = '3xl:block lg:hidden';
           );
         })}
       </div>
-      <dl class="bg-abyss/50 relative mt-19 grid gap-10 px-4.5 py-24 sm:grid-cols-3 lg:py-25 lg:mt-33.5">
+      <dl
+        data-stats
+        class="bg-abyss/50 relative mt-19 grid gap-10 px-4.5 py-24 sm:grid-cols-3 lg:mt-33.5 lg:py-25"
+      >
         <div class="bleed-x absolute top-0 h-px bg-white/10"></div>
         <div class="bleed-x absolute bottom-0 h-px bg-white/10"></div>
         <GridMark inverted class="absolute top-0 left-0" />
@@ -79,13 +82,33 @@ const right = '3xl:block lg:hidden';
           inverted
           class:list={[right, 'absolute top-full left-full -mt-px -ml-px']}
         />
-        {stats.map(({ value, label }) => (
+        {stats.map(({ value, label }, index) => (
           <div class="flex flex-col-reverse gap-2 sm:justify-self-center">
-            <dt class="text-sky text-stat-label max-w-48">{label}</dt>
-            <dd class="text-stat font-light">{value}</dd>
+            <dt
+              class="text-sky text-stat-label reveal-fade max-w-48"
+              style={`--delay: ${index * 160 + 600}ms`}
+            >
+              {label}
+            </dt>
+            <dd class="text-stat overflow-clip font-light">
+              <span
+                class="reveal-rise block"
+                style={`--delay: ${index * 160}ms`}
+              >
+                {value}
+              </span>
+            </dd>
           </div>
         ))}
       </dl>
     </Container>
   </div>
 </section>
+
+<script>
+  import { initImageReveal } from '../../scripts/image-reveal';
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-stats]')) {
+    initImageReveal(root);
+  }
+</script>
