@@ -77,10 +77,6 @@ const cases = (await getCollection('caseStudies')).sort(
                         </div>
                       </div>
                       <div class="relative">
-                        <span
-                          aria-hidden="true"
-                          class="bg-ink/10 -bottom-viewport absolute top-0 left-0 w-px"
-                        />
                         <p class="relative text-ink/80 ease-out-soft flex items-center font-medium gap-2.5 px-3 py-3.5 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
                           <span
                             aria-hidden="true"
@@ -88,7 +84,27 @@ const cases = (await getCollection('caseStudies')).sort(
                           />
                           <GridMark class="absolute top-full left-0 -mt-px" />
                           <SparkIcon class="text-signal size-5 shrink-0" />
-                          {data.stat}
+                          <span data-rotator class="grid">
+                            {data.stats.map((stat, i) => {
+                              const cut = stat.indexOf(',') + 1;
+                              return (
+                                <span
+                                  data-active={i === 0 ? '' : undefined}
+                                  aria-hidden={i === 0 ? undefined : 'true'}
+                                  class="ease-out-soft col-start-1 row-start-1 translate-y-2 opacity-0 transition duration-500 data-active:translate-y-0 data-active:opacity-100 motion-reduce:translate-y-0"
+                                >
+                                  <span class="font-semibold">
+                                    {cut ? stat.slice(0, cut) : stat}
+                                  </span>
+                                  {cut > 0 && (
+                                    <span class="font-normal">
+                                      {stat.slice(cut)}
+                                    </span>
+                                  )}
+                                </span>
+                              );
+                            })}
+                          </span>
                         </p>
                         <div>
                           <h4
@@ -131,6 +147,7 @@ const cases = (await getCollection('caseStudies')).sort(
   import { initCaseScroll } from '../../scripts/case-scroll';
   import { initImageReveal } from '../../scripts/image-reveal';
   import { splitLines } from '../../scripts/split-lines';
+  import { initRotator } from '../../scripts/rotator';
 
   for (const root of document.querySelectorAll<HTMLElement>(
     '[data-case-scroll]',
@@ -138,6 +155,9 @@ const cases = (await getCollection('caseStudies')).sort(
     root
       .querySelectorAll<HTMLElement>('[data-split]')
       .forEach((el) => splitLines(el));
+    root
+      .querySelectorAll<HTMLElement>('[data-rotator]')
+      .forEach((el) => initRotator(el));
     initCaseScroll(root);
     initImageReveal(root);
   }
