@@ -104,6 +104,7 @@
   --spacing-slide-lg: calc(50cqi - 7.5rem);
   --spacing-slide-3xl: calc(50cqi - 2.5rem);
   --spacing-case: calc(50% - 1.25rem);
+  --spacing-bullet-sm: 0.46875rem;
 
   --breakpoint-3xl: 100rem;
   --breakpoint-4xl: 120rem;
