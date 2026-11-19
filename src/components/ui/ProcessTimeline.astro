@@ -22,7 +22,7 @@ const label_ =
 
 <div
   data-timeline
-  class="@container relative py-3.5 lg:py-6.25"
+  class="group/timeline @container relative py-3.5 lg:py-6.25"
   style={`--weeks: ${weeks}`}
 >
   <div aria-hidden="true" class="absolute inset-0 flex">
@@ -83,7 +83,7 @@ const label_ =
   </ol>
   <div
     aria-hidden="true"
-    class="timeline-line absolute inset-y-0 w-px bg-linear-to-b from-white/10 via-white to-white/10"
+    class="timeline-line ease-out-soft absolute inset-y-0 w-px transition-opacity duration-500 group-data-done/timeline:opacity-0 bg-linear-to-b from-white/10 via-white to-white/10"
   ></div>
   <div
     data-tooltip
