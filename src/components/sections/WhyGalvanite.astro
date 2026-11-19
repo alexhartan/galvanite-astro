@@ -32,9 +32,15 @@ const art = {
   performance: PerformanceArt,
 };
 const right = '3xl:block lg:hidden';
+const edges = [
+  'max-sm:border-r',
+  'max-lg:border-r max-sm:border-l',
+  'max-sm:border-r sm:max-xl:border-l max-sm:border-l',
+  'max-lg:border-r 3xl:border-r max-sm:border-l',
+];
 const line = 'bleed-x absolute z-10 h-px bg-white/10';
 const panel =
-  'backdrop-blur-bar bg-space-950/50 absolute inset-y-0 left-0 -right-6 3xl:right-0';
+  'backdrop-blur-bar bg-space-950/50 absolute inset-y-0 left-0 right-0 border-x border-white/10 lg:-right-6 lg:border-r-0 3xl:right-0 3xl:border-r';
 ---
 
 <section
@@ -91,13 +97,17 @@ const panel =
             />
           ),
         )}
-        {benefits.map(({ data }) => {
+        {benefits.map(({ data }, index) => {
           const Art = art[data.art];
           return (
             <article class="group relative flex flex-col">
               <div
                 aria-hidden="true"
-                class="backdrop-blur-bar bg-space-950/50 relative h-52.5 overflow-hidden"
+                class:list={[
+                  'backdrop-blur-bar bg-space-950/50 relative h-52.5 overflow-hidden border-white/10',
+                  index === 0 && 'border-l',
+                  edges[index],
+                ]}
               >
                 <div class="from-deep-800 to-deep-950 ease-out-soft absolute inset-0 bg-linear-to-t opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <Art />
