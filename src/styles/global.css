@@ -61,7 +61,7 @@
   --text-kpi-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
   --text-kpi-lg--line-height: 1;
   --text-kpi-lg--letter-spacing: -0.015em;
-  --text-stat: clamp(3.2rem, 4vw, 4.6rem);
+  --text-stat: clamp(2.9rem, 3.6vw, 4.2rem);
   --text-stat--line-height: 1;
   --text-stat--letter-spacing: -0.04em;
   --text-stat-label: 0.9625rem;
@@ -107,7 +107,6 @@
   --spacing-slide-lg: calc(50cqi - 7.5rem);
   --spacing-slide-3xl: calc(50cqi - 2.5rem);
   --spacing-case: calc(50% - 1.25rem);
-  --spacing-bullet-sm: 0.46875rem;
 
   --breakpoint-3xl: 100rem;
   --breakpoint-4xl: 120rem;
@@ -206,6 +205,23 @@
   @media (prefers-reduced-motion: no-preference) {
     [data-reveal-state='hidden'] & {
       clip-path: inset(100% 0 0 0);
+      transition: none;
+    }
+  }
+}
+
+@utility reveal-line-mask {
+  overflow: clip;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+@utility reveal-line {
+  transition: translate 1s var(--ease-out-expo)
+    calc(var(--delay, 0ms) + var(--line, 0) * 75ms);
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal-state='hidden'] & {
+      translate: 0 110%;
       transition: none;
     }
   }
