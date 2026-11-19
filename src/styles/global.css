@@ -115,6 +115,7 @@
   --ease-standard: ease;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-marquee: marquee 80s linear infinite;
   --animate-confetti: confetti 700ms var(--ease-out-soft) 150ms both;
@@ -192,6 +193,27 @@
     }
     to {
       transform: rotate(-5deg);
+    }
+  }
+}
+
+@utility reveal-mask {
+  clip-path: inset(0);
+  transition: clip-path 1.2s var(--ease-out-expo) var(--delay, 0ms);
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal-state='hidden'] & {
+      clip-path: inset(100% 0 0 0);
+      transition: none;
+    }
+  }
+}
+
+@utility reveal-zoom {
+  transition: scale 1.4s var(--ease-out-expo) var(--delay, 0ms);
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal-state='hidden'] & {
+      scale: 1.08;
+      transition: none;
     }
   }
 }
