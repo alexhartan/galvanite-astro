@@ -5,7 +5,6 @@ import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
 import Pricing from '../components/sections/Pricing.astro';
-import Process from '../components/sections/Process.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import SectionLink from '../components/ui/SectionLink.astro';
 import SiteHeader from '../components/sections/SiteHeader.astro';
@@ -34,20 +33,15 @@ const sections = [
   { href: '#engagements', label: 'Where to Start', dark: true },
   { href: '#why', label: 'Why Galvanite', dark: true },
   { href: '#testimonials', label: 'Testimonials', dark: true },
-  { href: '#process', label: 'The Process', dark: true },
 ];
-const why = {
-  label: 'Why Galvanite',
-  heading: 'Why teams choose Galvanite',
-  stats: [
-    { value: '2 months', label: 'From rebrand and launch to successful exit' },
-    { value: '120M+', label: 'In acquisitions after the rebrand and launch' },
-    {
-      value: '16+ years',
-      label: 'Experience in branding and product development',
-    },
-  ],
-};
+const stats = [
+  { value: '2 months', label: 'From rebrand and launch to successful exit' },
+  { value: '120M+', label: 'In acquisitions after the rebrand and launch' },
+  {
+    value: '16+ years',
+    label: 'Experience in branding and product development',
+  },
+];
 const closing = {
   lead: 'It’s time to build a brand',
   emphasis: 'worthy of your product',
@@ -55,8 +49,7 @@ const closing = {
     'Book a 30-minute discovery call. We look at your site together, find where the value gets lost, and agree on the first steps.',
 };
 const process = {
-  label: 'The process',
-  heading: 'Modular process, focused on what matters',
+  heading: 'A modular process, focused on what matters',
   description:
     'Our sprint-based process is designed for fast-moving startups, with each stage building on the last, and weekly check-ins to maintain momentum.',
   weeks: 6,
@@ -72,6 +65,11 @@ const process = {
     { name: 'Development', start: 3, end: 5 },
     { name: 'QA & launch', start: 4, end: 6 },
   ],
+};
+const why = {
+  label: 'Why Galvanite',
+  heading: 'Why teams choose Galvanite',
+  process,
 };
 const link = (index: number) => ({
   ...sections[index]!,
@@ -90,16 +88,14 @@ const link = (index: number) => ({
   <SectionLink {...link(1)} />
   <FeaturedWork label="Featured work" />
   <SectionLink {...link(2)} />
-  <Pricing
-    label="Where to start"
-    heading="How we"
-    emphasis="work together"
-  />
+  <Pricing label="Where to start" heading="How we" emphasis="work together" />
   <SectionLink {...link(3)} />
   <WhyGalvanite {...why} />
   <ClosingCta {...closing} />
   <SectionLink {...link(4)} />
-  <Testimonials label="Testimonials" heading="Don’t take our word for it" />
-  <SectionLink {...link(5)} />
-  <Process {...process} />
+  <Testimonials
+    label="Testimonials"
+    heading="Don’t take our word for it"
+    stats={stats}
+  />
 </BaseLayout>
