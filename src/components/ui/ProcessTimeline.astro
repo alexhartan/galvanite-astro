@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import alex from '../../assets/process/alex.jpg';
 import CheckIcon from './CheckIcon.astro';
 
 interface Props {
@@ -78,24 +76,8 @@ const label_ =
   </ol>
   <div
     aria-hidden="true"
-    class="timeline-line ease-out-soft absolute inset-y-0 w-px transition-opacity duration-500 group-data-done/timeline:opacity-0 bg-linear-to-b from-white/10 via-white to-white/10"
+    class="timeline-line ease-out-soft absolute inset-y-0 w-px opacity-0 transition-opacity duration-500 group-data-playing/timeline:opacity-100 bg-linear-to-b from-white/10 via-white to-white/10"
   ></div>
-  <div
-    data-tooltip
-    aria-hidden="true"
-    class="max-lg:hidden timeline-tip ease-out-soft text-sky text-xs pointer-events-none absolute bottom-2 ml-2 flex translate-y-1 items-center gap-2 leading-tight opacity-0 transition-[opacity,translate] duration-300 data-visible:translate-y-0 data-visible:opacity-100"
-  >
-    <Image
-      src={alex}
-      alt=""
-      width={24}
-      height={24}
-      densities={[1, 2]}
-      format="webp"
-      class="size-6 rounded-sm object-cover"
-    />
-    <span class="w-min">Weekly Sync</span>
-  </div>
 </div>
 
 <script>

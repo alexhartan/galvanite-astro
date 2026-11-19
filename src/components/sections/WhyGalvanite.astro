@@ -33,7 +33,7 @@ const art = {
   performance: PerformanceArt,
 };
 const card =
-  'ease-out-soft pointer-events-none absolute inset-0 rounded-sm bg-space-950/50 backdrop-blur-bar opacity-0 transition duration-300';
+  'ease-out-soft pointer-events-none absolute inset-0 rounded-sm border border-white/10 bg-space-950/50 shadow-card backdrop-blur-bar opacity-0 transition duration-300';
 const line = 'bleed-x absolute top-0 h-px bg-white/10';
 const right = '3xl:block lg:hidden';
 ---
@@ -70,7 +70,7 @@ const right = '3xl:block lg:hidden';
         {benefits.map(({ data }) => {
           const Art = art[data.art];
           return (
-            <article class="group relative flex flex-col py-10">
+            <article class="group relative flex flex-col pb-10">
               <div
                 aria-hidden="true"
                 class:list={[
@@ -78,8 +78,13 @@ const right = '3xl:block lg:hidden';
                   'pointer-fine:group-hover:-translate-y-1 pointer-fine:group-hover:opacity-100',
                 ]}
               />
-              <div aria-hidden="true" class="relative h-32 overflow-hidden">
-                <div class="absolute top-0 left-0 h-52.5 w-full origin-top-left scale-60">
+              <div aria-hidden="true" class="relative h-36 overflow-hidden">
+                <div
+                  class:list={[
+                    'absolute bottom-0 left-0 h-45 w-full origin-bottom-left',
+                    data.art === 'strategy' ? 'scale-60' : 'scale-80',
+                  ]}
+                >
                   <Art />
                 </div>
               </div>
