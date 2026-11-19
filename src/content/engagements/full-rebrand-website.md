@@ -1,9 +1,9 @@
 ---
-name: Full Rebrand & Website
+name: Rebrand & Full Website
 order: 3
 tier: premium
 audience: For teams heading into a round or a category push, rebuilding from the ground up.
-price: 'Custom'
+price: '$20-$50,000'
 duration: 8+ weeks
 features:
   - 'Messaging framework and positioning'
