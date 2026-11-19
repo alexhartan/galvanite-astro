@@ -107,6 +107,7 @@
   --spacing-slide-lg: calc(50cqi - 7.5rem);
   --spacing-slide-3xl: calc(50cqi - 2.5rem);
   --spacing-case: calc(50% - 1.25rem);
+  --spacing-viewport: 100svh;
 
   --breakpoint-3xl: 100rem;
   --breakpoint-4xl: 120rem;
@@ -227,6 +228,13 @@
   }
 }
 
+@utility reveal-after {
+  [data-reveal-state='hidden'] &,
+  [data-reveal-state='shown'] & {
+    visibility: hidden;
+  }
+}
+
 @utility reveal-zoom {
   transition: scale 1.8s var(--ease-out-expo) var(--delay, 0ms);
   @media (prefers-reduced-motion: no-preference) {
@@ -238,7 +246,7 @@
 }
 
 @utility clip-left {
-  clip-path: inset(0 -100vw 0 0);
+  clip-path: inset(-100vh -100vw -100vh 0);
 }
 
 @layer base {
