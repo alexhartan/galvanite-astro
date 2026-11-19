@@ -1,16 +1,17 @@
-const SNAP_PX = 6;
-const DURATION_S = 7;
+const PLAY_S = 2.8;
+const RESET_S = 0.5;
+const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
 
 export function initTimeline(root: HTMLElement) {
-  const tooltip = root.querySelector<HTMLElement>('[data-tooltip]');
   const stages = [...root.querySelectorAll<HTMLElement>('[data-stage]')];
-  const weeks = Number(getComputedStyle(root).getPropertyValue('--weeks')) || 8;
   const trigger = root.closest<HTMLElement>('[data-process]') ?? root;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
   let position = 0;
-  let playing = false;
-  let last = 0;
+  let from = 0;
+  let to = 0;
+  let duration = 1;
+  let start = 0;
   let frame = 0;
 
   const paint = () => {
@@ -21,28 +22,28 @@ export function initTimeline(root: HTMLElement) {
         position >= Number(stage.dataset.end) - 0.0005,
       ),
     );
-    const week = Math.round(position * weeks);
-    const near =
-      Math.abs(position * weeks - week) * (root.clientWidth / weeks) < SNAP_PX;
-    const show = near && week > 0 && week < weeks;
-    if (show) root.style.setProperty('--tip', String(week));
-    tooltip?.toggleAttribute('data-visible', show);
-    root.toggleAttribute('data-done', position >= 0.995);
   };
 
   const step = (now: number) => {
-    const dt = Math.min((now - last) / 1000, 1 / 30);
-    last = now;
-    position = Math.min(1, position + dt / DURATION_S);
+    const t = Math.min(1, (now - start) / 1000 / duration);
+    position = from + (to - from) * ease(t);
     paint();
-    frame = playing && position < 1 ? requestAnimationFrame(step) : 0;
+    frame = t < 1 ? requestAnimationFrame(step) : 0;
+  };
+
+  const tween = (target: number, seconds: number, reset = false) => {
+    if (reset) position = 0;
+    from = position;
+    to = target;
+    duration = seconds;
+    start = performance.now();
+    if (!frame) frame = requestAnimationFrame(step);
   };
 
   const play = (on: boolean) => {
-    playing = on;
-    if (!on || frame || position >= 1) return;
-    last = performance.now();
-    frame = requestAnimationFrame(step);
+    root.toggleAttribute('data-playing', on);
+    if (on) tween(1, PLAY_S, true);
+    else tween(0, RESET_S);
   };
 
   if (reduced.matches) {

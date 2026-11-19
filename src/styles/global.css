@@ -117,6 +117,7 @@
   --breakpoint-4xl: 120rem;
 
   --blur-bar: 10px;
+  --shadow-card: 0 0.25rem 0 var(--color-abyss);
 
   --ease-standard: ease;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -326,10 +327,6 @@
     (var(--p, 0.5) * var(--weeks) - var(--start) - 1) / var(--weeks) * 100cqi
   );
   width: calc(100cqi / var(--weeks));
-}
-
-@utility timeline-tip {
-  left: calc(var(--tip, 0) / var(--weeks) * 100%);
 }
 
 @utility reveal-letter {
