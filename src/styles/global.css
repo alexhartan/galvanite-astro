@@ -58,6 +58,9 @@
   --text-benefit--line-height: 1.1;
   --text-process: clamp(1.375rem, 1.4vw, 1.75rem);
   --text-process--line-height: 1.1;
+  --text-section: clamp(2.1875rem, 3vw, 3.625rem);
+  --text-section--line-height: 1;
+  --text-section--letter-spacing: -0.015em;
   --text-kpi-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
   --text-kpi-lg--line-height: 1;
   --text-kpi-lg--letter-spacing: -0.015em;
@@ -243,6 +246,10 @@
       transition: none;
     }
   }
+}
+
+@utility bleed-r {
+  right: -100vw;
 }
 
 @utility clip-left {
