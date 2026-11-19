@@ -45,8 +45,8 @@
   --text-case--line-height: 1.04;
   --text-case--letter-spacing: -0.04em;
   --text-card: clamp(1.625rem, 2.08vw, 2.1125rem);
-  --text-card--line-height: 1.25;
-  --text-card--letter-spacing: -0.02em;
+  --text-card--line-height: 1.15;
+  --text-card--letter-spacing: -0.025em;
   --text-nav-label: 0.875rem;
   --text-tag: 0.65625rem;
   --text-stage: 0.6875rem;
