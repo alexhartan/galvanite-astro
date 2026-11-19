@@ -81,16 +81,23 @@ const arrow =
                 >
                   <Tag href={data.href} class="block">
                     <div class="ease-out-soft relative overflow-hidden transition-opacity duration-500 group-data-peek:opacity-50">
-                      <Picture
-                        src={data.image}
-                        alt={data.imageAlt}
-                        formats={['avif', 'webp']}
-                        widths={[400, 600, 800, 1200]}
-                        sizes="(min-width: 1024px) 40vw, (min-width: 640px) 60vw, 85vw"
-                        quality={78}
-                        draggable="false"
-                        class="ease-out-soft aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-102"
-                      />
+                      <div
+                        class="reveal-mask"
+                        style={`--delay: ${Math.min(index, 3) * 120}ms`}
+                      >
+                        <div class="reveal-zoom">
+                          <Picture
+                            src={data.image}
+                            alt={data.imageAlt}
+                            formats={['avif', 'webp']}
+                            widths={[400, 600, 800, 1200]}
+                            sizes="(min-width: 1024px) 40vw, (min-width: 640px) 60vw, 85vw"
+                            quality={78}
+                            draggable="false"
+                            class="ease-out-soft aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-102"
+                          />
+                        </div>
+                      </div>
                       <div class="ease-out-soft absolute right-0 bottom-0 flex translate-y-4 items-center gap-4 bg-black/66 px-4 py-4 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-data-peek:hidden motion-reduce:translate-y-0 lg:gap-6 lg:px-6.5 lg:py-4.75">
                         <span class="text-kpi-case tracking-display font-light whitespace-nowrap text-white">
                           {data.kpi}
@@ -136,10 +143,12 @@ const arrow =
 
 <script>
   import { initCaseSlider } from '../../scripts/case-slider';
+  import { initImageReveal } from '../../scripts/image-reveal';
 
   for (const root of document.querySelectorAll<HTMLElement>(
     '[data-case-slider]',
   )) {
     initCaseSlider(root);
+    initImageReveal(root);
   }
 </script>
