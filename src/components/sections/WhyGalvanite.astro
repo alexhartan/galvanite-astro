@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
-import GridMark from '../ui/GridMark.astro';
 import ProcessTimeline from '../ui/ProcessTimeline.astro';
 import BuildArt from '../ui/art/BuildArt.astro';
 import ConsistencyArt from '../ui/art/ConsistencyArt.astro';
@@ -14,6 +13,7 @@ interface Props {
   id?: string;
   label: string;
   heading: string;
+  description: string;
   process: {
     heading: string;
     description: string;
@@ -21,7 +21,7 @@ interface Props {
     stages: { name: string; short?: string; start: number; end: number }[];
   };
 }
-const { id = 'why', label, heading, process } = Astro.props;
+const { id = 'why', label, heading, description, process } = Astro.props;
 const benefits = (await getCollection('benefits')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -31,16 +31,8 @@ const art = {
   build: BuildArt,
   performance: PerformanceArt,
 };
-const right = '3xl:block lg:hidden';
-const edges = [
-  'max-sm:border-r',
-  'max-lg:border-r max-sm:border-l',
-  'max-sm:border-r sm:max-xl:border-l max-sm:border-l',
-  'max-lg:border-r 3xl:border-r max-sm:border-l',
-];
-const line = 'bleed-x absolute z-10 h-px bg-white/10';
-const panel =
-  'backdrop-blur-bar bg-space-950/50 absolute inset-y-0 left-0 right-0 border-x border-white/10 lg:-right-6 lg:border-r-0 3xl:right-0 3xl:border-r';
+const card =
+  'ease-out-soft pointer-events-none absolute inset-0 rounded-sm border border-white/10 bg-linear-to-b from-deep-800 to-deep-950 opacity-0 shadow-2xl shadow-black/40 transition duration-300';
 ---
 
 <section
@@ -54,73 +46,66 @@ const panel =
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <h3 class="text-section mt-28 pb-6.75 lg:mt-44">{heading}</h3>
-      <div class="group/process relative flex flex-col gap-9 py-5 lg:flex-row lg:gap-18">
-        <div aria-hidden="true" class={panel}></div>
-        <div class:list={[line, 'top-0']}></div>
-        <GridMark inverted class="absolute top-0 left-0 z-10" />
-        <GridMark
-          inverted
-          class:list={[right, 'absolute top-0 left-full z-10 -ml-px']}
-        />
-        <div class="relative flex flex-col justify-center gap-3 pl-6 lg:w-1/3 lg:shrink-0">
-          <h4 class="text-sky text-process ease-out-soft font-light text-balance transition-colors duration-300 group-hover/process:text-white">
-            {process.heading}
-          </h4>
-          <p class="text-frost/80 ease-out-soft max-w-sm text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover/process:opacity-100">
-            {process.description}
-          </p>
-        </div>
-        <div class="relative lg:min-w-0 lg:flex-1 lg:pr-3">
-          <ProcessTimeline weeks={process.weeks} stages={process.stages} />
-        </div>
+      <div class="mt-28 lg:mt-44">
+        <h3 class="text-section">{heading}</h3>
+        <p class="text-frost/80 max-w-lead mt-6 text-balance">{description}</p>
       </div>
-      <div class="relative grid gap-y-12 sm:grid-cols-2 sm:gap-x-6 xl:grid-cols-4 xl:gap-x-0">
-        <div class:list={[line, 'top-0']}></div>
-        <div class:list={[line, 'top-52.5 max-xl:hidden']}></div>
-        <GridMark inverted class="absolute top-0 left-0 z-10" />
-        <GridMark
-          inverted
-          class:list={[right, 'absolute top-0 left-full z-10 -ml-px']}
-        />
-        {['left-0', 'left-1/4', 'left-1/2', 'left-3/4', 'left-full -ml-px'].map(
-          (position, index) => (
-            <GridMark
-              inverted
-              class:list={[
-                'absolute top-52.5 z-10 max-xl:hidden',
-                position,
-                index === 4 && right,
-              ]}
-            />
-          ),
-        )}
-        {benefits.map(({ data }, index) => {
+      <div class="mt-16 grid gap-4 sm:grid-cols-2 lg:mt-20 xl:grid-cols-4">
+        {benefits.map(({ data }) => {
           const Art = art[data.art];
           return (
-            <article class="group relative flex flex-col">
+            <article class="group relative flex flex-col p-4">
               <div
                 aria-hidden="true"
                 class:list={[
-                  'backdrop-blur-bar bg-space-950/50 relative h-52.5 overflow-hidden border-white/10',
-                  index === 0 && 'border-l',
-                  edges[index],
+                  card,
+                  'pointer-fine:group-hover:-translate-y-1 pointer-fine:group-hover:opacity-100',
                 ]}
+              />
+              <div
+                aria-hidden="true"
+                class="relative h-48 overflow-hidden rounded-sm"
               >
-                <div class="from-deep-800 to-deep-950 ease-out-soft absolute inset-0 bg-linear-to-t opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <Art />
+                <div class="absolute inset-0 -translate-x-1/6 -translate-y-1/12 scale-125">
+                  <Art />
+                </div>
               </div>
-              <div class="@container pt-4 pl-6">
+              <div class="ease-out-soft relative px-2 pt-5 pb-2 transition-transform duration-300 pointer-fine:group-hover:-translate-y-1">
                 <h4 class="text-sky text-benefit ease-out-soft font-normal transition-colors duration-300 group-hover:text-white">
                   {data.title}
                 </h4>
-                <p class="text-frost/80 ease-out-soft mt-2 max-w-72 text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100">
+                <p class="text-frost/80 ease-out-soft mt-2 text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100">
                   {data.summary}
                 </p>
               </div>
             </article>
           );
         })}
+      </div>
+      <div class="mt-16 grid lg:mt-24 xl:grid-cols-4 xl:gap-4">
+        <div
+          data-process
+          class="group/process relative p-6 xl:col-span-2 xl:col-start-2"
+        >
+          <div
+            aria-hidden="true"
+            class:list={[
+              card,
+              'pointer-fine:group-hover/process:-translate-y-1 pointer-fine:group-hover/process:opacity-100',
+            ]}
+          />
+          <div class="relative">
+            <h4 class="text-sky text-process ease-out-soft font-light text-balance transition-colors duration-300 group-hover/process:text-white">
+              {process.heading}
+            </h4>
+            <p class="text-frost/80 ease-out-soft mt-3 max-w-md text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover/process:opacity-100">
+              {process.description}
+            </p>
+            <div class="mt-6">
+              <ProcessTimeline weeks={process.weeks} stages={process.stages} />
+            </div>
+          </div>
+        </div>
       </div>
     </Container>
   </div>
