@@ -5,10 +5,11 @@ import GridMark from './GridMark.astro';
 interface Props {
   inverted?: boolean;
   bottom?: boolean;
+  edge?: boolean;
 }
-const { inverted = false, bottom = false } = Astro.props;
+const { inverted = false, bottom = false, edge = true } = Astro.props;
 const line = inverted ? 'bg-white/10' : 'bg-ink/10';
-const right = '3xl:block lg:hidden';
+const right = edge ? '3xl:block lg:hidden' : 'hidden';
 ---
 
 <Container class="pointer-events-none absolute inset-0">
