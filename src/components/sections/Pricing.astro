@@ -121,7 +121,7 @@ const tiers = {
                   <h4 class:list={['text-2xl font-semibold', tier.name]}>
                     {data.name}
                   </h4>
-                  <p class:list={['mt-1.5 text-sm text-balance', tier.muted]}>
+                  <p class:list={['mt-1.5 text-base text-balance', tier.muted]}>
                     {data.audience}
                   </p>
                   <p
@@ -131,7 +131,7 @@ const tiers = {
                       <span class="font-light">{data.pricePrefix} </span>
                     )}
                     {data.price}
-                    <span class="text-azure text-label mt-3 block tracking-widest uppercase">
+                    <span class="text-azure mt-3 block text-sm tracking-widest uppercase">
                       {data.duration}
                     </span>
                   </p>
