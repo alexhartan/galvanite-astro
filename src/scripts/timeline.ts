@@ -27,6 +27,7 @@ export function initTimeline(root: HTMLElement) {
     const show = near && week > 0 && week < weeks;
     if (show) root.style.setProperty('--tip', String(week));
     tooltip?.toggleAttribute('data-visible', show);
+    root.toggleAttribute('data-done', position >= 1);
   };
 
   const scrolled = () => {
