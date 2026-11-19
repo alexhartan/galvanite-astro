@@ -20,7 +20,7 @@ const hero = {
 const mission = {
   label: 'Our mission',
   statement: [
-    { text: 'Memorable brands and websites for ' },
+    { text: 'Premium brands and websites for ' },
     { text: 'technical products ', strong: true },
     { text: 'that ' },
     { text: 'outgrew their story', strong: true },
@@ -30,7 +30,7 @@ const mission = {
 const sections = [
   { href: '#intro', label: 'Our Mission' },
   { href: '#work', label: 'Featured Work' },
-  { href: '#engagements', label: 'Where to Start', dark: true },
+  { href: '#engagements', label: 'Pricing', dark: true },
   { href: '#why', label: 'Why Galvanite', dark: true },
   { href: '#testimonials', label: 'Testimonials', dark: true },
 ];
@@ -88,7 +88,7 @@ const link = (index: number) => ({
   <SectionLink {...link(1)} />
   <FeaturedWork label="Featured work" />
   <SectionLink {...link(2)} />
-  <Pricing label="Where to start" heading="How we" emphasis="work together" />
+  <Pricing label="Pricing" heading="How we" emphasis="work together" />
   <SectionLink {...link(3)} />
   <WhyGalvanite {...why} />
   <ClosingCta {...closing} />
