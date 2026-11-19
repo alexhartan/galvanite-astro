@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import GridMark from '../ui/GridMark.astro';
 import ProcessTimeline from '../ui/ProcessTimeline.astro';
 import BuildArt from '../ui/art/BuildArt.astro';
 import ConsistencyArt from '../ui/art/ConsistencyArt.astro';
@@ -32,7 +33,9 @@ const art = {
   performance: PerformanceArt,
 };
 const card =
-  'ease-out-soft pointer-events-none absolute inset-0 rounded-sm border border-white/10 bg-linear-to-b from-deep-800 to-deep-950 opacity-0 shadow-2xl shadow-black/40 transition duration-300';
+  'ease-out-soft pointer-events-none absolute inset-0 rounded-sm bg-space-950/50 backdrop-blur-bar opacity-0 transition duration-300';
+const line = 'bleed-x absolute top-0 h-px bg-white/10';
+const right = '3xl:block lg:hidden';
 ---
 
 <section
@@ -50,11 +53,24 @@ const card =
         <h3 class="text-section">{heading}</h3>
         <p class="text-frost/80 max-w-lead mt-6 text-balance">{description}</p>
       </div>
-      <div class="mt-16 grid gap-4 sm:grid-cols-2 lg:mt-20 xl:grid-cols-4">
+      <div class="relative mt-16 grid sm:grid-cols-2 lg:mt-20 xl:grid-cols-4">
+        <div aria-hidden="true" class={line}></div>
+        {[
+          'left-0',
+          'left-1/2 max-sm:hidden',
+          'left-1/4 max-xl:hidden',
+          'left-3/4 max-xl:hidden',
+        ].map((position) => (
+          <GridMark inverted class:list={['absolute top-0', position]} />
+        ))}
+        <GridMark
+          inverted
+          class:list={[right, 'absolute top-0 left-full -ml-px']}
+        />
         {benefits.map(({ data }) => {
           const Art = art[data.art];
           return (
-            <article class="group relative flex flex-col p-4">
+            <article class="group relative flex flex-col py-10">
               <div
                 aria-hidden="true"
                 class:list={[
@@ -62,15 +78,12 @@ const card =
                   'pointer-fine:group-hover:-translate-y-1 pointer-fine:group-hover:opacity-100',
                 ]}
               />
-              <div
-                aria-hidden="true"
-                class="relative h-48 overflow-hidden rounded-sm"
-              >
-                <div class="absolute inset-0 -translate-x-1/6 -translate-y-1/12 scale-125">
+              <div aria-hidden="true" class="relative h-32 overflow-hidden">
+                <div class="absolute top-0 left-0 h-52.5 w-full origin-top-left scale-60">
                   <Art />
                 </div>
               </div>
-              <div class="ease-out-soft relative px-2 pt-5 pb-2 transition-transform duration-300 pointer-fine:group-hover:-translate-y-1">
+              <div class="ease-out-soft relative px-6 pt-5 transition-transform duration-300 pointer-fine:group-hover:-translate-y-1">
                 <h4 class="text-sky text-benefit ease-out-soft font-normal transition-colors duration-300 group-hover:text-white">
                   {data.title}
                 </h4>
@@ -82,10 +95,20 @@ const card =
           );
         })}
       </div>
-      <div class="mt-16 grid lg:mt-24 xl:grid-cols-4 xl:gap-4">
+      <div class="relative grid xl:grid-cols-4">
+        <div aria-hidden="true" class={line}></div>
+        {['left-0', 'left-1/4 max-xl:hidden', 'left-3/4 max-xl:hidden'].map(
+          (position) => (
+            <GridMark inverted class:list={['absolute top-0', position]} />
+          ),
+        )}
+        <GridMark
+          inverted
+          class:list={[right, 'absolute top-0 left-full -ml-px']}
+        />
         <div
           data-process
-          class="group/process relative p-6 xl:col-span-2 xl:col-start-2"
+          class="group/process relative px-6 py-10 xl:col-span-2 xl:col-start-2"
         >
           <div
             aria-hidden="true"
