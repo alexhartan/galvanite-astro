@@ -24,10 +24,6 @@ const twoLines = (text: string) => {
 const cases = (await getCollection('caseStudies')).sort(
   (a, b) => a.data.order - b.data.order,
 );
-const icon =
-  'opacity-80 transition-opacity duration-200 ease-out-soft group-hover:opacity-100';
-const arrow =
-  'group relative flex size-11 cursor-pointer items-center justify-center border border-ink/10 text-ocean transition-opacity duration-200 ease-out-soft disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean';
 ---
 
 <section
@@ -37,118 +33,94 @@ const arrow =
   class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <SectionFrame />
-  <div data-guide class="border-ink/10 relative border-t">
-    <Container class="pt-12 pb-32 lg:pt-16 lg:pb-48">
+  <div data-guide class="border-ink/10 relative border-t pb-32 lg:pb-48">
+    <Container class="pt-12 lg:pt-16">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
-      <div
-        data-case-slider
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="Case studies"
-      >
-        <div class="flex justify-end">
-          <div class="flex">
-            <button
-              type="button"
-              data-prev
-              aria-label="Previous case study"
-              class={arrow}
-            >
-              <ArrowIcon class:list={[icon, 'rotate-180']} />
-            </button>
-            <button
-              type="button"
-              data-next
-              aria-label="Next case study"
-              class:list={[arrow, '-ml-px']}
-            >
-              <ArrowIcon class={icon} />
-            </button>
-          </div>
-        </div>
-        <div data-viewport class="clip-left 3xl:-mr-page-bleed -mr-6 mt-8">
-          <div class="flex touch-pan-y gap-6 pr-6 lg:gap-10">
-            {cases.map(({ data }, index) => {
-              const Tag = data.href ? 'a' : 'div';
-              const lines = twoLines(data.kpiLabel);
-              return (
-                <article
-                  data-slide
-                  role="group"
-                  aria-roledescription="slide"
-                  aria-label={`${index + 1} of ${cases.length}`}
-                  class="group w-5/6 shrink-0 data-peek:cursor-pointer sm:w-3/5 lg:w-5/12"
-                >
-                  <Tag href={data.href} class="block">
-                    <div class="ease-out-soft relative overflow-hidden transition-opacity duration-500 group-data-peek:opacity-50">
-                      <div
-                        class="reveal-mask"
-                        style={`--delay: ${Math.min(index, 3) * 160}ms`}
-                      >
-                        <div class="reveal-zoom">
-                          <Picture
-                            src={data.image}
-                            alt={data.imageAlt}
-                            formats={['avif', 'webp']}
-                            widths={[400, 600, 800, 1200]}
-                            sizes="(min-width: 1024px) 40vw, (min-width: 640px) 60vw, 85vw"
-                            quality={78}
-                            draggable="false"
-                            class="ease-out-soft aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-102"
-                          />
+    </Container>
+    <div data-case-scroll class="relative mt-8 h-(--scroll-height,auto)">
+      <div data-sticky class="sticky top-(--sticky-top,var(--spacing-nav))">
+        <Container>
+          <div class="clip-left">
+            <div data-track class="flex translate-x-(--x,0) gap-6 lg:gap-10">
+              {cases.map(({ data }, index) => {
+                const Tag = data.href ? 'a' : 'div';
+                const lines = twoLines(data.kpiLabel);
+                return (
+                  <article
+                    data-slide
+                    class="group w-5/6 shrink-0 sm:w-3/5 lg:w-case"
+                  >
+                    <Tag href={data.href} class="block">
+                      <div class="relative overflow-hidden">
+                        <div
+                          class="reveal-mask"
+                          style={`--delay: ${Math.min(index, 3) * 160}ms`}
+                        >
+                          <div class="reveal-zoom">
+                            <Picture
+                              src={data.image}
+                              alt={data.imageAlt}
+                              formats={['avif', 'webp']}
+                              widths={[400, 600, 800, 1200]}
+                              sizes="(min-width: 1024px) 40vw, (min-width: 640px) 60vw, 85vw"
+                              quality={78}
+                              draggable="false"
+                              class="ease-out-soft aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-102"
+                            />
+                          </div>
+                        </div>
+                        <div class="ease-out-soft absolute right-0 bottom-0 flex translate-y-4 items-center gap-4 bg-black/66 px-4 py-4 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0 lg:gap-6 lg:px-6.5 lg:py-4.75">
+                          <span class="text-kpi-case tracking-display font-light whitespace-nowrap text-white">
+                            {data.kpi}
+                          </span>
+                          <span class="text-label leading-tight font-semibold tracking-widest whitespace-nowrap text-white/80 uppercase">
+                            {lines[0]}
+                            <br />
+                            {lines[1]}
+                          </span>
                         </div>
                       </div>
-                      <div class="ease-out-soft absolute right-0 bottom-0 flex translate-y-4 items-center gap-4 bg-black/66 px-4 py-4 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-data-peek:hidden motion-reduce:translate-y-0 lg:gap-6 lg:px-6.5 lg:py-4.75">
-                        <span class="text-kpi-case tracking-display font-light whitespace-nowrap text-white">
-                          {data.kpi}
-                        </span>
-                        <span class="text-label leading-tight font-semibold tracking-widest whitespace-nowrap text-white/80 uppercase">
-                          {lines[0]}
-                          <br />
-                          {lines[1]}
-                        </span>
+                      <div>
+                        <h4 class="text-card text-ink mt-6 font-normal text-balance">
+                          {data.title}
+                        </h4>
+                        <ul
+                          class="mt-4 flex flex-wrap gap-2.25"
+                          aria-label="Scope"
+                        >
+                          {data.scope.map((item) => (
+                            <li class="bg-ocean-50 text-azure-deep text-tag rounded-sm px-2.5 py-1.25 font-medium tracking-wider uppercase">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                        {data.href && (
+                          <span class="text-ink border-ink mt-6 inline-flex items-center gap-2 border-b-2 pb-1 text-sm font-semibold">
+                            Read the case study
+                            <ArrowIcon />
+                          </span>
+                        )}
                       </div>
-                    </div>
-                    <div class="ease-out-soft transition-opacity duration-500 group-data-peek:opacity-0">
-                      <h4 class="text-card text-ink mt-6 font-normal text-balance">
-                        {data.title}
-                      </h4>
-                      <ul
-                        class="mt-4 flex flex-wrap gap-2.25"
-                        aria-label="Scope"
-                      >
-                        {data.scope.map((item) => (
-                          <li class="bg-ocean-50 text-azure-deep text-tag rounded-sm px-2.5 py-1.25 font-medium tracking-wider uppercase">
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                      {data.href && (
-                        <span class="text-ink border-ink mt-6 inline-flex items-center gap-2 border-b-2 pb-1 text-sm font-semibold">
-                          Read the case study
-                          <ArrowIcon />
-                        </span>
-                      )}
-                    </div>
-                  </Tag>
-                </article>
-              );
-            })}
+                    </Tag>
+                  </article>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </Container>
       </div>
-    </Container>
+    </div>
   </div>
 </section>
 
 <script>
-  import { initCaseSlider } from '../../scripts/case-slider';
+  import { initCaseScroll } from '../../scripts/case-scroll';
   import { initImageReveal } from '../../scripts/image-reveal';
 
   for (const root of document.querySelectorAll<HTMLElement>(
-    '[data-case-slider]',
+    '[data-case-scroll]',
   )) {
-    initCaseSlider(root);
+    initCaseScroll(root);
     initImageReveal(root);
   }
 </script>
