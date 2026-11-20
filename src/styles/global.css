@@ -41,9 +41,6 @@
   --text-mission-xl: calc(84cqi / 14.3882);
   --text-mission-xl--line-height: 1.04;
   --text-mission-xl--letter-spacing: -0.04em;
-  --text-mission-showcase: calc(100.8cqi / 14.3882);
-  --text-mission-showcase--line-height: 1.04;
-  --text-mission-showcase--letter-spacing: -0.04em;
   --text-statement: clamp(2rem, 3.23vw, 3.875rem);
   --text-statement--line-height: 1.113;
   --text-statement--letter-spacing: -0.035em;

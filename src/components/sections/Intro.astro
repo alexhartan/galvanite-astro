@@ -7,16 +7,8 @@ interface Props {
   id?: string;
   label: string;
   statement: { text: string; strong?: boolean }[];
-  fill?: boolean;
-  large?: boolean;
 }
-const {
-  id = 'intro',
-  label,
-  statement,
-  fill = false,
-  large = false,
-} = Astro.props;
+const { id = 'intro', label, statement } = Astro.props;
 const fullText = statement.map(({ text }) => text).join('');
 let letterIndex = 0;
 const segments = statement.map(({ text, strong }) => ({
@@ -41,24 +33,12 @@ const reveal = letterIndex + 6;
 >
   <SectionFrame edge={false} />
   <div data-guide class="border-ink/10 relative overflow-clip border-t">
-    <Container
-      class:list={[
-        '@container',
-        fill
-          ? 'flex min-h-svh flex-col justify-center py-24'
-          : 'py-48 lg:py-80',
-      ]}
-    >
+    <Container class="@container py-48 lg:py-80">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
       <div data-parallax class="translate-y-(--shift)">
         <p
           data-reveal
-          class:list={[
-            'text-ink leading-none font-extralight text-balance',
-            large
-              ? 'text-statement lg:text-mission-showcase'
-              : 'max-w-mission text-statement lg:text-mission 4xl:text-mission-xl',
-          ]}
+          class="max-w-mission text-statement lg:text-mission 4xl:text-mission-xl text-ink leading-none font-extralight text-balance"
           style={`--n: ${reveal}`}
         >
           <span class="sr-only">{fullText}</span>
