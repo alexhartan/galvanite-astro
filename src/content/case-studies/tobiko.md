@@ -2,9 +2,9 @@
 title: How the Tobiko Data rebrand set the stage for their successful exit
 client: Tobiko Data
 order: 1
-scope: [Brand strategy, Web design & collateral, Web development]
+scope: [Positioning, Full Website Revamp, Marketing Kit]
 image: ../../assets/case-studies/tobiko.jpg
 imageAlt: Tobiko Cloud homepage on a phone, reading “The new standard in data transformations”
-kpi: 5 Months
-kpiLabel: From revamp to acquisition
+stats:
+  - Acquired by Fivetran, 5 months after the revamp
 ---

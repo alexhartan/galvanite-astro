@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import camera from '../../scripts/pricing-camera.json';
 import Container from '../ui/Container.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
+import SparkIcon from '../ui/SparkIcon.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import GridMark from '../ui/GridMark.astro';
 
@@ -30,7 +31,7 @@ const tiers = {
     name: 'text-white',
     muted: 'text-white/80',
     price: 'text-kpi text-frost mt-price font-medium',
-    plus: 1.25,
+    mark: 'text-azure',
     rule: 'max-lg:border-b border-white/10',
     item: 'text-frost',
   },
@@ -39,7 +40,7 @@ const tiers = {
     name: 'text-ink',
     muted: 'text-ink',
     price: 'text-kpi-lg text-ink mt-price-featured font-semibold',
-    plus: 2.5,
+    mark: 'text-signal',
     rule: 'border-b border-ink/10 -mx-8 px-8',
     item: 'text-ocean font-medium',
   },
@@ -48,7 +49,7 @@ const tiers = {
     name: 'text-white',
     muted: 'text-white/80',
     price: 'text-kpi text-frost mt-price font-medium',
-    plus: 2.5,
+    mark: 'text-signal',
     rule: 'max-lg:border-b border-white/10',
     item: 'text-frost',
   },
@@ -68,7 +69,7 @@ const tiers = {
         {label}
       </Eyebrow>
       <div data-parallax class="translate-y-(--shift) pt-40 lg:pt-60">
-        <h3 class="text-kpi-lg text-center font-extralight">
+        <h3 class="text-section text-center">
           {heading}
           {emphasis && (
             <>
@@ -120,7 +121,7 @@ const tiers = {
                   <h4 class:list={['text-2xl font-semibold', tier.name]}>
                     {data.name}
                   </h4>
-                  <p class:list={['mt-1.5 text-sm text-balance', tier.muted]}>
+                  <p class:list={['mt-1.5 text-base text-balance', tier.muted]}>
                     {data.audience}
                   </p>
                   <p
@@ -130,7 +131,7 @@ const tiers = {
                       <span class="font-light">{data.pricePrefix} </span>
                     )}
                     {data.price}
-                    <span class="text-azure text-label mt-3 block tracking-widest uppercase">
+                    <span class="text-azure mt-3 block text-sm tracking-widest uppercase">
                       {data.duration}
                     </span>
                   </p>
@@ -141,7 +142,7 @@ const tiers = {
                     {data.features.map((feature) => (
                       <li
                         class:list={[
-                          'ease-out-soft pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-within:opacity-100 flex gap-3 text-sm transition-opacity duration-300',
+                          'ease-out-soft pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-within:opacity-100 flex gap-2 text-sm transition-opacity duration-300',
                           tier.item,
                         ]}
                       >
@@ -149,15 +150,12 @@ const tiers = {
                           aria-hidden="true"
                           class="flex h-lh shrink-0 items-center"
                         >
-                          <svg
-                            class="text-signal ease-out-soft pointer-fine:opacity-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-within:opacity-100 size-2.5 transition-opacity duration-300"
-                            viewBox="0 0 10 10"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width={tier.plus}
-                          >
-                            <path d="M5 0v10M0 5h10" />
-                          </svg>
+                          <SparkIcon
+                            class:list={[
+                              'size-3 ease-out-soft pointer-fine:opacity-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-within:opacity-100 transition-opacity duration-300',
+                              tier.mark,
+                            ]}
+                          />
                         </span>
                         {feature}
                       </li>

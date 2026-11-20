@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Intro from '../components/sections/Intro.astro';
+import SectionLink from '../components/ui/SectionLink.astro';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import airbnb from '../assets/showcase/airbnb.svg';
+import google from '../assets/showcase/google.svg';
+import intel from '../assets/showcase/intel.svg';
+import netflix from '../assets/showcase/netflix.svg';
+import nvidia from '../assets/showcase/nvidia.svg';
+import sap from '../assets/showcase/sap.svg';
+import spotify from '../assets/showcase/spotify.svg';
+import stripe from '../assets/showcase/stripe.svg';
+import ibm from '../assets/showcase/ibm.svg';
+import microsoft from '../assets/showcase/microsoft.svg';
+
+const hero = {
+  eyebrow: 'A short line that sets the scene',
+  lead: 'Massive headline about the cool stuff we do',
+  emphasis: '',
+  description:
+    'Supporting sentence giving more context about what we do, how we do it and why it matters.',
+  trust: 'Trusted by industry giants:',
+  logos: [
+    { name: 'Google', logo: google },
+    { name: 'Airbnb', logo: airbnb },
+    { name: 'SAP', logo: sap },
+    { name: 'Stripe', logo: stripe },
+    { name: 'Spotify', logo: spotify },
+    { name: 'NVIDIA', logo: nvidia },
+    { name: 'Microsoft', logo: microsoft },
+    { name: 'Netflix', logo: netflix },
+    { name: 'IBM', logo: ibm },
+    { name: 'Intel', logo: intel },
+  ],
+  large: true,
+};
+const mission = {
+  label: 'Our mission',
+  fill: true,
+  large: true,
+  statement: [
+    {
+      text: 'This is where we’ll have the mission statement, describing the amazing stuff we do and how it’s changing the world.',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Showcase | Galvanite"
+  description="A placeholder page for showcasing the Galvanite layout."
+  noindex
+>
+  <SiteHeader slot="header" />
+  <Hero {...hero} />
+  <SectionLink href="#intro" label="Our Mission" position={0} />
+  <Intro {...mission} />
+</BaseLayout>

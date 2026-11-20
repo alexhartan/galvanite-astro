@@ -38,6 +38,12 @@
   --text-mission: calc(75cqi / 14.3882);
   --text-mission--line-height: 1.04;
   --text-mission--letter-spacing: -0.04em;
+  --text-mission-xl: calc(84cqi / 14.3882);
+  --text-mission-xl--line-height: 1.04;
+  --text-mission-xl--letter-spacing: -0.04em;
+  --text-mission-showcase: calc(92cqi / 14.3882);
+  --text-mission-showcase--line-height: 1.04;
+  --text-mission-showcase--letter-spacing: -0.04em;
   --text-statement: clamp(2rem, 3.23vw, 3.875rem);
   --text-statement--line-height: 1.113;
   --text-statement--letter-spacing: -0.035em;
@@ -51,20 +57,27 @@
   --text-tag: 0.65625rem;
   --text-stage: 0.6875rem;
   --text-label: 0.75rem;
-  --text-benefit: min(1.25rem, calc(100cqi / 12.4));
-  --text-benefit--line-height: 1.3;
+  --text-benefit: clamp(1rem, 1.05vw, 1.3125rem);
+  --text-benefit--line-height: 1.1;
+  --text-process: clamp(1.375rem, 1.4vw, 1.75rem);
+  --text-process--line-height: 1.1;
+  --text-section: clamp(2.1875rem, 3vw, 3.625rem);
+  --text-section--line-height: 1;
+  --text-section--letter-spacing: -0.033em;
+  --text-section--font-weight: 200;
   --text-kpi-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
   --text-kpi-lg--line-height: 1;
   --text-kpi-lg--letter-spacing: -0.015em;
-  --text-stat: clamp(3.2rem, 4vw, 4.6rem);
+  --text-stat: clamp(2.9rem, 3.6vw, 4.2rem);
   --text-stat--line-height: 1;
   --text-stat--letter-spacing: -0.04em;
   --text-stat-label: 0.9625rem;
   --text-stat-label--line-height: 1.25;
-  --text-kpi-case: calc(var(--text-kpi) * 1.15);
-  --text-kpi-case--line-height: 1;
   --text-kpi: clamp(1.75rem, 2.1vw, 2.5rem);
   --text-kpi--line-height: 1;
+  --text-display-showcase: calc(var(--text-display-half) * 1.15);
+  --text-display-showcase--line-height: 0.9;
+  --text-display-showcase--letter-spacing: -0.04em;
   --text-display-hero: calc(var(--text-display-half) * 1.4);
   --text-display-hero--line-height: 0.9;
   --text-display-hero--letter-spacing: -0.04em;
@@ -104,15 +117,19 @@
   --spacing-slide-lg: calc(50cqi - 7.5rem);
   --spacing-slide-3xl: calc(50cqi - 2.5rem);
   --spacing-case: calc(50% - 1.25rem);
+  --spacing-viewport: 100svh;
+  --spacing-lift: 0.175rem;
 
   --breakpoint-3xl: 100rem;
   --breakpoint-4xl: 120rem;
 
   --blur-bar: 10px;
+  --shadow-card: 0 var(--spacing-lift) 0 var(--color-abyss);
 
   --ease-standard: ease;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in-soft: cubic-bezier(0.32, 0, 0.67, 0);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-marquee: marquee 80s linear infinite;
@@ -206,6 +223,30 @@
   }
 }
 
+@utility reveal-line-mask {
+  overflow: clip;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+@utility reveal-line {
+  transition: translate 1s var(--ease-out-expo)
+    calc(var(--delay, 0ms) + 0.5s + var(--line, 0) * 75ms);
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal-state='hidden'] & {
+      translate: 0 110%;
+      transition: none;
+    }
+  }
+}
+
+@utility reveal-after {
+  [data-reveal-state='hidden'] &,
+  [data-reveal-state='shown'] & {
+    visibility: hidden;
+  }
+}
+
 @utility reveal-zoom {
   transition: scale 1.8s var(--ease-out-expo) var(--delay, 0ms);
   @media (prefers-reduced-motion: no-preference) {
@@ -236,8 +277,12 @@
   }
 }
 
+@utility bleed-r {
+  right: -100vw;
+}
+
 @utility clip-left {
-  clip-path: inset(0 -100vw 0 0);
+  clip-path: inset(-100vh -100vw -100vh 0);
 }
 
 @layer base {
@@ -309,10 +354,6 @@
     (var(--p, 0.5) * var(--weeks) - var(--start) - 1) / var(--weeks) * 100cqi
   );
   width: calc(100cqi / var(--weeks));
-}
-
-@utility timeline-tip {
-  left: calc(var(--tip, 0) / var(--weeks) * 100%);
 }
 
 @utility reveal-letter {

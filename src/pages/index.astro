@@ -5,14 +5,13 @@ import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
 import Pricing from '../components/sections/Pricing.astro';
-import Process from '../components/sections/Process.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import SectionLink from '../components/ui/SectionLink.astro';
 import SiteHeader from '../components/sections/SiteHeader.astro';
 import WhyGalvanite from '../components/sections/WhyGalvanite.astro';
 
 const hero = {
-  eyebrow: 'For early stage data/AI companies',
+  eyebrow: 'AI Native Creative Studio for Data/AI Companies',
   lead: 'We make highly technical products',
   emphasis: 'feel inevitable',
   description:
@@ -21,7 +20,7 @@ const hero = {
 const mission = {
   label: 'Our mission',
   statement: [
-    { text: 'Memorable brands and websites for ' },
+    { text: 'Premium brands and websites for ' },
     { text: 'technical products ', strong: true },
     { text: 'that ' },
     { text: 'outgrew their story', strong: true },
@@ -31,23 +30,18 @@ const mission = {
 const sections = [
   { href: '#intro', label: 'Our Mission' },
   { href: '#work', label: 'Featured Work' },
-  { href: '#engagements', label: 'Where to Start', dark: true },
+  { href: '#engagements', label: 'Pricing', dark: true },
   { href: '#why', label: 'Why Galvanite', dark: true },
   { href: '#testimonials', label: 'Testimonials', dark: true },
-  { href: '#process', label: 'The Process', dark: true },
 ];
-const why = {
-  label: 'Why Galvanite',
-  heading: 'Why teams choose Galvanite',
-  stats: [
-    { value: '2 months', label: 'From rebrand and launch to successful exit' },
-    { value: '120M+', label: 'In acquisitions after the rebrand and launch' },
-    {
-      value: '16+ years',
-      label: 'Experience in branding and product development',
-    },
-  ],
-};
+const stats = [
+  { value: '2 months', label: 'From rebrand and launch to successful exit' },
+  { value: '120M+', label: 'In acquisitions after the rebrand and launch' },
+  {
+    value: '16+ years',
+    label: 'Experience in branding and product development',
+  },
+];
 const closing = {
   lead: 'It’s time to build a brand',
   emphasis: 'worthy of your product',
@@ -55,8 +49,7 @@ const closing = {
     'Book a 30-minute discovery call. We look at your site together, find where the value gets lost, and agree on the first steps.',
 };
 const process = {
-  label: 'The process',
-  heading: 'Modular process, focused on what matters',
+  heading: 'A modular process, focused on what matters',
   description:
     'Our sprint-based process is designed for fast-moving startups, with each stage building on the last, and weekly check-ins to maintain momentum.',
   weeks: 6,
@@ -72,6 +65,13 @@ const process = {
     { name: 'Development', start: 3, end: 5 },
     { name: 'QA & launch', start: 4, end: 6 },
   ],
+};
+const why = {
+  label: 'Why Galvanite',
+  heading: 'Why teams choose Galvanite',
+  description:
+    'Strategy, design and engineering in one senior team, so every decision serves the product and nothing gets lost in handoffs.',
+  process,
 };
 const link = (index: number) => ({
   ...sections[index]!,
@@ -90,16 +90,14 @@ const link = (index: number) => ({
   <SectionLink {...link(1)} />
   <FeaturedWork label="Featured work" />
   <SectionLink {...link(2)} />
-  <Pricing
-    label="Where to start"
-    heading="How we"
-    emphasis="work together"
-  />
+  <Pricing label="Pricing" heading="How we" emphasis="work together" />
   <SectionLink {...link(3)} />
   <WhyGalvanite {...why} />
   <ClosingCta {...closing} />
   <SectionLink {...link(4)} />
-  <Testimonials label="Testimonials" heading="Don’t take our word for it" />
-  <SectionLink {...link(5)} />
-  <Process {...process} />
+  <Testimonials
+    label="Testimonials"
+    heading="Don’t take our word for it"
+    stats={stats}
+  />
 </BaseLayout>

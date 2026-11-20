@@ -1,0 +1,91 @@
+---
+import CheckIcon from './CheckIcon.astro';
+
+interface Props {
+  weeks: number;
+  stages: { name: string; short?: string; start: number; end: number }[];
+}
+const { weeks, stages } = Astro.props;
+const confetti = Array.from({ length: 8 }, (_, index) => {
+  const angle = (index / 8) * Math.PI * 2;
+  const reach = index % 2 ? 22 : 17;
+  return {
+    style: `--dx: ${(Math.cos(angle) * reach).toFixed(1)}px; --dy: ${(Math.sin(angle) * reach * 0.75).toFixed(1)}px; --r: ${(index * 47) % 90}deg; --r-end: ${((index * 47) % 90) + (index % 2 ? 160 : -140)}deg`,
+    tone: ['bg-azure', 'bg-sky', 'bg-frost'][index % 3],
+  };
+});
+const label_ =
+  'text-label lg:text-stage absolute inset-0 flex items-center justify-center font-semibold tracking-wider uppercase';
+---
+
+<div
+  data-timeline
+  class="group/timeline @container relative py-3.5 lg:py-6.25"
+  style={`--weeks: ${weeks}`}
+>
+  <ol class="relative space-y-2.5 lg:space-y-1.25">
+    {stages.map(({ name, short, start, end }) => (
+      <li
+        data-stage
+        data-end={end / weeks}
+        class="group/stage stage-span relative h-8 lg:h-7"
+        style={`--start: ${start}; --end: ${end}`}
+      >
+        <div class="bg-ink/40 absolute inset-0 rounded-sm border border-white/10">
+          <span class:list={[label_, 'text-azure']}>
+            {short ? (
+              <>
+                <span class="@3xl:hidden">{short}</span>
+                <span class="@max-3xl:hidden">{name}</span>
+              </>
+            ) : (
+              name
+            )}
+          </span>
+        </div>
+        <div
+          aria-hidden="true"
+          class="stage-reveal absolute inset-0 overflow-hidden rounded-sm bg-white/90"
+        >
+          <div class="timeline-trail from-frost via-chalk to-night/0 absolute inset-y-0 bg-linear-to-l via-15% mix-blend-multiply" />
+          <span class="absolute top-1/2 left-4 max-lg:hidden">
+            {confetti.map(({ style, tone }) => (
+              <span
+                style={style}
+                class:list={[
+                  'absolute -top-0.75 -left-0.75 size-1.5 opacity-0 motion-safe:group-data-complete/stage:animate-confetti',
+                  tone,
+                ]}
+              />
+            ))}
+          </span>
+          <CheckIcon class="ease-out-soft absolute max-lg:hidden top-1/2 left-2 lg:size-4 -translate-y-1/2 scale-75 opacity-0 transition-[opacity,scale] duration-300 group-data-complete/stage:scale-100 group-data-complete/stage:opacity-100" />
+          <span class:list={[label_, 'text-ink']}>
+            {short ? (
+              <>
+                <span class="@3xl:hidden">{short}</span>
+                <span class="@max-3xl:hidden">{name}</span>
+              </>
+            ) : (
+              name
+            )}
+          </span>
+        </div>
+      </li>
+    ))}
+  </ol>
+  <div
+    aria-hidden="true"
+    class="timeline-line ease-out-soft absolute inset-y-0 w-px opacity-0 transition-opacity duration-500 group-data-playing/timeline:opacity-100 bg-linear-to-b from-white/10 via-white to-white/10"
+  ></div>
+</div>
+
+<script>
+  import { initTimeline } from '../../scripts/timeline';
+
+  for (const root of document.querySelectorAll<HTMLElement>(
+    '[data-timeline]',
+  )) {
+    initTimeline(root);
+  }
+</script>

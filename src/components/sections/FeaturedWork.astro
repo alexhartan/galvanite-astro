@@ -4,6 +4,8 @@ import { getCollection } from 'astro:content';
 import ArrowIcon from '../ui/ArrowIcon.astro';
 import Container from '../ui/Container.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
+import SparkIcon from '../ui/SparkIcon.astro';
+import GridMark from '../ui/GridMark.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 
 interface Props {
@@ -11,16 +13,6 @@ interface Props {
   label: string;
 }
 const { id = 'work', label } = Astro.props;
-const twoLines = (text: string) => {
-  const words = text.split(' ');
-  let best = [text, ''];
-  for (let i = 1; i < words.length; i++) {
-    const pair = [words.slice(0, i).join(' '), words.slice(i).join(' ')];
-    const width = (lines: string[]) => Math.max(...lines.map((l) => l.length));
-    if (!best[1] || width(pair) < width(best)) best = pair;
-  }
-  return best;
-};
 const cases = (await getCollection('caseStudies')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -33,7 +25,10 @@ const cases = (await getCollection('caseStudies')).sort(
   class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <SectionFrame edge={false} />
-  <div data-guide class="border-ink/10 relative border-t pb-32 lg:pb-48">
+  <div
+    data-guide
+    class="border-ink/10 relative overflow-y-clip border-t pb-32 lg:pb-48"
+  >
     <Container class="pt-12 lg:pt-16">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
     </Container>
@@ -44,18 +39,15 @@ const cases = (await getCollection('caseStudies')).sort(
             <div data-track class="flex translate-x-(--x,0) gap-6 lg:gap-10">
               {cases.map(({ data }, index) => {
                 const Tag = data.href ? 'a' : 'div';
-                const lines = twoLines(data.kpiLabel);
                 return (
                   <article
                     data-slide
                     class="group w-5/6 shrink-0 sm:w-3/5 lg:w-case"
+                    style={`--delay: ${Math.min(index, 3) * 160}ms`}
                   >
                     <Tag href={data.href} class="block">
                       <div class="relative overflow-hidden">
-                        <div
-                          class="reveal-mask"
-                          style={`--delay: ${Math.min(index, 3) * 160}ms`}
-                        >
+                        <div class="reveal-mask">
                           <div class="reveal-zoom">
                             <Picture
                               src={data.image}
@@ -65,41 +57,84 @@ const cases = (await getCollection('caseStudies')).sort(
                               sizes="(min-width: 1024px) 40vw, (min-width: 640px) 60vw, 85vw"
                               quality={78}
                               draggable="false"
-                              class="ease-out-soft 4xl:aspect-square aspect-4/3 w-full object-cover transition-transform duration-300 group-hover:scale-102"
+                              class="ease-out-soft 4xl:aspect-square aspect-4/3 w-full object-cover transition-transform duration-700 group-hover:scale-104"
                             />
                           </div>
                         </div>
-                        <div class="ease-out-soft absolute right-0 bottom-0 flex translate-y-4 items-center gap-4 bg-black/66 px-4 py-4 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0 lg:gap-6 lg:px-6.5 lg:py-4.75">
-                          <span class="text-kpi-case tracking-display font-light whitespace-nowrap text-white">
-                            {data.kpi}
-                          </span>
-                          <span class="text-label leading-tight font-semibold tracking-widest whitespace-nowrap text-white/80 uppercase">
-                            {lines[0]}
-                            <br />
-                            {lines[1]}
-                          </span>
+                        <div
+                          aria-hidden="true"
+                          class="ease-in-soft absolute top-8 right-8 opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:top-10 lg:right-10"
+                        >
+                          <svg
+                            viewBox="0 0 56 56"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            class="ease-out-soft size-10 -translate-x-1/2 translate-y-1/2 text-white transition-transform duration-700 group-hover:translate-0 motion-reduce:translate-0 lg:size-14"
+                          >
+                            <path d="M2 54 54 2M14 2h40v40"></path>
+                          </svg>
                         </div>
                       </div>
-                      <div>
-                        <h4 class="text-card text-ink mt-6 font-medium text-balance">
-                          {data.title}
-                        </h4>
-                        <ul
-                          class="mt-3 flex flex-wrap gap-2.25"
-                          aria-label="Scope"
-                        >
-                          {data.scope.map((item) => (
-                            <li class="bg-ocean-50 text-azure-deep text-tag rounded-sm px-2.5 py-1.25 font-medium tracking-wider uppercase">
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                        {data.href && (
-                          <span class="text-ink border-ink mt-6 inline-flex items-center gap-2 border-b-2 pb-1 text-sm font-semibold">
-                            Read the case study
-                            <ArrowIcon />
+                      <div class="relative">
+                        <p class="relative text-ink/80 ease-out-soft flex items-center font-medium gap-2.5 px-3 py-3.5 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+                          <span
+                            aria-hidden="true"
+                            class:list={[
+                              'bg-ink/10 absolute bottom-0 left-0 h-px',
+                              index === cases.length - 1
+                                ? 'bleed-r'
+                                : '-right-6 lg:-right-10',
+                            ]}
+                          />
+                          <GridMark class="absolute top-full left-0 -mt-px" />
+                          <SparkIcon class="text-signal size-5 shrink-0" />
+                          <span data-rotator class="grid">
+                            {data.stats.map((stat, i) => {
+                              const cut = stat.indexOf(',') + 1;
+                              return (
+                                <span
+                                  data-active={i === 0 ? '' : undefined}
+                                  aria-hidden={i === 0 ? undefined : 'true'}
+                                  class="ease-out-soft col-start-1 row-start-1 translate-y-2 opacity-0 transition duration-500 data-active:translate-y-0 data-active:opacity-100 motion-reduce:translate-y-0"
+                                >
+                                  <span class="font-semibold">
+                                    {cut ? stat.slice(0, cut) : stat}
+                                  </span>
+                                  {cut > 0 && (
+                                    <span class="font-normal">
+                                      {stat.slice(cut)}
+                                    </span>
+                                  )}
+                                </span>
+                              );
+                            })}
                           </span>
-                        )}
+                        </p>
+                        <div>
+                          <h4
+                            data-split
+                            class="text-card text-ink ease-out-soft mt-3 font-normal text-balance opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+                          >
+                            {data.title}
+                          </h4>
+                          <ul
+                            class="reveal-after ease-out-soft mt-4 flex -translate-y-2 flex-wrap gap-2.25 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0"
+                            aria-label="Scope"
+                          >
+                            {data.scope.map((item) => (
+                              <li class="bg-ocean-50 text-azure-deep text-tag rounded-sm px-2.5 py-1.25 font-medium tracking-wider uppercase">
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                          {data.href && (
+                            <span class="text-ink border-ink mt-6 inline-flex items-center gap-2 border-b-2 pb-1 text-sm font-semibold">
+                              Read the case study
+                              <ArrowIcon />
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </Tag>
                   </article>
@@ -116,10 +151,18 @@ const cases = (await getCollection('caseStudies')).sort(
 <script>
   import { initCaseScroll } from '../../scripts/case-scroll';
   import { initImageReveal } from '../../scripts/image-reveal';
+  import { splitLines } from '../../scripts/split-lines';
+  import { initRotator } from '../../scripts/rotator';
 
   for (const root of document.querySelectorAll<HTMLElement>(
     '[data-case-scroll]',
   )) {
+    root
+      .querySelectorAll<HTMLElement>('[data-split]')
+      .forEach((el) => splitLines(el));
+    root
+      .querySelectorAll<HTMLElement>('[data-rotator]')
+      .forEach((el) => initRotator(el));
     initCaseScroll(root);
     initImageReveal(root);
   }
