@@ -323,6 +323,10 @@
   left: calc(var(--p, 0.5) * 100%);
 }
 
+@utility line-fade {
+  opacity: var(--fade, 1);
+}
+
 @utility timeline-trail {
   left: calc(
     (var(--p, 0.5) * var(--weeks) - var(--start) - 1) / var(--weeks) * 100cqi
