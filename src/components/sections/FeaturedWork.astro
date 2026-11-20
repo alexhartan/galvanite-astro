@@ -11,8 +11,9 @@ import Eyebrow from '../ui/Eyebrow.astro';
 interface Props {
   id?: string;
   label: string;
+  sceneStart?: boolean;
 }
-const { id = 'work', label } = Astro.props;
+const { id = 'work', label, sceneStart = false } = Astro.props;
 const cases = (await getCollection('caseStudies')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -22,6 +23,7 @@ const cases = (await getCollection('caseStudies')).sort(
   id={id}
   aria-labelledby={`${id}-label`}
   data-tone="light"
+  data-scene-start={sceneStart ? '' : undefined}
   class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <SectionFrame edge={false} />

@@ -198,6 +198,8 @@ export function initHeroScene(
   const zonePath = zone
     ? (JSON.parse(zone.dataset.scenePath ?? '') as CameraPath)
     : null;
+  const start =
+    document.querySelector<HTMLElement>('[data-scene-start]') ?? zone;
   let zoneActive = false;
 
   const content = hero?.querySelector<HTMLElement>('[data-hero-content]');
@@ -209,7 +211,7 @@ export function initHeroScene(
       content.style.setProperty('--shift', `${(-shift).toFixed(1)}px`);
     }
     const height = window.innerHeight;
-    const box = zone?.getBoundingClientRect();
+    const box = zone ? start?.getBoundingClientRect() : undefined;
     const active = !!box && box.top < height * 1.25 && window.scrollY >= height;
     if (active !== zoneActive) {
       zoneActive = active;
