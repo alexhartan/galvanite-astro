@@ -94,6 +94,7 @@
   --container-lead-hero: 25em;
   --container-statement: 13.5em;
   --container-mission: 14.5em;
+  --container-mission-lg: 20em;
 
   --spacing-nav: 5.5rem;
   --spacing-display-baseline: calc(100% - 0.12em);
