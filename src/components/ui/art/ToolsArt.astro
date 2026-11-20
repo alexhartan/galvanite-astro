@@ -1,91 +1,36 @@
 ---
-const motion =
-  'ease-standard transition duration-300 motion-reduce:transition-none';
-const card =
-  'M4 1H106C107.657 1 109 2.34315 109 4V76C109 77.6569 107.657 79 106 79H4C2.34315 79 1 77.6569 1 76V4C1 2.34315 2.34315 1 4 1Z';
-const lift = {
-  back: 'group-hover:-translate-x-1 group-hover:-rotate-6',
-  middle: 'group-hover:-translate-y-2',
-  front: 'group-hover:translate-x-4 group-hover:rotate-6',
-};
-const cards = [
-  { key: 'back', x: 83, y: 68, mask: 'art-tools-mask-back' },
-  { key: 'middle', x: 95, y: 80, mask: 'art-tools-mask-middle' },
-  { key: 'front', x: 107, y: 92 },
-] as const;
-const above = { back: cards[1], middle: cards[2] } as const;
+import ArtStack from './ArtStack.astro';
+import { ink, motion } from './kit';
+
+const frames = [
+  {
+    x: 83,
+    y: 80,
+    w: 110,
+    h: 80,
+    lift: 'group-hover:-translate-x-1 group-hover:-rotate-6',
+  },
+  { x: 95, y: 86, w: 110, h: 80, lift: 'group-hover:-translate-y-2' },
+  {
+    x: 107,
+    y: 92,
+    w: 110,
+    h: 80,
+    lift: 'group-hover:translate-x-4 group-hover:rotate-6',
+  },
+];
+const line = [ink, motion];
 ---
 
-<svg
-  class="absolute top-1/2 left-1/2 -translate-1/2 overflow-visible"
-  width="300"
-  height="180"
-  viewBox="0 0 300 180"
-  fill="none"
->
-  <defs>
-    {(['back', 'middle'] as const).map((key) => {
-      const next = above[key];
-      return (
-        <mask
-          id={`art-tools-mask-${key}`}
-          maskUnits="userSpaceOnUse"
-          x="0"
-          y="0"
-          width="300"
-          height="180"
-        >
-          <rect width="300" height="180" fill="white" />
-          <g transform={`translate(${next.x} ${next.y})`}>
-            <g
-              class:list={[
-                'transform-fill origin-bottom',
-                lift[next.key],
-                motion,
-              ]}
-            >
-              <path d={card} fill="black" stroke="black" stroke-width="16" />
-            </g>
-          </g>
-        </mask>
-      );
-    })}
-  </defs>
-  {cards.map(({ key, x, y, ...rest }) => (
-    <g mask={'mask' in rest ? `url(#${rest.mask})` : undefined}>
-      <g transform={`translate(${x} ${y})`}>
-        <g class:list={['transform-fill origin-bottom', lift[key], motion]}>
-          <path
-            d={card}
-            stroke-width="2"
-            class:list={[
-              'fill-deep-950 stroke-azure-deep group-hover:stroke-sky',
-              motion,
-            ]}
-          />
-          <g
-            stroke-width="2"
-            stroke-linecap="round"
-            class:list={['stroke-ink group-hover:stroke-azure-deep', motion]}
-          >
-            <path d="M14 16H50" stroke-width="1" />
-            {key === 'back' && <path d="M14 34H84M14 44H64" />}
-            {key === 'middle' && (
-              <>
-                <circle cx="21" cy="40" r="7" />
-                <circle cx="41" cy="40" r="7" />
-                <circle cx="61" cy="40" r="7" />
-              </>
-            )}
-            {key === 'front' && (
-              <>
-                <path d="M14 34H96M14 44H76" />
-                <rect x="14" y="58" width="28" height="10" rx="2" />
-              </>
-            )}
-          </g>
-        </g>
-      </g>
-    </g>
-  ))}
-</svg>
+<ArtStack id="art-tools" frames={frames}>
+  <path slot="a" d="M14 34H84M14 44H64" class:list={line} />
+  <g slot="b" class:list={line}>
+    <circle cx="21" cy="42" r="7" />
+    <circle cx="41" cy="42" r="7" />
+    <circle cx="61" cy="42" r="7" />
+  </g>
+  <g slot="c" class:list={line}>
+    <path d="M14 34H96M14 44H76" />
+    <rect x="14" y="58" width="28" height="10" rx="2" />
+  </g>
+</ArtStack>
