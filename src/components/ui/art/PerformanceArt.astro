@@ -3,13 +3,13 @@ import ArtStack from './ArtStack.astro';
 import { ink, motion } from './kit';
 
 const frames = [
-  { x: 83, y: 82, w: 120, h: 80, lift: 'group-hover:-translate-x-2' },
+  { x: 100, y: 82, w: 120, h: 80, lift: 'group-hover:translate-x-2' },
   {
-    x: 160,
+    x: 83,
     y: 124,
     w: 60,
     h: 48,
-    lift: 'group-hover:translate-x-3 group-hover:-translate-y-2',
+    lift: 'group-hover:-translate-x-3 group-hover:-translate-y-2',
   },
 ];
 const line = [ink, motion];
@@ -17,16 +17,16 @@ const line = [ink, motion];
 
 <ArtStack id="art-performance" frames={frames}>
   <g slot="a">
-    <circle cx="34" cy="48" r="16" class:list={line} />
+    <circle cx="90" cy="44" r="16" class:list={line} />
     <circle
-      cx="34"
-      cy="48"
+      cx="90"
+      cy="44"
       r="16"
       pathLength="100"
       stroke-dasharray="100"
       class="gauge group-hover:gauge-full transform-fill origin-center -rotate-90 stroke-azure-deep group-hover:stroke-sky"
     />
-    <path d="M64 40H104M64 50H92M64 60H98" class:list={line} />
+    <path d="M12 26H60M12 34H48" class:list={line} />
   </g>
   <path
     slot="b"
