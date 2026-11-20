@@ -15,9 +15,8 @@ interface Props {
   id?: string;
   label: string;
   heading: string;
-  description: string;
 }
-const { id = 'why', label, heading, description } = Astro.props;
+const { id = 'why', label, heading } = Astro.props;
 const benefits = (await getCollection('benefits')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -44,11 +43,8 @@ const card =
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <div class="mt-28 lg:mt-44">
-        <h3 class="text-section">{heading}</h3>
-        <p class="text-frost/80 max-w-lead mt-6 text-balance">{description}</p>
-      </div>
-      <div class="relative mt-16 lg:mt-20">
+      <h3 class="text-section mt-40 lg:mt-56">{heading}</h3>
+      <div class="relative mt-6">
         <div
           aria-hidden="true"
           class="bg-space-950/50 backdrop-blur-bar absolute inset-0 border-x border-white/10"
@@ -66,10 +62,28 @@ const card =
         <GridMark inverted class="absolute top-0 left-full -ml-px" />
         <GridMark inverted class="absolute top-full left-full -mt-px -ml-px" />
         <div class="relative grid sm:grid-cols-2 lg:grid-cols-3">
-          {benefits.map(({ data }) => {
+          {benefits.map(({ data }, index) => {
             const Art = art[data.art];
             return (
               <article class="group relative flex flex-col pb-14">
+                {index === 3 && (
+                  <>
+                    <div
+                      aria-hidden="true"
+                      class="bleed-x absolute top-0 z-10 h-px bg-white/10 max-lg:hidden"
+                    />
+                    <GridMark
+                      inverted
+                      class="absolute top-0 left-0 z-10 max-lg:hidden"
+                    />
+                  </>
+                )}
+                {index === 5 && (
+                  <GridMark
+                    inverted
+                    class="absolute top-0 left-full z-10 -ml-px max-lg:hidden"
+                  />
+                )}
                 <div
                   aria-hidden="true"
                   class:list={[
