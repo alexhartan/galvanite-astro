@@ -1,20 +1,20 @@
 ---
 import ArtStack from './ArtStack.astro';
-import { ink, motion, outline } from './kit';
+import { ink, motion } from './kit';
 
 const frames = [
   {
-    x: 149,
-    y: 166,
-    w: 68,
-    h: 6,
+    x: 225,
+    y: 103,
+    w: 6,
+    h: 68,
     bare: true,
-    d: 'M2 0.5H60L67.5 3L60 5.5H2C1.172 5.5 0.5 4.828 0.5 4V2C0.5 1.172 1.172 0.5 2 0.5Z',
+    d: 'M0.5 2C0.5 1.172 1.172 0.5 2 0.5H4C4.828 0.5 5.5 1.172 5.5 2V60L3 67.5L0.5 60Z',
     lift: 'group-hover:translate-x-2',
   },
   {
     x: 107,
-    y: 88,
+    y: 102,
     w: 110,
     h: 70,
     bare: true,
@@ -22,7 +22,7 @@ const frames = [
   },
   {
     x: 83,
-    y: 97,
+    y: 111,
     w: 30,
     h: 52,
     bare: true,
@@ -41,7 +41,7 @@ const fill = 'fill-azure-deep opacity-0 group-hover:opacity-100';
 ---
 
 <ArtStack id="art-process" frames={frames}>
-  <path slot="a" d="M8 0.5V5.5" stroke-width="1" class:list={[ink, motion]} />
+  <path slot="a" d="M0.5 8H5.5" stroke-width="1" class:list={[ink, motion]} />
   <g slot="b">
     <g class="ease-standard transition-transform duration-1000 group-hover:translate-x-23.5 motion-reduce:transition-none">
       <path d="M8 8V62" stroke-width="1" class:list={[ink, motion]} />
@@ -70,8 +70,8 @@ const fill = 'fill-azure-deep opacity-0 group-hover:opacity-100';
   </g>
   <path
     slot="c"
-    d="M7 18V45H22Z"
+    d="M7 24V45H18.76Z"
     stroke-linejoin="round"
-    class:list={[outline, 'fill-none', motion]}
+    class:list={[ink, 'fill-none', motion]}
   />
 </ArtStack>
