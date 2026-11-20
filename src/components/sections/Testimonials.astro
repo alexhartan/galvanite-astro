@@ -89,8 +89,8 @@ const arrow =
                 class="ease-out-soft invisible col-start-1 row-start-1 grid opacity-0 transition-[opacity,visibility] duration-700 data-active:visible data-active:opacity-100 lg:grid-cols-2"
               >
                 {page.map(({ data }) => (
-                  <figure class="group pt-12 pr-10 lg:pr-16">
-                    <blockquote class="text-frost text-xl font-light text-balance">
+                  <figure class="group ease-out-soft pt-12 pr-10 transition-opacity duration-300 pointer-fine:opacity-90 pointer-fine:hover:opacity-100 lg:pr-16">
+                    <blockquote class="text-frost text-lg font-extralight text-balance">
                       <p>{data.quote}</p>
                     </blockquote>
                     <figcaption class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-6">
