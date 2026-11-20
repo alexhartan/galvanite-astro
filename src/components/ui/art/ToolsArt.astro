@@ -1,6 +1,6 @@
 ---
 const motion =
-  'ease-standard transition duration-500 motion-reduce:transition-none';
+  'ease-standard transition duration-300 motion-reduce:transition-none';
 const card =
   'M4 1H106C107.657 1 109 2.34315 109 4V76C109 77.6569 107.657 79 106 79H4C2.34315 79 1 77.6569 1 76V4C1 2.34315 2.34315 1 4 1Z';
 const lift = {
@@ -44,7 +44,7 @@ const above = { back: cards[1], middle: cards[2] } as const;
                 motion,
               ]}
             >
-              <path d={card} fill="black" stroke="black" stroke-width="8" />
+              <path d={card} fill="black" stroke="black" stroke-width="16" />
             </g>
           </g>
         </mask>
@@ -55,9 +55,20 @@ const above = { back: cards[1], middle: cards[2] } as const;
     <g mask={'mask' in rest ? `url(#${rest.mask})` : undefined}>
       <g transform={`translate(${x} ${y})`}>
         <g class:list={['transform-fill origin-bottom', lift[key], motion]}>
-          <path d={card} stroke-width="2" class="fill-deep-950 stroke-sky" />
-          <g stroke-width="2" stroke-linecap="round" class="stroke-azure-deep">
-            <path d="M14 16H44" />
+          <path
+            d={card}
+            stroke-width="2"
+            class:list={[
+              'fill-deep-950 stroke-azure group-hover:stroke-sky',
+              motion,
+            ]}
+          />
+          <g
+            stroke-width="2"
+            stroke-linecap="round"
+            class:list={['stroke-ink group-hover:stroke-azure-deep', motion]}
+          >
+            <path d="M14 16H50" stroke-width="1" />
             {key === 'back' && <path d="M14 34H84M14 44H64" />}
             {key === 'middle' && (
               <>
