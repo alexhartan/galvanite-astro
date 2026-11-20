@@ -22,13 +22,14 @@ const under = await Promise.all(names.map((name) => render(`${name}-under`)));
   fill="none"
 >
   <ArtMasks id={id} frames={frames} />
-  {frames.map(({ x, y, w, h, lift, bare }, index) => (
+  {frames.map(({ x, y, w, h, lift, bare, d }, index) => (
     <g mask={index < frames.length - 1 ? `url(#${id}-${index})` : undefined}>
       <g transform={`translate(${x} ${y})`}>
         <g class:list={[pivot, lift, motion]}>
           <Fragment set:html={under[index]} />
           <path
-            d={frame(w, h)}
+            d={d ?? frame(w, h)}
+            stroke-linejoin="round"
             stroke-width="2"
             class:list={[outline, motion]}
           />

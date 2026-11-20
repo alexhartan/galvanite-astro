@@ -5,6 +5,7 @@ export interface Frame {
   h: number;
   lift: string;
   bare?: boolean;
+  d?: string;
 }
 
 export const motion =
