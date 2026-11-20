@@ -30,9 +30,9 @@ const mission = {
 const sections = [
   { href: '#intro', label: 'Our Mission' },
   { href: '#work', label: 'Featured Work' },
+  { href: '#testimonials', label: 'Testimonials', dark: true },
   { href: '#engagements', label: 'Pricing', dark: true },
   { href: '#why', label: 'Why Galvanite', dark: true },
-  { href: '#testimonials', label: 'Testimonials', dark: true },
 ];
 const stats = [
   { value: '2 months', label: 'From rebrand and launch to successful exit' },
@@ -90,14 +90,14 @@ const link = (index: number) => ({
   <SectionLink {...link(1)} />
   <FeaturedWork label="Featured work" />
   <SectionLink {...link(2)} />
-  <Pricing label="Pricing" heading="How we" emphasis="work together" />
-  <SectionLink {...link(3)} />
-  <WhyGalvanite {...why} />
-  <ClosingCta {...closing} />
-  <SectionLink {...link(4)} />
   <Testimonials
     label="Testimonials"
     heading="Don’t take our word for it"
     stats={stats}
   />
+  <SectionLink {...link(3)} />
+  <Pricing label="Pricing" heading="How we" emphasis="work together" />
+  <ClosingCta {...closing} />
+  <SectionLink {...link(4)} />
+  <WhyGalvanite {...why} />
 </BaseLayout>
