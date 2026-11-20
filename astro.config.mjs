@@ -9,7 +9,7 @@ export default defineConfig({
   trailingSlash: 'always',
   build: { inlineStylesheets: 'always' },
   prefetch: { defaultStrategy: 'hover' },
-  integrations: [sitemap({ filter: (page) => !page.includes('/lab/') })],
+  integrations: [sitemap({ filter: (page) => !page.includes('/lab/') && !page.includes('/showcase/') })],
   vite: { plugins: [tailwindcss()] },
   fonts: [
     {
