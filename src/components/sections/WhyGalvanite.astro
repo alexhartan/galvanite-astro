@@ -91,7 +91,7 @@ const card =
         })}
         <article
           data-process
-          class="group/process relative flex flex-col pb-10 sm:col-span-2"
+          class="group/process relative flex flex-col pb-10"
         >
           <div
             aria-hidden="true"
@@ -100,7 +100,7 @@ const card =
               'pointer-fine:group-hover/process:-translate-y-lift pointer-fine:group-hover/process:opacity-100',
             ]}
           />
-          <div class="relative px-6 pt-4">
+          <div class="relative flex h-36 items-end overflow-hidden px-6">
             <div class="w-full" style="--overhang: 48px">
               <ProcessTimeline weeks={process.weeks} stages={process.stages} />
             </div>

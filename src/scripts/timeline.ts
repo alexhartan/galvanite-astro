@@ -1,4 +1,4 @@
-const PLAY_S = 2.8;
+const PLAY_S = 1.4;
 const RESET_S = 0.5;
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
 
@@ -18,6 +18,11 @@ export function initTimeline(root: HTMLElement) {
 
   const paint = () => {
     root.style.setProperty('--p', position.toFixed(4));
+    const fade = Math.min(
+      lo < 0 ? (position - lo) / -lo : 1,
+      hi > 1 ? (hi - position) / (hi - 1) : 1,
+    );
+    root.style.setProperty('--fade', Math.max(0, Math.min(1, fade)).toFixed(3));
     stages.forEach((stage) =>
       stage.toggleAttribute(
         'data-complete',

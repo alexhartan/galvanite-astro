@@ -15,20 +15,20 @@ const confetti = Array.from({ length: 8 }, (_, index) => {
   };
 });
 const label_ =
-  'text-label lg:text-stage absolute inset-0 flex items-center justify-center font-semibold tracking-wider uppercase';
+  'text-tag absolute inset-0 flex items-center pl-5 font-semibold tracking-wider uppercase';
 ---
 
 <div
   data-timeline
-  class="group/timeline @container relative py-3.5 lg:py-6.25"
+  class="group/timeline @container relative py-2.5"
   style={`--weeks: ${weeks}`}
 >
-  <ol class="relative space-y-2.5 lg:space-y-1.25">
+  <ol class="relative space-y-1">
     {stages.map(({ name, short, start, end }) => (
       <li
         data-stage
         data-end={end / weeks}
-        class="group/stage stage-span relative h-8 lg:h-7"
+        class="group/stage stage-span relative h-5"
         style={`--start: ${start}; --end: ${end}`}
       >
         <div class="bg-ink/40 absolute inset-0 rounded-sm border border-white/10">
@@ -59,7 +59,7 @@ const label_ =
               />
             ))}
           </span>
-          <CheckIcon class="ease-out-soft absolute max-lg:hidden top-1/2 left-2 lg:size-4 -translate-y-1/2 scale-75 opacity-0 transition-[opacity,scale] duration-300 group-data-complete/stage:scale-100 group-data-complete/stage:opacity-100" />
+          <CheckIcon class="ease-out-soft absolute top-1/2 left-1 size-3 -translate-y-1/2 scale-75 opacity-0 transition-[opacity,scale] duration-300 group-data-complete/stage:scale-100 group-data-complete/stage:opacity-100" />
           <span class:list={[label_, 'text-ink']}>
             {short ? (
               <>
@@ -76,8 +76,10 @@ const label_ =
   </ol>
   <div
     aria-hidden="true"
-    class="timeline-line ease-out-soft absolute inset-y-0 w-px opacity-0 transition-opacity duration-500 group-data-playing/timeline:opacity-100 bg-linear-to-b from-white/10 via-white to-white/10"
-  ></div>
+    class="timeline-line ease-out-soft absolute inset-y-0 w-px opacity-0 transition-opacity duration-500 group-data-playing/timeline:opacity-100"
+  >
+    <div class="line-fade size-full bg-linear-to-b from-white/10 via-white to-white/10"></div>
+  </div>
 </div>
 
 <script>
