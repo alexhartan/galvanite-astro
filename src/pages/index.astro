@@ -30,8 +30,8 @@ const mission = {
 const sections = [
   { href: '#intro', label: 'Our Mission' },
   { href: '#work', label: 'Featured Work' },
-  { href: '#testimonials', label: 'Testimonials', dark: true },
   { href: '#engagements', label: 'Pricing', dark: true },
+  { href: '#testimonials', label: 'Testimonials', dark: true },
   { href: '#why', label: 'Why Galvanite', dark: true },
 ];
 const stats = [
@@ -88,15 +88,15 @@ const link = (index: number) => ({
   <SectionLink {...link(0)} />
   <Intro {...mission} />
   <SectionLink {...link(1)} />
-  <FeaturedWork label="Featured work" />
+  <FeaturedWork label="Featured work" sceneStart />
   <SectionLink {...link(2)} />
+  <Pricing label="Pricing" heading="How we" emphasis="work together" />
+  <SectionLink {...link(3)} />
   <Testimonials
     label="Testimonials"
     heading="Don’t take our word for it"
     stats={stats}
   />
-  <SectionLink {...link(3)} />
-  <Pricing label="Pricing" heading="How we" emphasis="work together" />
   <ClosingCta {...closing} />
   <SectionLink {...link(4)} />
   <WhyGalvanite {...why} />
