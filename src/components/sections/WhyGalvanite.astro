@@ -65,23 +65,23 @@ const card =
           {benefits.map(({ data }, index) => {
             const Art = art[data.art];
             return (
-              <article class="group relative flex flex-col pb-14">
+              <article class="group relative flex flex-col pb-14 pointer-fine:hover:z-20">
                 {index === 3 && (
                   <>
                     <div
                       aria-hidden="true"
-                      class="bleed-x absolute top-0 z-10 h-px bg-white/10 max-lg:hidden"
+                      class="bleed-x absolute top-0 h-px bg-white/10 max-lg:hidden"
                     />
                     <GridMark
                       inverted
-                      class="absolute top-0 left-0 z-10 max-lg:hidden"
+                      class="absolute top-0 left-0 max-lg:hidden"
                     />
                   </>
                 )}
                 {index === 5 && (
                   <GridMark
                     inverted
-                    class="absolute top-0 left-full z-10 -ml-px max-lg:hidden"
+                    class="absolute top-0 left-full -ml-px max-lg:hidden"
                   />
                 )}
                 <div
@@ -91,13 +91,13 @@ const card =
                     'pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:opacity-100',
                   ]}
                 />
-                <div aria-hidden="true" class="relative h-36 overflow-hidden">
-                  <div class="absolute bottom-0 left-0 h-45 w-75 origin-bottom-left -translate-x-2.5 translate-y-px scale-60">
+                <div aria-hidden="true" class="relative h-30 overflow-hidden">
+                  <div class="absolute bottom-0 left-0 h-45 w-75 origin-bottom-left -translate-x-0.5 translate-y-px scale-60">
                     <Art />
                   </div>
                 </div>
                 <div class="ease-out-soft relative px-10 pt-8 transition-transform duration-300 pointer-fine:group-hover:-translate-y-lift">
-                  <h4 class="text-sky text-benefit ease-out-soft font-medium transition-colors duration-300 group-hover:text-white">
+                  <h4 class="text-sky text-benefit ease-out-soft font-light transition-colors duration-300 group-hover:text-white">
                     {data.title}
                   </h4>
                   <p class="text-frost/80 ease-out-soft mt-2 text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100">
