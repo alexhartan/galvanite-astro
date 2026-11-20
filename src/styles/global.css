@@ -54,6 +54,7 @@
   --text-tag: 0.65625rem;
   --text-stage: 0.6875rem;
   --text-label: 0.75rem;
+  --text-stage-sm: 0.5rem;
   --text-benefit: clamp(1rem, 1.05vw, 1.3125rem);
   --text-benefit--line-height: 1.1;
   --text-process: clamp(1.375rem, 1.4vw, 1.75rem);
@@ -127,7 +128,6 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-marquee: marquee 80s linear infinite;
-  --animate-confetti: confetti 700ms var(--ease-out-soft) 150ms both;
   --animate-art-flow: art-flow 1.8s linear var(--delay, 0s) infinite both;
   --animate-art-pulse: art-pulse 2s var(--ease-in-out-soft) infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
@@ -137,20 +137,6 @@
   @keyframes marquee {
     to {
       transform: translate3d(-50%, 0, 0);
-    }
-  }
-
-  @keyframes confetti {
-    0% {
-      opacity: 1;
-      transform: rotate(var(--r)) scale(0.4);
-    }
-    60% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      transform: translate(var(--dx), var(--dy)) rotate(var(--r-end));
     }
   }
 
