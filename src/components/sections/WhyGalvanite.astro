@@ -3,10 +3,10 @@ import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
-import ProcessTimeline from '../ui/ProcessTimeline.astro';
 import BuildArt from '../ui/art/BuildArt.astro';
 import ConsistencyArt from '../ui/art/ConsistencyArt.astro';
 import PerformanceArt from '../ui/art/PerformanceArt.astro';
+import ProcessArt from '../ui/art/ProcessArt.astro';
 import StrategyArt from '../ui/art/StrategyArt.astro';
 import ToolsArt from '../ui/art/ToolsArt.astro';
 import GridMark from '../ui/GridMark.astro';
@@ -16,27 +16,17 @@ interface Props {
   label: string;
   heading: string;
   description: string;
-  process: {
-    heading: string;
-    description: string;
-    weeks: number;
-    stages: { name: string; short?: string; start: number; end: number }[];
-  };
 }
-const { id = 'why', label, heading, description, process } = Astro.props;
+const { id = 'why', label, heading, description } = Astro.props;
 const benefits = (await getCollection('benefits')).sort(
   (a, b) => a.data.order - b.data.order,
 );
-const items = [
-  ...benefits.slice(0, 4),
-  'process' as const,
-  ...benefits.slice(4),
-];
 const art = {
   strategy: StrategyArt,
   consistency: ConsistencyArt,
   build: BuildArt,
   performance: PerformanceArt,
+  process: ProcessArt,
   tools: ToolsArt,
 };
 const card =
@@ -76,39 +66,7 @@ const card =
         <GridMark inverted class="absolute top-0 left-full -ml-px" />
         <GridMark inverted class="absolute top-full left-full -mt-px -ml-px" />
         <div class="relative grid sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => {
-            if (item === 'process')
-              return (
-                <article
-                  data-process
-                  class="group/process relative flex flex-col pb-14"
-                >
-                  <div
-                    aria-hidden="true"
-                    class:list={[
-                      card,
-                      'pointer-fine:group-hover/process:-translate-y-lift pointer-fine:group-hover/process:opacity-100',
-                    ]}
-                  />
-                  <div class="relative flex h-36 items-end overflow-hidden px-10">
-                    <div class="w-full" style="--overhang: 64px">
-                      <ProcessTimeline
-                        weeks={process.weeks}
-                        stages={process.stages}
-                      />
-                    </div>
-                  </div>
-                  <div class="ease-out-soft relative px-10 pt-8 transition-transform duration-300 pointer-fine:group-hover/process:-translate-y-lift">
-                    <h4 class="text-sky text-benefit ease-out-soft font-medium transition-colors duration-300 group-hover/process:text-white">
-                      {process.heading}
-                    </h4>
-                    <p class="text-frost/80 ease-out-soft mt-2 max-w-md text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover/process:opacity-100">
-                      {process.description}
-                    </p>
-                  </div>
-                </article>
-              );
-            const { data } = item;
+          {benefits.map(({ data }) => {
             const Art = art[data.art];
             return (
               <article class="group relative flex flex-col pb-14">

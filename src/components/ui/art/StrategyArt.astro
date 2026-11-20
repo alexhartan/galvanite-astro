@@ -19,11 +19,7 @@ const frames = [
   },
 ];
 const line = [ink, motion];
-const bar = [
-  'transform-fill origin-bottom group-hover:scale-y-125',
-  ink,
-  motion,
-];
+const drift = ['transform-fill origin-center', ink, motion];
 ---
 
 <ArtStack id="art-strategy" frames={frames}>
@@ -32,9 +28,23 @@ const bar = [
     <path d="M36 30H76M36 40H62M12 54H80" />
   </g>
   <g slot="b">
-    <rect x="12" y="46" width="10" height="14" rx="1" class:list={bar} />
-    <rect x="28" y="40" width="10" height="20" rx="1" class:list={bar} />
-    <rect x="44" y="32" width="10" height="28" rx="1" class:list={bar} />
-    <path d="M64 36H88M64 46H80" class:list={line} />
+    <circle
+      cx="42"
+      cy="46"
+      r="13"
+      class:list={[drift, 'group-hover:-translate-x-1.5']}
+    />
+    <circle
+      cx="58"
+      cy="46"
+      r="13"
+      class:list={[drift, 'group-hover:translate-x-1.5']}
+    />
+    <circle
+      cx="50"
+      cy="33"
+      r="13"
+      class:list={[drift, 'group-hover:-translate-y-1.5']}
+    />
   </g>
 </ArtStack>

@@ -1,0 +1,76 @@
+---
+import ArtStack from './ArtStack.astro';
+import { ink, motion } from './kit';
+
+const frames = [
+  { x: 83, y: 80, w: 120, h: 84, lift: 'group-hover:-translate-x-2' },
+  {
+    x: 172,
+    y: 112,
+    w: 64,
+    h: 60,
+    lift: 'group-hover:translate-x-3 group-hover:-translate-y-2',
+  },
+];
+const steps = [
+  'group-hover:delay-0',
+  'group-hover:delay-75',
+  'group-hover:delay-150',
+  'group-hover:delay-200',
+  'group-hover:delay-300',
+];
+const fill = 'fill-azure-deep opacity-0 group-hover:opacity-100';
+---
+
+<ArtStack id="art-process" frames={frames}>
+  <g slot="a">
+    {steps.map((delay, index) => (
+      <>
+        <rect
+          x={12 + index * 11}
+          y={26 + index * 10}
+          width="24"
+          height="6"
+          rx="2"
+          class:list={[ink, motion]}
+        />
+        <rect
+          x={12 + index * 11}
+          y={26 + index * 10}
+          width="24"
+          height="6"
+          rx="2"
+          stroke="none"
+          class:list={[fill, motion, delay]}
+        />
+      </>
+    ))}
+  </g>
+  <g slot="b">
+    {steps.slice(0, 3).map((delay, index) => (
+      <>
+        <rect
+          x="10"
+          y={24 + index * 11}
+          width="6"
+          height="6"
+          rx="1"
+          class:list={[ink, motion]}
+        />
+        <rect
+          x="10"
+          y={24 + index * 11}
+          width="6"
+          height="6"
+          rx="1"
+          stroke="none"
+          class:list={[fill, motion, delay]}
+        />
+        <path
+          d={`M22 ${27 + index * 11}H${index === 1 ? 44 : 52}`}
+          class:list={[ink, motion]}
+        />
+      </>
+    ))}
+  </g>
+</ArtStack>
