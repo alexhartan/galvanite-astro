@@ -8,8 +8,15 @@ interface Props {
   label: string;
   statement: { text: string; strong?: boolean }[];
   fill?: boolean;
+  large?: boolean;
 }
-const { id = 'intro', label, statement, fill = false } = Astro.props;
+const {
+  id = 'intro',
+  label,
+  statement,
+  fill = false,
+  large = false,
+} = Astro.props;
 const fullText = statement.map(({ text }) => text).join('');
 let letterIndex = 0;
 const segments = statement.map(({ text, strong }) => ({
@@ -46,7 +53,12 @@ const reveal = letterIndex + 6;
       <div data-parallax class="translate-y-(--shift)">
         <p
           data-reveal
-          class="max-w-mission text-statement lg:text-mission 4xl:text-mission-xl text-ink leading-none font-extralight text-balance"
+          class:list={[
+            'text-ink leading-none font-extralight text-balance',
+            large
+              ? 'text-statement lg:text-mission-xl max-w-mission-lg'
+              : 'max-w-mission text-statement lg:text-mission 4xl:text-mission-xl',
+          ]}
           style={`--n: ${reveal}`}
         >
           <span class="sr-only">{fullText}</span>

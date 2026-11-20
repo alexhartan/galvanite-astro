@@ -49,7 +49,8 @@ const clients =
           {eyebrow}
         </p>
         <h1 class="max-w-headline text-display lg:text-display-half 4xl:text-display-hero relative font-extralight text-white">
-          {lead} <strong class="font-semibold">{emphasis}</strong>
+          {lead}
+          {emphasis && <strong class="font-semibold">{emphasis}</strong>}
           <GridMark class="top-display-baseline 4xl:hidden absolute left-0" />
         </h1>
         <p class="max-w-lead text-lead lg:max-w-lead-hero lg:text-lead-hero 4xl:text-lead-hero-xl mt-6 text-white/85 lg:mt-4.5">
