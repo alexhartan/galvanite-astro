@@ -28,10 +28,10 @@ const benefits = (await getCollection('benefits')).sort(
   (a, b) => a.data.order - b.data.order,
 );
 const offset: Record<string, string> = {
-  consistency: '--art-x: 4px; --art-y: 11px',
-  build: '--art-x: -18px; --art-y: 17px',
-  performance: '--art-x: -19px; --art-y: 16px',
-  tools: '--art-x: -26px; --art-y: 1px',
+  consistency: '--art-x: 28px; --art-y: 11px',
+  build: '--art-x: 6px; --art-y: 17px',
+  performance: '--art-x: 5px; --art-y: 16px',
+  tools: '--art-x: -2px; --art-y: 1px',
 };
 const items = [
   ...benefits.slice(0, 4),
@@ -67,7 +67,7 @@ const card =
       <div class="relative mt-16 lg:mt-20">
         <div
           aria-hidden="true"
-          class="bg-space-950/50 backdrop-blur-bar absolute inset-0"
+          class="bg-space-950/50 backdrop-blur-bar absolute inset-0 border-x border-white/10"
         ></div>
         <div
           aria-hidden="true"
@@ -87,7 +87,7 @@ const card =
               return (
                 <article
                   data-process
-                  class="group/process relative flex flex-col pb-10"
+                  class="group/process relative flex flex-col pb-20"
                 >
                   <div
                     aria-hidden="true"
@@ -96,15 +96,15 @@ const card =
                       'pointer-fine:group-hover/process:-translate-y-lift pointer-fine:group-hover/process:opacity-100',
                     ]}
                   />
-                  <div class="relative flex h-36 items-end overflow-hidden px-6">
-                    <div class="w-full" style="--overhang: 48px">
+                  <div class="relative flex h-36 items-end overflow-hidden px-12">
+                    <div class="w-full" style="--overhang: 72px">
                       <ProcessTimeline
                         weeks={process.weeks}
                         stages={process.stages}
                       />
                     </div>
                   </div>
-                  <div class="ease-out-soft relative px-6 pt-5 transition-transform duration-300 pointer-fine:group-hover/process:-translate-y-lift">
+                  <div class="ease-out-soft relative px-12 pt-10 transition-transform duration-300 pointer-fine:group-hover/process:-translate-y-lift">
                     <h4 class="text-sky text-benefit ease-out-soft font-normal transition-colors duration-300 group-hover/process:text-white">
                       {process.heading}
                     </h4>
@@ -117,7 +117,7 @@ const card =
             const { data } = item;
             const Art = art[data.art];
             return (
-              <article class="group relative flex flex-col pb-10">
+              <article class="group relative flex flex-col pb-20">
                 <div
                   aria-hidden="true"
                   class:list={[
@@ -136,7 +136,7 @@ const card =
                     <Art />
                   </div>
                 </div>
-                <div class="ease-out-soft relative px-6 pt-5 transition-transform duration-300 pointer-fine:group-hover:-translate-y-lift">
+                <div class="ease-out-soft relative px-12 pt-10 transition-transform duration-300 pointer-fine:group-hover:-translate-y-lift">
                   <h4 class="text-sky text-benefit ease-out-soft font-normal transition-colors duration-300 group-hover:text-white">
                     {data.title}
                   </h4>
