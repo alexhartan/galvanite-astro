@@ -19,11 +19,12 @@ const { id, frames } = Astro.props;
       height="180"
     >
       <rect width="300" height="180" fill="white" />
-      {frames.slice(index + 1).map(({ x, y, w, h, lift }) => (
+      {frames.slice(index + 1).map(({ x, y, w, h, lift, d }) => (
         <g transform={`translate(${x} ${y})`}>
           <g class:list={[pivot, lift, motion]}>
             <path
-              d={frame(w, h)}
+              d={d ?? frame(w, h)}
+              stroke-linejoin="round"
               fill="black"
               stroke="black"
               stroke-width="16"

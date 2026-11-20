@@ -1,25 +1,34 @@
 ---
 import ArtStack from './ArtStack.astro';
-import { ink, motion, outline } from './kit';
+import { ink, motion } from './kit';
 
 const frames = [
   {
-    x: 83,
-    y: 96,
-    w: 18,
-    h: 76,
+    x: 128,
+    y: 166,
+    w: 68,
+    h: 6,
     bare: true,
-    lift: 'group-hover:-translate-x-1 group-hover:-rotate-6',
+    d: 'M2 0.5H60L67.5 3L60 5.5H2C1.172 5.5 0.5 4.828 0.5 4V2C0.5 1.172 1.172 0.5 2 0.5Z',
+    lift: 'group-hover:translate-y-1',
   },
   {
-    x: 229,
-    y: 100,
-    w: 10,
-    h: 63,
+    x: 107,
+    y: 88,
+    w: 110,
+    h: 70,
     bare: true,
-    lift: 'group-hover:translate-x-1 group-hover:rotate-12',
+    lift: 'group-hover:-translate-y-1.5',
   },
-  { x: 109, y: 88, w: 112, h: 84, lift: 'group-hover:-translate-y-1' },
+  {
+    x: 83,
+    y: 88,
+    w: 40,
+    h: 70,
+    bare: true,
+    d: 'M1 1V69H39Z',
+    lift: 'group-hover:-translate-x-1.5 group-hover:-translate-y-1.5',
+  },
 ];
 const steps = [
   'group-hover:delay-0',
@@ -29,35 +38,19 @@ const steps = [
   'group-hover:delay-300',
 ];
 const fill = 'fill-azure-deep opacity-0 group-hover:opacity-100';
-const ticks = Array.from(
-  { length: 8 },
-  (_, i) => `M1 ${10 + i * 8}H${i % 2 ? 6 : 10}`,
-).join('');
 ---
 
 <ArtStack id="art-process" frames={frames}>
-  <path slot="a" d={ticks} stroke-width="1" class:list={[ink, motion]} />
+  <path slot="a" d="M8 0.5V5.5" stroke-width="1" class:list={[ink, motion]} />
   <g slot="b">
-    <path d="M1 14H9" class:list={[ink, motion]} />
-    <path
-      d="M1 62L5 72L9 62"
-      stroke-linejoin="round"
-      class:list={[outline, 'fill-none', motion]}
-    />
-  </g>
-  <g slot="c">
-    <path
-      d="M10 22V74"
-      stroke-width="1"
-      class:list={[
-        'stroke-ink/60 transition-transform duration-1000 ease-standard group-hover:translate-x-23 motion-reduce:transition-none',
-      ]}
-    />
+    <g class="ease-standard transition-transform duration-1000 group-hover:translate-x-23.5 motion-reduce:transition-none">
+      <path d="M8 8V62" stroke-width="1" class:list={[ink, motion]} />
+    </g>
     {steps.map((delay, index) => (
       <>
         <rect
           x={12 + index * 14}
-          y={26 + index * 10}
+          y={12 + index * 10}
           width="30"
           height="6"
           rx="2"
@@ -65,7 +58,7 @@ const ticks = Array.from(
         />
         <rect
           x={12 + index * 14}
-          y={26 + index * 10}
+          y={12 + index * 10}
           width="30"
           height="6"
           rx="2"
@@ -75,4 +68,11 @@ const ticks = Array.from(
       </>
     ))}
   </g>
+  <path
+    slot="c"
+    d="M8 26V60H28Z"
+    stroke-width="1"
+    stroke-linejoin="round"
+    class:list={[ink, motion]}
+  />
 </ArtStack>
