@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
-import GridMark from '../ui/GridMark.astro';
 import ProcessTimeline from '../ui/ProcessTimeline.astro';
 import BuildArt from '../ui/art/BuildArt.astro';
 import ConsistencyArt from '../ui/art/ConsistencyArt.astro';
@@ -39,8 +38,6 @@ const art = {
 };
 const card =
   'ease-out-soft pointer-events-none absolute inset-0 rounded-lg border border-white/15 bg-space-950/50 shadow-card backdrop-blur-bar opacity-0 transition duration-300';
-const line = 'bleed-x absolute top-0 h-px bg-white/10';
-const right = '3xl:block lg:hidden';
 ---
 
 <section
@@ -58,20 +55,7 @@ const right = '3xl:block lg:hidden';
         <h3 class="text-section">{heading}</h3>
         <p class="text-frost/80 max-w-lead mt-6 text-balance">{description}</p>
       </div>
-      <div class="relative mt-16 grid sm:grid-cols-2 lg:mt-20 xl:grid-cols-4">
-        <div aria-hidden="true" class={line}></div>
-        {[
-          'left-0',
-          'left-1/2 max-sm:hidden',
-          'left-1/4 max-xl:hidden',
-          'left-3/4 max-xl:hidden',
-        ].map((position) => (
-          <GridMark inverted class:list={['absolute top-0', position]} />
-        ))}
-        <GridMark
-          inverted
-          class:list={[right, 'absolute top-0 left-full -ml-px']}
-        />
+      <div class="mt-16 grid sm:grid-cols-2 lg:mt-20 lg:grid-cols-3">
         {benefits.map(({ data }) => {
           const Art = art[data.art];
           return (
@@ -105,21 +89,9 @@ const right = '3xl:block lg:hidden';
             </article>
           );
         })}
-      </div>
-      <div class="relative grid xl:grid-cols-4">
-        <div aria-hidden="true" class={line}></div>
-        {['left-0', 'left-1/4 max-xl:hidden', 'left-3/4 max-xl:hidden'].map(
-          (position) => (
-            <GridMark inverted class:list={['absolute top-0', position]} />
-          ),
-        )}
-        <GridMark
-          inverted
-          class:list={[right, 'absolute top-0 left-full -ml-px']}
-        />
-        <div
+        <article
           data-process
-          class="group/process relative px-6 py-10 xl:col-span-2 xl:col-start-2"
+          class="group/process relative flex flex-col pb-10 sm:col-span-2"
         >
           <div
             aria-hidden="true"
@@ -128,18 +100,20 @@ const right = '3xl:block lg:hidden';
               'pointer-fine:group-hover/process:-translate-y-lift pointer-fine:group-hover/process:opacity-100',
             ]}
           />
-          <div class="relative">
-            <h4 class="text-sky text-process ease-out-soft font-light text-balance transition-colors duration-300 group-hover/process:text-white">
-              {process.heading}
-            </h4>
-            <p class="text-frost/80 ease-out-soft mt-3 max-w-md text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover/process:opacity-100">
-              {process.description}
-            </p>
-            <div class="mt-6">
+          <div class="relative px-6 pt-4">
+            <div class="w-full" style="--overhang: 48px">
               <ProcessTimeline weeks={process.weeks} stages={process.stages} />
             </div>
           </div>
-        </div>
+          <div class="ease-out-soft relative px-6 pt-5 transition-transform duration-300 pointer-fine:group-hover/process:-translate-y-lift">
+            <h4 class="text-sky text-benefit ease-out-soft font-normal transition-colors duration-300 group-hover/process:text-white">
+              {process.heading}
+            </h4>
+            <p class="text-frost/80 ease-out-soft mt-2 max-w-md text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover/process:opacity-100">
+              {process.description}
+            </p>
+          </div>
+        </article>
       </div>
     </Container>
   </div>
