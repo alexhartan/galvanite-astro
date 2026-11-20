@@ -1,108 +1,47 @@
 ---
-const motion =
-  'ease-standard transition duration-300 motion-reduce:transition-none';
-const frame = (w: number, h: number) =>
-  `M4 1H${w - 4}C${w - 2.343} 1 ${w - 1} 2.343 ${w - 1} 4V${h - 4}C${w - 1} ${h - 2.343} ${w - 2.343} ${h - 1} ${w - 4} ${h - 1}H4C2.343 ${h - 1} 1 ${h - 2.343} 1 ${h - 4}V4C1 2.343 2.343 1 4 1Z`;
-const devices = [
+import ArtStack from './ArtStack.astro';
+import { ink, motion, outline } from './kit';
+
+const frames = [
   {
-    key: 'desktop',
-    x: 83,
-    y: 82,
+    x: 120,
+    y: 76,
     w: 120,
-    h: 78,
-    lift: 'group-hover:-translate-x-2',
+    h: 76,
+    lift: 'group-hover:translate-x-2 group-hover:-translate-y-1',
   },
-  {
-    key: 'tablet',
-    x: 178,
-    y: 98,
-    w: 58,
-    h: 74,
-    lift: 'group-hover:translate-x-3 group-hover:-translate-y-1',
-  },
-  {
-    key: 'phone',
-    x: 158,
-    y: 120,
-    w: 32,
-    h: 52,
-    lift: 'group-hover:-translate-y-3',
-  },
-] as const;
+  { x: 83, y: 118, w: 80, h: 50, lift: 'group-hover:-translate-x-2' },
+  { x: 149, y: 112, w: 28, h: 60, lift: 'group-hover:-translate-y-3' },
+];
+const line = [ink, motion];
+const edge = [outline, 'fill-none', motion];
 ---
 
-<svg
-  class="absolute top-1/2 left-1/2 -translate-1/2 overflow-visible"
-  width="300"
-  height="180"
-  viewBox="0 0 300 180"
-  fill="none"
->
-  <defs>
-    {devices.slice(0, 2).map(({ key }, index) => (
-      <mask
-        id={`art-consistency-mask-${key}`}
-        maskUnits="userSpaceOnUse"
-        x="0"
-        y="0"
-        width="300"
-        height="180"
-      >
-        <rect width="300" height="180" fill="white" />
-        {devices.slice(index + 1).map(({ x, y, w, h, lift }) => (
-          <g transform={`translate(${x} ${y})`}>
-            <g class:list={['transform-fill origin-bottom', lift, motion]}>
-              <path
-                d={frame(w, h)}
-                fill="black"
-                stroke="black"
-                stroke-width="16"
-              />
-            </g>
-          </g>
-        ))}
-      </mask>
-    ))}
-  </defs>
-  {devices.map(({ key, x, y, w, h, lift }, index) => (
-    <g mask={index < 2 ? `url(#art-consistency-mask-${key})` : undefined}>
-      <g transform={`translate(${x} ${y})`}>
-        <g class:list={['transform-fill origin-bottom', lift, motion]}>
-          {key === 'desktop' && (
-            <path
-              d={`M${w / 2} ${h}V${h + 10}M${w / 2 - 16} ${h + 11}H${w / 2 + 16}`}
-              stroke-width="2"
-              stroke-linecap="round"
-              class:list={['stroke-azure-deep group-hover:stroke-sky', motion]}
-            />
-          )}
-          <path
-            d={frame(w, h)}
-            stroke-width="2"
-            class:list={[
-              'fill-deep-950 stroke-azure-deep group-hover:stroke-sky',
-              motion,
-            ]}
-          />
-          <g
-            stroke-width="2"
-            stroke-linecap="round"
-            class:list={['stroke-ink group-hover:stroke-azure-deep', motion]}
-          >
-            <path d={`M${w * 0.14} ${h * 0.2}H${w * 0.46}`} stroke-width="1" />
-            <path
-              d={`M${w * 0.14} ${h * 0.42}H${w * 0.86}M${w * 0.14} ${h * 0.56}H${w * 0.66}`}
-            />
-            <rect
-              x={w * 0.14}
-              y={h * 0.72}
-              width={w * 0.3}
-              height={Math.max(6, h * 0.12)}
-              rx="2"
-            />
-          </g>
-        </g>
-      </g>
-    </g>
-  ))}
-</svg>
+<ArtStack id="art-consistency" frames={frames}>
+  <path
+    slot="a-under"
+    d="M60 76V86M44 87H76"
+    stroke-width="2"
+    stroke-linecap="round"
+    class:list={edge}
+  />
+  <g slot="a" class:list={line}>
+    <path d="M14 34H100M14 44H76" />
+    <rect x="14" y="56" width="30" height="8" rx="2" />
+  </g>
+  <path
+    slot="b-under"
+    d="M-6 51H86"
+    stroke-width="2"
+    stroke-linecap="round"
+    class:list={edge}
+  />
+  <g slot="b" class:list={line}>
+    <path d="M10 24H66M10 32H50" />
+    <rect x="10" y="38" width="20" height="6" rx="2" />
+  </g>
+  <g slot="c" class:list={line}>
+    <path d="M5 28H23M5 36H18" />
+    <rect x="5" y="44" width="12" height="6" rx="2" />
+  </g>
+</ArtStack>

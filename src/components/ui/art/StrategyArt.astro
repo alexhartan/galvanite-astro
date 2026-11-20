@@ -1,145 +1,40 @@
 ---
-const path =
-  'M2.06553 34.7209C-0.688517 34.2349 -0.688508 30.283 2.06554 29.797L13.5737 27.7662C20.817 26.4879 26.4879 20.817 27.7662 13.5737L29.797 2.06553C30.283 -0.688518 34.2349 -0.688507 34.7209 2.06554L36.7518 13.5737C38.03 20.817 43.701 26.4879 50.9443 27.7662L62.4524 29.797C65.2065 30.283 65.2065 34.2349 62.4524 34.7209L50.9442 36.7518C43.701 38.03 38.03 43.701 36.7518 50.9442L34.7209 62.4524C34.2349 65.2065 30.283 65.2065 29.797 62.4524L27.7662 50.9442C26.4879 43.701 20.817 38.03 13.5737 36.7518L2.06553 34.7209Z';
-const rings = [
-  { r: 75, opacity: 'opacity-100' },
-  { r: 112.5, opacity: 'opacity-80' },
-  { r: 168.75, opacity: 'opacity-60' },
-  { r: 253.125, opacity: 'opacity-40' },
-  { r: 379.688, opacity: 'opacity-20' },
-];
-const flips = ['', 'scale(1 -1)', 'scale(-1 1)', 'scale(-1)'];
-const sparks = [
+import ArtStack from './ArtStack.astro';
+import { ink, motion } from './kit';
+
+const frames = [
   {
-    id: 'art-strategy-spark-cool',
-    layer: 'opacity-100 group-hover:opacity-0',
-    stops: [
-      { offset: '0.15', tone: 'text-white' },
-      { offset: '0.35', tone: 'text-frost' },
-      { offset: '1', tone: 'text-azure' },
-    ],
+    x: 83,
+    y: 84,
+    w: 96,
+    h: 70,
+    lift: 'group-hover:-translate-x-2 group-hover:-rotate-3',
   },
   {
-    id: 'art-strategy-spark-warm',
-    layer: 'opacity-0 group-hover:opacity-100',
-    stops: [
-      { offset: '0.331731', tone: 'text-white' },
-      { offset: '1', tone: 'text-signal' },
-    ],
+    x: 122,
+    y: 100,
+    w: 100,
+    h: 72,
+    lift: 'group-hover:translate-x-2 group-hover:-translate-y-2',
   },
 ];
-const motion =
-  'ease-standard transition duration-500 motion-reduce:transition-none';
+const line = [ink, motion];
+const bar = [
+  'transform-fill origin-bottom group-hover:scale-y-125',
+  ink,
+  motion,
+];
 ---
 
-<svg
-  class="absolute bottom-0 left-1/2 -translate-x-1/2 overflow-visible"
-  width="300"
-  height="180"
-  viewBox="0 0 300 180"
-  fill="none"
->
-  <defs>
-    <radialGradient id="art-strategy-ring" cx="0.5" cy="1" r="1">
-      <stop
-        offset="0.35"
-        stop-color="currentColor"
-        class:list={['text-azure group-hover:text-sky', motion]}
-      ></stop>
-      <stop
-        offset="1"
-        stop-color="currentColor"
-        stop-opacity="0"
-        class="text-azure-deep"
-      ></stop>
-    </radialGradient>
-    <radialGradient
-      id="art-strategy-fade-fill"
-      cx="150"
-      cy="104"
-      r="330"
-      gradientUnits="userSpaceOnUse"
-    >
-      <stop offset="0.227" stop-color="white"></stop>
-      <stop offset="1" stop-color="white" stop-opacity="0"></stop>
-    </radialGradient>
-    <mask
-      id="art-strategy-fade"
-      maskUnits="userSpaceOnUse"
-      x="-300"
-      y="-500"
-      width="900"
-      height="700"
-    >
-      <rect
-        x="-300"
-        y="-500"
-        width="900"
-        height="700"
-        fill="url(#art-strategy-fade-fill)"
-      ></rect>
-    </mask>
-  </defs>
-  <g mask="url(#art-strategy-fade)">
-    {rings.map(({ r, opacity }) => (
-      <circle
-        style={`--grow: ${(1 + 0.2 * (r / 75)).toFixed(3)}`}
-        cx="150"
-        cy={179 - r}
-        r={r}
-        stroke="url(#art-strategy-ring)"
-        stroke-width="2"
-        class:list={[
-          'transform-fill origin-bottom group-hover:scale-(--grow) group-hover:opacity-100',
-          opacity,
-          motion,
-        ]}
-      />
-    ))}
+<ArtStack id="art-strategy" frames={frames}>
+  <g slot="a" class:list={line}>
+    <circle cx="20" cy="34" r="8" />
+    <path d="M36 30H76M36 40H62M12 54H80" />
   </g>
-</svg>
-<svg
-  class:list={[
-    'absolute bottom-5 left-1/2 origin-bottom -translate-x-1/2 overflow-visible group-hover:scale-150',
-    motion,
-  ]}
-  width="65"
-  height="65"
-  viewBox="0 0 65 65"
->
-  <defs>
-    <clipPath id="art-strategy-spark">
-      <path d={path}></path>
-    </clipPath>
-    {sparks.map(({ id, stops }) => (
-      <linearGradient
-        id={id}
-        x1="0"
-        y1="0"
-        x2="500"
-        y2="500"
-        gradientUnits="userSpaceOnUse"
-      >
-        {stops.map(({ offset, tone }) => (
-          <stop offset={offset} stop-color="currentColor" class={tone} />
-        ))}
-      </linearGradient>
-    ))}
-  </defs>
-  {sparks.map(({ id, layer }) => (
-    <g clip-path="url(#art-strategy-spark)" class:list={[layer, motion]}>
-      <g transform="matrix(0 0.0344358 -0.0344358 0 32.2555 32.2588)">
-        {flips.map((flip) => (
-          <rect
-            x="-58"
-            y="-58"
-            width="1003.308"
-            height="1003.404"
-            transform={flip || undefined}
-            fill={`url(#${id})`}
-          />
-        ))}
-      </g>
-    </g>
-  ))}
-</svg>
+  <g slot="b">
+    <rect x="12" y="46" width="10" height="14" rx="1" class:list={bar} />
+    <rect x="28" y="40" width="10" height="20" rx="1" class:list={bar} />
+    <rect x="44" y="32" width="10" height="28" rx="1" class:list={bar} />
+    <path d="M64 36H88M64 46H80" class:list={line} />
+  </g>
+</ArtStack>

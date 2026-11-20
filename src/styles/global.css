@@ -128,11 +128,7 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-marquee: marquee 80s linear infinite;
-  --animate-art-flow: art-flow 1.8s linear var(--delay, 0s) infinite both;
-  --animate-art-pulse: art-pulse 2s var(--ease-in-out-soft) infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
-  --animate-art-wobble: art-wobble 0.9s var(--ease-in-out-soft) 0.5s infinite
-    alternate both;
 
   @keyframes marquee {
     to {
@@ -140,36 +136,7 @@
     }
   }
 
-  @keyframes art-flow {
-    0% {
-      opacity: 0;
-      transform: none;
-    }
-    10% {
-      opacity: 1;
-    }
-    25% {
-      transform: translate(var(--x1), 0);
-    }
-    55% {
-      transform: translate(var(--x1), var(--ty));
-    }
-    75% {
-      opacity: 1;
-      transform: translate(var(--tx), var(--ty));
-    }
-    88%,
-    100% {
-      opacity: 0;
-      transform: translate(var(--tx), var(--ty));
-    }
-  }
 
-  @keyframes art-pulse {
-    50% {
-      transform: scale(1.08);
-    }
-  }
 
   @keyframes art-blink {
     0%,
@@ -182,14 +149,6 @@
     }
   }
 
-  @keyframes art-wobble {
-    from {
-      transform: none;
-    }
-    to {
-      transform: rotate(-5deg);
-    }
-  }
 }
 
 @utility reveal-mask {
@@ -241,6 +200,17 @@
   right: -100vw;
 }
 
+@utility gauge {
+  stroke-dashoffset: 35;
+  transition:
+    stroke-dashoffset 0.6s var(--ease-out-soft),
+    stroke 0.3s var(--ease-standard);
+}
+
+@utility gauge-full {
+  stroke-dashoffset: 0;
+}
+
 @utility clip-left {
   clip-path: inset(-100vh -100vw -100vh 0);
 }
@@ -264,16 +234,6 @@
 @utility section-link {
   top: calc(var(--offset, 0px) + var(--spacing-nav));
   bottom: calc(2.75rem + var(--slot, 0) * 1.5rem - 1lh);
-}
-
-@utility sweep {
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  transition-property: stroke-dashoffset;
-}
-
-@utility sweep-full {
-  stroke-dashoffset: 0;
 }
 
 @utility grid-rows-offer {

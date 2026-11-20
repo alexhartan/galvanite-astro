@@ -27,12 +27,6 @@ const { id = 'why', label, heading, description, process } = Astro.props;
 const benefits = (await getCollection('benefits')).sort(
   (a, b) => a.data.order - b.data.order,
 );
-const offset: Record<string, string> = {
-  consistency: '--art-x: -10px; --art-y: 1px',
-  build: '--art-x: -2px; --art-y: 17px',
-  performance: '--art-x: -3px; --art-y: 16px',
-  tools: '--art-x: -10px; --art-y: 1px',
-};
 const items = [
   ...benefits.slice(0, 4),
   'process' as const,
@@ -126,13 +120,7 @@ const card =
                   ]}
                 />
                 <div aria-hidden="true" class="relative h-36 overflow-hidden">
-                  <div
-                    class:list={[
-                      'absolute bottom-0 left-0 h-45 origin-bottom-left translate-x-(--art-x,0) translate-y-(--art-y,0) scale-60',
-                      data.art === 'strategy' ? 'w-full' : 'w-75',
-                    ]}
-                    style={offset[data.art]}
-                  >
+                  <div class="absolute bottom-0 left-0 h-45 w-75 origin-bottom-left -translate-x-2.5 translate-y-px scale-60">
                     <Art />
                   </div>
                 </div>
