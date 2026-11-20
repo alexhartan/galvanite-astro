@@ -9,8 +9,8 @@ const lift = {
   front: 'group-hover:translate-x-4 group-hover:rotate-6',
 };
 const cards = [
-  { key: 'back', x: 83, y: 78, mask: 'art-tools-mask-back' },
-  { key: 'middle', x: 95, y: 85, mask: 'art-tools-mask-middle' },
+  { key: 'back', x: 83, y: 44, mask: 'art-tools-mask-back' },
+  { key: 'middle', x: 95, y: 68, mask: 'art-tools-mask-middle' },
   { key: 'front', x: 107, y: 92 },
 ] as const;
 const above = { back: cards[1], middle: cards[2] } as const;
@@ -59,7 +59,7 @@ const above = { back: cards[1], middle: cards[2] } as const;
             d={card}
             stroke-width="2"
             class:list={[
-              'fill-deep-950 stroke-azure group-hover:stroke-sky',
+              'fill-deep-950 stroke-azure-deep group-hover:stroke-sky',
               motion,
             ]}
           />
