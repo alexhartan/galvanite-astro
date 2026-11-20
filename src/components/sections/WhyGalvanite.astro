@@ -28,7 +28,7 @@ const benefits = (await getCollection('benefits')).sort(
   (a, b) => a.data.order - b.data.order,
 );
 const offset: Record<string, string> = {
-  consistency: '--art-x: 20px; --art-y: 11px',
+  consistency: '--art-x: -10px; --art-y: 1px',
   build: '--art-x: -2px; --art-y: 17px',
   performance: '--art-x: -3px; --art-y: 16px',
   tools: '--art-x: -10px; --art-y: 1px',
@@ -105,7 +105,7 @@ const card =
                     </div>
                   </div>
                   <div class="ease-out-soft relative px-10 pt-8 transition-transform duration-300 pointer-fine:group-hover/process:-translate-y-lift">
-                    <h4 class="text-sky text-benefit ease-out-soft font-normal transition-colors duration-300 group-hover/process:text-white">
+                    <h4 class="text-sky text-benefit ease-out-soft font-medium transition-colors duration-300 group-hover/process:text-white">
                       {process.heading}
                     </h4>
                     <p class="text-frost/80 ease-out-soft mt-2 max-w-md text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover/process:opacity-100">
@@ -137,7 +137,7 @@ const card =
                   </div>
                 </div>
                 <div class="ease-out-soft relative px-10 pt-8 transition-transform duration-300 pointer-fine:group-hover:-translate-y-lift">
-                  <h4 class="text-sky text-benefit ease-out-soft font-normal transition-colors duration-300 group-hover:text-white">
+                  <h4 class="text-sky text-benefit ease-out-soft font-medium transition-colors duration-300 group-hover:text-white">
                     {data.title}
                   </h4>
                   <p class="text-frost/80 ease-out-soft mt-2 text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100">
