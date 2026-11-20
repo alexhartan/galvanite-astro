@@ -8,6 +8,8 @@ export function initTimeline(root: HTMLElement) {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
   let position = 0;
+  let lo = 0;
+  let hi = 1;
   let from = 0;
   let to = 0;
   let duration = 1;
@@ -32,7 +34,7 @@ export function initTimeline(root: HTMLElement) {
   };
 
   const tween = (target: number, seconds: number, reset = false) => {
-    if (reset) position = 0;
+    if (reset) position = lo;
     from = position;
     to = target;
     duration = seconds;
@@ -40,10 +42,19 @@ export function initTimeline(root: HTMLElement) {
     if (!frame) frame = requestAnimationFrame(step);
   };
 
+  const measure = () => {
+    const over =
+      parseFloat(getComputedStyle(root).getPropertyValue('--overhang')) || 0;
+    const width = root.clientWidth || 1;
+    lo = -over / width;
+    hi = 1 + over / width;
+  };
+
   const play = (on: boolean) => {
+    measure();
     root.toggleAttribute('data-playing', on);
-    if (on) tween(1, PLAY_S, true);
-    else tween(0, RESET_S);
+    if (on) tween(hi, PLAY_S, true);
+    else tween(lo, RESET_S);
   };
 
   if (reduced.matches) {
@@ -51,6 +62,8 @@ export function initTimeline(root: HTMLElement) {
     paint();
     return;
   }
+  measure();
+  position = lo;
   trigger.addEventListener('pointerenter', () => hover.matches && play(true));
   trigger.addEventListener('pointerleave', () => hover.matches && play(false));
   trigger.addEventListener('focusin', () => play(true));
