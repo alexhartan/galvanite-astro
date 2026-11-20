@@ -1,16 +1,16 @@
 ---
 import ArtStack from './ArtStack.astro';
-import { ink, motion } from './kit';
+import { ink, motion, outline } from './kit';
 
 const frames = [
   {
-    x: 128,
+    x: 149,
     y: 166,
     w: 68,
     h: 6,
     bare: true,
     d: 'M2 0.5H60L67.5 3L60 5.5H2C1.172 5.5 0.5 4.828 0.5 4V2C0.5 1.172 1.172 0.5 2 0.5Z',
-    lift: 'group-hover:translate-y-1',
+    lift: 'group-hover:translate-x-2',
   },
   {
     x: 107,
@@ -22,11 +22,11 @@ const frames = [
   },
   {
     x: 83,
-    y: 88,
-    w: 40,
-    h: 70,
+    y: 97,
+    w: 30,
+    h: 52,
     bare: true,
-    d: 'M1 1V69H39Z',
+    d: 'M1 1V51H29Z',
     lift: 'group-hover:-translate-x-1.5 group-hover:-translate-y-1.5',
   },
 ];
@@ -70,9 +70,8 @@ const fill = 'fill-azure-deep opacity-0 group-hover:opacity-100';
   </g>
   <path
     slot="c"
-    d="M8 26V60H28Z"
-    stroke-width="1"
+    d="M7 18V45H22Z"
     stroke-linejoin="round"
-    class:list={[ink, motion]}
+    class:list={[outline, 'fill-none', motion]}
   />
 </ArtStack>

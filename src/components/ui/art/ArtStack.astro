@@ -8,6 +8,10 @@ interface Props {
 }
 const { id, frames } = Astro.props;
 const names = ['a', 'b', 'c'] as const;
+const title = (w: number) => {
+  const start = Math.max(5, Math.round(w * 0.12));
+  return [start, start + Math.min(36, w - start * 2)];
+};
 const render = (name: string) =>
   Astro.slots.has(name) ? Astro.slots.render(name) : Promise.resolve('');
 const content = await Promise.all(names.map((name) => render(name)));
@@ -36,7 +40,7 @@ const under = await Promise.all(names.map((name) => render(`${name}-under`)));
           <g stroke-width="2" stroke-linecap="round">
             {!bare && (
               <path
-                d={`M${Math.round(w * 0.12)} 14H${Math.round(w * 0.12 + 36)}`}
+                d={`M${title(w)[0]} 14H${title(w)[1]}`}
                 stroke-width="1"
                 class:list={[ink, motion]}
               />
