@@ -9,11 +9,22 @@ interface Props {
   lead: string;
   emphasis: string;
   description: string;
+  trust?: string;
+  logos?: { name: string; logo: ImageMetadata }[];
 }
-const { eyebrow, lead, emphasis, description } = Astro.props;
-const clients = (
-  await getCollection('clients', ({ data }) => !data.hidden)
-).sort((a, b) => a.data.order - b.data.order);
+const {
+  eyebrow,
+  lead,
+  emphasis,
+  description,
+  trust = 'Trusted by technical teams at:',
+  logos,
+} = Astro.props;
+const clients =
+  logos ??
+  (await getCollection('clients', ({ data }) => !data.hidden))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(({ data }) => data);
 ---
 
 <section
@@ -54,7 +65,7 @@ const clients = (
           <Container class="relative">
             <GridMark class="absolute -top-3.75 left-6 -mt-px" />
             <p class="text-frost text-xs font-normal tracking-widest uppercase">
-              Trusted by technical teams at:
+              {trust}
             </p>
             <div class="clip-left mt-1" aria-label="Clients" role="group">
               <div class="motion-safe:animate-marquee flex w-max">
@@ -63,7 +74,7 @@ const clients = (
                     class="flex shrink-0 items-center gap-10 pr-10"
                     aria-hidden={copy === 1 ? 'true' : undefined}
                   >
-                    {clients.map(({ data }) => (
+                    {clients.map((data) => (
                       <li class="shrink-0">
                         <Image
                           src={data.logo}
