@@ -199,6 +199,12 @@
   clip-path: inset(-100vh -100vw -100vh 0);
 }
 
+@custom-variant pick-any {
+  :where([data-self-check]:has(input:checked)) & {
+    @slot;
+  }
+}
+
 @custom-variant pick-standard {
   :where([data-self-check]:has(input[data-tier='standard']:checked)) & {
     @slot;

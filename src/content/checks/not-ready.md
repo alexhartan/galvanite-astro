@@ -1,5 +1,5 @@
 ---
 order: 6
 tier: premium
-statement: "“We need a brand that gets customers and investors excited.”"
+statement: "“Our brand doesn’t excite customers or investors.”"
 ---

@@ -9,16 +9,9 @@ interface Props {
   id?: string;
   label: string;
   heading: string;
-  prompt: string;
   ctaHref?: string;
 }
-const {
-  id = 'fit',
-  label,
-  heading,
-  prompt,
-  ctaHref = '#contact',
-} = Astro.props;
+const { id = 'fit', label, heading, ctaHref = '#contact' } = Astro.props;
 const checks = (await getCollection('checks')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -27,9 +20,9 @@ const packages = (await getCollection('engagements')).sort(
 );
 const reveal = {
   standard:
-    'hidden pick-standard:block pick-featured:hidden pick-premium:hidden',
-  featured: 'hidden pick-featured:block pick-premium:hidden',
-  premium: 'hidden pick-premium:block',
+    'pick-standard:visible pick-featured:invisible pick-premium:invisible',
+  featured: 'pick-featured:visible pick-premium:invisible',
+  premium: 'pick-premium:visible',
 };
 ---
 
@@ -44,82 +37,81 @@ const reveal = {
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <div
-        data-self-check
-        class="grid gap-16 lg:grid-cols-3 lg:items-center lg:gap-10"
-      >
-        <div class="lg:col-span-2">
-          <h3 class="text-section">{heading}</h3>
-          <ul
-            class="bg-space-950/50 backdrop-blur-bar mt-12 divide-y divide-white/10 rounded-lg border border-white/15"
-            role="list"
-          >
-            {checks.map(({ id: key, data }) => (
-              <li>
-                <label class="group text-frost/80 has-checked:text-white ease-standard flex cursor-pointer items-start gap-4 px-6 py-5 text-lg transition-colors lg:px-8 lg:py-6 duration-200 pointer-fine:hover:text-white">
-                  <span class="relative mt-0.5 flex size-6 shrink-0">
-                    <input
-                      type="checkbox"
-                      name="fit"
-                      value={key}
-                      data-tier={data.tier}
-                      class="peer ease-out-soft checked:border-signal checked:bg-signal focus-visible:outline-signal group-hover:border-sky size-6 cursor-pointer appearance-none rounded-sm border-2 border-white/30 transition duration-300 active:scale-90 focus-visible:outline-2 focus-visible:outline-offset-2"
+      <h3 class="text-section">{heading}</h3>
+      <div data-self-check class="mt-12 grid gap-4 xl:grid-cols-4 xl:gap-10">
+        <ul
+          class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:col-span-3"
+          role="list"
+        >
+          {checks.map(({ id: key, data }) => (
+            <li class="flex">
+              <label class="group bg-space-950/50 backdrop-blur-bar text-frost/80 has-checked:border-signal/60 has-checked:text-white ease-standard flex w-full cursor-pointer flex-col justify-between gap-6 rounded-lg border border-white/15 p-6 text-base text-balance transition-colors duration-300 pointer-fine:hover:border-white/30 pointer-fine:hover:text-white">
+                <span class="relative flex size-6 shrink-0">
+                  <input
+                    type="checkbox"
+                    name="fit"
+                    value={key}
+                    data-tier={data.tier}
+                    class="peer ease-out-soft checked:border-signal checked:bg-signal focus-visible:outline-signal group-hover:border-sky size-6 cursor-pointer appearance-none rounded-sm border-2 border-white/30 transition duration-300 active:scale-90 focus-visible:outline-2 focus-visible:outline-offset-2"
+                  />
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="text-ink pointer-events-none absolute inset-0"
+                  >
+                    <path
+                      d="M6 12.5l4 4 8-9"
+                      pathLength="1"
+                      class="dash-hidden group-has-checked:dash-shown"
                     />
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="text-ink pointer-events-none absolute inset-0"
-                    >
-                      <path
-                        d="M6 12.5l4 4 8-9"
-                        pathLength="1"
-                        class="dash-hidden group-has-checked:dash-shown"
-                      />
-                    </svg>
-                  </span>
-                  <span>{data.statement}</span>
-                </label>
-              </li>
-            ))}
-          </ul>
-        </div>
+                  </svg>
+                </span>
+                <span>{data.statement}</span>
+              </label>
+            </li>
+          ))}
+        </ul>
         <aside
           aria-live="polite"
-          class="bg-space-950/50 backdrop-blur-bar shadow-card relative rounded-lg border border-white/15 lg:self-stretch"
+          class="text-ink ease-out-soft pick-any:visible pick-any:translate-y-0 pick-any:opacity-100 invisible grid translate-y-2 bg-white opacity-0 transition duration-500 motion-reduce:translate-y-0"
         >
-          <p class="text-frost/70 flex h-full min-h-72 items-center p-8 text-lg text-balance pick-standard:hidden pick-featured:hidden pick-premium:hidden">
-            {prompt}
-          </p>
           {packages.map(({ data }) => (
-            <div class:list={['p-8', reveal[data.tier]]}>
+            <div
+              class:list={[
+                'invisible col-start-1 row-start-1 flex flex-col p-8',
+                reveal[data.tier],
+              ]}
+            >
               <p class="text-sky text-label font-semibold tracking-widest uppercase">
                 Where to start
               </p>
               <h4 class="mt-4 text-2xl font-semibold">{data.name}</h4>
-              <p class="text-frost/80 mt-2 text-balance">{data.audience}</p>
-              <p class="text-price text-frost tracking-price mt-8 font-medium">
+              <p class="mt-2 text-balance">{data.audience}</p>
+              <p class="text-price tracking-price mt-8 font-semibold">
                 {data.pricePrefix && (
                   <span class="font-light">{data.pricePrefix} </span>
                 )}
                 {data.price}
               </p>
-              <p class="text-azure mt-3 text-sm tracking-widest uppercase">
+              <p class="text-sky mt-3 text-sm tracking-widest uppercase">
                 {data.duration}
               </p>
-              <CtaButton href={ctaHref} class="relative mt-8 w-full">
-                Book a Call
-              </CtaButton>
-              <a
-                href="#engagements"
-                class="text-frost hover:text-white focus-visible:outline-frost mt-4 inline-block text-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-              >
-                See what’s included
-              </a>
+              <div class="mt-auto pt-8">
+                <CtaButton href={ctaHref} class="relative w-full">
+                  Book a Call
+                </CtaButton>
+                <a
+                  href="#engagements"
+                  class="text-ink/70 hover:text-ink focus-visible:outline-ocean mt-4 inline-block text-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+                >
+                  See what’s included
+                </a>
+              </div>
             </div>
           ))}
         </aside>
