@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
 import CtaButton from '../ui/CtaButton.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import GridMark from '../ui/GridMark.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 
 interface Props {
@@ -37,84 +38,115 @@ const reveal = {
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <h3 class="text-section">{heading}</h3>
-      <div data-self-check class="mt-12 grid gap-4 xl:grid-cols-4 xl:gap-10">
-        <ul
-          class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:col-span-3"
-          role="list"
-        >
-          {checks.map(({ id: key, data }) => (
-            <li class="flex">
-              <label class="group bg-space-950/50 backdrop-blur-bar text-frost/80 has-checked:border-signal/60 has-checked:text-white ease-standard flex w-full cursor-pointer flex-col justify-between gap-6 rounded-lg border border-white/15 p-6 text-base text-balance transition-colors duration-300 pointer-fine:hover:border-white/30 pointer-fine:hover:text-white">
-                <span class="relative flex size-6 shrink-0">
-                  <input
-                    type="checkbox"
-                    name="fit"
-                    value={key}
-                    data-tier={data.tier}
-                    class="peer ease-out-soft checked:border-signal checked:bg-signal focus-visible:outline-signal group-hover:border-sky size-6 cursor-pointer appearance-none rounded-sm border-2 border-white/30 transition duration-300 active:scale-90 focus-visible:outline-2 focus-visible:outline-offset-2"
-                  />
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="text-ink pointer-events-none absolute inset-0"
-                  >
-                    <path
-                      d="M6 12.5l4 4 8-9"
-                      pathLength="1"
-                      class="dash-hidden group-has-checked:dash-shown"
+      <h3 class="text-section mt-40 lg:mt-56">{heading}</h3>
+      <div data-self-check class="relative mt-6">
+        <div
+          aria-hidden="true"
+          class="bg-space-950/50 backdrop-blur-bar absolute inset-0 border-x border-white/10"
+        ></div>
+        <div
+          aria-hidden="true"
+          class="bleed-x absolute top-0 h-px bg-white/10"
+        ></div>
+        <div
+          aria-hidden="true"
+          class="bleed-x absolute bottom-0 h-px bg-white/10"
+        ></div>
+        <div
+          aria-hidden="true"
+          class="absolute inset-y-0 left-2/3 w-px bg-white/10 max-xl:hidden"
+        ></div>
+        <GridMark inverted class="absolute top-0 left-0" />
+        <GridMark inverted class="absolute top-full left-0 -mt-px" />
+        <GridMark inverted class="absolute top-0 left-2/3 max-xl:hidden" />
+        <GridMark
+          inverted
+          class="absolute top-full left-2/3 -mt-px max-xl:hidden"
+        />
+        <GridMark inverted class="absolute top-0 left-full -ml-px" />
+        <GridMark inverted class="absolute top-full left-full -mt-px -ml-px" />
+        <div class="relative grid xl:grid-cols-3">
+          <ul
+            class="grid sm:grid-cols-2 lg:grid-cols-3 xl:col-span-2"
+            role="list"
+          >
+            {checks.map(({ id: key, data }) => (
+              <li class="group relative pointer-fine:hover:z-20">
+                <div
+                  aria-hidden="true"
+                  class="ease-out-soft shadow-card bg-space-950/50 backdrop-blur-bar pointer-events-none absolute inset-0 rounded-lg border border-white/15 opacity-0 transition duration-300 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:opacity-100"
+                />
+                <label class="text-frost/80 has-checked:text-white ease-out-soft relative flex h-full cursor-pointer flex-col gap-4 px-8 py-10 text-base text-balance transition duration-300 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:text-white">
+                  <span class="relative flex size-6 shrink-0">
+                    <input
+                      type="checkbox"
+                      name="fit"
+                      value={key}
+                      data-tier={data.tier}
+                      class="peer ease-out-soft checked:border-signal checked:bg-signal focus-visible:outline-signal group-hover:border-sky size-6 cursor-pointer appearance-none rounded-sm border-2 border-white/30 transition duration-300 active:scale-90 focus-visible:outline-2 focus-visible:outline-offset-2"
                     />
-                  </svg>
-                </span>
-                <span>{data.statement}</span>
-              </label>
-            </li>
-          ))}
-        </ul>
-        <aside
-          aria-live="polite"
-          class="text-ink ease-out-soft pick-any:visible pick-any:translate-y-0 pick-any:opacity-100 invisible grid translate-y-2 bg-white opacity-0 transition duration-500 motion-reduce:translate-y-0"
-        >
-          {packages.map(({ data }) => (
-            <div
-              class:list={[
-                'invisible col-start-1 row-start-1 flex flex-col p-8',
-                reveal[data.tier],
-              ]}
-            >
-              <p class="text-sky text-label font-semibold tracking-widest uppercase">
-                Where to start
-              </p>
-              <h4 class="mt-4 text-2xl font-semibold">{data.name}</h4>
-              <p class="mt-2 text-balance">{data.audience}</p>
-              <p class="text-price tracking-price mt-8 font-semibold">
-                {data.pricePrefix && (
-                  <span class="font-light">{data.pricePrefix} </span>
-                )}
-                {data.price}
-              </p>
-              <p class="text-sky mt-3 text-sm tracking-widest uppercase">
-                {data.duration}
-              </p>
-              <div class="mt-auto pt-8">
-                <CtaButton href={ctaHref} class="relative w-full">
-                  Book a Call
-                </CtaButton>
-                <a
-                  href="#engagements"
-                  class="text-ink/70 hover:text-ink focus-visible:outline-ocean mt-4 inline-block text-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-                >
-                  See what’s included
-                </a>
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="text-ink pointer-events-none absolute inset-0"
+                    >
+                      <path
+                        d="M6 12.5l4 4 8-9"
+                        pathLength="1"
+                        class="dash-hidden group-has-checked:dash-shown"
+                      />
+                    </svg>
+                  </span>
+                  <span>{data.statement}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+          <aside
+            aria-live="polite"
+            class="text-ink ease-out-soft pick-any:visible pick-any:opacity-100 invisible relative grid bg-white opacity-0 transition duration-500"
+          >
+            {packages.map(({ data }) => (
+              <div
+                class:list={[
+                  'invisible col-start-1 row-start-1 flex flex-col p-8',
+                  reveal[data.tier],
+                ]}
+              >
+                <p class="text-sky text-label font-semibold tracking-widest uppercase">
+                  Where to start
+                </p>
+                <h4 class="mt-4 text-2xl font-semibold">{data.name}</h4>
+                <p class="mt-2 text-balance">{data.audience}</p>
+                <p class="text-price tracking-price mt-8 font-semibold">
+                  {data.pricePrefix && (
+                    <span class="font-light">{data.pricePrefix} </span>
+                  )}
+                  {data.price}
+                </p>
+                <p class="text-sky mt-3 text-sm tracking-widest uppercase">
+                  {data.duration}
+                </p>
+                <div class="mt-auto pt-8">
+                  <CtaButton href={ctaHref} class="relative w-full">
+                    Book a Call
+                  </CtaButton>
+                  <a
+                    href="#engagements"
+                    class="text-ink/70 hover:text-ink focus-visible:outline-ocean mt-4 inline-block text-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+                  >
+                    See what’s included
+                  </a>
+                </div>
               </div>
-            </div>
-          ))}
-        </aside>
+            ))}
+          </aside>
+        </div>
       </div>
     </Container>
   </div>
