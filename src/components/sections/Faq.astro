@@ -62,15 +62,8 @@ const columns = [faqs.slice(0, half), faqs.slice(half)];
                     name="faq"
                     class="details-expand ease-out-soft relative pb-4 transition duration-300 pointer-fine:group-hover:-translate-y-lift"
                   >
-                    <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 px-8 pt-8 pb-4 text-lg font-light tracking-tight lg:text-xl transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
-                      <span class="text-balance">{data.question}</span>
-                      <span
-                        aria-hidden="true"
-                        class="group-hover:text-sky relative size-3 shrink-0"
-                      >
-                        <span class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 rounded-full bg-current" />
-                        <span class="ease-out-soft group-has-open:scale-y-0 absolute inset-y-0 left-1/2 w-px -translate-x-1/2 rounded-full bg-current transition-transform duration-300" />
-                      </span>
+                    <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none text-balance items-center pr-16 pl-8 pt-8 pb-4 text-lg font-light tracking-tight lg:text-xl transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
+                      {data.question}
                     </summary>
                     <div class="text-frost/80 pr-16 pb-4 pl-8 text-base text-pretty prose-links">
                       <Content />
