@@ -1,5 +1,5 @@
 ---
 order: 2
 tier: standard
-statement: "“We need a sharper homepage, fast, without rebuilding the whole site.”"
+statement: "“We need a better homepage, not a rebuild.”"
 ---
