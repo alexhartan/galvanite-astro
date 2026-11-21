@@ -9,7 +9,6 @@ interface Props {
   id?: string;
   label: string;
   heading: string;
-  hint: string;
   prompt: string;
   ctaHref?: string;
 }
@@ -17,7 +16,6 @@ const {
   id = 'fit',
   label,
   heading,
-  hint,
   prompt,
   ctaHref = '#contact',
 } = Astro.props;
@@ -52,11 +50,13 @@ const reveal = {
       >
         <div class="lg:col-span-2">
           <h3 class="text-section">{heading}</h3>
-          <p class="text-frost/70 mt-4">{hint}</p>
-          <ul class="mt-12 space-y-5" role="list">
+          <ul
+            class="bg-space-950/50 backdrop-blur-bar mt-12 divide-y divide-white/10 rounded-lg border border-white/15"
+            role="list"
+          >
             {checks.map(({ id: key, data }) => (
               <li>
-                <label class="group text-frost/80 has-checked:text-white ease-standard flex cursor-pointer items-start gap-4 text-lg transition-colors duration-200 pointer-fine:hover:text-white">
+                <label class="group text-frost/80 has-checked:text-white ease-standard flex cursor-pointer items-start gap-4 px-6 py-5 text-lg transition-colors lg:px-8 lg:py-6 duration-200 pointer-fine:hover:text-white">
                   <span class="relative mt-0.5 flex size-6 shrink-0">
                     <input
                       type="checkbox"
