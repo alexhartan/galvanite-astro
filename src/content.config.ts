@@ -41,6 +41,15 @@ const engagements = defineCollection({
   }),
 });
 
+const checks = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/checks' }),
+  schema: z.object({
+    order: z.number(),
+    tier: z.enum(['standard', 'featured', 'premium']),
+    statement: z.string(),
+  }),
+});
+
 const testimonials = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/testimonials' }),
   schema: ({ image }) =>
@@ -69,6 +78,7 @@ export const collections = {
   caseStudies,
   benefits,
   engagements,
+  checks,
   testimonials,
   clients,
 };

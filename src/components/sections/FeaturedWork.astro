@@ -9,14 +9,8 @@ interface Props {
   id?: string;
   label: string;
   sceneStart?: boolean;
-  layout?: 'scroll' | 'marquee';
 }
-const {
-  id = 'work',
-  label,
-  sceneStart = false,
-  layout = 'scroll',
-} = Astro.props;
+const { id = 'work', label, sceneStart = false } = Astro.props;
 const cases = (await getCollection('caseStudies')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -37,60 +31,38 @@ const cases = (await getCollection('caseStudies')).sort(
     <Container class="pt-12 lg:pt-16">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
     </Container>
-    {layout === 'marquee' ? (
-      <div data-case-marquee class="relative mt-8">
-        <Container class="@container">
-          <div class="clip-left">
-            <div
-              data-track
-              class="flex w-max translate-x-(--x,0) gap-6 lg:gap-10"
-            >
-              {[false, true].map((copy) =>
-                cases.map(({ data }, index) => (
-                  <CaseCard
-                    data={data}
-                    index={index}
-                    copy={copy}
-                    class="w-slide sm:w-slide-sm lg:w-slide-lg"
-                  />
-                )),
-              )}
-            </div>
+    <div data-case-marquee class="relative mt-8">
+      <Container class="@container">
+        <div class="clip-left">
+          <div
+            data-track
+            class="flex w-max translate-x-(--x,0) cursor-grab touch-pan-y gap-6 select-none active:cursor-grabbing lg:gap-10"
+          >
+            {[false, true].map((copy) =>
+              cases.map(({ data }, index) => (
+                <CaseCard
+                  data={data}
+                  index={index}
+                  copy={copy}
+                  class="w-slide sm:w-slide-sm lg:w-slide-lg"
+                />
+              )),
+            )}
           </div>
-        </Container>
-      </div>
-    ) : (
-      <div data-case-scroll class="relative mt-8 h-(--scroll-height,auto)">
-        <div data-sticky class="top-nav sticky">
-          <Container>
-            <div class="clip-left">
-              <div data-track class="flex translate-x-(--x,0) gap-6 lg:gap-10">
-                {cases.map(({ data }, index) => (
-                  <CaseCard
-                    data={data}
-                    index={index}
-                    bleed={index === cases.length - 1}
-                    class="w-5/6 sm:w-3/5 lg:w-case"
-                  />
-                ))}
-              </div>
-            </div>
-          </Container>
         </div>
-      </div>
-    )}
+      </Container>
+    </div>
   </div>
 </section>
 
 <script>
-  import { initCaseScroll } from '../../scripts/case-scroll';
   import { initImageReveal } from '../../scripts/image-reveal';
   import { initMarquee } from '../../scripts/marquee';
   import { initRotator } from '../../scripts/rotator';
   import { splitLines } from '../../scripts/split-lines';
 
   for (const root of document.querySelectorAll<HTMLElement>(
-    '[data-case-scroll], [data-case-marquee]',
+    '[data-case-marquee]',
   )) {
     root
       .querySelectorAll<HTMLElement>('[data-split]')
@@ -98,8 +70,7 @@ const cases = (await getCollection('caseStudies')).sort(
     root
       .querySelectorAll<HTMLElement>('[data-rotator]')
       .forEach((el) => initRotator(el));
-    if (root.hasAttribute('data-case-marquee')) initMarquee(root);
-    else initCaseScroll(root);
+    initMarquee(root);
     initImageReveal(root);
   }
 </script>

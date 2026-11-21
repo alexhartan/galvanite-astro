@@ -9,16 +9,9 @@ interface Props {
   data: CollectionEntry<'caseStudies'>['data'];
   index: number;
   class?: string;
-  bleed?: boolean;
   copy?: boolean;
 }
-const {
-  data,
-  index,
-  class: className,
-  bleed = false,
-  copy = false,
-} = Astro.props;
+const { data, index, class: className, copy = false } = Astro.props;
 const Tag = data.href ? 'a' : 'div';
 ---
 
@@ -64,10 +57,7 @@ const Tag = data.href ? 'a' : 'div';
       <p class="relative text-ink/80 ease-out-soft flex items-center font-medium gap-2.5 px-3 py-3.5 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
         <span
           aria-hidden="true"
-          class:list={[
-            'bg-ink/10 absolute bottom-0 left-0 h-px',
-            bleed ? 'bleed-r' : '-right-6 lg:-right-10',
-          ]}
+          class="bg-ink/10 absolute bottom-0 left-0 -right-6 h-px lg:-right-10"
         />
         <GridMark class="absolute top-full left-0 -mt-px" />
         <SparkIcon class="text-signal size-5 shrink-0" />
