@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import Container from '../ui/Container.astro';
+import CtaButton from '../ui/CtaButton.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
+
+interface Props {
+  id?: string;
+  label: string;
+  heading: string;
+  hint: string;
+  prompt: string;
+  ctaHref?: string;
+}
+const {
+  id = 'fit',
+  label,
+  heading,
+  hint,
+  prompt,
+  ctaHref = '#contact',
+} = Astro.props;
+const checks = (await getCollection('checks')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const packages = (await getCollection('engagements')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const reveal = {
+  standard:
+    'hidden pick-standard:block pick-featured:hidden pick-premium:hidden',
+  featured: 'hidden pick-featured:block pick-premium:hidden',
+  premium: 'hidden pick-premium:block',
+};
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-label`}
+  data-tone="light"
+  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
+>
+  <SectionFrame edge={false} />
+  <div data-guide class="border-ink/10 relative border-t">
+    <Container class="py-40 lg:py-56">
+      <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
+      <div
+        data-self-check
+        class="grid gap-16 lg:grid-cols-3 lg:items-center lg:gap-10"
+      >
+        <div class="lg:col-span-2">
+          <h3 class="text-section text-ink">{heading}</h3>
+          <p class="text-ink/70 mt-4">{hint}</p>
+          <ul class="mt-12 space-y-5" role="list">
+            {checks.map(({ id: key, data }) => (
+              <li>
+                <label class="group text-ink flex cursor-pointer items-start gap-4 text-lg">
+                  <span class="relative mt-0.5 flex size-6 shrink-0">
+                    <input
+                      type="checkbox"
+                      name="fit"
+                      value={key}
+                      data-tier={data.tier}
+                      class="peer border-ink ease-standard checked:bg-ink focus-visible:outline-ocean size-6 cursor-pointer appearance-none rounded-sm border-2 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
+                    />
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="ease-standard pointer-events-none absolute inset-0 scale-75 text-white opacity-0 transition duration-200 peer-checked:scale-100 peer-checked:opacity-100"
+                    >
+                      <path d="M6 12.5l4 4 8-9" />
+                    </svg>
+                  </span>
+                  <span class="ease-standard transition-opacity duration-200 pointer-fine:opacity-80 pointer-fine:group-hover:opacity-100">
+                    {data.statement}
+                  </span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <aside
+          aria-live="polite"
+          class="bg-space-950 relative text-white lg:self-stretch"
+        >
+          <p class="text-frost/70 flex h-full min-h-72 items-center p-8 text-lg text-balance pick-standard:hidden pick-featured:hidden pick-premium:hidden">
+            {prompt}
+          </p>
+          {packages.map(({ data }) => (
+            <div class:list={['p-8', reveal[data.tier]]}>
+              <p class="text-sky text-label font-semibold tracking-widest uppercase">
+                Where to start
+              </p>
+              <h4 class="mt-4 text-2xl font-semibold">{data.name}</h4>
+              <p class="text-frost/80 mt-2 text-balance">{data.audience}</p>
+              <p class="text-price text-frost tracking-price mt-8 font-medium">
+                {data.pricePrefix && (
+                  <span class="font-light">{data.pricePrefix} </span>
+                )}
+                {data.price}
+              </p>
+              <p class="text-azure mt-3 text-sm tracking-widest uppercase">
+                {data.duration}
+              </p>
+              <CtaButton href={ctaHref} class="relative mt-8 w-full">
+                Book a Call
+              </CtaButton>
+              <a
+                href="#engagements"
+                class="text-frost hover:text-white focus-visible:outline-frost mt-4 inline-block text-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                See what’s included
+              </a>
+            </div>
+          ))}
+        </aside>
+      </div>
+    </Container>
+  </div>
+</section>

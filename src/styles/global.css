@@ -94,7 +94,6 @@
   --spacing-slide: 85cqi;
   --spacing-slide-sm: 60cqi;
   --spacing-slide-lg: calc(50cqi - 1.25rem);
-  --spacing-case: calc(50% - 1.25rem);
   --spacing-lift: 0.175rem;
 
   --breakpoint-3xl: 100rem;
@@ -175,10 +174,6 @@
   }
 }
 
-@utility bleed-r {
-  right: -100vw;
-}
-
 @utility gauge {
   stroke-dashoffset: 35;
   transition:
@@ -192,6 +187,24 @@
 
 @utility clip-left {
   clip-path: inset(-100vh -100vw -100vh 0);
+}
+
+@custom-variant pick-standard {
+  :where([data-self-check]:has(input[data-tier='standard']:checked)) & {
+    @slot;
+  }
+}
+
+@custom-variant pick-featured {
+  :where([data-self-check]:has(input[data-tier='featured']:checked)) & {
+    @slot;
+  }
+}
+
+@custom-variant pick-premium {
+  :where([data-self-check]:has(input[data-tier='premium']:checked)) & {
+    @slot;
+  }
 }
 
 @layer base {

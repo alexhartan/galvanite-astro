@@ -6,6 +6,7 @@ import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
 import Pricing from '../components/sections/Pricing.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
+import SelfCheck from '../components/sections/SelfCheck.astro';
 import SectionLink from '../components/ui/SectionLink.astro';
 import SiteHeader from '../components/sections/SiteHeader.astro';
 import WhyGalvanite from '../components/sections/WhyGalvanite.astro';
@@ -30,6 +31,7 @@ const mission = {
 const sections = [
   { href: '#intro', label: 'Our Mission' },
   { href: '#work', label: 'Featured Work' },
+  { href: '#fit', label: 'Self Check' },
   { href: '#engagements', label: 'Pricing', dark: true },
   { href: '#testimonials', label: 'Testimonials', dark: true },
   { href: '#why', label: 'Why Galvanite', dark: true },
@@ -69,14 +71,21 @@ const link = (index: number) => ({
   <SectionLink {...link(1)} />
   <FeaturedWork label="Featured work" sceneStart />
   <SectionLink {...link(2)} />
-  <Pricing label="Pricing" heading="How we" emphasis="work together" />
+  <SelfCheck
+    label="Self check"
+    heading="Is your brand holding your product back?"
+    hint="(Check all that apply)"
+    prompt="Check what sounds familiar and we’ll point you to the right place to start."
+  />
   <SectionLink {...link(3)} />
+  <Pricing label="Pricing" heading="How we" emphasis="work together" />
+  <SectionLink {...link(4)} />
   <Testimonials
     label="Testimonials"
     heading="Don’t take our word for it"
     stats={stats}
   />
   <ClosingCta {...closing} />
-  <SectionLink {...link(4)} />
+  <SectionLink {...link(5)} />
   <WhyGalvanite {...why} />
 </BaseLayout>
