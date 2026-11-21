@@ -121,7 +121,12 @@ const tiers = {
                       Most popular
                     </p>
                   )}
-                  <h4 class:list={['text-2xl font-semibold', tier.name]}>
+                  <h4
+                    class:list={[
+                      'text-2xl font-semibold tracking-tight',
+                      tier.name,
+                    ]}
+                  >
                     {data.name}
                   </h4>
                   <p class:list={['mt-1.5 text-base text-balance', tier.muted]}>

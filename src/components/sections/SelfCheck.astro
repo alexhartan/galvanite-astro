@@ -74,9 +74,9 @@ const reveal = {
               <li class="group relative pointer-fine:hover:z-20">
                 <div
                   aria-hidden="true"
-                  class="ease-out-soft shadow-card bg-space-950/50 backdrop-blur-bar pointer-events-none absolute inset-0 rounded-lg border border-white/15 opacity-0 transition duration-300 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:opacity-100"
+                  class="ease-out-soft shadow-card bg-space-950/50 backdrop-blur-bar pointer-events-none absolute inset-0 rounded-lg border border-white/15 opacity-0 transition duration-300 group-has-checked:opacity-100 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:opacity-100"
                 />
-                <label class="text-frost/80 has-checked:text-white ease-out-soft relative flex h-full cursor-pointer flex-col gap-4 px-8 py-10 text-base text-balance transition duration-300 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:text-white">
+                <label class="text-frost/80 has-checked:text-white ease-out-soft relative flex h-full cursor-pointer flex-col justify-center gap-4 px-8 py-10 text-base text-balance transition duration-300 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:text-white">
                   <span class="relative flex size-6 shrink-0">
                     <input
                       type="checkbox"
@@ -119,29 +119,28 @@ const reveal = {
                 ]}
               >
                 <p class="text-sky text-label font-semibold tracking-widest uppercase">
-                  Where to start
+                  Recommended package
                 </p>
-                <h4 class="mt-4 text-2xl font-semibold">{data.name}</h4>
+                <h4 class="mt-2 text-2xl font-semibold tracking-tight">
+                  {data.name}
+                </h4>
                 <p class="mt-2 text-balance">{data.audience}</p>
-                <p class="text-price tracking-price mt-8 font-semibold">
+                <p class="text-price tracking-price mt-4 font-semibold">
                   {data.pricePrefix && (
                     <span class="font-light">{data.pricePrefix} </span>
                   )}
                   {data.price}
                 </p>
-                <p class="text-sky mt-3 text-sm tracking-widest uppercase">
-                  {data.duration}
-                </p>
                 <div class="mt-auto pt-8">
-                  <CtaButton href={ctaHref} class="relative w-full">
-                    Book a Call
-                  </CtaButton>
                   <a
                     href="#engagements"
-                    class="text-ink/70 hover:text-ink focus-visible:outline-ocean mt-4 inline-block text-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+                    class="text-ink/70 hover:text-ink focus-visible:outline-ocean inline-block text-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
                   >
                     See what’s included
                   </a>
+                  <CtaButton href={ctaHref} class="relative mt-4 w-full">
+                    Book a Call
+                  </CtaButton>
                 </div>
               </div>
             ))}
