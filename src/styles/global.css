@@ -205,20 +205,20 @@
   }
 }
 
-@custom-variant pick-standard {
-  :where([data-self-check]:has(input[data-tier='standard']:checked)) & {
+@custom-variant pick-sprint {
+  :where([data-self-check][data-pick='sprint']) & {
     @slot;
   }
 }
 
-@custom-variant pick-featured {
-  :where([data-self-check]:has(input[data-tier='featured']:checked)) & {
+@custom-variant pick-upper {
+  :where([data-self-check][data-pick='upper']) & {
     @slot;
   }
 }
 
-@custom-variant pick-premium {
-  :where([data-self-check]:has(input[data-tier='premium']:checked)) & {
+@custom-variant pick-brand {
+  :where([data-self-check][data-pick='brand']) & {
     @slot;
   }
 }

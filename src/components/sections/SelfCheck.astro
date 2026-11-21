@@ -20,10 +20,9 @@ const packages = (await getCollection('engagements')).sort(
   (a, b) => a.data.order - b.data.order,
 );
 const reveal = {
-  standard:
-    'pick-standard:visible pick-featured:invisible pick-premium:invisible',
-  featured: 'pick-featured:visible pick-premium:invisible',
-  premium: 'pick-premium:visible',
+  standard: 'pick-sprint:visible',
+  featured: 'pick-upper:visible',
+  premium: 'pick-brand:visible',
 };
 ---
 
@@ -150,3 +149,7 @@ const reveal = {
     </Container>
   </div>
 </section>
+
+<script>
+  import '../../scripts/self-check';
+</script>
