@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ClosingCta from '../components/sections/ClosingCta.astro';
 import FeaturedWork from '../components/sections/FeaturedWork.astro';
+import Faq from '../components/sections/Faq.astro';
 import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
 import Pricing from '../components/sections/Pricing.astro';
@@ -35,6 +36,7 @@ const sections = [
   { href: '#testimonials', label: 'Testimonials', dark: true },
   { href: '#why', label: 'Why Galvanite', dark: true },
   { href: '#fit', label: 'Self Check', dark: true },
+  { href: '#faq', label: 'FAQ', dark: true },
 ];
 const stats = [
   { value: '2 months', label: 'From rebrand and launch to successful exit' },
@@ -82,8 +84,7 @@ const link = (index: number) => ({
   <SectionLink {...link(4)} />
   <WhyGalvanite {...why} />
   <SectionLink {...link(5)} />
-  <SelfCheck
-    label="Self check"
-    heading="What’s holding you back?"
-  />
+  <SelfCheck label="Self check" heading="What’s holding you back?" />
+  <SectionLink {...link(6)} />
+  <Faq label="FAQ" heading="Questions, answered" />
 </BaseLayout>
