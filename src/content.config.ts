@@ -23,7 +23,14 @@ const benefits = defineCollection({
     title: z.string(),
     order: z.number(),
     summary: z.string(),
-    art: z.enum(['strategy', 'consistency', 'build', 'performance', 'process', 'tools']),
+    art: z.enum([
+      'strategy',
+      'consistency',
+      'build',
+      'performance',
+      'process',
+      'tools',
+    ]),
   }),
 });
 
@@ -47,6 +54,14 @@ const checks = defineCollection({
     order: z.number(),
     tier: z.enum(['standard', 'featured', 'premium']),
     statement: z.string(),
+  }),
+});
+
+const faqs = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/faqs' }),
+  schema: z.object({
+    order: z.number(),
+    question: z.string(),
   }),
 });
 
@@ -79,6 +94,7 @@ export const collections = {
   benefits,
   engagements,
   checks,
+  faqs,
   testimonials,
   clients,
 };

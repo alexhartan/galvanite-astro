@@ -1,0 +1,93 @@
+---
+import { getCollection, render } from 'astro:content';
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import GridMark from '../ui/GridMark.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
+
+interface Props {
+  id?: string;
+  label: string;
+  heading: string;
+}
+const { id = 'faq', label, heading } = Astro.props;
+const faqs = await Promise.all(
+  (await getCollection('faqs'))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(async (entry) => ({ ...entry, ...(await render(entry)) })),
+);
+const half = Math.ceil(faqs.length / 2);
+const columns = [faqs.slice(0, half), faqs.slice(half)];
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-label`}
+  class="scroll-mt-nav relative z-10 overflow-x-clip text-white"
+>
+  <SectionFrame inverted />
+  <div data-guide class="relative border-t border-white/10">
+    <Container class="py-40 lg:py-56">
+      <Eyebrow id={`${id}-label`} inverted>
+        {label}
+      </Eyebrow>
+      <h3 class="text-section mt-40 lg:mt-56">{heading}</h3>
+      <div class="relative mt-6">
+        <div
+          aria-hidden="true"
+          class="bg-space-950/50 backdrop-blur-bar absolute inset-0 border-x border-white/10"
+        ></div>
+        <div
+          aria-hidden="true"
+          class="bleed-x absolute top-0 h-px bg-white/10"
+        ></div>
+        <div
+          aria-hidden="true"
+          class="bleed-x absolute bottom-0 h-px bg-white/10"
+        ></div>
+        <div
+          aria-hidden="true"
+          class="absolute inset-y-0 left-1/2 w-px bg-white/10 max-lg:hidden"
+        ></div>
+        <GridMark inverted class="absolute top-0 left-0" />
+        <GridMark inverted class="absolute top-full left-0 -mt-px" />
+        <GridMark inverted class="absolute top-0 left-1/2 max-lg:hidden" />
+        <GridMark
+          inverted
+          class="absolute top-full left-1/2 -mt-px max-lg:hidden"
+        />
+        <GridMark inverted class="absolute top-0 left-full -ml-px" />
+        <GridMark inverted class="absolute top-full left-full -mt-px -ml-px" />
+        <div class="relative grid items-start lg:grid-cols-2">
+          {columns.map((column) => (
+            <ul role="list">
+              {column.map(({ data, Content }) => (
+                <li class="group relative pointer-fine:hover:z-20">
+                  <div
+                    aria-hidden="true"
+                    class="ease-out-soft shadow-card bg-space-950/50 backdrop-blur-bar pointer-events-none absolute inset-0 rounded-lg border border-white/15 opacity-0 transition duration-300 group-has-open:opacity-100 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:opacity-100"
+                  />
+                  <details class="ease-out-soft relative transition duration-300 pointer-fine:group-hover:-translate-y-lift">
+                    <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 px-8 py-8 text-base transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
+                      <span class="text-balance">{data.question}</span>
+                      <span
+                        aria-hidden="true"
+                        class="group-hover:text-sky relative size-4 shrink-0"
+                      >
+                        <span class="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 rounded-full bg-current" />
+                        <span class="ease-out-soft group-has-open:scale-y-0 absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 rounded-full bg-current transition-transform duration-300" />
+                      </span>
+                    </summary>
+                    <div class="text-frost/80 motion-safe:animate-fade-in px-8 pb-8 text-base text-pretty prose-links">
+                      <Content />
+                    </div>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

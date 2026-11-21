@@ -111,6 +111,15 @@
   --animate-marquee: marquee 80s linear infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
 
+  --animate-fade-in: fade-in 0.5s var(--ease-out-soft);
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      translate: 0 calc(var(--spacing) * -2);
+    }
+  }
+
   @keyframes marquee {
     to {
       transform: translate3d(-50%, 0, 0);
@@ -224,6 +233,9 @@
 }
 
 @layer base {
+  summary::-webkit-details-marker {
+    display: none;
+  }
   @media (prefers-reduced-motion: no-preference) {
     html {
       scroll-behavior: smooth;
@@ -246,6 +258,14 @@
 
 @utility grid-rows-offer {
   grid-template-rows: auto auto auto;
+}
+
+@utility prose-links {
+  & a {
+    color: var(--color-sky);
+    text-decoration: underline;
+    text-underline-offset: calc(var(--spacing) * 1);
+  }
 }
 
 @utility bleed-x {
