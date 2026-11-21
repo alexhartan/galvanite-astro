@@ -28,7 +28,7 @@ const cases = (await getCollection('caseStudies')).sort(
     <Container class="max-lg:pt-12">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
     </Container>
-    <div data-case-marquee class="top-nav sticky">
+    <div data-case-marquee class="max-4xl:top-nav max-4xl:sticky">
       <Container class="@container">
         <div class="clip-left">
           <div
@@ -49,7 +49,7 @@ const cases = (await getCollection('caseStudies')).sort(
         </div>
       </Container>
     </div>
-    <div aria-hidden="true" class="h-40 lg:h-64"></div>
+    <div aria-hidden="true" class="4xl:hidden h-40 lg:h-64"></div>
   </div>
 </section>
 
