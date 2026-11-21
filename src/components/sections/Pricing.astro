@@ -32,6 +32,7 @@ const tiers = {
     muted: 'text-white/80',
     price: 'text-kpi text-frost mt-price font-medium',
     mark: 'text-azure',
+    term: 'text-azure',
     rule: 'max-lg:border-b border-white/10',
     item: 'text-frost',
   },
@@ -41,6 +42,7 @@ const tiers = {
     muted: 'text-ink',
     price: 'text-kpi-lg text-ink mt-price-featured font-semibold',
     mark: 'text-signal',
+    term: 'text-sky',
     rule: 'border-b border-ink/10 -mx-8 px-8',
     item: 'text-ocean font-medium',
   },
@@ -50,6 +52,7 @@ const tiers = {
     muted: 'text-white/80',
     price: 'text-kpi text-frost mt-price font-medium',
     mark: 'text-signal',
+    term: 'text-azure',
     rule: 'max-lg:border-b border-white/10',
     item: 'text-frost',
   },
@@ -114,7 +117,7 @@ const tiers = {
               >
                 <div class="relative px-8 pt-11">
                   {data.tier === 'featured' && (
-                    <p class="to-ocean-50 text-azure absolute inset-x-0 top-0 bg-linear-to-r from-white text-label px-4 py-2 text-right font-semibold tracking-widest uppercase">
+                    <p class="to-ocean-50 text-sky absolute inset-x-0 top-0 bg-linear-to-r from-white text-label px-4 py-2 text-right font-semibold tracking-widest uppercase">
                       Most popular
                     </p>
                   )}
@@ -131,7 +134,12 @@ const tiers = {
                       <span class="font-light">{data.pricePrefix} </span>
                     )}
                     {data.price}
-                    <span class="text-azure mt-3 block text-sm tracking-widest uppercase">
+                    <span
+                      class:list={[
+                        'mt-3 block text-sm tracking-widest uppercase',
+                        tier.term,
+                      ]}
+                    >
                       {data.duration}
                     </span>
                   </p>
