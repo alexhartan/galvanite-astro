@@ -24,14 +24,11 @@ const cases = (await getCollection('caseStudies')).sort(
   class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <SectionFrame edge={false} />
-  <div
-    data-guide
-    class="border-ink/10 relative overflow-y-clip border-t pb-32 lg:pb-48"
-  >
-    <Container class="pt-12 lg:pt-16">
+  <div data-guide class="border-ink/10 relative border-t pb-32 lg:pb-48">
+    <Container class="max-lg:pt-12">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
     </Container>
-    <div data-case-marquee class="relative mt-8">
+    <div data-case-marquee class="top-nav sticky">
       <Container class="@container">
         <div class="clip-left">
           <div
@@ -52,6 +49,7 @@ const cases = (await getCollection('caseStudies')).sort(
         </div>
       </Container>
     </div>
+    <div aria-hidden="true" class="h-40 lg:h-64"></div>
   </div>
 </section>
 
