@@ -9,19 +9,13 @@
   --color-ink: #1d3961;
   --color-ocean: #305785;
   --color-signal: #ffd23f;
-  --color-signal-strong: #f5c518;
   --color-sky: #76b1db;
   --color-azure: #cceaff;
   --color-frost: #ccecff;
-  --color-chalk: #92c9eb;
-  --color-night: #1b2540;
   --color-abyss: #04091b;
   --color-ocean-50: #ecf2f9;
   --color-azure-deep: #2e6aa3;
   --color-deep-950: #0d1326;
-  --color-deep-900: #151c33;
-  --color-deep-800: #1c294d;
-  --color-deep-700: #1a2b4d;
   --color-grid: color-mix(
     in srgb,
     var(--color-ink) calc(var(--grid-invert, 0) * 100%),
@@ -44,9 +38,6 @@
   --text-statement: clamp(2rem, 3.23vw, 3.875rem);
   --text-statement--line-height: 1.113;
   --text-statement--letter-spacing: -0.035em;
-  --text-case: clamp(1.7rem, 2.465vw, 2.975rem);
-  --text-case--line-height: 1.04;
-  --text-case--letter-spacing: -0.04em;
   --text-card: clamp(1.625rem, 2.08vw, 2.1125rem);
   --text-card--line-height: 1.25;
   --text-card--letter-spacing: -0.02em;
@@ -55,22 +46,20 @@
   --text-label: 0.75rem;
   --text-benefit: clamp(1.3rem, 1.35vw, 1.6875rem);
   --text-benefit--line-height: 1.1;
-  --text-process: clamp(1.375rem, 1.4vw, 1.75rem);
-  --text-process--line-height: 1.1;
   --text-section: clamp(2.1875rem, 3vw, 3.625rem);
   --text-section--line-height: 1;
   --text-section--letter-spacing: -0.033em;
   --text-section--font-weight: 200;
-  --text-kpi-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
-  --text-kpi-lg--line-height: 1;
-  --text-kpi-lg--letter-spacing: -0.015em;
+  --text-price-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
+  --text-price-lg--line-height: 1;
+  --text-price-lg--letter-spacing: -0.015em;
   --text-stat: clamp(2.9rem, 3.6vw, 4.2rem);
   --text-stat--line-height: 1;
   --text-stat--letter-spacing: -0.04em;
   --text-stat-label: 0.9625rem;
   --text-stat-label--line-height: 1.25;
-  --text-kpi: clamp(1.75rem, 2.1vw, 2.5rem);
-  --text-kpi--line-height: 1;
+  --text-price: clamp(1.75rem, 2.1vw, 2.5rem);
+  --text-price--line-height: 1;
   --text-display-hero: calc(var(--text-display-half) * 1.4);
   --text-display-hero--line-height: 0.9;
   --text-display-hero--letter-spacing: -0.04em;
@@ -81,24 +70,20 @@
   --text-lead: clamp(1.125rem, 1.25vw, 1.5rem);
   --text-lead--line-height: 1.42;
 
-  --leading-statement: 1.113;
-  --tracking-statement: -0.035em;
   --tracking-price: -0.03em;
-  --tracking-display: -0.04em;
 
   --container-page: 83rem;
   --container-page-inset: min(83rem, calc(100% - 8.5rem));
   --container-headline: 8.5em;
   --container-lead: 30rem;
   --container-lead-hero: 25em;
-  --container-statement: 13.5em;
   --container-mission: 14.5em;
 
   --spacing-nav: 5.5rem;
   --spacing-display-baseline: calc(100% - 0.12em);
   --spacing-price: 2rem;
   --spacing-price-featured: calc(
-    var(--spacing-price) - 0.84 * (var(--text-kpi-lg) - var(--text-kpi))
+    var(--spacing-price) - 0.84 * (var(--text-price-lg) - var(--text-price))
   );
   --spacing-cap-statement: 0.191em;
   --spacing-cap-label: 0.25em;
@@ -107,10 +92,9 @@
     25rem
   );
   --spacing-slide: 85cqi;
-  --spacing-slide-lg: calc(50cqi - 7.5rem);
-  --spacing-slide-3xl: calc(50cqi - 2.5rem);
+  --spacing-slide-sm: 60cqi;
+  --spacing-slide-lg: calc(50cqi - 1.25rem);
   --spacing-case: calc(50% - 1.25rem);
-  --spacing-viewport: 100svh;
   --spacing-lift: 0.175rem;
 
   --breakpoint-3xl: 100rem;
@@ -134,8 +118,6 @@
     }
   }
 
-
-
   @keyframes art-blink {
     0%,
     45% {
@@ -146,7 +128,6 @@
       opacity: 0;
     }
   }
-
 }
 
 @utility reveal-mask {
