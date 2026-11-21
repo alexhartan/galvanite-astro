@@ -38,31 +38,32 @@ const reveal = {
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  data-tone="light"
-  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
+  class="scroll-mt-nav relative z-10 overflow-x-clip text-white"
 >
-  <SectionFrame edge={false} />
-  <div data-guide class="border-ink/10 relative border-t">
+  <SectionFrame inverted />
+  <div data-guide class="relative border-t border-white/10">
     <Container class="py-40 lg:py-56">
-      <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
+      <Eyebrow id={`${id}-label`} inverted>
+        {label}
+      </Eyebrow>
       <div
         data-self-check
         class="grid gap-16 lg:grid-cols-3 lg:items-center lg:gap-10"
       >
         <div class="lg:col-span-2">
-          <h3 class="text-section text-ink">{heading}</h3>
-          <p class="text-ink/70 mt-4">{hint}</p>
+          <h3 class="text-section">{heading}</h3>
+          <p class="text-frost/70 mt-4">{hint}</p>
           <ul class="mt-12 space-y-5" role="list">
             {checks.map(({ id: key, data }) => (
               <li>
-                <label class="group text-ink flex cursor-pointer items-start gap-4 text-lg">
+                <label class="group text-frost/80 has-checked:text-white ease-standard flex cursor-pointer items-start gap-4 text-lg transition-colors duration-200 pointer-fine:hover:text-white">
                   <span class="relative mt-0.5 flex size-6 shrink-0">
                     <input
                       type="checkbox"
                       name="fit"
                       value={key}
                       data-tier={data.tier}
-                      class="peer border-ink ease-standard checked:bg-ink focus-visible:outline-ocean size-6 cursor-pointer appearance-none rounded-sm border-2 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
+                      class="peer ease-out-soft checked:border-signal checked:bg-signal focus-visible:outline-signal group-hover:border-sky size-6 cursor-pointer appearance-none rounded-sm border-2 border-white/30 transition duration-300 active:scale-90 focus-visible:outline-2 focus-visible:outline-offset-2"
                     />
                     <svg
                       aria-hidden="true"
@@ -72,14 +73,16 @@ const reveal = {
                       stroke-width="3"
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      class="ease-standard pointer-events-none absolute inset-0 scale-75 text-white opacity-0 transition duration-200 peer-checked:scale-100 peer-checked:opacity-100"
+                      class="text-ink pointer-events-none absolute inset-0"
                     >
-                      <path d="M6 12.5l4 4 8-9" />
+                      <path
+                        d="M6 12.5l4 4 8-9"
+                        pathLength="1"
+                        class="dash-hidden group-has-checked:dash-shown"
+                      />
                     </svg>
                   </span>
-                  <span class="ease-standard transition-opacity duration-200 pointer-fine:opacity-80 pointer-fine:group-hover:opacity-100">
-                    {data.statement}
-                  </span>
+                  <span>{data.statement}</span>
                 </label>
               </li>
             ))}
@@ -87,7 +90,7 @@ const reveal = {
         </div>
         <aside
           aria-live="polite"
-          class="bg-space-950 relative text-white lg:self-stretch"
+          class="bg-space-950/50 backdrop-blur-bar shadow-card relative rounded-lg border border-white/15 lg:self-stretch"
         >
           <p class="text-frost/70 flex h-full min-h-72 items-center p-8 text-lg text-balance pick-standard:hidden pick-featured:hidden pick-premium:hidden">
             {prompt}

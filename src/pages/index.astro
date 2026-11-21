@@ -31,10 +31,10 @@ const mission = {
 const sections = [
   { href: '#intro', label: 'Our Mission' },
   { href: '#work', label: 'Featured Work' },
-  { href: '#fit', label: 'Self Check' },
   { href: '#engagements', label: 'Pricing', dark: true },
   { href: '#testimonials', label: 'Testimonials', dark: true },
   { href: '#why', label: 'Why Galvanite', dark: true },
+  { href: '#fit', label: 'Self Check', dark: true },
 ];
 const stats = [
   { value: '2 months', label: 'From rebrand and launch to successful exit' },
@@ -71,21 +71,21 @@ const link = (index: number) => ({
   <SectionLink {...link(1)} />
   <FeaturedWork label="Featured work" sceneStart />
   <SectionLink {...link(2)} />
-  <SelfCheck
-    label="Self check"
-    heading="Is your brand holding your product back?"
-    hint="(Check all that apply)"
-    prompt="Check what sounds familiar and we’ll point you to the right place to start."
-  />
-  <SectionLink {...link(3)} />
   <Pricing label="Pricing" heading="How we" emphasis="work together" />
-  <SectionLink {...link(4)} />
+  <SectionLink {...link(3)} />
   <Testimonials
     label="Testimonials"
     heading="Don’t take our word for it"
     stats={stats}
   />
   <ClosingCta {...closing} />
-  <SectionLink {...link(5)} />
+  <SectionLink {...link(4)} />
   <WhyGalvanite {...why} />
+  <SectionLink {...link(5)} />
+  <SelfCheck
+    label="Self check"
+    heading="Is your brand holding your product back?"
+    hint="(Check all that apply)"
+    prompt="Check what sounds familiar and we’ll point you to the right place to start."
+  />
 </BaseLayout>
