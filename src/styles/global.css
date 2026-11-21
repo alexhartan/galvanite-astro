@@ -185,6 +185,16 @@
   stroke-dashoffset: 0;
 }
 
+@utility dash-hidden {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.3s var(--ease-out-soft);
+}
+
+@utility dash-shown {
+  stroke-dashoffset: 0;
+}
+
 @utility clip-left {
   clip-path: inset(-100vh -100vw -100vh 0);
 }
