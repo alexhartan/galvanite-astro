@@ -1,3 +1,4 @@
+const points: Record<string, number> = { standard: 1, featured: 2, premium: 3 };
 for (const root of document.querySelectorAll<HTMLElement>(
   '[data-self-check]',
 )) {
@@ -5,15 +6,15 @@ for (const root of document.querySelectorAll<HTMLElement>(
     ...root.querySelectorAll<HTMLInputElement>('input[data-tier]'),
   ];
   const update = () => {
-    const tiers = inputs.filter((i) => i.checked).map((i) => i.dataset.tier);
-    const count = (tier: string) => tiers.filter((t) => t === tier).length;
-    const premium = count('premium');
-    const upper = premium + count('featured');
-    const n = tiers.length;
-    if (!n) delete root.dataset.pick;
-    else if (premium >= 2 || n >= 4 || (premium && n >= 3))
-      root.dataset.pick = 'brand';
-    else root.dataset.pick = upper ? 'upper' : 'sprint';
+    const checked = inputs.filter((i) => i.checked);
+    const score = checked.reduce(
+      (sum, i) => sum + (points[i.dataset.tier!] ?? 0),
+      0,
+    );
+    if (!checked.length) delete root.dataset.pick;
+    else
+      root.dataset.pick =
+        score >= 6 ? 'brand' : score >= 3 ? 'upper' : 'sprint';
   };
   root.addEventListener('change', update);
   update();

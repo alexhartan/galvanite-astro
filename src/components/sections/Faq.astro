@@ -45,17 +45,8 @@ const columns = [faqs.slice(0, half), faqs.slice(half)];
           aria-hidden="true"
           class="bleed-x absolute bottom-0 h-px bg-white/10"
         ></div>
-        <div
-          aria-hidden="true"
-          class="absolute inset-y-0 left-1/2 w-px bg-white/10 max-lg:hidden"
-        ></div>
         <GridMark inverted class="absolute top-0 left-0" />
         <GridMark inverted class="absolute top-full left-0 -mt-px" />
-        <GridMark inverted class="absolute top-0 left-1/2 max-lg:hidden" />
-        <GridMark
-          inverted
-          class="absolute top-full left-1/2 -mt-px max-lg:hidden"
-        />
         <GridMark inverted class="absolute top-0 left-full -ml-px" />
         <GridMark inverted class="absolute top-full left-full -mt-px -ml-px" />
         <div class="relative grid items-start lg:grid-cols-2">
@@ -67,18 +58,21 @@ const columns = [faqs.slice(0, half), faqs.slice(half)];
                     aria-hidden="true"
                     class="ease-out-soft shadow-card bg-space-950/50 backdrop-blur-bar pointer-events-none absolute inset-0 rounded-lg border border-white/15 opacity-0 transition duration-300 group-has-open:opacity-100 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:opacity-100"
                   />
-                  <details class="ease-out-soft relative transition duration-300 pointer-fine:group-hover:-translate-y-lift">
-                    <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 px-8 py-8 text-base transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
+                  <details
+                    name="faq"
+                    class="details-expand ease-out-soft relative transition duration-300 pointer-fine:group-hover:-translate-y-lift"
+                  >
+                    <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 px-8 py-8 text-xl font-light tracking-tight lg:text-2xl transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
                       <span class="text-balance">{data.question}</span>
                       <span
                         aria-hidden="true"
-                        class="group-hover:text-sky relative size-4 shrink-0"
+                        class="group-hover:text-sky relative size-3 shrink-0"
                       >
-                        <span class="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 rounded-full bg-current" />
-                        <span class="ease-out-soft group-has-open:scale-y-0 absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 rounded-full bg-current transition-transform duration-300" />
+                        <span class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 rounded-full bg-current" />
+                        <span class="ease-out-soft group-has-open:scale-y-0 absolute inset-y-0 left-1/2 w-px -translate-x-1/2 rounded-full bg-current transition-transform duration-300" />
                       </span>
                     </summary>
-                    <div class="text-frost/80 motion-safe:animate-fade-in px-8 pb-8 text-base text-pretty prose-links">
+                    <div class="text-frost/80 px-8 pb-8 text-base text-pretty prose-links">
                       <Content />
                     </div>
                   </details>
