@@ -96,6 +96,7 @@
   --spacing-slide: 85cqi;
   --spacing-slide-sm: 60cqi;
   --spacing-triple: 300%;
+  --spacing-fade: 50svh;
   --spacing-slide-lg: calc(50cqi - 1.25rem);
   --spacing-lift: 0.175rem;
 
@@ -196,6 +197,14 @@
 
 @utility dash-shown {
   stroke-dashoffset: 0;
+}
+
+@utility text-tone {
+  color: color-mix(
+    in oklab,
+    var(--color-sky) calc(var(--tone, 1) * 100%),
+    var(--color-ocean)
+  );
 }
 
 @utility clip-left {
