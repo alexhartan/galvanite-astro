@@ -17,8 +17,8 @@ const { href, label, position, dark = false } = Astro.props;
   <a
     href={href}
     class:list={[
-      dark ? 'data-current:text-sky' : 'data-current:text-ocean',
-      'section-link ease-out-soft text-nav-label text-azure-deep pointer-events-auto sticky ml-5 block w-fit whitespace-nowrap opacity-80 transition-[opacity,color] duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-current data-current:opacity-100',
+      dark ? 'text-tone' : 'text-azure-deep data-current:text-ocean',
+      'section-link ease-out-soft text-nav-label pointer-events-auto sticky ml-5 block w-fit whitespace-nowrap opacity-80 transition-[opacity,color] duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-current data-current:opacity-100',
     ]}
   >
     {label}
@@ -78,9 +78,21 @@ const { href, label, position, dark = false } = Astro.props;
         current = index;
       }
     });
-    links.forEach(({ anchor }, index) =>
-      anchor.toggleAttribute('data-current', index === current),
-    );
+    const fade = document.querySelector<HTMLElement>('[data-fade]');
+    const band = fade?.querySelector<HTMLElement>('[data-fade-band]');
+    links.forEach(({ anchor }, index) => {
+      anchor.toggleAttribute('data-current', index === current);
+      if (!fade || !band) return;
+      const box = fade.getBoundingClientRect();
+      const anchorBox = anchor.getBoundingClientRect();
+      const y = anchorBox.top + anchorBox.height / 2;
+      const top = box.bottom - band.offsetHeight;
+      const tone =
+        y >= box.bottom
+          ? 1
+          : Math.min(1, Math.max(0, (y - top) / band.offsetHeight));
+      anchor.style.setProperty('--tone', tone.toFixed(3));
+    });
   };
 
   const observer = new ResizeObserver(measure);

@@ -20,11 +20,21 @@ const cases = (await getCollection('caseStudies')).sort(
   id={id}
   aria-labelledby={`${id}-label`}
   data-tone="light"
+  data-fade
   data-scene-start={sceneStart ? '' : undefined}
-  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
+  class="scroll-mt-nav relative z-10 overflow-x-clip"
 >
+  <div
+    aria-hidden="true"
+    class="bottom-fade absolute inset-x-0 top-0 bg-white"
+  ></div>
+  <div
+    aria-hidden="true"
+    data-fade-band
+    class="h-fade absolute inset-x-0 bottom-0 bg-linear-to-b from-white to-white/0"
+  ></div>
   <SectionFrame edge={false} />
-  <div data-guide class="border-ink/10 relative border-t pb-32 lg:pb-48">
+  <div data-guide class="border-ink/10 pb-fade relative border-t">
     <Container class="max-lg:pt-12">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
     </Container>
