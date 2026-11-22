@@ -50,6 +50,8 @@
   --text-section--line-height: 1;
   --text-section--letter-spacing: -0.033em;
   --text-section--font-weight: 200;
+  --text-question: 1.375rem;
+  --text-question--line-height: 1.35;
   --text-price-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
   --text-price-lg--line-height: 1;
   --text-price-lg--letter-spacing: -0.015em;
