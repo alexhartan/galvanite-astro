@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
-import GridMark from '../ui/GridMark.astro';
 
 interface Props {
   eyebrow: string;
@@ -39,7 +38,6 @@ const clients = (
         </p>
         <h1 class="max-w-headline text-display lg:text-display-half 4xl:text-display-hero relative font-extralight text-white">
           {lead} <strong class="font-semibold">{emphasis}</strong>
-          <GridMark class="top-display-baseline 4xl:hidden absolute left-0" />
         </h1>
         <p class="max-w-lead text-lead lg:max-w-lead-hero lg:text-lead-hero 4xl:text-lead-hero-xl mt-6 text-white/85 lg:mt-4.5">
           {description}
@@ -48,11 +46,11 @@ const clients = (
       <div class="relative overflow-x-clip">
         <Container class="pointer-events-none absolute inset-0">
           <div class="backdrop-blur-bar 3xl:-right-page-bleed absolute inset-y-0 right-0 left-6"></div>
-          <div class="border-grid/5 bg-space-950/50 3xl:-right-page-bleed absolute inset-y-0 right-0 left-6 border-t"></div>
+          <div class="bg-space-950/50 3xl:-right-page-bleed absolute inset-y-0 right-0 left-6"></div>
+          <div class="bg-grid/5 absolute inset-x-6 top-0 h-px"></div>
         </Container>
         <div class="relative opacity-50 pt-3.75 pb-6">
           <Container class="relative">
-            <GridMark class="absolute -top-3.75 left-6 -mt-px" />
             <p class="text-frost text-xs font-normal tracking-widest uppercase">
               Trusted by technical teams at:
             </p>

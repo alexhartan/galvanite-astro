@@ -6,7 +6,6 @@ import ArrowIcon from '../ui/ArrowIcon.astro';
 import Container from '../ui/Container.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
-import GridMark from '../ui/GridMark.astro';
 
 interface Props {
   id?: string;
@@ -15,7 +14,6 @@ interface Props {
   stats?: { value: string; label: string }[];
 }
 const { id = 'testimonials', label, heading, stats = [] } = Astro.props;
-const right = '3xl:block lg:hidden';
 const testimonials = (await getCollection('testimonials')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -76,7 +74,6 @@ const arrow =
             stats.length === 0 && 'pb-48 lg:pb-56',
           ]}
         >
-          <GridMark inverted class="absolute top-0 left-0 -mt-px" />
           <div class="grid touch-pan-y select-none">
             {pages.map((page, index) => (
               <div
@@ -131,12 +128,7 @@ const arrow =
       </div>
       {stats.length > 0 && (
         <dl class="from-abyss/0 to-abyss relative grid gap-10 bg-linear-to-b px-8 pt-72 pb-24 sm:grid-cols-3 lg:pt-64 lg:pb-24">
-          <div class="bleed-x absolute bottom-0 h-px bg-white/10"></div>
-          <GridMark inverted class="absolute top-full left-0 -mt-px" />
-          <GridMark
-            inverted
-            class:list={[right, 'absolute top-full left-full -mt-px -ml-px']}
-          />
+          <div class="absolute inset-x-0 bottom-0 h-px bg-white/10"></div>
           {stats.map(({ value, label }) => (
             <div class="flex flex-col-reverse gap-2 sm:justify-self-center">
               <dt class="text-sky text-stat-label max-w-48">{label}</dt>

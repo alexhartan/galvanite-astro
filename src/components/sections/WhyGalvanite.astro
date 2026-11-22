@@ -9,7 +9,6 @@ import PerformanceArt from '../ui/art/PerformanceArt.astro';
 import ProcessArt from '../ui/art/ProcessArt.astro';
 import StrategyArt from '../ui/art/StrategyArt.astro';
 import ToolsArt from '../ui/art/ToolsArt.astro';
-import GridMark from '../ui/GridMark.astro';
 
 interface Props {
   id?: string;
@@ -51,37 +50,21 @@ const card =
         ></div>
         <div
           aria-hidden="true"
-          class="bleed-x absolute top-0 h-px bg-white/10"
+          class="absolute inset-x-0 top-0 h-px bg-white/10"
         ></div>
         <div
           aria-hidden="true"
-          class="bleed-x absolute bottom-0 h-px bg-white/10"
+          class="absolute inset-x-0 bottom-0 h-px bg-white/10"
         ></div>
-        <GridMark inverted class="absolute top-0 left-0" />
-        <GridMark inverted class="absolute top-full left-0 -mt-px" />
-        <GridMark inverted class="absolute top-0 left-full -ml-px" />
-        <GridMark inverted class="absolute top-full left-full -mt-px -ml-px" />
         <div class="relative grid sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map(({ data }, index) => {
             const Art = art[data.art];
             return (
               <article class="group relative flex flex-col pb-14 pointer-fine:hover:z-20">
                 {index === 3 && (
-                  <>
-                    <div
-                      aria-hidden="true"
-                      class="bleed-x absolute top-0 h-px bg-white/10 max-lg:hidden"
-                    />
-                    <GridMark
-                      inverted
-                      class="absolute top-0 left-0 max-lg:hidden"
-                    />
-                  </>
-                )}
-                {index === 5 && (
-                  <GridMark
-                    inverted
-                    class="absolute top-0 left-full -ml-px max-lg:hidden"
+                  <div
+                    aria-hidden="true"
+                    class="w-triple absolute top-0 left-0 h-px bg-white/10 max-lg:hidden"
                   />
                 )}
                 <div
