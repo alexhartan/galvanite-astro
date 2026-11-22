@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
 import CtaButton from '../ui/CtaButton.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
-import GridMark from '../ui/GridMark.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 
 interface Props {
@@ -45,25 +44,16 @@ const reveal = {
         ></div>
         <div
           aria-hidden="true"
-          class="bleed-x absolute top-0 h-px bg-white/10"
+          class="absolute inset-x-0 top-0 h-px bg-white/10"
         ></div>
         <div
           aria-hidden="true"
-          class="bleed-x absolute bottom-0 h-px bg-white/10"
+          class="absolute inset-x-0 bottom-0 h-px bg-white/10"
         ></div>
         <div
           aria-hidden="true"
           class="absolute inset-y-0 left-2/3 w-px bg-white/10 max-xl:hidden"
         ></div>
-        <GridMark inverted class="absolute top-0 left-0" />
-        <GridMark inverted class="absolute top-full left-0 -mt-px" />
-        <GridMark inverted class="absolute top-0 left-2/3 max-xl:hidden" />
-        <GridMark
-          inverted
-          class="absolute top-full left-2/3 -mt-px max-xl:hidden"
-        />
-        <GridMark inverted class="absolute top-0 left-full -ml-px" />
-        <GridMark inverted class="absolute top-full left-full -mt-px -ml-px" />
         <div class="relative grid xl:grid-cols-3">
           <ul
             class="grid sm:grid-cols-2 lg:grid-cols-3 xl:col-span-2"

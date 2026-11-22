@@ -6,7 +6,6 @@ import Container from '../ui/Container.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import SparkIcon from '../ui/SparkIcon.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
-import GridMark from '../ui/GridMark.astro';
 
 interface Props {
   id?: string;
@@ -85,25 +84,8 @@ const tiers = {
           {engagements.map(({ data }, index) => {
             const tier = tiers[data.tier];
             const first = index === 0;
-            const last = index === engagements.length - 1;
-            const guide = (
-              <>
-                {first && (
-                  <>
-                    <div class="bleed-x absolute bottom-0 h-px bg-white/10 max-lg:hidden" />
-                    <GridMark
-                      inverted
-                      class="absolute top-full left-0 -mt-px max-lg:hidden"
-                    />
-                  </>
-                )}
-                {last && (
-                  <GridMark
-                    inverted
-                    class="3xl:block absolute top-full left-full -mt-px -ml-px hidden"
-                  />
-                )}
-              </>
+            const guide = first && (
+              <div class="w-triple absolute bottom-0 left-0 h-px bg-white/10 max-lg:hidden" />
             );
             return (
               <article

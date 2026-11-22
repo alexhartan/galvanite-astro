@@ -95,6 +95,7 @@
   );
   --spacing-slide: 85cqi;
   --spacing-slide-sm: 60cqi;
+  --spacing-triple: 300%;
   --spacing-slide-lg: calc(50cqi - 1.25rem);
   --spacing-lift: 0.175rem;
 
