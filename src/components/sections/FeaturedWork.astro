@@ -20,16 +20,11 @@ const cases = (await getCollection('caseStudies')).sort(
   id={id}
   aria-labelledby={`${id}-label`}
   data-tone="light"
-  data-fade
   data-scene-start={sceneStart ? '' : undefined}
-  class="scroll-mt-nav relative z-10 overflow-x-clip"
+  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
-  <div
-    aria-hidden="true"
-    class="pointer-events-none fixed inset-0 bg-white opacity-(--fade,1)"
-  ></div>
   <SectionFrame edge={false} />
-  <div data-guide class="border-ink/10 pb-fade relative border-t">
+  <div data-guide class="border-ink/10 relative border-t pb-32 lg:pb-48">
     <Container class="max-lg:pt-12">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
     </Container>
@@ -59,7 +54,6 @@ const cases = (await getCollection('caseStudies')).sort(
 </section>
 
 <script>
-  import { initFade } from '../../scripts/fade';
   import { initImageReveal } from '../../scripts/image-reveal';
   import { initMarquee } from '../../scripts/marquee';
   import { initRotator } from '../../scripts/rotator';
@@ -76,8 +70,5 @@ const cases = (await getCollection('caseStudies')).sort(
       .forEach((el) => initRotator(el));
     initMarquee(root);
     initImageReveal(root);
-  }
-  for (const section of document.querySelectorAll<HTMLElement>('[data-fade]')) {
-    initFade(section);
   }
 </script>
