@@ -79,18 +79,13 @@ const { href, label, position, dark = false } = Astro.props;
       }
     });
     const fade = document.querySelector<HTMLElement>('[data-fade]');
-    const band = fade?.querySelector<HTMLElement>('[data-fade-band]');
     links.forEach(({ anchor }, index) => {
       anchor.toggleAttribute('data-current', index === current);
-      if (!fade || !band) return;
-      const box = fade.getBoundingClientRect();
-      const anchorBox = anchor.getBoundingClientRect();
-      const y = anchorBox.top + anchorBox.height / 2;
-      const top = box.bottom - band.offsetHeight;
-      const tone =
-        y >= box.bottom
-          ? 1
-          : Math.min(1, Math.max(0, (y - top) / band.offsetHeight));
+      if (!fade) return;
+      const box = anchor.getBoundingClientRect();
+      const y = box.top + box.height / 2;
+      const opacity = Number(fade.style.getPropertyValue('--fade') || 1);
+      const tone = y < fade.getBoundingClientRect().bottom ? 0 : 1 - opacity;
       anchor.style.setProperty('--tone', tone.toFixed(3));
     });
   };

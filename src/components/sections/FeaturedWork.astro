@@ -26,12 +26,7 @@ const cases = (await getCollection('caseStudies')).sort(
 >
   <div
     aria-hidden="true"
-    class="bottom-fade absolute inset-x-0 top-0 bg-white"
-  ></div>
-  <div
-    aria-hidden="true"
-    data-fade-band
-    class="h-fade absolute inset-x-0 bottom-0 bg-linear-to-b from-white to-white/0"
+    class="pointer-events-none fixed inset-0 bg-white opacity-(--fade,1)"
   ></div>
   <SectionFrame edge={false} />
   <div data-guide class="border-ink/10 pb-fade relative border-t">
@@ -64,6 +59,7 @@ const cases = (await getCollection('caseStudies')).sort(
 </section>
 
 <script>
+  import { initFade } from '../../scripts/fade';
   import { initImageReveal } from '../../scripts/image-reveal';
   import { initMarquee } from '../../scripts/marquee';
   import { initRotator } from '../../scripts/rotator';
@@ -80,5 +76,8 @@ const cases = (await getCollection('caseStudies')).sort(
       .forEach((el) => initRotator(el));
     initMarquee(root);
     initImageReveal(root);
+  }
+  for (const section of document.querySelectorAll<HTMLElement>('[data-fade]')) {
+    initFade(section);
   }
 </script>
