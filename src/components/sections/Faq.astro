@@ -33,11 +33,11 @@ const faqs = await Promise.all(
           aria-hidden="true"
           class="from-abyss to-abyss/0 absolute inset-0 border-x border-white/10 bg-linear-to-b"
         ></div>
-        <div class="relative grid items-start pt-12 lg:grid-cols-3 lg:pt-16">
+        <div class="relative grid items-start pt-12 lg:grid-cols-2 lg:pt-16">
           <h3 class="text-section px-8 pb-12 whitespace-pre-line lg:pb-0">
             {heading}
           </h3>
-          <ul role="list" class="divide-y divide-white/10 lg:col-span-2">
+          <ul role="list">
             {faqs.map(({ data, Content }) => (
               <li class="group relative pointer-fine:hover:z-20">
                 <div
@@ -46,12 +46,12 @@ const faqs = await Promise.all(
                 />
                 <details
                   name="faq"
-                  class="details-expand ease-out-soft relative pb-3 transition duration-300 pointer-fine:group-hover:-translate-y-lift"
+                  class="details-expand ease-out-soft relative pb-2 transition duration-300 pointer-fine:group-hover:-translate-y-lift"
                 >
-                  <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none text-balance items-center pr-16 pl-6 pt-6 pb-3 text-lg font-light tracking-tight lg:text-xl transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
+                  <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none text-balance items-center pr-16 pl-5 pt-4 pb-2 text-lg font-light tracking-tight lg:text-xl transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
                     {data.question}
                   </summary>
-                  <div class="text-frost/80 pr-16 pb-3 pl-6 text-base text-pretty prose-links">
+                  <div class="text-frost/80 pr-16 pb-2 pl-5 text-base text-pretty prose-links">
                     <Content />
                   </div>
                 </details>
