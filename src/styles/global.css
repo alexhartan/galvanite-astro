@@ -46,7 +46,8 @@
   --text-nav-label: 0.875rem;
   --text-tag: 0.65625rem;
   --text-label: 0.75rem;
-  --text-benefit: clamp(1.3rem, 1.35vw, 1.6875rem);
+  --text-benefit: clamp(1.365rem, 1.42vw, 1.775rem);
+  --text-benefit--letter-spacing: -0.02em;
   --text-benefit--line-height: 1.1;
   --text-section: clamp(2.1875rem, 3vw, 3.625rem);
   --text-section--line-height: 1;

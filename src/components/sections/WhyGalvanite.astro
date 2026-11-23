@@ -89,13 +89,13 @@ const bottom = (index: number) => [
               {index === last && (
                 <GridMark class="absolute top-full left-full z-10" />
               )}
-              <div aria-hidden="true" class="relative h-30 overflow-hidden">
-                <div class="absolute bottom-0 left-0 h-45 w-75 origin-bottom-left -translate-x-0.5 translate-y-px scale-60">
+              <div aria-hidden="true" class="relative h-32 overflow-hidden">
+                <div class="absolute bottom-0 left-0 h-45 w-75 origin-bottom-left -translate-x-0.5 translate-y-px scale-70">
                   <Art />
                 </div>
               </div>
               <div class="ease-out-soft relative px-10 pt-8 transition-transform duration-300 pointer-fine:group-hover:-translate-y-lift">
-                <h3 class="text-azure-deep text-benefit ease-out-soft group-hover:text-ink font-light transition-colors duration-300">
+                <h3 class="text-azure-deep text-benefit ease-out-soft group-hover:text-ink font-medium whitespace-pre-line transition-colors duration-300">
                   {data.title}
                 </h3>
                 <p class="text-graphite ease-out-soft mt-2 text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100">
