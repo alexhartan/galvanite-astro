@@ -5,6 +5,7 @@ import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import Faq from '../components/sections/Faq.astro';
 import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
+import Results from '../components/sections/Results.astro';
 import Pricing from '../components/sections/Pricing.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import SelfCheck from '../components/sections/SelfCheck.astro';
@@ -38,14 +39,27 @@ const sections = [
   { href: '#fit', label: 'Self Check', dark: true },
   { href: '#faq', label: 'FAQ', dark: true },
 ];
-const stats = [
-  { value: '2 months', label: 'From rebrand and launch to successful exit' },
-  { value: '120M+', label: 'In acquisitions after the rebrand and launch' },
-  {
-    value: '16+ years',
-    label: 'Experience in branding and product development',
-  },
-];
+const results = {
+  lead: 'Others ship deliverables.',
+  emphasis: 'We ship results.',
+  stats: [
+    {
+      value: '120M+',
+      label: 'In total client acquisitions\nover the past 2 years',
+      href: '#',
+    },
+    {
+      value: '60 days',
+      label: 'From rebrand and launch\nto successful exit',
+      href: '#',
+    },
+    {
+      value: '3.62x',
+      label: 'Boost in organic search traffic,\nwithin the first month',
+      href: '#',
+    },
+  ],
+};
 const closing = {
   lead: 'It’s time to build a brand',
   emphasis: 'worthy of your product',
@@ -72,14 +86,11 @@ const link = (index: number) => ({
   <Intro {...mission} />
   <SectionLink {...link(1)} />
   <FeaturedWork label="Featured work" sceneStart />
+  <Results {...results} />
   <SectionLink {...link(2)} />
   <Pricing label="Pricing" heading="How we" emphasis="work together" />
   <SectionLink {...link(3)} />
-  <Testimonials
-    label="Testimonials"
-    heading="Don’t take our word for it"
-    stats={stats}
-  />
+  <Testimonials label="Testimonials" heading="Don’t take our word for it" />
   <ClosingCta {...closing} />
   <SectionLink {...link(4)} />
   <WhyGalvanite {...why} />
