@@ -55,9 +55,6 @@
   --text-tag: 0.65625rem;
   --text-label: 0.75rem;
   --text-benefit: clamp(1.2rem, 1.25vw, 1.55rem);
-  --text-assess: clamp(2.25rem, 3.5vw, 4.2rem);
-  --text-assess--line-height: 1;
-  --text-assess--letter-spacing: -0.035em;
   --text-benefit--letter-spacing: -0.02em;
   --text-benefit--line-height: 1.04;
   --text-section: clamp(2.1875rem, 3vw, 3.625rem);
