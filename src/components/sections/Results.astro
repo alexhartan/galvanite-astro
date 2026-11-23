@@ -35,15 +35,15 @@ const motion =
   <Container class="pointer-events-none absolute inset-0">
     <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
   </Container>
-  <Container class="pb-32 lg:pb-48">
-    <h2 id={`${id}-heading`} class="text-section text-center text-balance">
-      <span class="text-sky block font-light">{lead}</span>
+  <Container class="pt-36 lg:pt-56 4xl:pt-24">
+    <h2 id={`${id}-heading`} class="text-section">
+      <span class="text-sky block">{lead}</span>
       <span class="text-ink block font-normal">{emphasis}</span>
     </h2>
-    <div class="relative mt-16 lg:mt-20">
+    <div class="relative mt-12 lg:mt-15">
       <div
         aria-hidden="true"
-        class="bg-ink/10 absolute inset-x-0 top-0 h-px"
+        class="bg-ink/10 bleed-r absolute top-0 left-0 h-px"
       ></div>
       <div
         aria-hidden="true"
@@ -73,7 +73,7 @@ const motion =
             <a
               href={href}
               class:list={[
-                'group hover:bg-navy/3 focus-visible:bg-navy/3 focus-visible:outline-ocean relative flex h-full flex-col overflow-clip px-8 pt-20 focus-visible:outline-2 focus-visible:-outline-offset-2 lg:px-14 lg:pt-28',
+                'group hover:bg-navy/3 focus-visible:bg-navy/3 focus-visible:outline-ocean relative flex h-full flex-col overflow-clip px-8 pt-15 focus-visible:outline-2 focus-visible:-outline-offset-2 lg:px-14 lg:pt-21',
                 motion,
               ]}
             >
@@ -102,7 +102,7 @@ const motion =
               </span>
               <span
                 class:list={[
-                  'text-ink mt-auto pt-20 pb-4 text-sm pointer-fine:translate-y-4 pointer-fine:opacity-0 pointer-fine:group-hover:translate-y-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-visible:translate-y-0 pointer-fine:group-focus-visible:opacity-100',
+                  'text-ink mt-auto pt-15 pb-3 text-sm pointer-fine:translate-y-4 pointer-fine:opacity-0 pointer-fine:group-hover:translate-y-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-visible:translate-y-0 pointer-fine:group-focus-visible:opacity-100',
                   motion,
                 ]}
               >

@@ -42,7 +42,7 @@
   --text-statement--letter-spacing: -0.035em;
   --text-card: clamp(1.625rem, 2.08vw, 2.1125rem);
   --text-card--line-height: 1.25;
-  --text-card--letter-spacing: -0.02em;
+  --text-card--letter-spacing: -0.03em;
   --text-nav-label: 0.875rem;
   --text-tag: 0.65625rem;
   --text-label: 0.75rem;
@@ -283,6 +283,10 @@
     text-decoration: underline;
     text-underline-offset: calc(var(--spacing) * 1);
   }
+}
+
+@utility bleed-r {
+  right: -100vw;
 }
 
 @utility bleed-x {
