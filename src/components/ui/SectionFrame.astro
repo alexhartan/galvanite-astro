@@ -6,8 +6,14 @@ interface Props {
   inverted?: boolean;
   bottom?: boolean;
   edge?: boolean;
+  top?: boolean;
 }
-const { inverted = false, bottom = false, edge = true } = Astro.props;
+const {
+  inverted = false,
+  bottom = false,
+  edge = true,
+  top = true,
+} = Astro.props;
 const line = inverted ? 'bg-white/10' : 'bg-ink/10';
 const right = edge ? '3xl:block lg:hidden' : 'hidden';
 ---
@@ -15,11 +21,15 @@ const right = edge ? '3xl:block lg:hidden' : 'hidden';
 <Container class="pointer-events-none absolute inset-0">
   <div class:list={['absolute inset-y-0 left-6 w-px', line]}></div>
   <div class:list={[right, 'absolute inset-y-0 right-6 w-px', line]}></div>
-  <GridMark inverted={inverted} class="absolute top-0 left-6" />
-  <GridMark
-    inverted={inverted}
-    class:list={[right, 'absolute top-0 right-6 translate-x-1.25']}
-  />
+  {top && (
+    <>
+      <GridMark inverted={inverted} class="absolute top-0 left-6" />
+      <GridMark
+        inverted={inverted}
+        class:list={[right, 'absolute top-0 right-6 translate-x-1.25']}
+      />
+    </>
+  )}
   {bottom && (
     <>
       <GridMark
