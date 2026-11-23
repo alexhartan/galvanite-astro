@@ -81,20 +81,15 @@ const motion =
                 motion,
               ]}
             >
-              <span
-                class:list={[
-                  'pointer-fine:group-hover:-translate-y-2 pointer-fine:group-focus-visible:-translate-y-2 flex flex-col gap-1.5',
-                  motion,
-                ]}
-              >
+              <span class:list={['flex flex-col gap-1', motion]}>
                 <span
                   class:list={[
-                    'text-stat text-azure-deep group-hover:text-ocean group-focus-visible:text-ocean origin-bottom-left font-light pointer-fine:group-hover:scale-120 pointer-fine:group-focus-visible:scale-120',
+                    'text-stat text-azure-deep group-hover:text-ocean group-focus-visible:text-ocean origin-bottom-left font-light pointer-fine:group-hover:scale-125 pointer-fine:group-focus-visible:scale-125',
                     motion,
                   ]}
                 >
                   <span class="reveal-line-mask block">
-                    <span class="reveal-line block">{value}</span>
+                    <span class="reveal-rise block">{value}</span>
                   </span>
                 </span>
                 <span class="reveal-fade">
@@ -135,6 +130,6 @@ const motion =
   import { initImageReveal } from '../../scripts/image-reveal';
 
   for (const root of document.querySelectorAll<HTMLElement>('[data-results]')) {
-    initImageReveal(root);
+    initImageReveal(root, '0px');
   }
 </script>
