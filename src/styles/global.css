@@ -114,7 +114,8 @@
   --ease-in-soft: cubic-bezier(0.32, 0, 0.67, 0);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  --animate-marquee: marquee 80s linear infinite;
+  --animate-marquee: marquee 120s linear infinite;
+  --animate-marquee-slow: marquee 168s linear infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
 
   @keyframes marquee {
