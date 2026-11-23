@@ -19,6 +19,7 @@
   --color-navy: #000f40;
   --color-midnight: #1b2540;
   --color-glacier: #92c9eb;
+  --color-glacier-tint: color-mix(in oklab, var(--color-glacier) 40%, white);
   --color-graphite: #1f2937;
   --color-grid: color-mix(
     in srgb,
@@ -55,6 +56,9 @@
   --text-tag: 0.65625rem;
   --text-label: 0.75rem;
   --text-benefit: clamp(1.2rem, 1.25vw, 1.55rem);
+  --text-assess: clamp(1.875rem, 2.5vw, 3rem);
+  --text-assess--line-height: 1;
+  --text-assess--letter-spacing: -0.033em;
   --text-benefit--letter-spacing: -0.02em;
   --text-benefit--line-height: 1.04;
   --text-section: clamp(2.1875rem, 3vw, 3.625rem);

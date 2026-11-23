@@ -31,15 +31,15 @@ const checks = (await getCollection('checks')).sort(
     data-guide
     class="border-ink/10 from-navy/3 to-navy/0 relative border-t bg-linear-to-b"
   >
-    <Container class="grid gap-12 pb-40 lg:grid-cols-2 lg:gap-0 lg:pb-56">
-      <div class="pt-10">
+    <Container class="grid gap-12 py-40 lg:grid-cols-2 lg:items-center lg:gap-0 lg:py-56">
+      <div>
         <h2
           id={`${id}-heading`}
-          class="text-section text-ocean font-normal whitespace-pre-line"
+          class="text-assess text-ocean font-normal whitespace-pre-line"
         >
           {heading}
         </h2>
-        <p class="text-graphite/80 mt-6 max-w-sm text-base">{description}</p>
+        <p class="text-graphite/80 mt-10 max-w-sm text-base">{description}</p>
       </div>
       <form action={action} class="lg:p-5">
         <fieldset>
@@ -47,7 +47,7 @@ const checks = (await getCollection('checks')).sort(
           <ul class="grid gap-5 sm:grid-cols-2" role="list">
             {checks.map(({ id: key, data }) => (
               <li>
-                <label class="group border-midnight/15 hover:border-glacier/50 hover:bg-glacier/6 has-checked:border-glacier has-checked:bg-glacier/40 ease-out-soft flex h-full cursor-pointer items-center gap-4 rounded-lg border bg-white px-4 py-5 transition-colors duration-300">
+                <label class="group border-midnight/15 hover:border-glacier/50 hover:bg-white has-checked:border-glacier has-checked:bg-glacier-tint ease-out-soft flex h-full cursor-pointer items-center gap-4 rounded-lg border bg-white px-4 py-5 transition-colors duration-300">
                   <span class="relative flex size-6 shrink-0">
                     <input
                       type="checkbox"
