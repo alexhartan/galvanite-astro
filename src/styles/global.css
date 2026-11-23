@@ -190,7 +190,7 @@
     opacity 0.6s var(--ease-out-soft) calc(var(--delay, 0ms) + 0.15s);
   @media (prefers-reduced-motion: no-preference) {
     [data-reveal-state='hidden'] & {
-      translate: 0 33%;
+      translate: 0 50%;
       opacity: 0;
       transition: none;
     }
@@ -247,6 +247,36 @@
 
 @utility clip-left {
   clip-path: inset(-100vh -100vw -100vh 0);
+}
+
+@custom-variant card-active (&[data-pos='active']);
+@custom-variant card-next (&[data-pos='next']);
+@custom-variant card-prev (&[data-pos='prev']);
+@custom-variant card-side (&:is([data-pos='next'], [data-pos='prev']));
+@custom-variant card-hidden (&[data-pos='hidden']);
+@custom-variant in-card-side (:where([data-pos='next'], [data-pos='prev'], [data-pos='hidden']) &);
+
+@utility card-edge {
+  --card-fill: var(--color-space-900);
+  --card-fill-end: var(--color-space-900);
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--card-fill), var(--card-fill-end)) padding-box,
+    linear-gradient(var(--color-azure-deep), var(--color-space-900)) border-box;
+  &[data-pos='active'] {
+    --card-fill: var(--color-space-800);
+    --card-fill-end: var(--color-space-950);
+  }
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 25%,
+    black 75%,
+    transparent
+  );
 }
 
 @custom-variant pick-any {
