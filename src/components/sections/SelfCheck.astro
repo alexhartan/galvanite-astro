@@ -27,7 +27,10 @@ const checks = (await getCollection('checks')).sort(
     <GridMark class="absolute top-0 left-6" />
     <GridMark class="absolute top-0 right-6 translate-x-1.25" />
   </Container>
-  <div data-guide class="border-ink/10 relative border-t">
+  <div
+    data-guide
+    class="border-ink/10 from-navy/3 to-navy/0 relative border-t bg-linear-to-b"
+  >
     <Container class="grid gap-12 pb-40 lg:grid-cols-2 lg:gap-0 lg:pb-56">
       <div class="pt-10">
         <h2
@@ -44,13 +47,13 @@ const checks = (await getCollection('checks')).sort(
           <ul class="grid gap-5 sm:grid-cols-2" role="list">
             {checks.map(({ id: key, data }) => (
               <li>
-                <label class="group border-midnight/15 from-navy/3 to-navy/0 hover:border-glacier/50 hover:bg-glacier/6 has-checked:border-glacier has-checked:bg-glacier/40 ease-out-soft flex h-full cursor-pointer items-center gap-4 rounded-lg border bg-linear-to-b px-4 py-5 transition-colors duration-300 has-checked:bg-none hover:bg-none">
+                <label class="group border-midnight/15 hover:border-glacier/50 hover:bg-glacier/6 has-checked:border-glacier has-checked:bg-glacier/40 ease-out-soft flex h-full cursor-pointer items-center gap-4 rounded-lg border bg-white px-4 py-5 transition-colors duration-300">
                   <span class="relative flex size-6 shrink-0">
                     <input
                       type="checkbox"
                       name="issues"
                       value={key}
-                      class="peer border-midnight/15 group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean ease-out-soft size-6 cursor-pointer appearance-none rounded-sm border bg-white transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2"
+                      class="peer border-midnight/15 group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean ease-out-soft size-6 cursor-pointer appearance-none rounded-sm border-2 bg-white transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2"
                     />
                     <svg
                       aria-hidden="true"
