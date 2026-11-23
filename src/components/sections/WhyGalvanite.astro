@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
-import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import GridMark from '../ui/GridMark.astro';
 import BuildArt from '../ui/art/BuildArt.astro';
 import ConsistencyArt from '../ui/art/ConsistencyArt.astro';
 import PerformanceArt from '../ui/art/PerformanceArt.astro';
@@ -27,72 +27,84 @@ const art = {
   process: ProcessArt,
   tools: ToolsArt,
 };
-const card =
-  'ease-out-soft pointer-events-none absolute inset-0 rounded-lg border border-white/15 bg-space-950/50 shadow-card backdrop-blur-bar opacity-0 transition duration-300';
+const last = benefits.length - 1;
+const right = (index: number) => [
+  'block',
+  index % 2 === 1 ? 'sm:block' : 'sm:hidden',
+  index % 3 === 2 ? 'lg:block' : 'lg:hidden',
+];
+const bottom = (index: number) => [
+  index === last ? 'block' : 'hidden',
+  index >= last - 1 ? 'sm:block' : 'sm:hidden',
+  index >= last - 2 ? 'lg:block' : 'lg:hidden',
+];
 ---
 
 <section
   id={id}
-  aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 overflow-x-clip pt-40 pb-40 text-white lg:pt-56 lg:pb-56"
+  aria-labelledby={`${id}-heading`}
+  data-tone="light"
+  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white pt-40 pb-40 lg:pt-56 lg:pb-56"
 >
-  <SectionFrame inverted top={false} />
-  <Container>
-    <h2 class="text-section pb-6">{heading}</h2>
+  <Container class="pointer-events-none absolute inset-0">
+    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
   </Container>
-  <div data-guide class="relative">
+  <Container class="@container">
+    <h2
+      id={`${id}-heading`}
+      class="text-statement lg:text-mission 4xl:text-mission-xl text-ocean text-center leading-none font-extralight text-balance"
+    >
+      {heading}
+    </h2>
+  </Container>
+  <div data-guide class="relative mt-9 lg:mt-12">
     <Container>
-      <Eyebrow id={`${id}-label`} inverted>
-        {label}
-      </Eyebrow>
-      <div class="relative">
-        <div
-          aria-hidden="true"
-          class="bg-space-950/50 backdrop-blur-bar absolute inset-0 border-x border-white/10"
-        ></div>
-        <div
-          aria-hidden="true"
-          class="absolute inset-x-0 top-0 h-px bg-white/10"
-        ></div>
-        <div
-          aria-hidden="true"
-          class="absolute inset-x-0 bottom-0 h-px bg-white/10"
-        ></div>
-        <div class="relative grid sm:grid-cols-2 lg:grid-cols-3">
-          {benefits.map(({ data }, index) => {
-            const Art = art[data.art];
-            return (
-              <article class="group relative flex flex-col pb-14 pointer-fine:hover:z-20">
-                {index === 3 && (
-                  <div
-                    aria-hidden="true"
-                    class="w-triple absolute top-0 left-0 h-px bg-white/10 max-lg:hidden"
-                  />
-                )}
-                <div
-                  aria-hidden="true"
-                  class:list={[
-                    card,
-                    'pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:opacity-100',
-                  ]}
-                />
-                <div aria-hidden="true" class="relative h-30 overflow-hidden">
-                  <div class="absolute bottom-0 left-0 h-45 w-75 origin-bottom-left -translate-x-0.5 translate-y-px scale-60">
-                    <Art />
-                  </div>
+      <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(({ data }, index) => {
+          const Art = art[data.art];
+          return (
+            <article class="group border-ink/10 hover:bg-navy/3 ease-out-soft relative flex flex-col border-t border-l pb-14 transition-colors duration-300">
+              <div
+                aria-hidden="true"
+                class:list={[
+                  'border-ink/10 pointer-events-none absolute inset-y-0 right-0 border-r',
+                  right(index),
+                ]}
+              />
+              <div
+                aria-hidden="true"
+                class:list={[
+                  'border-ink/10 pointer-events-none absolute inset-x-0 bottom-0 border-b',
+                  bottom(index),
+                ]}
+              />
+              <GridMark class="absolute top-0 left-0 z-10" />
+              <GridMark
+                class:list={['absolute top-0 left-full z-10', right(index)]}
+              />
+              <GridMark
+                class:list={['absolute top-full left-0 z-10', bottom(index)]}
+              />
+              {index === last && (
+                <GridMark class="absolute top-full left-full z-10" />
+              )}
+              <div aria-hidden="true" class="relative h-30 overflow-hidden">
+                <div class="absolute bottom-0 left-0 h-45 w-75 origin-bottom-left -translate-x-0.5 translate-y-px scale-60">
+                  <Art />
                 </div>
-                <div class="ease-out-soft relative px-10 pt-8 transition-transform duration-300 pointer-fine:group-hover:-translate-y-lift">
-                  <h4 class="text-sky text-benefit ease-out-soft font-light transition-colors duration-300 group-hover:text-white">
-                    {data.title}
-                  </h4>
-                  <p class="text-frost/80 ease-out-soft mt-2 text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100">
-                    {data.summary}
-                  </p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+              </div>
+              <div class="ease-out-soft relative px-10 pt-8 transition-transform duration-300 pointer-fine:group-hover:-translate-y-lift">
+                <h3 class="text-azure-deep text-benefit ease-out-soft group-hover:text-ink font-light transition-colors duration-300">
+                  {data.title}
+                </h3>
+                <p class="text-graphite ease-out-soft mt-2 text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100">
+                  {data.summary}
+                </p>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </Container>
   </div>

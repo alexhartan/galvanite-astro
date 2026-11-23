@@ -35,7 +35,7 @@ const sections = [
   { href: '#work', label: 'Featured Work' },
   { href: '#engagements', label: 'Pricing', dark: true },
   { href: '#testimonials', label: 'Testimonials', dark: true },
-  { href: '#why', label: 'Why Galvanite', dark: true },
+  { href: '#why', label: 'Why Galvanite' },
   { href: '#fit', label: 'Self Check', dark: true },
   { href: '#faq', label: 'FAQ', dark: true },
 ];
@@ -68,7 +68,7 @@ const closing = {
 };
 const why = {
   label: 'Why Galvanite',
-  heading: 'Why teams choose Galvanite',
+  heading: 'Built with intent',
 };
 const link = (index: number) => ({
   ...sections[index]!,
@@ -91,7 +91,6 @@ const link = (index: number) => ({
   <Pricing label="Pricing" heading="How we" emphasis="work together" />
   <SectionLink {...link(3)} />
   <Testimonials label="Testimonials" heading="Don’t take our word for it" />
-  <ClosingCta {...closing} />
   <SectionLink {...link(4)} />
   <WhyGalvanite {...why} />
   <SectionLink {...link(5)} />
@@ -102,4 +101,5 @@ const link = (index: number) => ({
     heading={`Questions,
 answered`}
   />
+  <ClosingCta {...closing} />
 </BaseLayout>

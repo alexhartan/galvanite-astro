@@ -10,9 +10,9 @@ export interface Frame {
 
 export const motion =
   'ease-standard transition duration-300 motion-reduce:transition-none';
-export const outline = 'fill-deep-950 stroke-azure-deep group-hover:stroke-sky';
-export const ink = 'stroke-ink group-hover:stroke-azure-deep';
-export const solid = 'fill-ink group-hover:fill-azure-deep';
+export const outline = 'fill-white stroke-sky group-hover:stroke-azure-deep';
+export const ink = 'stroke-azure group-hover:stroke-sky';
+export const solid = 'fill-azure group-hover:fill-sky';
 export const pivot = 'transform-fill origin-bottom';
 
 export const frame = (w: number, h: number) =>
