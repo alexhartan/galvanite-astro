@@ -17,6 +17,8 @@
   --color-azure-deep: #2e6aa3;
   --color-deep-950: #0d1326;
   --color-navy: #000f40;
+  --color-midnight: #1b2540;
+  --color-glacier: #92c9eb;
   --color-graphite: #1f2937;
   --color-grid: color-mix(
     in srgb,
@@ -52,7 +54,10 @@
   --text-nav-label: 0.875rem;
   --text-tag: 0.65625rem;
   --text-label: 0.75rem;
-  --text-benefit: clamp(1.3rem, 1.35vw, 1.6875rem);
+  --text-benefit: clamp(1.2rem, 1.25vw, 1.55rem);
+  --text-assess: clamp(2.25rem, 3.5vw, 4.2rem);
+  --text-assess--line-height: 1;
+  --text-assess--letter-spacing: -0.035em;
   --text-benefit--letter-spacing: -0.02em;
   --text-benefit--line-height: 1.04;
   --text-section: clamp(2.1875rem, 3vw, 3.625rem);
@@ -265,30 +270,6 @@
     black 75%,
     transparent
   );
-}
-
-@custom-variant pick-any {
-  :where([data-self-check]:has(input:checked)) & {
-    @slot;
-  }
-}
-
-@custom-variant pick-sprint {
-  :where([data-self-check][data-pick='sprint']) & {
-    @slot;
-  }
-}
-
-@custom-variant pick-upper {
-  :where([data-self-check][data-pick='upper']) & {
-    @slot;
-  }
-}
-
-@custom-variant pick-brand {
-  :where([data-self-check][data-pick='brand']) & {
-    @slot;
-  }
 }
 
 @layer base {

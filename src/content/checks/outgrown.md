@@ -1,5 +1,4 @@
 ---
-order: 4
-tier: featured
-statement: "“Our website makes us look smaller than we are.”"
+order: 3
+statement: "Our brand and website make us look smaller than we are."
 ---

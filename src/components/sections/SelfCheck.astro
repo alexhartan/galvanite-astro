@@ -1,80 +1,56 @@
 ---
 import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
-import CtaButton from '../ui/CtaButton.astro';
-import Eyebrow from '../ui/Eyebrow.astro';
-import SectionFrame from '../ui/SectionFrame.astro';
+import GridMark from '../ui/GridMark.astro';
 
 interface Props {
   id?: string;
-  label: string;
   heading: string;
-  ctaHref?: string;
+  description: string;
+  action?: string;
 }
-const { id = 'fit', label, heading, ctaHref = '#contact' } = Astro.props;
+const { id = 'fit', heading, description, action = '#contact' } = Astro.props;
 const checks = (await getCollection('checks')).sort(
   (a, b) => a.data.order - b.data.order,
 );
-const packages = (await getCollection('engagements')).sort(
-  (a, b) => a.data.order - b.data.order,
-);
-const reveal = {
-  standard: 'pick-sprint:visible',
-  featured: 'pick-upper:visible',
-  premium: 'pick-brand:visible',
-};
 ---
 
 <section
   id={id}
-  aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 overflow-x-clip pt-40 text-white lg:pt-56"
+  aria-labelledby={`${id}-heading`}
+  data-tone="light"
+  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
-  <SectionFrame inverted top={false} />
-  <Container>
-    <h2 class="text-section pb-6">{heading}</h2>
+  <Container class="pointer-events-none absolute inset-0">
+    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
+    <div class="bg-ink/10 absolute inset-y-0 right-6 w-px"></div>
+    <GridMark class="absolute top-0 left-6" />
+    <GridMark class="absolute top-0 right-6 translate-x-1.25" />
   </Container>
-  <div data-guide class="relative">
-    <Container class="pb-40 lg:pb-56">
-      <Eyebrow id={`${id}-label`} inverted>
-        {label}
-      </Eyebrow>
-      <div data-self-check class="relative">
-        <div
-          aria-hidden="true"
-          class="bg-space-950/50 backdrop-blur-bar absolute inset-0 border-x border-white/10"
-        ></div>
-        <div
-          aria-hidden="true"
-          class="absolute inset-x-0 top-0 h-px bg-white/10"
-        ></div>
-        <div
-          aria-hidden="true"
-          class="absolute inset-x-0 bottom-0 h-px bg-white/10"
-        ></div>
-        <div
-          aria-hidden="true"
-          class="absolute inset-y-0 left-2/3 w-px bg-white/10 max-xl:hidden"
-        ></div>
-        <div class="relative grid xl:grid-cols-3">
-          <ul
-            class="grid sm:grid-cols-2 lg:grid-cols-3 xl:col-span-2"
-            role="list"
-          >
+  <div data-guide class="border-ink/10 relative border-t">
+    <Container class="grid gap-12 pb-40 lg:grid-cols-2 lg:gap-0 lg:pb-56">
+      <div class="pt-10">
+        <h2
+          id={`${id}-heading`}
+          class="text-assess text-ocean font-normal text-balance"
+        >
+          {heading}
+        </h2>
+        <p class="text-graphite/80 mt-6 max-w-sm text-base">{description}</p>
+      </div>
+      <form action={action} class="lg:p-5">
+        <fieldset>
+          <legend class="sr-only">Select the issues that ring true</legend>
+          <ul class="grid gap-5 sm:grid-cols-2" role="list">
             {checks.map(({ id: key, data }) => (
-              <li class="group relative pointer-fine:hover:z-20">
-                <div
-                  aria-hidden="true"
-                  class="ease-out-soft shadow-card bg-space-950/50 backdrop-blur-bar pointer-events-none absolute inset-0 rounded-lg border border-white/15 opacity-0 transition duration-300 group-has-checked:opacity-100 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:opacity-100"
-                />
-                <label class="text-frost/80 has-checked:text-white ease-out-soft relative flex h-full cursor-pointer flex-col justify-center gap-4 px-8 py-10 text-base text-balance transition duration-300 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:text-white">
+              <li>
+                <label class="group border-midnight/15 from-navy/3 to-navy/0 hover:border-glacier/50 hover:bg-glacier/6 has-checked:border-glacier has-checked:bg-glacier/40 ease-out-soft flex h-full cursor-pointer items-center gap-4 rounded-lg border bg-linear-to-b px-4 py-5 transition-colors duration-300 has-checked:bg-none hover:bg-none">
                   <span class="relative flex size-6 shrink-0">
                     <input
                       type="checkbox"
-                      name="fit"
+                      name="issues"
                       value={key}
-                      data-tier={data.tier}
-                      class="peer ease-out-soft checked:border-signal checked:bg-signal focus-visible:outline-signal group-hover:border-sky size-6 cursor-pointer appearance-none rounded-sm border-2 border-white/30 transition duration-300 active:scale-90 focus-visible:outline-2 focus-visible:outline-offset-2"
+                      class="peer border-midnight/15 group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean ease-out-soft size-6 cursor-pointer appearance-none rounded-sm border bg-white transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2"
                     />
                     <svg
                       aria-hidden="true"
@@ -84,7 +60,7 @@ const reveal = {
                       stroke-width="3"
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      class="text-ink pointer-events-none absolute inset-0"
+                      class="text-azure-deep pointer-events-none absolute inset-0"
                     >
                       <path
                         d="M6 12.5l4 4 8-9"
@@ -93,55 +69,36 @@ const reveal = {
                       />
                     </svg>
                   </span>
-                  <span>{data.statement}</span>
+                  <span class="text-ocean text-base italic">
+                    {data.statement}
+                  </span>
                 </label>
               </li>
             ))}
           </ul>
-          <aside
-            aria-live="polite"
-            class="text-ink ease-out-soft pick-any:visible pick-any:opacity-100 invisible relative grid bg-white opacity-0 transition duration-500"
+        </fieldset>
+        <div class="border-midnight/15 mt-5 flex flex-col gap-1.5 rounded-lg border bg-white p-1.5 sm:flex-row">
+          <label for={`${id}-url`} class="sr-only">
+            Company website
+          </label>
+          <input
+            id={`${id}-url`}
+            type="url"
+            name="website"
+            required
+            autocomplete="url"
+            inputmode="url"
+            placeholder="yourwebsite.com"
+            class="text-ink placeholder:text-sky/80 min-h-11 min-w-0 flex-1 bg-transparent px-3 text-xl font-light outline-none"
+          />
+          <button
+            type="submit"
+            class="bg-signal text-ink focus-visible:outline-ocean ease-out-soft min-h-11 cursor-pointer px-12 text-sm font-semibold transition-opacity duration-300 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2"
           >
-            {packages.map(({ data }) => (
-              <div
-                class:list={[
-                  'invisible col-start-1 row-start-1 flex flex-col p-8',
-                  reveal[data.tier],
-                ]}
-              >
-                <p class="text-sky text-label font-semibold tracking-widest uppercase">
-                  Recommended package
-                </p>
-                <h4 class="mt-2 text-2xl font-semibold tracking-tight">
-                  {data.name}
-                </h4>
-                <p class="mt-2 text-balance">{data.audience}</p>
-                <p class="text-price tracking-price mt-4 font-semibold">
-                  {data.pricePrefix && (
-                    <span class="font-light">{data.pricePrefix} </span>
-                  )}
-                  {data.price}
-                </p>
-                <div class="mt-auto pt-8">
-                  <a
-                    href="#engagements"
-                    class="text-ink/70 hover:text-ink focus-visible:outline-ocean inline-block text-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-                  >
-                    See what’s included
-                  </a>
-                  <CtaButton href={ctaHref} class="relative mt-4 w-full">
-                    Book a Call
-                  </CtaButton>
-                </div>
-              </div>
-            ))}
-          </aside>
+            Get the Report
+          </button>
         </div>
-      </div>
+      </form>
     </Container>
   </div>
 </section>
-
-<script>
-  import '../../scripts/self-check';
-</script>
