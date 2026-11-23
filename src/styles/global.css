@@ -60,7 +60,8 @@
   --text-stat: clamp(2.9rem, 3.6vw, 4.2rem);
   --text-stat--line-height: 1;
   --text-stat--letter-spacing: -0.04em;
-  --text-stat-label: 0.9625rem;
+  --text-stat-label: 1.075rem;
+  --text-link-sm: 0.8125rem;
   --text-stat-label--line-height: 1.25;
   --text-price: clamp(1.75rem, 2.1vw, 2.5rem);
   --text-price--line-height: 1;
