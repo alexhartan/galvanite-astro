@@ -11,9 +11,8 @@ interface Props {
   id?: string;
   label: string;
   heading: string;
-  stats?: { value: string; label: string }[];
 }
-const { id = 'testimonials', label, heading, stats = [] } = Astro.props;
+const { id = 'testimonials', label, heading } = Astro.props;
 const testimonials = (await getCollection('testimonials')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -30,10 +29,7 @@ const arrow =
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  class:list={[
-    'scroll-mt-nav relative z-10 overflow-x-clip text-white',
-    stats.length > 0 && 'pb-40 lg:pb-56',
-  ]}
+  class="scroll-mt-nav relative z-10 overflow-x-clip text-white"
 >
   <SectionFrame inverted />
   <div data-guide class="relative border-t border-white/10">
@@ -68,12 +64,7 @@ const arrow =
             </button>
           </div>
         </div>
-        <div
-          class:list={[
-            'relative border-t border-white/10',
-            stats.length === 0 && 'pb-48 lg:pb-56',
-          ]}
-        >
+        <div class="relative border-t border-white/10 pb-48 lg:pb-56">
           <div class="grid touch-pan-y select-none">
             {pages.map((page, index) => (
               <div
@@ -126,17 +117,6 @@ const arrow =
           </div>
         </div>
       </div>
-      {stats.length > 0 && (
-        <dl class="from-abyss/0 to-abyss relative grid gap-10 bg-linear-to-b px-8 pt-72 pb-24 sm:grid-cols-3 lg:pt-64 lg:pb-24">
-          <div class="absolute inset-x-0 bottom-0 h-px bg-white/10"></div>
-          {stats.map(({ value, label }) => (
-            <div class="flex flex-col-reverse gap-2 sm:justify-self-center">
-              <dt class="text-sky text-stat-label max-w-48">{label}</dt>
-              <dd class="text-stat font-light">{value}</dd>
-            </div>
-          ))}
-        </dl>
-      )}
     </Container>
   </div>
 </section>

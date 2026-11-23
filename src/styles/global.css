@@ -16,6 +16,8 @@
   --color-ocean-50: #ecf2f9;
   --color-azure-deep: #2e6aa3;
   --color-deep-950: #0d1326;
+  --color-navy: #000f40;
+  --color-graphite: #1f2937;
   --color-grid: color-mix(
     in srgb,
     var(--color-ink) calc(var(--grid-invert, 0) * 100%),
