@@ -6,6 +6,7 @@ import ArrowIcon from '../ui/ArrowIcon.astro';
 import Container from '../ui/Container.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import GridMark from '../ui/GridMark.astro';
 import LogoMarquee from '../ui/LogoMarquee.astro';
 
 interface Props {
@@ -30,42 +31,44 @@ const arrow =
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 overflow-x-clip text-white"
+  class="scroll-mt-nav relative z-10 overflow-x-clip pt-40 text-white lg:pt-56"
 >
-  <SectionFrame inverted />
-  <div data-guide class="relative border-t border-white/10">
-    <Container class="@container">
-      <Eyebrow id={`${id}-label`} inverted>
-        {label}
-      </Eyebrow>
-      <div
-        data-testimonials
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="Testimonials"
-      >
-        <div class="mt-40 flex items-end justify-between gap-6 pb-6 lg:mt-56">
-          <h3 class="text-section">{heading}</h3>
-          <div class="-mb-6 flex shrink-0">
-            <button
-              type="button"
-              data-prev
-              aria-label="Previous testimonial"
-              class={arrow}
-            >
-              <ArrowIcon class:list={[icon, 'rotate-180']} />
-            </button>
-            <button
-              type="button"
-              data-next
-              aria-label="Next testimonial"
-              class:list={[arrow, '-ml-px']}
-            >
-              <ArrowIcon class={icon} />
-            </button>
-          </div>
-        </div>
-        <div class="relative border-t border-white/10">
+  <SectionFrame inverted top={false} />
+  <div data-testimonials>
+    <Container class="flex items-end justify-between gap-6 pb-6">
+      <h2 class="text-section">{heading}</h2>
+      <div class="relative z-10 -mb-6 flex shrink-0">
+        <button
+          type="button"
+          data-prev
+          aria-label="Previous testimonial"
+          class={arrow}
+        >
+          <ArrowIcon class:list={[icon, 'rotate-180']} />
+        </button>
+        <button
+          type="button"
+          data-next
+          aria-label="Next testimonial"
+          class:list={[arrow, '-ml-px']}
+        >
+          <ArrowIcon class={icon} />
+        </button>
+      </div>
+    </Container>
+    <div data-guide class="relative border-t border-white/10">
+      <Container class="pointer-events-none absolute inset-0">
+        <GridMark inverted class="absolute top-0 left-6" />
+      </Container>
+      <Container class="@container">
+        <Eyebrow id={`${id}-label`} inverted>
+          {label}
+        </Eyebrow>
+        <div
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Testimonials"
+        >
           <div class="grid touch-pan-y select-none">
             {pages.map((page, index) => (
               <div
@@ -117,11 +120,11 @@ const arrow =
             ))}
           </div>
         </div>
-      </div>
-      <div class="mt-24 pb-48 opacity-70 lg:mt-32 lg:pb-56">
-        <LogoMarquee class="mask-fade-x overflow-clip" />
-      </div>
-    </Container>
+        <div class="mt-24 pb-48 opacity-70 lg:mt-32 lg:pb-56">
+          <LogoMarquee class="mask-fade-x overflow-clip" />
+        </div>
+      </Container>
+    </div>
   </div>
 </section>
 
