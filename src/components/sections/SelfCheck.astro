@@ -41,13 +41,13 @@ const checks = (await getCollection('checks')).sort(
         </h2>
         <p class="text-graphite/80 mt-3 max-w-sm text-base">{description}</p>
       </div>
-      <form action={action} class="lg:px-5">
-        <fieldset>
+      <form action={action} novalidate data-assess class="lg:px-5">
+        <fieldset aria-describedby={`${id}-issues-error`}>
           <legend class="sr-only">Select the issues that ring true</legend>
-          <ul class="grid gap-5 sm:grid-cols-2" role="list">
+          <ul class="grid gap-3 sm:grid-cols-2" role="list">
             {checks.map(({ id: key, data }) => (
               <li>
-                <label class="group border-midnight/15 hover:border-glacier hover:bg-white has-checked:border-glacier has-checked:bg-glacier-tint ease-out-soft flex h-full cursor-pointer items-center gap-4 rounded-lg border bg-white px-4 py-5 transition-colors duration-300">
+                <label class="group border-midnight/15 hover:border-glacier hover:bg-white has-checked:border-glacier has-checked:bg-glacier-tint issues-error:border-alert/60 ease-out-soft flex h-full cursor-pointer items-center gap-4 rounded-lg border bg-white px-4 py-5 transition-colors duration-300">
                   <span class="relative flex size-6 shrink-0">
                     <input
                       type="checkbox"
@@ -72,27 +72,36 @@ const checks = (await getCollection('checks')).sort(
                       />
                     </svg>
                   </span>
-                  <span class="text-ocean text-base leading-tight font-medium italic">
+                  <span class="text-ocean text-base leading-tight font-medium text-balance italic">
                     {data.statement}
                   </span>
                 </label>
               </li>
             ))}
           </ul>
+          <p
+            id={`${id}-issues-error`}
+            data-issues-message
+            hidden
+            class="text-alert mt-3 text-sm"
+          >
+            Please select at least one item from the list
+          </p>
         </fieldset>
-        <div class="border-midnight/15 hover:border-sky/50 focus-within:border-sky ease-out-soft mt-5 flex flex-col gap-1.5 rounded-lg border bg-white p-1.5 transition-colors duration-300 sm:flex-row">
+        <div class="border-midnight/15 hover:border-sky/50 focus-within:border-sky field-error:border-alert/60 ease-out-soft mt-5 flex flex-col gap-1.5 rounded-lg border bg-white p-1.5 transition-colors duration-300 sm:flex-row">
           <label for={`${id}-url`} class="sr-only">
             Company website
           </label>
           <input
             id={`${id}-url`}
-            type="url"
+            type="text"
             name="website"
             required
+            aria-describedby={`${id}-url-error`}
             autocomplete="url"
             inputmode="url"
             placeholder="yourwebsite.com"
-            class="text-ocean placeholder:text-ocean/33 min-h-11 min-w-0 flex-1 bg-transparent px-3 text-xl font-normal outline-none"
+            class="text-ocean placeholder:text-ocean/33 min-h-11 min-w-0 flex-1 bg-transparent px-2.5 text-2xl font-normal outline-none"
           />
           <button
             type="submit"
@@ -101,7 +110,25 @@ const checks = (await getCollection('checks')).sort(
             Get the Report
           </button>
         </div>
+        <p
+          id={`${id}-url-error`}
+          data-url-message
+          hidden
+          class="text-alert mt-2 text-sm"
+        >
+          Please enter a valid website URL
+        </p>
       </form>
     </Container>
   </div>
 </section>
+
+<script>
+  import { initAssess } from '../../scripts/assess';
+
+  for (const form of document.querySelectorAll<HTMLFormElement>(
+    '[data-assess]',
+  )) {
+    initAssess(form);
+  }
+</script>

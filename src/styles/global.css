@@ -19,6 +19,7 @@
   --color-navy: #000f40;
   --color-midnight: #1b2540;
   --color-glacier: #92c9eb;
+  --color-alert: #d6455e;
   --color-glacier-tint: color-mix(in oklab, var(--color-glacier) 40%, white);
   --color-graphite: #1f2937;
   --color-grid: color-mix(
@@ -262,6 +263,9 @@
 @utility clip-left {
   clip-path: inset(-100vh -100vw -100vh 0);
 }
+
+@custom-variant field-error (&:has([aria-invalid='true']));
+@custom-variant issues-error (:where([data-issues-error]) &);
 
 @utility mask-fade-x {
   mask-image: linear-gradient(
