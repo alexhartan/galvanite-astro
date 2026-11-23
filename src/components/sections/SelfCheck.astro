@@ -31,7 +31,7 @@ const checks = (await getCollection('checks')).sort(
     data-guide
     class="border-ink/10 from-navy/3 to-navy/0 relative border-t bg-linear-to-b"
   >
-    <Container class="grid gap-12 py-40 lg:grid-cols-2 lg:items-center lg:gap-0 lg:py-56">
+    <Container class="grid gap-12 pt-20 pb-30 lg:grid-cols-2 lg:items-start lg:gap-0 lg:pt-28 lg:pb-42">
       <div>
         <h2
           id={`${id}-heading`}
@@ -39,9 +39,9 @@ const checks = (await getCollection('checks')).sort(
         >
           {heading}
         </h2>
-        <p class="text-graphite/80 mt-10 max-w-sm text-base">{description}</p>
+        <p class="text-graphite/80 mt-3 max-w-sm text-base">{description}</p>
       </div>
-      <form action={action} class="lg:p-5">
+      <form action={action} class="lg:px-5">
         <fieldset>
           <legend class="sr-only">Select the issues that ring true</legend>
           <ul class="grid gap-5 sm:grid-cols-2" role="list">
