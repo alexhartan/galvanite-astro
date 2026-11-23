@@ -34,14 +34,14 @@ const under = await Promise.all(names.map((name) => render(`${name}-under`)));
           <path
             d={d ?? frame(w, h)}
             stroke-linejoin="round"
-            stroke-width="2"
+            stroke-width="2.5"
             class:list={[outline, motion]}
           />
-          <g stroke-width="2" stroke-linecap="round">
+          <g stroke-width="2.5" stroke-linecap="round">
             {!bare && (
               <path
                 d={`M${title(w)[0]} 14H${title(w)[1]}`}
-                stroke-width="1"
+                stroke-width="1.5"
                 class:list={[ink, motion]}
               />
             )}
