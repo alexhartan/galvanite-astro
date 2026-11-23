@@ -49,8 +49,10 @@ const { href, label, position, dark = false } = Astro.props;
     let base = 0;
     links.forEach(({ track, section, label }, index) => {
       const box = section.getBoundingClientRect();
-      const offset = label.getBoundingClientRect().top - box.top;
-      const start = box.top - origin + offset;
+      const guide = section.querySelector('[data-guide]') ?? section;
+      const offset =
+        label.getBoundingClientRect().top - guide.getBoundingClientRect().top;
+      const start = label.getBoundingClientRect().top - origin;
       if (index === 0) base = start;
       const top = Math.min(base + index * pitch, start);
       track.style.setProperty('--offset', `${offset}px`);
