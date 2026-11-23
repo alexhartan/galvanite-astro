@@ -52,7 +52,6 @@ const checks = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/checks' }),
   schema: z.object({
     order: z.number(),
-    tier: z.enum(['standard', 'featured', 'premium']),
     statement: z.string(),
   }),
 });

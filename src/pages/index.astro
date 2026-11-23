@@ -36,7 +36,6 @@ const sections = [
   { href: '#engagements', label: 'Pricing', dark: true },
   { href: '#testimonials', label: 'Testimonials', dark: true },
   { href: '#why', label: 'Why Galvanite' },
-  { href: '#fit', label: 'Self Check', dark: true },
   { href: '#faq', label: 'FAQ', dark: true },
 ];
 const results = {
@@ -70,6 +69,11 @@ const why = {
   label: 'Why Galvanite',
   heading: 'Built with intent',
 };
+const check = {
+  heading: 'Let’s assess your brand & website',
+  description:
+    'Select the issues that ring true, and enter your company’s URL to get a custom report with clear fixes.',
+};
 const link = (index: number) => ({
   ...sections[index]!,
   position: sections.length - 1 - index,
@@ -93,9 +97,8 @@ const link = (index: number) => ({
   <Testimonials label="Testimonials" heading="Don’t take our word for it" />
   <SectionLink {...link(4)} />
   <WhyGalvanite {...why} />
+  <SelfCheck {...check} />
   <SectionLink {...link(5)} />
-  <SelfCheck label="Self check" heading="What’s holding you back?" />
-  <SectionLink {...link(6)} />
   <Faq
     label="FAQ"
     heading={`Questions,
