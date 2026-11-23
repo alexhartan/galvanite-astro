@@ -34,6 +34,12 @@
   --text-mission: calc(75cqi / 14.3882);
   --text-mission--line-height: 1.04;
   --text-mission--letter-spacing: -0.04em;
+  --text-intent: clamp(1.9rem, 3.07vw, 3.68rem);
+  --text-intent--letter-spacing: -0.035em;
+  --text-intent-lg: calc(71.25cqi / 14.3882);
+  --text-intent-lg--letter-spacing: -0.04em;
+  --text-intent-xl: calc(79.8cqi / 14.3882);
+  --text-intent-xl--letter-spacing: -0.04em;
   --text-mission-xl: calc(84cqi / 14.3882);
   --text-mission-xl--line-height: 1.04;
   --text-mission-xl--letter-spacing: -0.04em;
@@ -46,9 +52,9 @@
   --text-nav-label: 0.875rem;
   --text-tag: 0.65625rem;
   --text-label: 0.75rem;
-  --text-benefit: clamp(1.365rem, 1.42vw, 1.775rem);
+  --text-benefit: clamp(1.3rem, 1.35vw, 1.6875rem);
   --text-benefit--letter-spacing: -0.02em;
-  --text-benefit--line-height: 1.1;
+  --text-benefit--line-height: 1.04;
   --text-section: clamp(2.1875rem, 3vw, 3.625rem);
   --text-section--line-height: 1;
   --text-section--letter-spacing: -0.033em;

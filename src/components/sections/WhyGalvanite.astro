@@ -33,6 +33,11 @@ const right = (index: number) => [
   index % 2 === 1 ? 'sm:block' : 'sm:hidden',
   index % 3 === 2 ? 'lg:block' : 'lg:hidden',
 ];
+const first = (index: number) => [
+  index === 0 ? 'border-t-0' : '',
+  index < 2 ? 'sm:border-t-0' : 'sm:border-t',
+  index < 3 ? 'lg:border-t-0' : 'lg:border-t',
+];
 const bottom = (index: number) => [
   index === last ? 'block' : 'hidden',
   index >= last - 1 ? 'sm:block' : 'sm:hidden',
@@ -48,23 +53,29 @@ const bottom = (index: number) => [
 >
   <Container class="pointer-events-none absolute inset-0">
     <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
+    <div class="bg-ink/10 absolute inset-y-0 right-6 w-px"></div>
   </Container>
   <Container class="@container">
     <h2
       id={`${id}-heading`}
-      class="text-statement lg:text-mission 4xl:text-mission-xl text-ocean text-center leading-none font-extralight text-balance"
+      class="text-intent lg:text-intent-lg 4xl:text-intent-xl text-ocean text-center leading-none font-light text-balance"
     >
       {heading}
     </h2>
   </Container>
-  <div data-guide class="relative mt-9 lg:mt-12">
+  <div data-guide class="border-ink/10 relative mt-6 border-t">
     <Container>
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3">
         {benefits.map(({ data }, index) => {
           const Art = art[data.art];
           return (
-            <article class="group border-ink/10 hover:bg-navy/3 ease-out-soft relative flex flex-col border-t border-l pb-14 transition-colors duration-300">
+            <article
+              class:list={[
+                'group border-ink/10 hover:bg-navy/3 ease-out-soft relative flex flex-col border-t border-l pb-14 transition-colors duration-300',
+                first(index),
+              ]}
+            >
               <div
                 aria-hidden="true"
                 class:list={[
@@ -79,18 +90,24 @@ const bottom = (index: number) => [
                   bottom(index),
                 ]}
               />
-              <GridMark class="absolute top-0 left-0 z-10" />
+              <GridMark class="absolute top-0 left-0 z-10 -mt-px -ml-px" />
               <GridMark
-                class:list={['absolute top-0 left-full z-10', right(index)]}
+                class:list={[
+                  'absolute top-0 left-full z-10 -mt-px -ml-px',
+                  right(index),
+                ]}
               />
               <GridMark
-                class:list={['absolute top-full left-0 z-10', bottom(index)]}
+                class:list={[
+                  'absolute top-full left-0 z-10 -mt-px -ml-px',
+                  bottom(index),
+                ]}
               />
               {index === last && (
-                <GridMark class="absolute top-full left-full z-10" />
+                <GridMark class="absolute top-full left-full z-10 -mt-px -ml-px" />
               )}
-              <div aria-hidden="true" class="relative h-32 overflow-hidden">
-                <div class="absolute bottom-0 left-0 h-45 w-75 origin-bottom-left -translate-x-0.5 translate-y-px scale-70">
+              <div aria-hidden="true" class="relative h-30 overflow-hidden">
+                <div class="absolute bottom-0 left-0 h-45 w-75 origin-bottom-left -translate-x-0.5 translate-y-px scale-60">
                   <Art />
                 </div>
               </div>
