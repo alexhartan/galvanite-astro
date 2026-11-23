@@ -28,16 +28,18 @@ const reveal = {
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 overflow-x-clip text-white"
+  class="scroll-mt-nav relative z-10 overflow-x-clip pt-40 text-white lg:pt-56"
 >
-  <SectionFrame inverted />
-  <div data-guide class="relative border-t border-white/10">
-    <Container class="py-40 lg:py-56">
+  <SectionFrame inverted top={false} />
+  <Container>
+    <h2 class="text-section pb-6">{heading}</h2>
+  </Container>
+  <div data-guide class="relative">
+    <Container class="pb-40 lg:pb-56">
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <h3 class="text-section mt-40 lg:mt-56">{heading}</h3>
-      <div data-self-check class="relative mt-6">
+      <div data-self-check class="relative">
         <div
           aria-hidden="true"
           class="bg-space-950/50 backdrop-blur-bar absolute inset-0 border-x border-white/10"
