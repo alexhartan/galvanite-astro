@@ -163,6 +163,16 @@
   }
 }
 
+@utility reveal-fade {
+  transition: opacity 0.8s var(--ease-out-soft) calc(var(--delay, 0ms) + 0.9s);
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal-state='hidden'] & {
+      opacity: 0;
+      transition: none;
+    }
+  }
+}
+
 @utility reveal-after {
   [data-reveal-state='hidden'] &,
   [data-reveal-state='shown'] & {
