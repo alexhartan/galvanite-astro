@@ -1,6 +1,6 @@
 const DONE_MS = 2200;
 
-export function initImageReveal(root: HTMLElement) {
+export function initImageReveal(root: HTMLElement, bottomMargin = '-40%') {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (root.getBoundingClientRect().top < window.innerHeight) return;
   root.dataset.revealState = 'hidden';
@@ -11,7 +11,7 @@ export function initImageReveal(root: HTMLElement) {
       setTimeout(() => (root.dataset.revealState = 'done'), DONE_MS);
       observer.disconnect();
     },
-    { rootMargin: '0px 0px -40% 0px' },
+    { rootMargin: `0px 0px ${bottomMargin} 0px` },
   );
   observer.observe(root);
 }
