@@ -19,10 +19,9 @@ const checks = (await getCollection('checks')).sort(
   id={id}
   aria-labelledby={`${id}-heading`}
   data-tone="light"
-  class="scroll-mt-nav relative z-10 overflow-x-clip"
+  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <Container class="pointer-events-none absolute inset-0">
-    <div class="bleed-l absolute inset-y-0 right-6 bg-white"></div>
     <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
     <div class="bg-ink/10 absolute inset-y-0 right-6 w-px"></div>
     <GridMark class="absolute top-0 left-6" />

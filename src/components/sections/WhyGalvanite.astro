@@ -64,13 +64,12 @@ const bottom = (index: number) => [
   id={id}
   aria-labelledby={`${id}-heading`}
   data-tone="light"
-  class="scroll-mt-nav relative z-10 overflow-clip pt-40 pb-40 lg:pt-56 lg:pb-56"
+  class="scroll-mt-nav relative z-10 overflow-clip bg-white pt-40 pb-40 lg:pt-56 lg:pb-56"
 >
   <Container class="pointer-events-none absolute inset-0">
-    <div class="bleed-l absolute inset-y-0 right-6 bg-white"></div>
     <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
   </Container>
-  <Container class="relative @container">
+  <Container class="@container">
     <h2
       id={`${id}-heading`}
       class="text-intent lg:text-intent-lg 4xl:text-intent-xl text-ocean text-center leading-none font-light text-balance"
