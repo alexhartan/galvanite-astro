@@ -33,6 +33,21 @@ const right = (index: number) => [
   index % 2 === 1 ? 'sm:block' : 'sm:hidden',
   index % 3 === 2 ? 'lg:block' : 'lg:hidden',
 ];
+const edge = (index: number) => [
+  index === 0 ? 'block' : 'hidden',
+  index === 1 ? 'sm:block' : 'sm:hidden',
+  index === 2 ? 'lg:block' : 'lg:hidden',
+];
+const left = (index: number) => [
+  'border-l-0',
+  index % 2 === 0 ? 'sm:border-l-0' : 'sm:border-l',
+  index % 3 === 0 ? 'lg:border-l-0' : 'lg:border-l',
+];
+const shift = (index: number) => [
+  'ml-0',
+  index % 2 === 0 ? 'sm:ml-0' : 'sm:-ml-px',
+  index % 3 === 0 ? 'lg:ml-0' : 'lg:-ml-px',
+];
 const first = (index: number) => [
   index === 0 ? 'border-t-0' : '',
   index < 2 ? 'sm:border-t-0' : 'sm:border-t',
@@ -49,11 +64,10 @@ const bottom = (index: number) => [
   id={id}
   aria-labelledby={`${id}-heading`}
   data-tone="light"
-  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white pt-40 pb-40 lg:pt-56 lg:pb-56"
+  class="scroll-mt-nav relative z-10 overflow-clip bg-white pt-40 pb-40 lg:pt-56 lg:pb-56"
 >
   <Container class="pointer-events-none absolute inset-0">
     <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
-    <div class="bg-ink/10 absolute inset-y-0 right-6 w-px"></div>
   </Container>
   <Container class="@container">
     <h2
@@ -74,13 +88,14 @@ const bottom = (index: number) => [
               class:list={[
                 'group border-ink/10 relative flex flex-col border-t border-l pb-14',
                 first(index),
+                left(index),
               ]}
             >
               <div
                 aria-hidden="true"
                 class:list={[
-                  'border-ink/10 pointer-events-none absolute inset-y-0 right-0 border-r',
-                  right(index),
+                  'bg-ink/10 bleed-y pointer-events-none absolute right-0 w-px',
+                  edge(index),
                 ]}
               />
               <div
@@ -100,7 +115,9 @@ const bottom = (index: number) => [
               >
                 <div class="bg-signal ease-out-soft absolute inset-x-0 bottom-0 h-1 translate-y-full mix-blend-multiply transition-transform duration-500 group-hover:translate-y-0 motion-reduce:transition-none" />
               </div>
-              <GridMark class="absolute top-0 left-0 z-10 -mt-px -ml-px" />
+              <GridMark
+                class:list={['absolute top-0 left-0 z-10 -mt-px', shift(index)]}
+              />
               <GridMark
                 class:list={[
                   'absolute top-0 left-full z-10 -mt-px -ml-px',
@@ -109,7 +126,8 @@ const bottom = (index: number) => [
               />
               <GridMark
                 class:list={[
-                  'absolute top-full left-0 z-10 -mt-px -ml-px',
+                  'absolute top-full left-0 z-10 -mt-px',
+                  shift(index),
                   bottom(index),
                 ]}
               />

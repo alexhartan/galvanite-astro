@@ -348,6 +348,11 @@
   }
 }
 
+@utility bleed-y {
+  top: -300vh;
+  bottom: -300vh;
+}
+
 @utility bleed-r {
   right: -100vw;
 }
