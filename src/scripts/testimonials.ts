@@ -6,73 +6,41 @@ const WHEEL_PX = 40;
 const WHEEL_LOCK_MS = 700;
 
 export function initTestimonials(root: HTMLElement) {
-  const cards = [...root.querySelectorAll<HTMLElement>('[data-card]')];
-  const total = cards.length;
-  if (total < 2) return;
+  const pages = [...root.querySelectorAll<HTMLElement>('[data-page]')];
+  const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
+  const next = root.querySelector<HTMLButtonElement>('[data-next]');
+  if (!prev || !next || pages.length < 2) return;
   let current = 0;
-  const position = (index: number) => {
-    const offset = (index - current + total) % total;
-    if (offset === 0) return 'active';
-    if (offset === 1) return 'next';
-    if (offset === total - 1) return 'prev';
-    return 'hidden';
-  };
   const show = (index: number) => {
-    current = (index + total) % total;
-    cards.forEach((card, i) => {
-      const pos = position(i);
-      card.dataset.pos = pos;
-      card.inert = pos === 'hidden';
-      const content = card.querySelector<HTMLElement>('[data-content]');
-      if (content) content.inert = pos !== 'active';
-      const go = card.querySelector<HTMLButtonElement>('[data-go]');
-      if (!go) return;
-      go.hidden = pos !== 'prev' && pos !== 'next';
-      go.setAttribute(
-        'aria-label',
-        pos === 'prev' ? 'Previous testimonial' : 'Next testimonial',
-      );
+    current = (index + pages.length) % pages.length;
+    pages.forEach((page, i) => {
+      page.toggleAttribute('data-active', i === current);
+      page.inert = i !== current;
     });
     restart();
   };
   const restart = autoplay(root, AUTOPLAY_MS, () => show(current + 1));
-  cards.forEach((card) =>
-    card.querySelector('[data-go]')?.addEventListener('click', () => {
-      if (card.dataset.pos === 'prev') show(current - 1);
-      if (card.dataset.pos === 'next') show(current + 1);
-    }),
-  );
+  prev.addEventListener('click', () => show(current - 1));
+  next.addEventListener('click', () => show(current + 1));
+  const track = pages[0]?.parentElement;
   let startX = 0;
   let startY = 0;
-  let swiped = false;
-  root.addEventListener('pointerdown', (event) => {
+  track?.addEventListener('pointerdown', (event) => {
     startX = event.clientX;
     startY = event.clientY;
-    swiped = false;
   });
-  root.addEventListener('pointerup', (event) => {
+  track?.addEventListener('pointerup', (event) => {
     const dx = event.clientX - startX;
     if (
       Math.abs(dx) < SWIPE_PX ||
       Math.abs(dx) < Math.abs(event.clientY - startY)
     )
       return;
-    swiped = true;
     show(current + (dx < 0 ? 1 : -1));
   });
-  root.addEventListener(
-    'click',
-    (event) => {
-      if (!swiped) return;
-      event.stopPropagation();
-      event.preventDefault();
-      swiped = false;
-    },
-    true,
-  );
   let wheel = 0;
   let locked = 0;
-  root.addEventListener(
+  track?.addEventListener(
     'wheel',
     (event) => {
       if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;

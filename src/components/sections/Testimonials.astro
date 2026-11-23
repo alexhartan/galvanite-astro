@@ -1,10 +1,12 @@
 ---
+import CtaButton from '../ui/CtaButton.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import ArrowIcon from '../ui/ArrowIcon.astro';
 import Container from '../ui/Container.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import LogoMarquee from '../ui/LogoMarquee.astro';
-import SectionFrame from '../ui/SectionFrame.astro';
 
 interface Props {
   id?: string;
@@ -15,94 +17,108 @@ const { id = 'testimonials', label, heading } = Astro.props;
 const testimonials = (await getCollection('testimonials')).sort(
   (a, b) => a.data.order - b.data.order,
 );
-const total = testimonials.length;
-const position = (index: number) =>
-  index === 0
-    ? 'active'
-    : index === 1
-      ? 'next'
-      : index === total - 1
-        ? 'prev'
-        : 'hidden';
-const side = (index: number) => ['prev', 'next'].includes(position(index));
+const pages = Array.from(
+  { length: Math.ceil(testimonials.length / 2) },
+  (_, index) => testimonials.slice(index * 2, index * 2 + 2),
+);
+const icon =
+  'opacity-80 transition-opacity duration-200 ease-out-soft group-hover:opacity-100';
+const arrow =
+  'group relative flex size-8 cursor-pointer items-center justify-center border border-white/10 text-sky before:absolute before:-inset-1.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white';
 ---
 
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 overflow-x-clip pb-40 text-white lg:pb-56"
+  class="scroll-mt-nav relative z-10 overflow-x-clip text-white"
 >
   <SectionFrame inverted />
   <div data-guide class="relative border-t border-white/10">
-    <Container>
+    <Container class="@container">
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <h3 class="text-section mt-40 text-center lg:mt-56">{heading}</h3>
       <div
         data-testimonials
         role="region"
         aria-roledescription="carousel"
         aria-label="Testimonials"
-        class="mt-14 grid touch-pan-y justify-items-center select-none"
       >
-        {testimonials.map(({ data }, index) => (
-          <figure
-            data-card
-            data-pos={position(index)}
-            role="group"
-            aria-roledescription="slide"
-            aria-label={`${index + 1} of ${total}`}
-            inert={position(index) === 'hidden'}
-            class="card-edge ease-out-soft card-active:z-20 card-side:z-10 card-side:scale-80 card-side:opacity-60 card-next:translate-x-1/5 card-prev:-translate-x-1/5 card-hidden:scale-60 card-hidden:opacity-0 relative col-start-1 row-start-1 w-full max-w-2xl self-center transition duration-700 motion-reduce:transition-none"
-          >
-            <div
-              aria-hidden="true"
-              class="bg-signal in-card-side:opacity-0 absolute inset-x-0 -top-px h-1 transition-opacity duration-700"
-            />
-            <div
-              data-content
-              inert={index !== 0}
-              class="ease-out-soft in-card-side:opacity-0 px-8 pt-14 pb-12 transition-opacity duration-700 sm:px-14"
-            >
-              <blockquote class="text-frost text-lg font-extralight text-balance">
-                <p>{data.quote}</p>
-              </blockquote>
-              <figcaption class="mt-12 flex items-center gap-4">
-                <Image
-                  src={data.photo}
-                  alt=""
-                  width={36}
-                  height={36}
-                  densities={[1, 2]}
-                  format="webp"
-                  class="size-9 object-cover"
-                />
-                <div>
-                  <p class="text-sm font-semibold tracking-wider uppercase">
-                    {data.name}
-                  </p>
-                  <p class="text-sky text-tag mt-1 tracking-wider uppercase">
-                    {data.role}
-                  </p>
-                </div>
-              </figcaption>
-            </div>
+        <div class="mt-40 flex items-end justify-between gap-6 pb-6 lg:mt-56">
+          <h3 class="text-section">{heading}</h3>
+          <div class="-mb-6 flex shrink-0">
             <button
               type="button"
-              data-go
-              hidden={!side(index)}
-              aria-label={
-                position(index) === 'prev'
-                  ? 'Previous testimonial'
-                  : 'Next testimonial'
-              }
-              class="absolute inset-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-            />
-          </figure>
-        ))}
+              data-prev
+              aria-label="Previous testimonial"
+              class={arrow}
+            >
+              <ArrowIcon class:list={[icon, 'rotate-180']} />
+            </button>
+            <button
+              type="button"
+              data-next
+              aria-label="Next testimonial"
+              class:list={[arrow, '-ml-px']}
+            >
+              <ArrowIcon class={icon} />
+            </button>
+          </div>
+        </div>
+        <div class="relative border-t border-white/10">
+          <div class="grid touch-pan-y select-none">
+            {pages.map((page, index) => (
+              <div
+                data-page
+                data-active={index === 0 ? '' : undefined}
+                inert={index !== 0}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${index + 1} of ${pages.length}`}
+                class="ease-out-soft invisible col-start-1 row-start-1 grid opacity-0 transition-[opacity,visibility] duration-700 data-active:visible data-active:opacity-100 lg:grid-cols-2"
+              >
+                {page.map(({ data }) => (
+                  <figure class="group ease-out-soft pt-12 pr-10 transition-opacity duration-300 pointer-fine:opacity-90 pointer-fine:hover:opacity-100 lg:pr-16">
+                    <blockquote class="text-frost text-lg font-extralight text-balance">
+                      <p>{data.quote}</p>
+                    </blockquote>
+                    <figcaption class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-6">
+                      <Image
+                        src={data.photo}
+                        alt=""
+                        width={44}
+                        height={44}
+                        densities={[1, 2]}
+                        format="webp"
+                        class="size-11 object-cover"
+                      />
+                      <div class="flex-1">
+                        <p class="text-sm font-semibold tracking-wider uppercase">
+                          {data.name}
+                        </p>
+                        <p class="text-sky text-tag mt-1 tracking-wider uppercase">
+                          {data.role}
+                        </p>
+                      </div>
+                      {data.caseStudyHref && (
+                        <CtaButton
+                          href={data.caseStudyHref}
+                          variant="secondary"
+                          link="h-11 px-8 text-sm"
+                          class="ease-out-soft relative transition-opacity duration-300 lg:opacity-0 lg:group-focus-within:opacity-100 lg:group-hover:opacity-100"
+                        >
+                          Read Case Study
+                        </CtaButton>
+                      )}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      <div class="mt-16 opacity-70">
+      <div class="mt-24 pb-48 opacity-70 lg:mt-32 lg:pb-56">
         <LogoMarquee class="mask-fade-x overflow-clip" />
       </div>
     </Container>
