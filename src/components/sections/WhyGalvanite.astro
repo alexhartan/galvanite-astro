@@ -72,7 +72,7 @@ const bottom = (index: number) => [
           return (
             <article
               class:list={[
-                'group border-ink/10 hover:bg-navy/3 ease-out-soft relative flex flex-col border-t border-l pb-14 transition-colors duration-300',
+                'group border-ink/10 relative flex flex-col border-t border-l pb-14',
                 first(index),
               ]}
             >
@@ -90,6 +90,16 @@ const bottom = (index: number) => [
                   bottom(index),
                 ]}
               />
+              <div
+                aria-hidden="true"
+                class="from-navy/3 to-navy/0 ease-out-soft pointer-events-none absolute inset-0 bg-linear-to-b opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              />
+              <div
+                aria-hidden="true"
+                class="pointer-events-none absolute inset-0 overflow-clip"
+              >
+                <div class="bg-signal ease-out-soft absolute inset-x-0 bottom-0 h-1 translate-y-full mix-blend-multiply transition-transform duration-500 group-hover:translate-y-0 motion-reduce:transition-none" />
+              </div>
               <GridMark class="absolute top-0 left-0 z-10 -mt-px -ml-px" />
               <GridMark
                 class:list={[

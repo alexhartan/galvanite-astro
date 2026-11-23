@@ -38,7 +38,7 @@
   --text-intent--letter-spacing: -0.035em;
   --text-intent-lg: calc(71.25cqi / 14.3882);
   --text-intent-lg--letter-spacing: -0.04em;
-  --text-intent-xl: calc(79.8cqi / 14.3882);
+  --text-intent-xl: calc(78cqi / 15);
   --text-intent-xl--letter-spacing: -0.04em;
   --text-mission-xl: calc(84cqi / 14.3882);
   --text-mission-xl--line-height: 1.04;
