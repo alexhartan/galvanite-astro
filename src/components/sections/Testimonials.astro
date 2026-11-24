@@ -25,13 +25,13 @@ const pages = Array.from(
 const icon =
   'opacity-80 transition-opacity duration-200 ease-out-soft group-hover:opacity-100';
 const arrow =
-  'group relative flex size-8 cursor-pointer items-center justify-center border border-line-dark text-sky before:absolute before:-inset-1.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white';
+  'group relative flex size-8 cursor-pointer items-center justify-center border border-line-dark text-sky before:absolute before:-inset-1.5 focus-visible:outline-white focus-ring';
 ---
 
 <section
   id={id}
   aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 overflow-x-clip pt-40 text-white lg:pt-56"
+  class="scroll-mt-nav relative z-10 overflow-x-clip pt-section text-white"
 >
   <SectionFrame inverted top={false} />
   <div data-testimonials>
@@ -81,7 +81,7 @@ const arrow =
                 class="ease-out-soft invisible col-start-1 row-start-1 grid opacity-0 transition-[opacity,visibility] duration-700 data-active:visible data-active:opacity-100 lg:grid-cols-2"
               >
                 {page.map(({ data }) => (
-                  <figure class="group ease-out-soft pt-12 pr-10 transition-opacity duration-300 pointer-fine:opacity-90 pointer-fine:hover:opacity-100 lg:pr-16">
+                  <figure class="group pt-12 pr-10 transition-opacity pointer-fine:opacity-90 pointer-fine:hover:opacity-100 lg:pr-16 motion-ui">
                     <blockquote class="text-frost text-lg font-extralight text-balance">
                       <p>{data.quote}</p>
                     </blockquote>
@@ -108,7 +108,7 @@ const arrow =
                           href={data.caseStudyHref}
                           variant="secondary"
                           link="h-11 px-8 text-sm"
-                          class="ease-out-soft relative transition-opacity duration-300 lg:opacity-0 lg:group-focus-within:opacity-100 lg:group-hover:opacity-100"
+                          class="relative transition-opacity motion-ui reveal-on-hover"
                         >
                           Read Case Study
                         </CtaButton>

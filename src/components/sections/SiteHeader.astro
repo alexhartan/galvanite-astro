@@ -12,7 +12,7 @@ const { ctaHref = '#contact' } = Astro.props;
 
 <header
   data-nav
-  class="group pointer-events-none fixed inset-x-0 top-0 z-30 h-nav ease-out-soft border-b border-line-dark transition-colors duration-300 data-light:border-line pt-5.5"
+  class="group pointer-events-none fixed inset-x-0 top-0 z-30 h-nav border-b border-line-dark transition-colors data-light:border-line pt-5.5 motion-ui"
 >
   <div
     aria-hidden="true"
@@ -25,14 +25,14 @@ const { ctaHref = '#contact' } = Astro.props;
   </div>
   <div
     aria-hidden="true"
-    class="ease-out-soft absolute inset-0 -z-10 bg-white opacity-0 transition-opacity duration-300 group-data-light:opacity-100"
+    class="absolute inset-0 -z-10 bg-white opacity-0 transition-opacity group-data-light:opacity-100 motion-ui"
   ></div>
   <Container class="relative h-full">
     <a
       href={import.meta.env.BASE_URL}
       aria-label="Galvanite home"
       data-nav-logo
-      class="pointer-events-auto -m-0.5 inline-flex lg:-translate-x-10 size-11 items-center justify-center text-white transition-colors duration-300 ease-out-soft group-data-light:text-ink focus-visible:outline-current rounded-surface focus-visible:outline-2 focus-visible:outline-offset-2"
+      class="pointer-events-auto -m-0.5 inline-flex lg:-translate-x-10 size-11 items-center justify-center text-white transition-colors group-data-light:text-ink focus-visible:outline-current rounded-surface motion-ui focus-ring"
     >
       <Logo />
     </a>
@@ -45,7 +45,7 @@ const { ctaHref = '#contact' } = Astro.props;
     </CtaButton>
     <GridMark
       inverted
-      class="ease-out-soft group-data-light:text-ink/30 absolute top-full left-gutter transition-colors duration-300"
+      class="group-data-light:text-ink/30 absolute top-full left-gutter transition-colors motion-ui"
     />
   </Container>
 </header>

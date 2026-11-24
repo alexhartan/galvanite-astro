@@ -47,13 +47,13 @@ const checks = (await getCollection('checks')).sort(
           <ul class="grid gap-3 sm:grid-cols-2" role="list">
             {checks.map(({ id: key, data }) => (
               <li>
-                <label class="group border-line-control hover:border-glacier hover:bg-white has-checked:border-glacier has-checked:bg-glacier-tint issues-error:border-alert/60 ease-out-soft flex h-full cursor-pointer items-center gap-4 rounded-surface border bg-white px-4 py-5 transition-colors duration-300">
+                <label class="group border-line-control hover:border-glacier hover:bg-white has-checked:border-glacier has-checked:bg-glacier-tint issues-error:border-alert/60 flex h-full cursor-pointer items-center gap-4 rounded-surface border bg-white px-4 py-5 transition-colors motion-ui">
                   <span class="relative flex size-6 shrink-0">
                     <input
                       type="checkbox"
                       name="issues"
                       value={key}
-                      class="peer border-line-control group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean ease-out-soft size-6 cursor-pointer appearance-none rounded-control border-2 bg-white transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2"
+                      class="peer border-line-control group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean size-6 cursor-pointer appearance-none rounded-control border-2 bg-white transition-colors motion-ui focus-ring"
                     />
                     <svg
                       aria-hidden="true"
@@ -88,7 +88,7 @@ const checks = (await getCollection('checks')).sort(
             Please select at least one item from the list
           </p>
         </fieldset>
-        <div class="border-line-control hover:border-sky/50 focus-within:border-sky field-error:border-alert/60 ease-out-soft mt-5 flex flex-col gap-1.5 rounded-surface border bg-white p-1.5 transition-colors duration-300 sm:flex-row">
+        <div class="border-line-control hover:border-sky/50 focus-within:border-sky field-error:border-alert/60 mt-5 flex flex-col gap-1.5 rounded-surface border bg-white p-1.5 transition-colors sm:flex-row motion-ui">
           <label for={`${id}-url`} class="sr-only">
             Company website
           </label>
@@ -105,7 +105,7 @@ const checks = (await getCollection('checks')).sort(
           />
           <button
             type="submit"
-            class="bg-signal text-ink focus-visible:outline-ocean ease-out-soft min-h-11 cursor-pointer px-12 text-sm font-semibold transition-opacity duration-300 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2"
+            class="bg-signal text-ink focus-visible:outline-ocean min-h-11 cursor-pointer px-12 text-sm font-semibold transition-opacity hover:opacity-90 motion-ui focus-ring"
           >
             Get the Report
           </button>

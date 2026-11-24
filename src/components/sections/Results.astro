@@ -17,7 +17,7 @@ const {
   linkLabel = 'See Relevant Case Study',
 } = Astro.props;
 const motion =
-  'ease-out-soft transition duration-500 motion-reduce:transition-none';
+  'transition motion-slow';
 ---
 
 <section
@@ -104,7 +104,7 @@ const motion =
             </a>
             <span
               aria-hidden="true"
-              class="border-line-solid ease-out-soft pointer-events-none absolute top-0 -right-px bottom-0 left-0 z-10 border opacity-0 transition-opacity duration-300 peer-hover:opacity-100 peer-focus-visible:opacity-100"
+              class="border-line-solid pointer-events-none absolute top-0 -right-px bottom-0 left-0 z-10 border opacity-0 transition-opacity peer-hover:opacity-100 peer-focus-visible:opacity-100 motion-ui"
             ></span>
           </li>
         ))}

@@ -332,3 +332,75 @@
     1
   );
 }
+
+@utility motion-ui {
+  --tw-duration: 300ms;
+  --tw-ease: var(--ease-out-soft);
+  transition-duration: 300ms;
+  transition-timing-function: var(--ease-out-soft);
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0s;
+  }
+}
+
+@utility motion-slow {
+  --tw-duration: 500ms;
+  --tw-ease: var(--ease-out-soft);
+  transition-duration: 500ms;
+  transition-timing-function: var(--ease-out-soft);
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0s;
+  }
+}
+
+@utility focus-ring {
+  &:focus-visible {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-offset: 2px;
+  }
+}
+
+@utility caps {
+  --tw-tracking: var(--tracking-widest);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+}
+
+@utility reveal-on-hover {
+  @variant lg {
+    opacity: 0;
+    &:focus-within {
+      opacity: 1;
+    }
+    &:is(:where(.group):focus-within *) {
+      opacity: 1;
+    }
+    @media (hover: hover) {
+      &:is(:where(.group):hover *) {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@utility pt-section {
+  padding-top: --spacing(40);
+  @variant lg {
+    padding-top: --spacing(56);
+  }
+}
+
+@utility pb-section {
+  padding-bottom: --spacing(40);
+  @variant lg {
+    padding-bottom: --spacing(56);
+  }
+}
+
+@utility py-section {
+  padding-block: --spacing(40);
+  @variant lg {
+    padding-block: --spacing(56);
+  }
+}

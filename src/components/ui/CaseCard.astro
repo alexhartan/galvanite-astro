@@ -56,7 +56,7 @@ const Tag = data.href ? 'a' : 'div';
       </div>
     </div>
     <div class="relative">
-      <p class="relative text-ink/80 ease-out-soft flex items-center font-medium gap-2.5 px-3 py-3.5 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+      <p class="relative text-ink/80 flex items-center font-medium gap-2.5 px-3 py-3.5 opacity-90 transition-opacity group-hover:opacity-100 motion-ui">
         <span
           aria-hidden="true"
           class="bg-line absolute bottom-0 left-0 -right-12 h-px lg:-right-20"
@@ -69,7 +69,7 @@ const Tag = data.href ? 'a' : 'div';
               <span
                 data-active={i === 0 ? '' : undefined}
                 aria-hidden={i === 0 ? undefined : 'true'}
-                class="ease-out-soft col-start-1 row-start-1 translate-y-2 opacity-0 transition duration-500 data-active:translate-y-0 data-active:opacity-100 motion-reduce:translate-y-0"
+                class="col-start-1 row-start-1 translate-y-2 opacity-0 transition data-active:translate-y-0 data-active:opacity-100 motion-reduce:translate-y-0 motion-slow"
               >
                 <span class="font-semibold">
                   {cut ? stat.slice(0, cut) : stat}
@@ -83,12 +83,12 @@ const Tag = data.href ? 'a' : 'div';
       <div>
         <h4
           data-split
-          class="text-card text-ink ease-out-soft mt-3 font-normal text-balance opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+          class="text-card text-ink mt-3 font-normal text-balance opacity-90 transition-opacity group-hover:opacity-100 motion-ui"
         >
           {data.title}
         </h4>
         <ul
-          class="reveal-after ease-out-soft mt-4 flex -translate-y-2 flex-wrap gap-2 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0"
+          class="reveal-after mt-4 flex -translate-y-2 flex-wrap gap-2 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0 motion-slow"
           aria-label="Scope"
         >
           {data.scope.map((item) => (
