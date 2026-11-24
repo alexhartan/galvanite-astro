@@ -1,6 +1,5 @@
 ---
 title: 'Quotient AI: From rebrand to successful exit in under two months'
-client: QuotientAI
 order: 2
 scope: [Positioning, Full Website Revamp]
 image: ../../assets/case-studies/quotient.webp

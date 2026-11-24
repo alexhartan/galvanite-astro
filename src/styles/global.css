@@ -15,7 +15,6 @@
   --color-abyss: #04091b;
   --color-ocean-50: #ecf2f9;
   --color-azure-deep: #2e6aa3;
-  --color-deep-950: #0d1326;
   --color-navy: #000f40;
   --color-midnight: #1b2540;
   --color-glacier: #92c9eb;
@@ -37,7 +36,6 @@
   --text-display-half--line-height: 0.9;
   --text-display-half--letter-spacing: -0.04em;
   --text-mission: calc(75cqi / 14.3882);
-  --text-mission--line-height: 1.04;
   --text-mission--letter-spacing: -0.04em;
   --text-intent: clamp(1.9rem, 3.07vw, 3.68rem);
   --text-intent--letter-spacing: -0.035em;
@@ -46,7 +44,6 @@
   --text-intent-xl: calc(78cqi / 15);
   --text-intent-xl--letter-spacing: -0.04em;
   --text-mission-xl: calc(84cqi / 14.3882);
-  --text-mission-xl--line-height: 1.04;
   --text-mission-xl--letter-spacing: -0.04em;
   --text-statement: clamp(2rem, 3.23vw, 3.875rem);
   --text-statement--line-height: 1.113;
@@ -71,7 +68,6 @@
   --text-question--line-height: 1.35;
   --text-price-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
   --text-price-lg--line-height: 1;
-  --text-price-lg--letter-spacing: -0.015em;
   --text-stat: clamp(2.9rem, 3.6vw, 4.2rem);
   --text-stat--line-height: 1;
   --text-stat--letter-spacing: -0.04em;
@@ -100,7 +96,6 @@
   --container-mission: 14.5em;
 
   --spacing-nav: 5.5rem;
-  --spacing-display-baseline: calc(100% - 0.12em);
   --spacing-price: 2rem;
   --spacing-price-featured: calc(
     var(--spacing-price) - 0.84 * (var(--text-price-lg) - var(--text-price))
@@ -312,15 +307,6 @@
     text-decoration: underline;
     text-underline-offset: calc(var(--spacing) * 1);
   }
-}
-
-@utility bleed-y {
-  top: -300vh;
-  bottom: -300vh;
-}
-
-@utility bleed-r {
-  right: -100vw;
 }
 
 @utility bleed-x {

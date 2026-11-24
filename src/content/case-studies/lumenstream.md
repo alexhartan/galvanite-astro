@@ -1,6 +1,5 @@
 ---
 title: Building trust around an innovative business model
-client: LumenStream
 order: 3
 scope: [Positioning, Identity Design, Full Website Revamp, Marketing Kit]
 image: ../../assets/case-studies/lumenstream.jpg
