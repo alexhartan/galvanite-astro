@@ -1,10 +1,11 @@
+import { reducedMotion } from './env';
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
 const OMEGA = 5;
 
 export function initReveal(element: HTMLElement) {
   const section = element.closest('section');
   if (!section) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (reducedMotion.matches) return;
   let target = 0;
   let position = 0;
   let velocity = 0;

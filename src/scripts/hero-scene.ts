@@ -1,4 +1,5 @@
 import savedCamera from './hero-camera.json';
+import { reducedMotion } from './env';
 import { FRAGMENT, VERTEX } from './hero-shader';
 
 const SMOOTHING_MS = 140;
@@ -178,7 +179,6 @@ export function initHeroScene(
   window_?: HTMLCanvasElement | null,
 ) {
   const mirror = window_ ? createMirror(canvas, window_) : null;
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let renderer: Renderer | null = null;
   let frameTotal = 0;
   const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };

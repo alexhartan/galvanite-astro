@@ -25,7 +25,7 @@ const {
   <SectionFrame />
   <div class="border-line relative overflow-clip border-t">
     <Container class="@container py-40 lg:py-60">
-      <div data-parallax class="translate-y-(--shift)">
+      <div data-parallax="0.25" class="translate-y-(--shift)">
         <SplitHeading
           id={`${id}-heading`}
           lead={lead}
@@ -43,11 +43,5 @@ const {
 </Section>
 
 <script>
-  import { initParallax } from '../../scripts/parallax';
-
-  for (const element of document.querySelectorAll<HTMLElement>(
-    '#contact [data-parallax]',
-  )) {
-    initParallax(element, 0.25);
-  }
+  import '../../scripts/parallax';
 </script>

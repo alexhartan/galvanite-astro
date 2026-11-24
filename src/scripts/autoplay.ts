@@ -1,9 +1,10 @@
+import { reducedMotion } from './env';
 export function autoplay(
   root: HTMLElement,
   delay: number,
   advance: () => void,
 ) {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduced = reducedMotion.matches;
   let timer = 0;
   let paused = false;
   let visible = false;

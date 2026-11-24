@@ -56,7 +56,7 @@ const tiers = {
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <div data-parallax class="translate-y-(--shift) pt-40 lg:pt-60">
+      <div data-parallax="0.125" class="translate-y-(--shift) pt-40 lg:pt-60">
         <SplitHeading
           as="h3"
           lead={heading}
@@ -163,11 +163,5 @@ const tiers = {
 </Section>
 
 <script>
-  import { initParallax } from '../../scripts/parallax';
-
-  for (const element of document.querySelectorAll<HTMLElement>(
-    '#engagements [data-parallax]',
-  )) {
-    initParallax(element, 0.125);
-  }
+  import '../../scripts/parallax';
 </script>

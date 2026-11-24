@@ -1,27 +1,20 @@
-export function initParallax(
-  element: HTMLElement,
-  rate: number,
-  fromEnter = false,
-) {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const frameElement = element.parentElement ?? element;
-  let frame = 0;
-  const update = () => {
-    frame = 0;
-    if (reduced.matches) {
+import { onScrollFrame, reducedMotion } from './env';
+
+for (const element of document.querySelectorAll<HTMLElement>(
+  '[data-parallax]',
+)) {
+  const rate = Number(element.dataset.parallax) || 0.25;
+  const fromEnter = element.dataset.parallaxFrom === 'enter';
+  const frame = element.parentElement ?? element;
+  onScrollFrame(() => {
+    if (reducedMotion.matches) {
       element.style.setProperty('--shift', '0px');
       return;
     }
-    const box = frameElement.getBoundingClientRect();
+    const box = frame.getBoundingClientRect();
     const offset = fromEnter
       ? Math.min(0, box.top - window.innerHeight) * rate
       : (box.top + box.height / 2 - window.innerHeight / 2) * rate;
     element.style.setProperty('--shift', `${(-offset).toFixed(1)}px`);
-  };
-  const schedule = () => {
-    frame ||= requestAnimationFrame(update);
-  };
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule, { passive: true });
-  update();
+  });
 }
