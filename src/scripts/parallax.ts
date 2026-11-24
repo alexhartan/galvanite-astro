@@ -1,4 +1,8 @@
-export function initParallax(element: HTMLElement, rate: number) {
+export function initParallax(
+  element: HTMLElement,
+  rate: number,
+  fromEnter = false,
+) {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const frameElement = element.parentElement ?? element;
   let frame = 0;
@@ -9,7 +13,9 @@ export function initParallax(element: HTMLElement, rate: number) {
       return;
     }
     const box = frameElement.getBoundingClientRect();
-    const offset = (box.top + box.height / 2 - window.innerHeight / 2) * rate;
+    const offset = fromEnter
+      ? Math.min(0, box.top - window.innerHeight) * rate
+      : (box.top + box.height / 2 - window.innerHeight / 2) * rate;
     element.style.setProperty('--shift', `${(-offset).toFixed(1)}px`);
   };
   const schedule = () => {
