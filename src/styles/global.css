@@ -22,6 +22,7 @@
   --color-alert: #d6455e;
   --color-glacier-tint: color-mix(in oklab, var(--color-glacier) 40%, white);
   --color-graphite: #1f2937;
+  --color-rule: color-mix(in srgb, var(--color-ink) 10%, white);
   --color-grid: color-mix(
     in srgb,
     var(--color-ink) calc(var(--grid-invert, 0) * 100%),
