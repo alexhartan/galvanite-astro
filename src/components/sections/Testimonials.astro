@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import ArrowIcon from '../ui/ArrowIcon.astro';
 import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import GridMark from '../ui/GridMark.astro';
@@ -28,11 +29,7 @@ const arrow =
   'group relative flex size-8 cursor-pointer items-center justify-center border border-line-dark text-sky before:absolute before:-inset-1.5 focus-visible:outline-white focus-ring';
 ---
 
-<section
-  id={id}
-  aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 overflow-x-clip pt-section text-white"
->
+<Section id={id} tone="dark" class="pt-section">
   <SectionFrame inverted top={false} />
   <div data-testimonials>
     <Container class="flex items-end justify-between gap-6 pb-6">
@@ -126,7 +123,7 @@ const arrow =
       </Container>
     </div>
   </div>
-</section>
+</Section>
 
 <script>
   import { initTestimonials } from '../../scripts/testimonials';

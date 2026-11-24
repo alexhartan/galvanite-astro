@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import ColumnLines from '../ui/ColumnLines.astro';
 import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import BuildArt from '../ui/art/BuildArt.astro';
 import ConsistencyArt from '../ui/art/ConsistencyArt.astro';
@@ -29,15 +31,8 @@ const art = {
 };
 ---
 
-<section
-  id={id}
-  aria-labelledby={`${id}-heading`}
-  data-tone="light"
-  class="scroll-mt-nav relative z-10 overflow-clip bg-white py-section"
->
-  <Container class="pointer-events-none absolute inset-0">
-    <div class="bg-line absolute inset-y-0 left-gutter w-px"></div>
-  </Container>
+<Section id={id} labelledby={`${id}-heading`} clip="all" class="py-section">
+  <SectionFrame edge={false} top={false} />
   <Container class="@container">
     <h2
       id={`${id}-heading`}
@@ -92,4 +87,4 @@ const art = {
       </div>
     </Container>
   </div>
-</section>
+</Section>

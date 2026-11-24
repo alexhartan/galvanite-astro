@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Container from '../ui/Container.astro';
-import GridMark from '../ui/GridMark.astro';
+import Section from '../ui/Section.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
 
 interface Props {
   id?: string;
@@ -15,18 +16,8 @@ const checks = (await getCollection('checks')).sort(
 );
 ---
 
-<section
-  id={id}
-  aria-labelledby={`${id}-heading`}
-  data-tone="light"
-  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
->
-  <Container class="pointer-events-none absolute inset-0">
-    <div class="bg-line absolute inset-y-0 left-gutter w-px"></div>
-    <div class="bg-line absolute inset-y-0 right-gutter w-px"></div>
-    <GridMark class="absolute top-0 left-gutter" />
-    <GridMark class="absolute top-0 right-gutter translate-x-1.25" />
-  </Container>
+<Section id={id} labelledby={`${id}-heading`}>
+  <SectionFrame edge="always" />
   <div
     data-guide
     class="border-line from-tint to-transparent relative border-t bg-linear-to-b"
@@ -121,7 +112,7 @@ const checks = (await getCollection('checks')).sort(
       </form>
     </Container>
   </div>
-</section>
+</Section>
 
 <script>
   import { initAssess } from '../../scripts/assess';

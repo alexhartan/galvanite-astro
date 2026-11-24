@@ -1,5 +1,8 @@
 ---
 import Container from '../ui/Container.astro';
+import SplitHeading from '../ui/SplitHeading.astro';
+import Section from '../ui/Section.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
 import ColumnLines from '../ui/ColumnLines.astro';
 
 interface Props {
@@ -20,20 +23,17 @@ const motion =
   'transition motion-slow';
 ---
 
-<section
-  id={id}
-  aria-labelledby={`${id}-heading`}
-  data-tone="light"
-  class="relative z-10 overflow-x-clip bg-white"
->
-  <Container class="pointer-events-none absolute inset-0">
-    <div class="bg-line pointer-events-none z-10 absolute inset-y-0 left-gutter w-px"></div>
-  </Container>
+<Section id={id} labelledby={`${id}-heading`}>
+  <SectionFrame class="z-10" edge={false} top={false} />
   <Container class="pt-36 pb-24 lg:pt-56 lg:pb-32 4xl:pt-24">
-    <h2 id={`${id}-heading`} class="text-section text-center">
-      <span class="text-sky block">{lead}</span>
-      <span class="text-ink block font-normal">{emphasis}</span>
-    </h2>
+    <SplitHeading
+      id={`${id}-heading`}
+      lead={lead}
+      emphasis={emphasis}
+      leadClass="text-sky block"
+      emphasisClass="text-ink block font-normal"
+      class="text-section text-center"
+    />
     <div data-results class="relative mt-9 lg:mt-11">
       <div
         aria-hidden="true"
@@ -111,7 +111,7 @@ const motion =
       </ul>
     </div>
   </Container>
-</section>
+</Section>
 
 <script>
   import { initImageReveal } from '../../scripts/image-reveal';

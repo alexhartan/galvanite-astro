@@ -5,28 +5,34 @@ import GridMark from './GridMark.astro';
 interface Props {
   inverted?: boolean;
   bottom?: boolean;
-  edge?: boolean;
+  edge?: boolean | 'always';
   top?: boolean;
+  class?: string;
 }
 const {
   inverted = false,
   bottom = false,
   edge = true,
   top = true,
+  class: className,
 } = Astro.props;
 const line = inverted ? 'bg-line-dark' : 'bg-line';
-const right = edge ? '3xl:block lg:hidden' : 'hidden';
+const right = {
+  always: '',
+  true: '3xl:block lg:hidden',
+  false: 'hidden',
+}[String(edge) as 'always' | 'true' | 'false'];
 ---
 
-<Container class="pointer-events-none absolute inset-0">
-  <div class:list={['absolute inset-y-0 left-gutter w-px', line]}></div>
-  <div class:list={[right, 'absolute inset-y-0 right-gutter w-px', line]}></div>
+<Container class:list={['pointer-events-none absolute inset-0', className]}>
+  <div class:list={['left-gutter absolute inset-y-0 w-px', line]}></div>
+  <div class:list={[right, 'right-gutter absolute inset-y-0 w-px', line]}></div>
   {top && (
     <>
-      <GridMark inverted={inverted} class="absolute top-0 left-gutter" />
+      <GridMark inverted={inverted} class="left-gutter absolute top-0" />
       <GridMark
         inverted={inverted}
-        class:list={[right, 'absolute top-0 right-gutter translate-x-1.25']}
+        class:list={[right, 'right-gutter absolute top-0 translate-x-1.25']}
       />
     </>
   )}
@@ -34,13 +40,13 @@ const right = edge ? '3xl:block lg:hidden' : 'hidden';
     <>
       <GridMark
         inverted={inverted}
-        class="absolute bottom-0 left-gutter translate-y-1.25"
+        class="left-gutter absolute bottom-0 translate-y-1.25"
       />
       <GridMark
         inverted={inverted}
         class:list={[
           right,
-          'absolute right-gutter bottom-0 translate-x-1.25 translate-y-1.25',
+          'right-gutter absolute bottom-0 translate-x-1.25 translate-y-1.25',
         ]}
       />
     </>

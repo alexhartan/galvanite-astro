@@ -7,6 +7,7 @@ interface Props {
   large?: boolean;
 }
 const { class: className, large = false } = Astro.props;
+const size = large ? { height: 90, class: 'h-22.5 w-auto' } : { height: 80, class: 'h-20 w-auto' };
 const clients = (
   await getCollection('clients', ({ data }) => !data.hidden)
 ).sort((a, b) => a.data.order - b.data.order);
@@ -31,9 +32,9 @@ const clients = (
             <Image
               src={data.logo}
               alt={copy === 0 ? data.name : ''}
-              height={large ? 90 : 80}
+              height={size.height}
               densities={[1, 2]}
-              class={large ? 'h-22.5 w-auto' : 'h-20 w-auto'}
+              class={size.class}
             />
           </li>
         ))}

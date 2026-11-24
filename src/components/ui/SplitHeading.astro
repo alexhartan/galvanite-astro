@@ -1,0 +1,30 @@
+---
+interface Props {
+  as?: 'h1' | 'h2' | 'h3';
+  id?: string;
+  lead: string;
+  emphasis?: string;
+  class?: string;
+  leadClass?: string;
+  emphasisClass?: string;
+}
+const {
+  as: Tag = 'h2',
+  id,
+  lead,
+  emphasis,
+  class: className,
+  leadClass,
+  emphasisClass,
+} = Astro.props;
+---
+
+<Tag id={id} class={className}>
+  {leadClass ? <span class={leadClass}>{lead}</span> : lead}
+  {emphasis && (
+    <>
+      {' '}
+      <strong class={emphasisClass}>{emphasis}</strong>
+    </>
+  )}
+</Tag>

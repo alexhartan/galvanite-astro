@@ -1,5 +1,6 @@
 ---
 import Container from '../ui/Container.astro';
+import SplitHeading from '../ui/SplitHeading.astro';
 import LogoMarquee from '../ui/LogoMarquee.astro';
 
 interface Props {
@@ -32,9 +33,13 @@ const { eyebrow, lead, emphasis, description } = Astro.props;
         <p class="text-sky mb-3.5 text-2xs leading-snug font-semibold lg:mb-4 caps">
           {eyebrow}
         </p>
-        <h1 class="max-w-headline text-display lg:text-display-half 4xl:text-display-hero relative font-extralight text-white">
-          {lead} <strong class="font-semibold">{emphasis}</strong>
-        </h1>
+        <SplitHeading
+          as="h1"
+          lead={lead}
+          emphasis={emphasis}
+          emphasisClass="font-semibold"
+          class="max-w-headline text-display lg:text-display-half 4xl:text-display-hero relative font-extralight text-white"
+        />
         <p class="max-w-lead text-lead lg:max-w-lead-hero lg:text-lead-hero 4xl:text-lead-hero-xl mt-6 text-white/85 lg:mt-4.5">
           {description}
         </p>
