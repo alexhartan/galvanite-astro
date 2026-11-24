@@ -27,37 +27,8 @@ const art = {
   process: ProcessArt,
   tools: ToolsArt,
 };
-const last = benefits.length - 1;
-const right = (index: number) => [
-  'block',
-  index % 2 === 1 ? 'sm:block' : 'sm:hidden',
-  index % 3 === 2 ? 'lg:block' : 'lg:hidden',
-];
-const edge = (index: number) => [
-  index === 0 ? 'block' : 'hidden',
-  index === 1 ? 'sm:block' : 'sm:hidden',
-  index === 2 ? 'lg:block' : 'lg:hidden',
-];
-const left = (index: number) => [
-  'border-l-0',
-  index % 2 === 0 ? 'sm:border-l-0' : 'sm:border-l',
-  index % 3 === 0 ? 'lg:border-l-0' : 'lg:border-l',
-];
-const shift = (index: number) => [
-  'ml-0',
-  index % 2 === 0 ? 'sm:ml-0' : 'sm:-ml-px',
-  index % 3 === 0 ? 'lg:ml-0' : 'lg:-ml-px',
-];
-const first = (index: number) => [
-  index === 0 ? 'border-t-0' : '',
-  index < 2 ? 'sm:border-t-0' : 'sm:border-t',
-  index < 3 ? 'lg:border-t-0' : 'lg:border-t',
-];
-const bottom = (index: number) => [
-  index === last ? 'block' : 'hidden',
-  index >= last - 1 ? 'sm:block' : 'sm:hidden',
-  index >= last - 2 ? 'lg:block' : 'lg:hidden',
-];
+const fade =
+  'from-ink/10 to-ink/0 absolute inset-y-0 w-px bg-linear-to-b from-50%';
 ---
 
 <section
@@ -80,34 +51,29 @@ const bottom = (index: number) => [
   <div data-guide class="border-ink/10 relative mt-6 border-t">
     <Container>
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3">
-        {benefits.map(({ data }, index) => {
+      <div class="relative grid sm:grid-cols-2 lg:grid-cols-3">
+        <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+          <div class:list={[fade, 'left-full']} />
+          <div class:list={[fade, 'left-1/2 hidden sm:block lg:hidden']} />
+          <div class:list={[fade, 'left-1/3 hidden lg:block']} />
+          <div class:list={[fade, 'left-2/3 hidden lg:block']} />
+          <GridMark class="absolute top-0 left-0 z-10 -mt-px" />
+          <GridMark class="absolute top-0 left-1/2 z-10 -mt-px hidden sm:block lg:hidden" />
+          <GridMark class="absolute top-0 left-1/3 z-10 -mt-px hidden lg:block" />
+          <GridMark class="absolute top-0 left-2/3 z-10 -mt-px hidden lg:block" />
+          <GridMark class="absolute top-0 left-full z-10 -mt-px" />
+        </div>
+        {benefits.map(({ data }) => {
           const Art = art[data.art];
           return (
-            <article
-              class:list={[
-                'group border-ink/10 relative flex flex-col border-t border-l pb-10',
-                first(index),
-                left(index),
-              ]}
-            >
-              <div
-                aria-hidden="true"
-                class:list={[
-                  'bg-ink/10 bleed-y pointer-events-none absolute right-0 w-px',
-                  edge(index),
-                ]}
-              />
-              <div
-                aria-hidden="true"
-                class:list={[
-                  'border-ink/10 pointer-events-none absolute inset-x-0 bottom-0 border-b',
-                  bottom(index),
-                ]}
-              />
+            <article class="group relative flex flex-col pb-10">
               <div
                 aria-hidden="true"
                 class="from-navy/3 to-navy/0 ease-out-soft pointer-events-none absolute inset-0 bg-linear-to-b opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              />
+              <div
+                aria-hidden="true"
+                class="border-rule ease-out-soft pointer-events-none absolute -top-px -right-px bottom-0 left-0 border opacity-0 transition-opacity duration-300 group-hover:opacity-100"
               />
               <div
                 aria-hidden="true"
@@ -115,25 +81,6 @@ const bottom = (index: number) => [
               >
                 <div class="bg-signal ease-out-soft absolute inset-x-0 bottom-0 h-1 translate-y-full mix-blend-multiply transition-transform duration-500 group-hover:translate-y-0 motion-reduce:transition-none" />
               </div>
-              <GridMark
-                class:list={['absolute top-0 left-0 z-10 -mt-px', shift(index)]}
-              />
-              <GridMark
-                class:list={[
-                  'absolute top-0 left-full z-10 -mt-px -ml-px',
-                  right(index),
-                ]}
-              />
-              <GridMark
-                class:list={[
-                  'absolute top-full left-0 z-10 -mt-px',
-                  shift(index),
-                  bottom(index),
-                ]}
-              />
-              {index === last && (
-                <GridMark class="absolute top-full left-full z-10 -mt-px -ml-px" />
-              )}
               <div aria-hidden="true" class="relative h-30 overflow-hidden">
                 <div class="absolute bottom-0 left-0 h-45 w-75 origin-bottom-left -translate-x-0.5 translate-y-px scale-60">
                   <Art />
