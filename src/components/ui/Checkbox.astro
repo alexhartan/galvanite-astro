@@ -1,0 +1,32 @@
+---
+interface Props {
+  name: string;
+  value: string;
+}
+const { name, value } = Astro.props;
+---
+
+<span class="relative flex size-6 shrink-0">
+  <input
+    type="checkbox"
+    name={name}
+    value={value}
+    class="peer border-line-control group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean rounded-control motion-ui focus-ring size-6 cursor-pointer appearance-none border-2 bg-white transition-colors"
+  />
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="text-azure-deep pointer-events-none absolute inset-0"
+  >
+    <path
+      d="M6 12.5l4 4 8-9"
+      pathLength="1"
+      class="dash-hidden group-has-checked:dash-shown"
+    />
+  </svg>
+</span>
