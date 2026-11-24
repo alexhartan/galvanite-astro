@@ -24,11 +24,11 @@ const cases = (await getCollection('caseStudies')).sort(
   class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <SectionFrame edge={false} />
-  <div data-guide class="border-ink/10 relative border-t pb-32 lg:pb-48">
+  <div data-guide class="border-ink/10 relative border-t pb-72 lg:pb-112">
     <Container class="max-lg:pt-12">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
     </Container>
-    <div data-case-marquee class="max-4xl:top-nav max-4xl:sticky">
+    <div data-case-marquee data-parallax class="translate-y-(--shift)">
       <Container class="@container">
         <div class="clip-left">
           <div
@@ -49,13 +49,13 @@ const cases = (await getCollection('caseStudies')).sort(
         </div>
       </Container>
     </div>
-    <div aria-hidden="true" class="4xl:hidden h-40 lg:h-64"></div>
   </div>
 </section>
 
 <script>
   import { initImageReveal } from '../../scripts/image-reveal';
   import { initMarquee } from '../../scripts/marquee';
+  import { initParallax } from '../../scripts/parallax';
   import { initRotator } from '../../scripts/rotator';
   import { splitLines } from '../../scripts/split-lines';
 
@@ -70,5 +70,6 @@ const cases = (await getCollection('caseStudies')).sort(
       .forEach((el) => initRotator(el));
     initMarquee(root);
     initImageReveal(root);
+    initParallax(root, 0.2, true);
   }
 </script>
