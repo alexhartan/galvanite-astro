@@ -63,10 +63,6 @@ const motion =
       {marks.map((mark) => (
         <GridMark class:list={['absolute top-0 z-20', mark]} />
       ))}
-      <div
-        aria-hidden="true"
-        class="kpi-bar bg-signal mix-blend-multiply pointer-events-none absolute inset-x-0 bottom-0 z-20 hidden h-1 sm:pointer-fine:block"
-      ></div>
       <ul role="list" class="grid sm:grid-cols-3">
         {stats.map(({ value, label, href }, index) => (
           <li class="relative" style={`--delay: ${index * 150}ms`}>
@@ -115,7 +111,7 @@ const motion =
               <span
                 aria-hidden="true"
                 class:list={[
-                  'bg-signal mix-blend-multiply absolute right-0 bottom-0 left-8 h-1 sm:pointer-fine:hidden pointer-fine:translate-y-full pointer-fine:group-hover:translate-y-0 pointer-fine:group-focus-visible:translate-y-0 lg:left-14',
+                  'bg-signal mix-blend-multiply absolute right-0 bottom-0 left-8 h-1 pointer-fine:translate-y-full pointer-fine:group-hover:translate-y-0 pointer-fine:group-focus-visible:translate-y-0 lg:left-14',
                   motion,
                 ]}
               ></span>
