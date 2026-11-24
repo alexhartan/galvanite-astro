@@ -4,26 +4,7 @@ import CameraLab from '../components/ui/CameraLab.astro';
 import Hero from '../components/sections/Hero.astro';
 import Intro from '../components/sections/Intro.astro';
 import SiteHeader from '../components/sections/SiteHeader.astro';
-
-const hero = {
-  eyebrow: 'For early stage data/AI companies',
-  lead: 'We make highly technical products',
-  emphasis: 'feel inevitable',
-  description:
-    'A lean creative studio focused on making technical products clear, compelling and easy to choose.',
-};
-const mission = {
-  label: 'Our mission',
-  statement: [
-    { text: 'We make complex products easy to ' },
-    { text: 'understand', strong: true },
-    { text: ', ' },
-    { text: 'recognize', strong: true },
-    { text: ' and ' },
-    { text: 'choose', strong: true },
-    { text: ' through memorable branding and digital experiences.' },
-  ],
-};
+import { hero, label, mission } from '../data/home';
 ---
 
 <BaseLayout
@@ -33,6 +14,6 @@ const mission = {
 >
   <SiteHeader slot="header" />
   <Hero {...hero} />
-  <Intro {...mission} />
+  <Intro label={label('intro')} {...mission} />
   <CameraLab />
 </BaseLayout>

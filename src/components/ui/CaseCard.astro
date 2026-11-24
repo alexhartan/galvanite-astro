@@ -18,7 +18,7 @@ const Tag = data.href ? 'a' : 'div';
   data-slide
   aria-hidden={copy ? 'true' : undefined}
   class:list={['group shrink-0', className]}
-  style={`--delay: ${Math.min(index, 3) * 160}ms`}
+  style={`--delay: ${Math.min(index, 3) * 150}ms`}
 >
   <Tag
     href={data.href}
@@ -56,10 +56,10 @@ const Tag = data.href ? 'a' : 'div';
       </div>
     </div>
     <div class="relative">
-      <p class="relative text-ink/80 ease-out-soft flex items-center font-medium gap-2.5 px-3 py-3.5 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+      <p class="relative text-ink/80 flex items-center font-medium gap-2.5 px-3 py-3.5 opacity-90 transition-opacity group-hover:opacity-100 motion-ui">
         <span
           aria-hidden="true"
-          class="bg-ink/10 absolute bottom-0 left-0 -right-12 h-px lg:-right-20"
+          class="bg-line absolute bottom-0 left-0 -right-12 h-px lg:-right-20"
         />
         <SparkIcon class="text-signal size-5 shrink-0" />
         <span data-rotator class="grid">
@@ -69,7 +69,7 @@ const Tag = data.href ? 'a' : 'div';
               <span
                 data-active={i === 0 ? '' : undefined}
                 aria-hidden={i === 0 ? undefined : 'true'}
-                class="ease-out-soft col-start-1 row-start-1 translate-y-2 opacity-0 transition duration-500 data-active:translate-y-0 data-active:opacity-100 motion-reduce:translate-y-0"
+                class="col-start-1 row-start-1 translate-y-2 opacity-0 transition data-active:translate-y-0 data-active:opacity-100 motion-reduce:translate-y-0 motion-slow"
               >
                 <span class="font-semibold">
                   {cut ? stat.slice(0, cut) : stat}
@@ -81,18 +81,18 @@ const Tag = data.href ? 'a' : 'div';
         </span>
       </p>
       <div>
-        <h4
+        <h3
           data-split
-          class="text-card text-ink ease-out-soft mt-3 font-normal text-balance opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+          class="text-card text-ink mt-3 font-normal text-balance opacity-90 transition-opacity group-hover:opacity-100 motion-ui"
         >
           {data.title}
-        </h4>
+        </h3>
         <ul
-          class="reveal-after ease-out-soft mt-4 flex -translate-y-2 flex-wrap gap-2.25 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0"
+          class="reveal-after mt-4 flex -translate-y-2 flex-wrap gap-2 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0 motion-slow"
           aria-label="Scope"
         >
           {data.scope.map((item) => (
-            <li class="bg-ocean-50 text-azure-deep text-tag rounded-sm px-2.5 py-1.25 font-medium tracking-wider uppercase">
+            <li class="bg-ocean-50 text-azure-deep text-2xs rounded-control px-2.5 py-1.25 font-medium tracking-wider uppercase">
               {item}
             </li>
           ))}

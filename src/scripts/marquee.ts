@@ -1,3 +1,5 @@
+import { reducedMotion } from './env';
+
 const BASE_SPEED = 60;
 const SCROLL_BOOST = 0.8;
 const SPEED_EASE = 2.5;
@@ -10,11 +12,10 @@ export function initMarquee(root: HTMLElement) {
     ? [...track.querySelectorAll<HTMLElement>('[data-slide]')]
     : [];
   if (!track || slides.length < 2) return;
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
   let loop = 0;
   let x = 0;
-  let speed = reduced.matches ? 0 : BASE_SPEED;
+  let speed = reducedMotion.matches ? 0 : BASE_SPEED;
   let boost = 0;
   let paused = false;
   let visible = false;
@@ -49,7 +50,9 @@ export function initMarquee(root: HTMLElement) {
     if (!drag) {
       boost *= Math.exp(-BOOST_DECAY * dt);
       const target =
-        paused || reduced.matches ? 0 : BASE_SPEED * (1 + boost * SCROLL_BOOST);
+        paused || reducedMotion.matches
+          ? 0
+          : BASE_SPEED * (1 + boost * SCROLL_BOOST);
       speed += (target - speed) * (1 - Math.exp(-SPEED_EASE * dt));
       x -= speed * dt;
       paint();

@@ -18,7 +18,7 @@ const { href, label, position, dark = false } = Astro.props;
     href={href}
     class:list={[
       dark ? 'data-current:text-sky' : 'data-current:text-ocean',
-      'section-link ease-out-soft text-nav-label text-azure-deep pointer-events-auto sticky ml-5 block w-fit whitespace-nowrap opacity-80 transition-[opacity,color] duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-current data-current:opacity-100',
+      'section-link ease-out-soft text-sm leading-normal text-azure-deep pointer-events-auto sticky ml-5 block w-fit whitespace-nowrap opacity-80 transition-[opacity,color] duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-current data-current:opacity-100',
     ]}
   >
     {label}
@@ -26,6 +26,8 @@ const { href, label, position, dark = false } = Astro.props;
 </div>
 
 <script>
+  import { onScrollFrame } from '../../scripts/env';
+
   const main = document.querySelector<HTMLElement>('main');
   const links = [
     ...document.querySelectorAll<HTMLElement>('[data-section-link]'),
@@ -63,9 +65,7 @@ const { href, label, position, dark = false } = Astro.props;
     highlight();
   };
 
-  let frame = 0;
   const highlight = () => {
-    frame = 0;
     const line = nav();
     const view = window.innerHeight - line;
     let current = -1;
@@ -91,12 +91,6 @@ const { href, label, position, dark = false } = Astro.props;
     const guide = section.querySelector('[data-guide]');
     if (guide) observer.observe(guide);
   }
-  window.addEventListener(
-    'scroll',
-    () => {
-      frame ||= requestAnimationFrame(highlight);
-    },
-    { passive: true },
-  );
+  onScrollFrame(highlight);
   document.fonts.ready.then(measure);
 </script>

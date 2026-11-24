@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import Checkbox from '../ui/Checkbox.astro';
 import Container from '../ui/Container.astro';
-import GridMark from '../ui/GridMark.astro';
+import Section from '../ui/Section.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
 
 interface Props {
   id?: string;
@@ -15,21 +17,11 @@ const checks = (await getCollection('checks')).sort(
 );
 ---
 
-<section
-  id={id}
-  aria-labelledby={`${id}-heading`}
-  data-tone="light"
-  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
->
-  <Container class="pointer-events-none absolute inset-0">
-    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
-    <div class="bg-ink/10 absolute inset-y-0 right-6 w-px"></div>
-    <GridMark class="absolute top-0 left-6" />
-    <GridMark class="absolute top-0 right-6 translate-x-1.25" />
-  </Container>
+<Section id={id} labelledby={`${id}-heading`}>
+  <SectionFrame edge="always" />
   <div
     data-guide
-    class="border-ink/10 from-navy/3 to-navy/0 relative border-t bg-linear-to-b"
+    class="border-line from-tint to-transparent relative border-t bg-linear-to-b"
   >
     <Container class="grid gap-12 pt-20 pb-30 lg:grid-cols-2 lg:items-start lg:gap-0 lg:pt-28 lg:pb-42">
       <div>
@@ -47,31 +39,8 @@ const checks = (await getCollection('checks')).sort(
           <ul class="grid gap-3 sm:grid-cols-2" role="list">
             {checks.map(({ id: key, data }) => (
               <li>
-                <label class="group border-midnight/15 hover:border-glacier hover:bg-white has-checked:border-glacier has-checked:bg-glacier-tint issues-error:border-alert/60 ease-out-soft flex h-full cursor-pointer items-center gap-4 rounded-lg border bg-white px-4 py-5 transition-colors duration-300">
-                  <span class="relative flex size-6 shrink-0">
-                    <input
-                      type="checkbox"
-                      name="issues"
-                      value={key}
-                      class="peer border-midnight/15 group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean ease-out-soft size-6 cursor-pointer appearance-none rounded-sm border-2 bg-white transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2"
-                    />
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="text-azure-deep pointer-events-none absolute inset-0"
-                    >
-                      <path
-                        d="M6 12.5l4 4 8-9"
-                        pathLength="1"
-                        class="dash-hidden group-has-checked:dash-shown"
-                      />
-                    </svg>
-                  </span>
+                <label class="group border-line-control hover:border-glacier hover:bg-white has-checked:border-glacier has-checked:bg-glacier-tint issues-error:border-alert/60 flex h-full cursor-pointer items-center gap-4 rounded-surface border bg-white px-4 py-5 transition-colors motion-ui">
+                  <Checkbox name="issues" value={key} />
                   <span class="text-ocean text-base leading-tight font-medium text-balance italic">
                     {data.statement}
                   </span>
@@ -88,7 +57,7 @@ const checks = (await getCollection('checks')).sort(
             Please select at least one item from the list
           </p>
         </fieldset>
-        <div class="border-midnight/15 hover:border-sky/50 focus-within:border-sky field-error:border-alert/60 ease-out-soft mt-5 flex flex-col gap-1.5 rounded-lg border bg-white p-1.5 transition-colors duration-300 sm:flex-row">
+        <div class="border-line-control hover:border-sky/50 focus-within:border-sky field-error:border-alert/60 mt-5 flex flex-col gap-1.5 rounded-surface border bg-white p-1.5 transition-colors sm:flex-row motion-ui">
           <label for={`${id}-url`} class="sr-only">
             Company website
           </label>
@@ -105,7 +74,7 @@ const checks = (await getCollection('checks')).sort(
           />
           <button
             type="submit"
-            class="bg-signal text-ink focus-visible:outline-ocean ease-out-soft min-h-11 cursor-pointer px-12 text-sm font-semibold transition-opacity duration-300 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2"
+            class="bg-signal text-ink focus-visible:outline-ocean min-h-11 cursor-pointer px-12 text-sm font-semibold transition-opacity hover:opacity-90 motion-ui focus-ring"
           >
             Get the Report
           </button>
@@ -118,10 +87,16 @@ const checks = (await getCollection('checks')).sort(
         >
           Please enter a valid website URL
         </p>
+        <label class="group mt-5 flex min-h-11 w-fit cursor-pointer items-center gap-4">
+          <Checkbox name="audit" value="yes" />
+          <span class="text-ocean text-base leading-tight font-medium">
+            Include a free technical audit
+          </span>
+        </label>
       </form>
     </Container>
   </div>
-</section>
+</Section>
 
 <script>
   import { initAssess } from '../../scripts/assess';

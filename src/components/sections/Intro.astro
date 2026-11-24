@@ -1,5 +1,6 @@
 ---
 import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 
@@ -25,20 +26,15 @@ const segments = statement.map(({ text, strong }) => ({
 const reveal = letterIndex + 6;
 ---
 
-<section
-  id={id}
-  aria-labelledby={`${id}-label`}
-  data-tone="light"
-  class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
->
+<Section id={id}>
   <SectionFrame edge={false} />
-  <div data-guide class="border-ink/10 relative overflow-clip border-t">
+  <div data-guide class="border-line relative overflow-clip border-t">
     <Container class="@container py-48 lg:py-80">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
-      <div data-parallax class="translate-y-(--shift)">
+      <div data-parallax="0.25" class="translate-y-(--shift)">
         <p
           data-reveal
-          class="max-w-mission text-statement lg:text-mission 4xl:text-mission-xl text-ink leading-none font-extralight text-balance"
+          class="max-w-mission text-statement lg:text-statement-lg 4xl:text-statement-xl text-ink leading-none font-extralight text-balance"
           style={`--n: ${reveal}`}
         >
           <span class="sr-only">{fullText}</span>
@@ -66,20 +62,15 @@ const reveal = letterIndex + 6;
       </div>
     </Container>
   </div>
-</section>
+</Section>
 
 <script>
-  import { initParallax } from '../../scripts/parallax';
+  import '../../scripts/parallax';
   import { initReveal } from '../../scripts/letter-reveal';
 
   for (const element of document.querySelectorAll<HTMLElement>(
     '[data-reveal]',
   )) {
     initReveal(element);
-  }
-  for (const element of document.querySelectorAll<HTMLElement>(
-    '#intro [data-parallax]',
-  )) {
-    initParallax(element, 0.25);
   }
 </script>

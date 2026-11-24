@@ -1,7 +1,8 @@
+import { reducedMotion } from './env';
 const DONE_MS = 2200;
 
 export function initImageReveal(root: HTMLElement, bottomMargin = '-40%') {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (reducedMotion.matches) return;
   if (root.getBoundingClientRect().top < window.innerHeight) return;
   root.dataset.revealState = 'hidden';
   const observer = new IntersectionObserver(

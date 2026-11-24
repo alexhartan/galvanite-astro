@@ -1,5 +1,6 @@
 ---
 import Container from '../ui/Container.astro';
+import SplitHeading from '../ui/SplitHeading.astro';
 import LogoMarquee from '../ui/LogoMarquee.astro';
 
 interface Props {
@@ -22,32 +23,36 @@ const { eyebrow, lead, emphasis, description } = Astro.props;
       class="ease-out-soft absolute inset-0 size-full opacity-0 transition-opacity duration-700 data-ready:opacity-100"
     ></canvas>
     <Container class="pointer-events-none absolute inset-0 z-10 group-data-scene:invisible">
-      <div class="absolute top-nav bottom-0 left-6 bg-grid/10 w-px"></div>
+      <div class="absolute top-nav bottom-0 left-gutter bg-grid/10 w-px"></div>
     </Container>
     <div
       data-hero-content
       class="relative flex h-full translate-y-(--shift) flex-col group-data-scene:invisible"
     >
       <Container class="@container pt-nav flex flex-1 flex-col justify-center max-lg:pt-56 lg:pb-4">
-        <p class="text-sky mb-3.5 text-xs font-semibold tracking-widest uppercase lg:mb-4">
+        <p class="text-sky mb-3.5 text-2xs leading-snug font-semibold lg:mb-4 caps">
           {eyebrow}
         </p>
-        <h1 class="max-w-headline text-display lg:text-display-half 4xl:text-display-hero relative font-extralight text-white">
-          {lead} <strong class="font-semibold">{emphasis}</strong>
-        </h1>
+        <SplitHeading
+          as="h1"
+          lead={lead}
+          emphasis={emphasis}
+          emphasisClass="font-semibold"
+          class="max-w-headline text-display lg:text-display-half 4xl:text-display-hero relative font-extralight text-white"
+        />
         <p class="max-w-lead text-lead lg:max-w-lead-hero lg:text-lead-hero 4xl:text-lead-hero-xl mt-6 text-white/85 lg:mt-4.5">
           {description}
         </p>
       </Container>
       <div class="relative overflow-x-clip">
         <Container class="pointer-events-none absolute inset-0">
-          <div class="backdrop-blur-bar 3xl:-right-page-bleed absolute inset-y-0 right-0 left-6"></div>
-          <div class="bg-space-950/50 3xl:-right-page-bleed absolute inset-y-0 right-0 left-6"></div>
-          <div class="bg-grid/5 absolute inset-x-6 top-0 h-px"></div>
+          <div class="backdrop-blur-bar 3xl:-right-page-bleed absolute inset-y-0 right-0 left-gutter"></div>
+          <div class="bg-space-950/50 3xl:-right-page-bleed absolute inset-y-0 right-0 left-gutter"></div>
+          <div class="bg-grid/5 absolute inset-x-gutter top-0 h-px"></div>
         </Container>
-        <div class="relative opacity-50 pt-3.75 pb-6">
+        <div class="relative opacity-50 pt-4 pb-6">
           <Container class="relative">
-            <p class="text-frost text-xs font-normal tracking-widest uppercase">
+            <p class="text-frost text-2xs leading-snug font-normal caps">
               Trusted by technical teams at:
             </p>
             <LogoMarquee class="clip-left mt-1" />

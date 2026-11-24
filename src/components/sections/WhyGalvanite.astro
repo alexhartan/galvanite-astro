@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import ColumnLines from '../ui/ColumnLines.astro';
 import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import BuildArt from '../ui/art/BuildArt.astro';
 import ConsistencyArt from '../ui/art/ConsistencyArt.astro';
@@ -29,15 +31,8 @@ const art = {
 };
 ---
 
-<section
-  id={id}
-  aria-labelledby={`${id}-heading`}
-  data-tone="light"
-  class="scroll-mt-nav relative z-10 overflow-clip bg-white pt-40 pb-40 lg:pt-56 lg:pb-56"
->
-  <Container class="pointer-events-none absolute inset-0">
-    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
-  </Container>
+<Section id={id} labelledby={`${id}-heading`} clip="all" class="py-section">
+  <SectionFrame edge={false} top={false} />
   <Container class="@container">
     <h2
       id={`${id}-heading`}
@@ -46,7 +41,7 @@ const art = {
       {heading}
     </h2>
   </Container>
-  <div data-guide class="border-ink/10 relative mt-6 border-t">
+  <div data-guide class="border-line relative mt-6 border-t">
     <Container>
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
       <div class="relative grid sm:grid-cols-2 lg:grid-cols-3">
@@ -61,28 +56,28 @@ const art = {
             <article class="group relative flex flex-col pb-10">
               <div
                 aria-hidden="true"
-                class="from-navy/3 to-navy/0 ease-out-soft pointer-events-none absolute inset-0 bg-linear-to-b opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                class="from-tint to-transparent pointer-events-none absolute inset-0 bg-linear-to-b opacity-0 transition-opacity group-hover:opacity-100 motion-ui"
               />
               <div
                 aria-hidden="true"
-                class="border-rule ease-out-soft pointer-events-none absolute -top-px -right-px bottom-0 left-0 border opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                class="border-line-solid pointer-events-none absolute -top-px -right-px bottom-0 left-0 border opacity-0 transition-opacity group-hover:opacity-100 motion-ui"
               />
               <div
                 aria-hidden="true"
                 class="pointer-events-none absolute inset-0 overflow-clip"
               >
-                <div class="bg-signal ease-out-soft absolute inset-x-0 bottom-0 h-1 translate-y-full mix-blend-multiply transition-transform duration-500 group-hover:translate-y-0 motion-reduce:transition-none" />
+                <div class="bg-signal absolute inset-x-0 bottom-0 h-1 translate-y-full mix-blend-multiply transition-transform group-hover:translate-y-0 motion-slow" />
               </div>
               <div aria-hidden="true" class="relative h-30 overflow-hidden">
                 <div class="absolute bottom-0 left-0 h-45 w-75 origin-bottom-left -translate-x-0.5 translate-y-px scale-60">
                   <Art />
                 </div>
               </div>
-              <div class="ease-out-soft relative px-10 pt-8 transition-transform duration-300 pointer-fine:group-hover:-translate-y-lift">
-                <h3 class="text-azure-deep text-benefit ease-out-soft group-hover:text-ink font-medium whitespace-pre-line transition-colors duration-300">
+              <div class="relative px-10 pt-8 transition-transform pointer-fine:group-hover:-translate-y-lift motion-ui">
+                <h3 class="text-azure-deep text-benefit group-hover:text-ink font-medium whitespace-pre-line transition-colors motion-ui">
                   {data.title}
                 </h3>
-                <p class="text-graphite ease-out-soft mt-2 text-sm text-balance transition-opacity duration-300 pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100">
+                <p class="text-graphite mt-2 text-sm text-balance transition-opacity pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100 motion-ui">
                   {data.summary}
                 </p>
               </div>
@@ -92,4 +87,4 @@ const art = {
       </div>
     </Container>
   </div>
-</section>
+</Section>

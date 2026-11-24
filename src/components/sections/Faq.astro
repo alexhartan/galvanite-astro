@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 
@@ -17,21 +18,17 @@ const faqs = await Promise.all(
 );
 ---
 
-<section
-  id={id}
-  aria-labelledby={`${id}-label`}
-  class="scroll-mt-nav relative z-10 overflow-x-clip text-white"
->
+<Section id={id} tone="dark">
   <SectionFrame inverted />
-  <div data-guide class="relative border-t border-white/10">
+  <div data-guide class="relative border-t border-line-dark">
     <Container>
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <div class="relative pb-40 lg:pb-56">
+      <div class="relative pb-section">
         <div
           aria-hidden="true"
-          class="from-abyss to-abyss/0 absolute inset-0 border-x border-white/10 bg-linear-to-b"
+          class="from-abyss to-transparent absolute inset-0 border-x border-line-dark bg-linear-to-b"
         ></div>
         <div class="relative grid items-start pt-12 lg:grid-cols-3 lg:pt-16">
           <h3 class="text-section px-8 pb-12 whitespace-pre-line lg:pb-0">
@@ -42,11 +39,11 @@ const faqs = await Promise.all(
               <li class="group relative pointer-fine:hover:z-20">
                 <div
                   aria-hidden="true"
-                  class="ease-out-soft shadow-card bg-space-950/50 backdrop-blur-bar pointer-events-none absolute inset-0 rounded-lg border border-white/15 opacity-0 transition duration-300 group-has-open:opacity-100 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:opacity-100"
+                  class="shadow-card bg-space-950/50 backdrop-blur-bar pointer-events-none absolute inset-0 rounded-surface border border-white/15 opacity-0 transition group-has-open:opacity-100 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:opacity-100 motion-ui"
                 />
                 <details
                   name="faq"
-                  class="details-expand ease-out-soft relative pb-3 transition duration-300 pointer-fine:group-hover:-translate-y-lift"
+                  class="details-expand relative pb-3 transition pointer-fine:group-hover:-translate-y-lift motion-ui"
                 >
                   <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none text-balance items-center pr-16 pl-6 pt-5 pb-3 text-lg font-light tracking-tight lg:text-question transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
                     {data.question}
@@ -62,4 +59,4 @@ const faqs = await Promise.all(
       </div>
     </Container>
   </div>
-</section>
+</Section>

@@ -3,6 +3,8 @@ import CtaButton from '../ui/CtaButton.astro';
 import { getCollection } from 'astro:content';
 import camera from '../../scripts/pricing-camera.json';
 import Container from '../ui/Container.astro';
+import SplitHeading from '../ui/SplitHeading.astro';
+import Section from '../ui/Section.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import SparkIcon from '../ui/SparkIcon.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
@@ -24,68 +26,51 @@ const {
 const engagements = (await getCollection('engagements')).sort(
   (a, b) => a.data.order - b.data.order,
 );
+const standard = {
+  box: 'transition-opacity lg:opacity-90 lg:hover:opacity-100 lg:focus-within:opacity-100 motion-ui',
+  name: 'text-white',
+  muted: 'text-white/80',
+  price: 'text-price text-frost mt-price font-medium',
+  mark: 'text-frost',
+  rule: 'max-lg:border-b border-line-dark',
+  item: 'text-frost',
+};
 const tiers = {
-  standard: {
-    box: 'ease-out-soft transition-opacity duration-300 lg:opacity-90 lg:hover:opacity-100 lg:focus-within:opacity-100',
-    name: 'text-white',
-    muted: 'text-white/80',
-    price: 'text-price text-frost mt-price font-medium',
-    mark: 'text-azure',
-    term: 'text-sky',
-    rule: 'max-lg:border-b border-white/10',
-    item: 'text-frost',
-  },
+  standard,
+  premium: { ...standard, mark: 'text-signal' },
   featured: {
-    box: 'bg-white z-10 ease-standard origin-(--origin) transition-transform duration-300 hover:scale-103',
+    box: 'bg-white z-10 ease-in-out-soft origin-(--origin) transition-transform duration-300 hover:scale-103',
     name: 'text-ink',
     muted: 'text-ink',
     price: 'text-price-lg text-ink mt-price-featured font-semibold',
     mark: 'text-signal',
-    term: 'text-sky',
-    rule: 'border-b border-ink/10 -mx-8 px-8',
+    rule: 'border-b border-line -mx-8 px-8',
     item: 'text-ocean font-medium',
-  },
-  premium: {
-    box: 'ease-out-soft transition-opacity duration-300 lg:opacity-90 lg:hover:opacity-100 lg:focus-within:opacity-100',
-    name: 'text-white',
-    muted: 'text-white/80',
-    price: 'text-price text-frost mt-price font-medium',
-    mark: 'text-signal',
-    term: 'text-sky',
-    rule: 'max-lg:border-b border-white/10',
-    item: 'text-frost',
   },
 };
 ---
 
-<section
-  id={id}
-  aria-labelledby={`${id}-label`}
-  data-scene-path={JSON.stringify(camera)}
-  class="scroll-mt-nav relative z-10 overflow-x-clip text-white"
->
+<Section id={id} tone="dark" data-scene-path={JSON.stringify(camera)}>
   <SectionFrame inverted />
-  <div data-guide class="relative border-t border-white/10">
-    <Container class="overflow-y-clip pb-35 lg:pb-48">
+  <div data-guide class="relative border-t border-line-dark">
+    <Container class="overflow-y-clip pb-36 lg:pb-48">
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
-      <div data-parallax class="translate-y-(--shift) pt-40 lg:pt-60">
-        <h3 class="text-section text-center">
-          {heading}
-          {emphasis && (
-            <>
-              {' '}
-              <strong class="font-normal">{emphasis}</strong>
-            </>
-          )}
-        </h3>
+      <div data-parallax="0.125" class="translate-y-(--shift) pt-40 lg:pt-60">
+        <SplitHeading
+          as="h3"
+          lead={heading}
+          emphasis={emphasis}
+          emphasisClass="font-normal"
+          class="text-section text-center"
+        />
         <div class="lg:grid-rows-offer mt-14 grid gap-6 lg:grid-cols-3 lg:gap-0">
           {engagements.map(({ data }, index) => {
             const tier = tiers[data.tier];
             const first = index === 0;
             const guide = first && (
-              <div class="w-triple absolute bottom-0 left-0 h-px bg-white/10 max-lg:hidden" />
+              <div class="w-triple absolute bottom-0 left-0 h-px bg-line-dark max-lg:hidden" />
             );
             return (
               <article
@@ -99,7 +84,7 @@ const tiers = {
               >
                 <div class="relative px-8 pt-11">
                   {data.tier === 'featured' && (
-                    <p class="to-ocean-50 text-sky absolute inset-x-0 top-0 bg-linear-to-r from-white text-label px-4 py-2 text-right font-semibold tracking-widest uppercase">
+                    <p class="to-ocean-50 text-sky absolute inset-x-0 top-0 bg-linear-to-r from-white text-xs px-4 py-2 text-right font-semibold caps">
                       Most popular
                     </p>
                   )}
@@ -115,18 +100,13 @@ const tiers = {
                     {data.audience}
                   </p>
                   <p
-                    class:list={['pb-6 tracking-price', tier.price, tier.rule]}
+                    class:list={['pb-6 tracking-title', tier.price, tier.rule]}
                   >
                     {data.pricePrefix && (
                       <span class="font-light">{data.pricePrefix} </span>
                     )}
                     {data.price}
-                    <span
-                      class:list={[
-                        'mt-3 block text-sm tracking-widest uppercase',
-                        tier.term,
-                      ]}
-                    >
+                    <span class:list={['text-sky mt-3 block text-sm caps']}>
                       {data.duration}
                     </span>
                   </p>
@@ -137,7 +117,7 @@ const tiers = {
                     {data.features.map((feature) => (
                       <li
                         class:list={[
-                          'ease-out-soft pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-within:opacity-100 flex gap-2 text-sm transition-opacity duration-300',
+                          'pointer-fine:opacity-70 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-within:opacity-100 flex gap-2 text-sm transition-opacity motion-ui',
                           tier.item,
                         ]}
                       >
@@ -147,7 +127,7 @@ const tiers = {
                         >
                           <SparkIcon
                             class:list={[
-                              'size-3 ease-out-soft pointer-fine:opacity-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-within:opacity-100 transition-opacity duration-300',
+                              'size-3 pointer-fine:opacity-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-within:opacity-100 transition-opacity motion-ui',
                               tier.mark,
                             ]}
                           />
@@ -165,7 +145,7 @@ const tiers = {
                   <CtaButton
                     href={ctaHref}
                     variant="secondary"
-                    class="ease-out-soft relative mt-auto transition-opacity duration-300 lg:opacity-0 lg:group-focus-within:opacity-100 lg:group-hover:opacity-100"
+                    class="relative mt-auto transition-opacity motion-ui reveal-on-hover"
                   >
                     Book a Call with Alex
                   </CtaButton>
@@ -177,14 +157,8 @@ const tiers = {
       </div>
     </Container>
   </div>
-</section>
+</Section>
 
 <script>
-  import { initParallax } from '../../scripts/parallax';
-
-  for (const element of document.querySelectorAll<HTMLElement>(
-    '#engagements [data-parallax]',
-  )) {
-    initParallax(element, 0.125);
-  }
+  import '../../scripts/parallax';
 </script>

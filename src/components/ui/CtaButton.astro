@@ -16,14 +16,14 @@ const tone = {
   secondary: { base: 'bg-ink/60 text-frost', fill: 'bg-ink' },
 }[variant];
 const motion =
-  'ease-standard transition duration-300 motion-reduce:transition-none';
+  'ease-in-out-soft transition duration-300 motion-reduce:transition-none';
 ---
 
 <span class:list={['group/cta flex', className]}>
   <a
     href={href}
     class:list={[
-      'relative isolate z-10 flex w-full items-center justify-center font-semibold group-hover/cta:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
+      'relative isolate z-10 flex w-full items-center justify-center font-semibold group-hover/cta:text-white focus-visible:outline-current focus-ring',
       tone.base,
       motion,
       link,
@@ -39,7 +39,7 @@ const motion =
     ></span>
     <span
       aria-hidden="true"
-      class="pointer-events-none absolute inset-0 ring-1 ring-white/10 ring-inset"
+      class="pointer-events-none absolute inset-0 ring-1 ring-line-dark ring-inset"
     ></span>
     <slot />
   </a>

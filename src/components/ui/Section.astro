@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'section'> {
+  id: string;
+  tone?: 'light' | 'dark';
+  labelledby?: string;
+  clip?: 'x' | 'all';
+}
+const {
+  id,
+  tone = 'light',
+  labelledby = `${id}-label`,
+  clip = 'x',
+  class: className,
+  ...rest
+} = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={labelledby}
+  data-tone={tone === 'light' ? 'light' : undefined}
+  class:list={[
+    'scroll-mt-nav relative z-10',
+    clip === 'x' ? 'overflow-x-clip' : 'overflow-clip',
+    tone === 'light' ? 'bg-white' : 'text-white',
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</section>
