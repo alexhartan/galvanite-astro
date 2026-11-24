@@ -1,6 +1,6 @@
 # Design System Audit: Phase 1
 
-Status: proposal. No code is changed. Phase 2 starts after sign-off.
+Status: Phase 2 done. See `docs/design-system.md` for the system as built.
 
 Scope: `src/styles/global.css`, 11 sections, 21 UI and art components, 12 scripts, 7 content collections, `index`, `lab` and `404` pages.
 

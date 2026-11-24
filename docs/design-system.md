@@ -1,0 +1,148 @@
+# Galvanite Design System
+
+Source of truth for tokens, utilities, primitives and content boundaries. Read this before you add a style, a component or a content field.
+
+## Files
+
+| Layer | Location |
+|---|---|
+| Tokens and utilities | `src/styles/global.css` |
+| UI primitives | `src/components/ui/` |
+| Sections | `src/components/sections/` |
+| Page copy and section config | `src/data/home.ts` |
+| Repeating content | `src/content/*` + `src/content.config.ts` |
+| Behavior | `src/scripts/` (shared helpers in `env.ts`) |
+
+## Tokens
+
+### Color
+
+Primitives are the brand palette. Use roles for lines and tints.
+
+| Primitive | Use |
+|---|---|
+| `space-950`, `space-900`, `space-800` | dark surfaces (gradient `from-space-950 to-space-900`) |
+| `abyss` | FAQ gradient, card shadow |
+| `ink` | primary text on light |
+| `ocean`, `ocean-50` | headings on light, pills |
+| `azure-deep` | accent text on light |
+| `sky` | accent text on dark, links |
+| `glacier`, `glacier-tint` | form hover and checked states |
+| `frost` | text on dark |
+| `signal` | primary action, accent bar |
+| `alert` | errors |
+| `graphite` | body text on light |
+| `navy`, `midnight` | only through the roles below |
+
+| Role | Value | Use |
+|---|---|---|
+| `line` | ink 10% | rules and borders on light |
+| `line-dark` | white 10% | rules and borders on dark |
+| `line-solid` | opaque ink 10% on white | hover borders that overlap other lines |
+| `line-control` | midnight 15% | form field and checkbox borders |
+| `tint` | navy 3% | panel gradients (`from-tint to-transparent`) |
+| `grid` | white to ink, set by `hero-scene.ts` | grid marks and hero lines |
+
+### Typography
+
+DM Sans variable. Weights: 200, 300, 400, 500, 600.
+
+| Group | Tokens |
+|---|---|
+| UI | `text-2xs`, `text-xs` (no line-height, inherits), `text-sm`, `text-link-sm`, `text-base` |
+| Body | `text-lead`, `text-question` |
+| Titles | `text-benefit`, `text-card`, `text-price`, `text-price-lg` |
+| Headings | `text-assess`, `text-section`, `text-stat` |
+| Statements | `text-statement`, `text-statement-lg`, `text-statement-xl`, `text-intent`, `text-intent-lg`, `text-intent-xl` |
+| Display | `text-display`, `text-display-half`, `text-display-hero`, `text-lead-hero`, `text-lead-hero-xl` |
+
+Letter-spacing: `tracking-display` (-0.04em), `tracking-headline` (-0.035em), `tracking-title` (-0.03em), `tracking-snug` (-0.02em).
+Line height: `leading-display` (0.9), `leading-heading` (1), `leading-statement` (1.113), `leading-lead-hero` (1.456).
+
+Each `text-*` token carries its own line-height and letter-spacing. Do not add `tracking-*` or `leading-*` to a heading unless the context needs it.
+
+### Spacing and layout
+
+| Token | Use |
+|---|---|
+| `gutter` (1.5rem) | page gutter: `px-gutter`, `left-gutter`, `right-gutter` |
+| `nav` (5.5rem) | header height, scroll offset |
+| `lift` | hover lift (`-translate-y-lift`) |
+| `pt-section`, `pb-section`, `py-section` | shared section rhythm: 10rem, 14rem at lg |
+| `max-w-page`, `max-w-page-inset` | page width (inset leaves room for the section-link rail) |
+| `max-w-lead`, `max-w-lead-hero`, `max-w-headline`, `max-w-mission` | text measures |
+| `3xl` (100rem), `4xl` (120rem) | ultra-wide breakpoints |
+
+### Radius, shadow, blur
+
+`rounded-control` (checkbox, pills), `rounded-surface` (cards, fields). Buttons are square. `shadow-card`, `backdrop-blur-bar`.
+
+### Motion
+
+| Token / utility | Use |
+|---|---|
+| `motion-ui` | 300ms, ease-out-soft; default for hover and state changes. Combine with `transition`, `transition-opacity`, `transition-colors` or `transition-transform`. |
+| `motion-slow` | 500ms, ease-out-soft; signal bars, rotator, KPI hover |
+| `ease-out-soft` | default curve |
+| `ease-out-expo` | scroll reveals (`reveal-*` utilities) |
+| `ease-in-out-soft` | CTA fill, art hover, featured price card |
+| `ease-in-soft` | CaseCard arrow fade-in |
+| `duration-200`, `duration-700` | section links; image zoom, canvas fade, carousel |
+| `animate-marquee`, `animate-marquee-slow` | logo marquees |
+
+Both motion utilities stop transitions when the user prefers reduced motion.
+
+## Utilities
+
+| Utility | Does |
+|---|---|
+| `focus-ring` | 2px solid outline, 2px offset on `:focus-visible`. Set the color with `focus-visible:outline-*`. |
+| `caps` | uppercase + widest tracking. Set the size separately. |
+| `reveal-on-hover` | at lg: hidden until the parent `.group` is hovered or focused |
+| `reveal-*` | scroll reveal choreography, driven by `data-reveal-state` |
+| `details-expand` | animated `<details>` (progressive enhancement) |
+| `clip-left`, `bleed-x`, `mask-fade-x` | layout hacks for marquees and full-bleed backgrounds |
+
+## Primitives
+
+| Component | Props | Use |
+|---|---|---|
+| `Section` | `id`, `tone`, `labelledby`, `clip`, any section attribute | every section except Hero |
+| `SectionFrame` | `inverted`, `edge` (`true`, `false`, `'always'`), `top`, `bottom`, `class` | page rules and grid marks |
+| `Container` | `class` | page width and gutter |
+| `Eyebrow` | `id`, `inverted`, `class` | section label (aligned to the statement cap height) |
+| `SplitHeading` | `as`, `id`, `lead`, `emphasis`, `class`, `leadClass`, `emphasisClass` | heading with a bold second part |
+| `CtaButton` | `href`, `variant`, `link`, `class` | primary and secondary actions |
+| `Checkbox` | `name`, `value` | custom checkbox; place inside a `label.group` |
+| `GridMark`, `ColumnLines` | | grid decoration |
+| `LogoMarquee`, `CaseCard` | | content-driven UI |
+| `ArrowIcon`, `SparkIcon`, `Logo` | `class` | icons |
+
+## Context rules (keep local)
+
+These values stay in their component. Do not make global tokens from them.
+
+- Container-query type sizes (`cqi`) and `3xl:` / `4xl:` overrides: tuned to each composition.
+- Section padding other than `*-section`: each section has its own rhythm. FeaturedWork and Pricing padding also absorbs parallax travel.
+- Eyebrow cap offsets and the featured price baseline: optical math tied to specific type sizes.
+- Parallax rates: set per element with `data-parallax="0.25"` (and `data-parallax-from="enter"`).
+- SectionLink positions: measured at runtime.
+- Layering: sections `z-10` (they scroll over the fixed hero), section links `z-20`, header and skip link `z-30`.
+- Art SVG geometry (`art/kit.ts`): illustration coordinates in px.
+- Pricing tier visuals: mapped from the `tier` enum inside `Pricing.astro`.
+
+## Content boundaries
+
+| Belongs in | What | Never |
+|---|---|---|
+| Tokens / CSS | color, type, spacing, radius, motion | copy |
+| Component props | content values and closed layout variants (`tone`, `variant`, `edge`) | class names from content |
+| Content (`src/data`, `src/content`) | copy, images with alt, links, order, visibility, closed choices (`tier`, `art`) | classes, colors, sizes, parallax rates, tone |
+
+Section labels for eyebrows and the section-link rail come from one list: `sections` in `src/data/home.ts`.
+
+## Reuse on a new project
+
+1. Copy `global.css`. Replace the color primitives, font and type values. Keep roles, utilities and motion.
+2. Copy `components/ui` and `scripts/env.ts`.
+3. Write new sections from the primitives. Put copy in `src/data` and repeating content in collections.
