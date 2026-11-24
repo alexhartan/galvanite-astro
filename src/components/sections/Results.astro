@@ -1,6 +1,6 @@
 ---
 import Container from '../ui/Container.astro';
-import GridMark from '../ui/GridMark.astro';
+import ColumnLines from '../ui/ColumnLines.astro';
 
 interface Props {
   id?: string;
@@ -16,14 +16,6 @@ const {
   stats,
   linkLabel = 'See Relevant Case Study',
 } = Astro.props;
-const marks = [
-  'left-0',
-  'left-1/3 max-sm:hidden',
-  'left-2/3 max-sm:hidden',
-  'left-full',
-];
-const fade =
-  'from-ink/10 to-ink/0 pointer-events-none absolute inset-y-0 z-10 w-px bg-linear-to-b from-50%';
 const motion =
   'ease-out-soft transition duration-500 motion-reduce:transition-none';
 ---
@@ -51,18 +43,12 @@ const motion =
         aria-hidden="true"
         class="bg-ink/10 pointer-events-none z-10 bleed-x absolute top-0 h-px"
       ></div>
-      <div
-        aria-hidden="true"
-        class:list={[fade, 'left-1/3 max-sm:hidden']}
-      ></div>
-      <div
-        aria-hidden="true"
-        class:list={[fade, 'left-2/3 max-sm:hidden']}
-      ></div>
-      <div aria-hidden="true" class:list={[fade, 'left-full']}></div>
-      {marks.map((mark) => (
-        <GridMark class:list={['absolute top-0 z-20', mark]} />
-      ))}
+      <ColumnLines
+        class="sm:grid-cols-3"
+        columns={['hidden sm:block', 'hidden sm:block', '']}
+        line="z-10"
+        mark="z-20"
+      />
       <ul role="list" class="grid sm:grid-cols-3">
         {stats.map(({ value, label, href }, index) => (
           <li class="relative" style={`--delay: ${index * 150}ms`}>

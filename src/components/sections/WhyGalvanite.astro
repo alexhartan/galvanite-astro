@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
+import ColumnLines from '../ui/ColumnLines.astro';
 import Container from '../ui/Container.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
-import GridMark from '../ui/GridMark.astro';
 import BuildArt from '../ui/art/BuildArt.astro';
 import ConsistencyArt from '../ui/art/ConsistencyArt.astro';
 import PerformanceArt from '../ui/art/PerformanceArt.astro';
@@ -27,8 +27,6 @@ const art = {
   process: ProcessArt,
   tools: ToolsArt,
 };
-const fade =
-  'from-ink/10 to-ink/0 absolute inset-y-0 w-px bg-linear-to-b from-50%';
 ---
 
 <section
@@ -52,17 +50,11 @@ const fade =
     <Container>
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
       <div class="relative grid sm:grid-cols-2 lg:grid-cols-3">
-        <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-          <div class:list={[fade, 'left-full']} />
-          <div class:list={[fade, 'left-1/2 hidden sm:block lg:hidden']} />
-          <div class:list={[fade, 'left-1/3 hidden lg:block']} />
-          <div class:list={[fade, 'left-2/3 hidden lg:block']} />
-          <GridMark class="absolute top-0 left-0 z-10 -mt-px" />
-          <GridMark class="absolute top-0 left-1/2 z-10 -mt-px hidden sm:block lg:hidden" />
-          <GridMark class="absolute top-0 left-1/3 z-10 -mt-px hidden lg:block" />
-          <GridMark class="absolute top-0 left-2/3 z-10 -mt-px hidden lg:block" />
-          <GridMark class="absolute top-0 left-full z-10 -mt-px" />
-        </div>
+        <ColumnLines
+          class="sm:grid-cols-2 lg:grid-cols-3"
+          columns={['hidden lg:block', 'hidden sm:block', '']}
+          mark="z-10 -mt-px"
+        />
         {benefits.map(({ data }) => {
           const Art = art[data.art];
           return (
