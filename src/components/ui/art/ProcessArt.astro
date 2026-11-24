@@ -37,7 +37,6 @@ const steps = [
   'group-hover:delay-200',
   'group-hover:delay-300',
 ];
-const brick = 'fill-white stroke-azure group-hover:stroke-azure-deep/70';
 ---
 
 <ArtStack id="art-process" frames={frames}>
@@ -53,7 +52,7 @@ const brick = 'fill-white stroke-azure group-hover:stroke-azure-deep/70';
         width="30"
         height="6"
         rx="2"
-        class:list={[brick, motion, delay]}
+        class:list={['fill-white', ink, motion, delay]}
       />
     ))}
   </g>
