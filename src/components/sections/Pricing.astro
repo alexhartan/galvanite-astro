@@ -30,19 +30,19 @@ const tiers = {
     name: 'text-white',
     muted: 'text-white/80',
     price: 'text-price text-frost mt-price font-medium',
-    mark: 'text-azure',
+    mark: 'text-frost',
     term: 'text-sky',
-    rule: 'max-lg:border-b border-white/10',
+    rule: 'max-lg:border-b border-line-dark',
     item: 'text-frost',
   },
   featured: {
-    box: 'bg-white z-10 ease-standard origin-(--origin) transition-transform duration-300 hover:scale-103',
+    box: 'bg-white z-10 ease-in-out-soft origin-(--origin) transition-transform duration-300 hover:scale-103',
     name: 'text-ink',
     muted: 'text-ink',
     price: 'text-price-lg text-ink mt-price-featured font-semibold',
     mark: 'text-signal',
     term: 'text-sky',
-    rule: 'border-b border-ink/10 -mx-8 px-8',
+    rule: 'border-b border-line -mx-8 px-8',
     item: 'text-ocean font-medium',
   },
   premium: {
@@ -52,7 +52,7 @@ const tiers = {
     price: 'text-price text-frost mt-price font-medium',
     mark: 'text-signal',
     term: 'text-sky',
-    rule: 'max-lg:border-b border-white/10',
+    rule: 'max-lg:border-b border-line-dark',
     item: 'text-frost',
   },
 };
@@ -65,8 +65,8 @@ const tiers = {
   class="scroll-mt-nav relative z-10 overflow-x-clip text-white"
 >
   <SectionFrame inverted />
-  <div data-guide class="relative border-t border-white/10">
-    <Container class="overflow-y-clip pb-35 lg:pb-48">
+  <div data-guide class="relative border-t border-line-dark">
+    <Container class="overflow-y-clip pb-36 lg:pb-48">
       <Eyebrow id={`${id}-label`} inverted>
         {label}
       </Eyebrow>
@@ -85,7 +85,7 @@ const tiers = {
             const tier = tiers[data.tier];
             const first = index === 0;
             const guide = first && (
-              <div class="w-triple absolute bottom-0 left-0 h-px bg-white/10 max-lg:hidden" />
+              <div class="w-triple absolute bottom-0 left-0 h-px bg-line-dark max-lg:hidden" />
             );
             return (
               <article
@@ -99,7 +99,7 @@ const tiers = {
               >
                 <div class="relative px-8 pt-11">
                   {data.tier === 'featured' && (
-                    <p class="to-ocean-50 text-sky absolute inset-x-0 top-0 bg-linear-to-r from-white text-label px-4 py-2 text-right font-semibold tracking-widest uppercase">
+                    <p class="to-ocean-50 text-sky absolute inset-x-0 top-0 bg-linear-to-r from-white text-xs px-4 py-2 text-right font-semibold tracking-widest uppercase">
                       Most popular
                     </p>
                   )}
@@ -115,7 +115,7 @@ const tiers = {
                     {data.audience}
                   </p>
                   <p
-                    class:list={['pb-6 tracking-price', tier.price, tier.rule]}
+                    class:list={['pb-6 tracking-title', tier.price, tier.rule]}
                   >
                     {data.pricePrefix && (
                       <span class="font-light">{data.pricePrefix} </span>

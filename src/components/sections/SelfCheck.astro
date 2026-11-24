@@ -22,14 +22,14 @@ const checks = (await getCollection('checks')).sort(
   class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <Container class="pointer-events-none absolute inset-0">
-    <div class="bg-ink/10 absolute inset-y-0 left-6 w-px"></div>
-    <div class="bg-ink/10 absolute inset-y-0 right-6 w-px"></div>
-    <GridMark class="absolute top-0 left-6" />
-    <GridMark class="absolute top-0 right-6 translate-x-1.25" />
+    <div class="bg-line absolute inset-y-0 left-gutter w-px"></div>
+    <div class="bg-line absolute inset-y-0 right-gutter w-px"></div>
+    <GridMark class="absolute top-0 left-gutter" />
+    <GridMark class="absolute top-0 right-gutter translate-x-1.25" />
   </Container>
   <div
     data-guide
-    class="border-ink/10 from-navy/3 to-navy/0 relative border-t bg-linear-to-b"
+    class="border-line from-tint to-transparent relative border-t bg-linear-to-b"
   >
     <Container class="grid gap-12 pt-20 pb-30 lg:grid-cols-2 lg:items-start lg:gap-0 lg:pt-28 lg:pb-42">
       <div>
@@ -47,13 +47,13 @@ const checks = (await getCollection('checks')).sort(
           <ul class="grid gap-3 sm:grid-cols-2" role="list">
             {checks.map(({ id: key, data }) => (
               <li>
-                <label class="group border-midnight/15 hover:border-glacier hover:bg-white has-checked:border-glacier has-checked:bg-glacier-tint issues-error:border-alert/60 ease-out-soft flex h-full cursor-pointer items-center gap-4 rounded-lg border bg-white px-4 py-5 transition-colors duration-300">
+                <label class="group border-line-control hover:border-glacier hover:bg-white has-checked:border-glacier has-checked:bg-glacier-tint issues-error:border-alert/60 ease-out-soft flex h-full cursor-pointer items-center gap-4 rounded-surface border bg-white px-4 py-5 transition-colors duration-300">
                   <span class="relative flex size-6 shrink-0">
                     <input
                       type="checkbox"
                       name="issues"
                       value={key}
-                      class="peer border-midnight/15 group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean ease-out-soft size-6 cursor-pointer appearance-none rounded-sm border-2 bg-white transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2"
+                      class="peer border-line-control group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean ease-out-soft size-6 cursor-pointer appearance-none rounded-control border-2 bg-white transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2"
                     />
                     <svg
                       aria-hidden="true"
@@ -88,7 +88,7 @@ const checks = (await getCollection('checks')).sort(
             Please select at least one item from the list
           </p>
         </fieldset>
-        <div class="border-midnight/15 hover:border-sky/50 focus-within:border-sky field-error:border-alert/60 ease-out-soft mt-5 flex flex-col gap-1.5 rounded-lg border bg-white p-1.5 transition-colors duration-300 sm:flex-row">
+        <div class="border-line-control hover:border-sky/50 focus-within:border-sky field-error:border-alert/60 ease-out-soft mt-5 flex flex-col gap-1.5 rounded-surface border bg-white p-1.5 transition-colors duration-300 sm:flex-row">
           <label for={`${id}-url`} class="sr-only">
             Company website
           </label>

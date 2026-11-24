@@ -16,7 +16,7 @@ const tone = {
   secondary: { base: 'bg-ink/60 text-frost', fill: 'bg-ink' },
 }[variant];
 const motion =
-  'ease-standard transition duration-300 motion-reduce:transition-none';
+  'ease-in-out-soft transition duration-300 motion-reduce:transition-none';
 ---
 
 <span class:list={['group/cta flex', className]}>
@@ -39,7 +39,7 @@ const motion =
     ></span>
     <span
       aria-hidden="true"
-      class="pointer-events-none absolute inset-0 ring-1 ring-white/10 ring-inset"
+      class="pointer-events-none absolute inset-0 ring-1 ring-line-dark ring-inset"
     ></span>
     <slot />
   </a>

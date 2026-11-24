@@ -27,7 +27,7 @@ const motion =
   class="relative z-10 overflow-x-clip bg-white"
 >
   <Container class="pointer-events-none absolute inset-0">
-    <div class="bg-ink/10 pointer-events-none z-10 absolute inset-y-0 left-6 w-px"></div>
+    <div class="bg-line pointer-events-none z-10 absolute inset-y-0 left-gutter w-px"></div>
   </Container>
   <Container class="pt-36 pb-24 lg:pt-56 lg:pb-32 4xl:pt-24">
     <h2 id={`${id}-heading`} class="text-section text-center">
@@ -37,11 +37,11 @@ const motion =
     <div data-results class="relative mt-9 lg:mt-11">
       <div
         aria-hidden="true"
-        class="from-navy/3 to-navy/0 bleed-x absolute inset-y-0 bg-linear-to-b"
+        class="from-tint to-transparent bleed-x absolute inset-y-0 bg-linear-to-b"
       ></div>
       <div
         aria-hidden="true"
-        class="bg-ink/10 pointer-events-none z-10 bleed-x absolute top-0 h-px"
+        class="bg-line pointer-events-none z-10 bleed-x absolute top-0 h-px"
       ></div>
       <ColumnLines
         class="sm:grid-cols-3"
@@ -78,7 +78,7 @@ const motion =
                 <span class="reveal-fade">
                   <span
                     class:list={[
-                      'text-stat-label block text-graphite/70 group-hover:text-graphite group-focus-visible:text-graphite whitespace-pre-line',
+                      'text-base leading-tight block text-graphite/70 group-hover:text-graphite group-focus-visible:text-graphite whitespace-pre-line',
                       motion,
                     ]}
                   >
@@ -104,7 +104,7 @@ const motion =
             </a>
             <span
               aria-hidden="true"
-              class="border-rule ease-out-soft pointer-events-none absolute top-0 -right-px bottom-0 left-0 z-10 border opacity-0 transition-opacity duration-300 peer-hover:opacity-100 peer-focus-visible:opacity-100"
+              class="border-line-solid ease-out-soft pointer-events-none absolute top-0 -right-px bottom-0 left-0 z-10 border opacity-0 transition-opacity duration-300 peer-hover:opacity-100 peer-focus-visible:opacity-100"
             ></span>
           </li>
         ))}

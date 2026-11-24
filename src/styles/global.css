@@ -6,87 +6,96 @@
   --color-space-950: #070a16;
   --color-space-900: #141a3c;
   --color-space-800: #1f3166;
-  --color-ink: #1d3961;
-  --color-ocean: #305785;
-  --color-signal: #ffd23f;
-  --color-sky: #76b1db;
-  --color-azure: #cceaff;
-  --color-frost: #ccecff;
   --color-abyss: #04091b;
-  --color-ocean-50: #ecf2f9;
-  --color-azure-deep: #2e6aa3;
   --color-navy: #000f40;
   --color-midnight: #1b2540;
+  --color-ink: #1d3961;
+  --color-ocean: #305785;
+  --color-ocean-50: #ecf2f9;
+  --color-azure-deep: #2e6aa3;
+  --color-sky: #76b1db;
   --color-glacier: #92c9eb;
-  --color-alert: #d6455e;
   --color-glacier-tint: color-mix(in oklab, var(--color-glacier) 40%, white);
+  --color-frost: #ccecff;
+  --color-signal: #ffd23f;
+  --color-alert: #d6455e;
   --color-graphite: #1f2937;
-  --color-rule: color-mix(in srgb, var(--color-ink) 10%, white);
+
+  --color-line: color-mix(in oklab, var(--color-ink) 10%, transparent);
+  --color-line-solid: color-mix(in srgb, var(--color-ink) 10%, white);
+  --color-line-dark: color-mix(in oklab, white 10%, transparent);
+  --color-line-control: color-mix(in oklab, var(--color-midnight) 15%, transparent);
+  --color-tint: color-mix(in oklab, var(--color-navy) 3%, transparent);
   --color-grid: color-mix(
     in srgb,
     var(--color-ink) calc(var(--grid-invert, 0) * 100%),
     #fff
   );
 
-  --text-xs: 0.65rem;
-  --text-display: clamp(3.25rem, 6.77vw, 8.125rem);
-  --text-display--line-height: 0.9;
-  --text-display--letter-spacing: -0.04em;
-  --text-display-half: calc(50cqi / 7.4974);
-  --text-display-half--line-height: 0.9;
-  --text-display-half--letter-spacing: -0.04em;
-  --text-mission: calc(75cqi / 14.3882);
-  --text-mission--letter-spacing: -0.04em;
-  --text-intent: clamp(1.9rem, 3.07vw, 3.68rem);
-  --text-intent--letter-spacing: -0.035em;
-  --text-intent-lg: calc(71.25cqi / 14.3882);
-  --text-intent-lg--letter-spacing: -0.04em;
-  --text-intent-xl: calc(78cqi / 15);
-  --text-intent-xl--letter-spacing: -0.04em;
-  --text-mission-xl: calc(84cqi / 14.3882);
-  --text-mission-xl--letter-spacing: -0.04em;
-  --text-statement: clamp(2rem, 3.23vw, 3.875rem);
-  --text-statement--line-height: 1.113;
-  --text-statement--letter-spacing: -0.035em;
-  --text-card: clamp(1.625rem, 2.08vw, 2.1125rem);
-  --text-card--line-height: 1.25;
-  --text-card--letter-spacing: -0.03em;
-  --text-nav-label: 0.875rem;
-  --text-tag: 0.65625rem;
-  --text-label: 0.75rem;
-  --text-benefit: clamp(1.2rem, 1.25vw, 1.55rem);
-  --text-assess: clamp(1.875rem, 2.5vw, 3rem);
-  --text-assess--line-height: 1;
-  --text-assess--letter-spacing: -0.033em;
-  --text-benefit--letter-spacing: -0.02em;
-  --text-benefit--line-height: 1.04;
-  --text-section: clamp(2.1875rem, 3vw, 3.625rem);
-  --text-section--line-height: 1;
-  --text-section--letter-spacing: -0.033em;
-  --text-section--font-weight: 200;
+  --tracking-display: -0.04em;
+  --tracking-headline: -0.035em;
+  --tracking-title: -0.03em;
+  --tracking-snug: -0.02em;
+
+  --leading-display: 0.9;
+  --leading-heading: 1;
+  --leading-statement: 1.113;
+  --leading-lead-hero: 1.456;
+
+  --text-2xs: 0.65625rem;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: initial;
+  --text-link-sm: 0.8125rem;
   --text-question: 1.375rem;
   --text-question--line-height: 1.35;
-  --text-price-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
-  --text-price-lg--line-height: 1;
-  --text-stat: clamp(2.9rem, 3.6vw, 4.2rem);
-  --text-stat--line-height: 1;
-  --text-stat--letter-spacing: -0.04em;
-  --text-stat-label: 1rem;
-  --text-link-sm: 0.8125rem;
-  --text-stat-label--line-height: 1.25;
-  --text-price: clamp(1.75rem, 2.1vw, 2.5rem);
-  --text-price--line-height: 1;
-  --text-display-hero: calc(var(--text-display-half) * 1.4);
-  --text-display-hero--line-height: 0.9;
-  --text-display-hero--letter-spacing: -0.04em;
-  --text-lead-hero: calc(var(--text-display-half) * 0.19);
-  --text-lead-hero--line-height: 1.456;
-  --text-lead-hero-xl: calc(var(--text-lead-hero) * 1.2);
-  --text-lead-hero-xl--line-height: 1.456;
   --text-lead: clamp(1.125rem, 1.25vw, 1.5rem);
   --text-lead--line-height: 1.42;
-
-  --tracking-price: -0.03em;
+  --text-benefit: clamp(1.2rem, 1.25vw, 1.55rem);
+  --text-benefit--line-height: 1.04;
+  --text-benefit--letter-spacing: var(--tracking-snug);
+  --text-card: clamp(1.625rem, 2.08vw, 2.1125rem);
+  --text-card--line-height: 1.25;
+  --text-card--letter-spacing: var(--tracking-title);
+  --text-price: clamp(1.75rem, 2.1vw, 2.5rem);
+  --text-price--line-height: var(--leading-heading);
+  --text-price-lg: clamp(2.1875rem, 2.75vw, 3.1rem);
+  --text-price-lg--line-height: var(--leading-heading);
+  --text-assess: clamp(1.875rem, 2.5vw, 3rem);
+  --text-assess--line-height: var(--leading-heading);
+  --text-assess--letter-spacing: var(--tracking-headline);
+  --text-section: clamp(2.1875rem, 3vw, 3.625rem);
+  --text-section--line-height: var(--leading-heading);
+  --text-section--letter-spacing: var(--tracking-headline);
+  --text-section--font-weight: 200;
+  --text-stat: clamp(2.9rem, 3.6vw, 4.2rem);
+  --text-stat--line-height: var(--leading-heading);
+  --text-stat--letter-spacing: var(--tracking-display);
+  --text-statement: clamp(2rem, 3.23vw, 3.875rem);
+  --text-statement--line-height: var(--leading-statement);
+  --text-statement--letter-spacing: var(--tracking-headline);
+  --text-statement-lg: calc(75cqi / 14.3882);
+  --text-statement-lg--letter-spacing: var(--tracking-display);
+  --text-statement-xl: calc(84cqi / 14.3882);
+  --text-statement-xl--letter-spacing: var(--tracking-display);
+  --text-intent: calc(var(--text-statement) * 0.95);
+  --text-intent--letter-spacing: var(--tracking-headline);
+  --text-intent-lg: calc(var(--text-statement-lg) * 0.95);
+  --text-intent-lg--letter-spacing: var(--tracking-display);
+  --text-intent-xl: calc(78cqi / 15);
+  --text-intent-xl--letter-spacing: var(--tracking-display);
+  --text-display: clamp(3.25rem, 6.77vw, 8.125rem);
+  --text-display--line-height: var(--leading-display);
+  --text-display--letter-spacing: var(--tracking-display);
+  --text-display-half: calc(50cqi / 7.4974);
+  --text-display-half--line-height: var(--leading-display);
+  --text-display-half--letter-spacing: var(--tracking-display);
+  --text-display-hero: calc(var(--text-display-half) * 1.4);
+  --text-display-hero--line-height: var(--leading-display);
+  --text-display-hero--letter-spacing: var(--tracking-display);
+  --text-lead-hero: calc(var(--text-display-half) * 0.19);
+  --text-lead-hero--line-height: var(--leading-lead-hero);
+  --text-lead-hero-xl: calc(var(--text-lead-hero) * 1.2);
+  --text-lead-hero-xl--line-height: var(--leading-lead-hero);
 
   --container-page: 83rem;
   --container-page-inset: min(83rem, calc(100% - 8.5rem));
@@ -95,30 +104,32 @@
   --container-lead-hero: 25em;
   --container-mission: 14.5em;
 
+  --spacing-gutter: 1.5rem;
   --spacing-nav: 5.5rem;
+  --spacing-lift: 0.175rem;
+  --spacing-cap-statement: 0.191em;
+  --spacing-cap-label: 0.25em;
   --spacing-price: 2rem;
   --spacing-price-featured: calc(
     var(--spacing-price) - 0.84 * (var(--text-price-lg) - var(--text-price))
   );
-  --spacing-cap-statement: 0.191em;
-  --spacing-cap-label: 0.25em;
   --spacing-page-bleed: min(
-    calc((100vw - var(--container-page)) / 2 + 1.5rem),
+    calc((100vw - var(--container-page)) / 2 + var(--spacing-gutter)),
     25rem
   );
   --spacing-slide: 85cqi;
   --spacing-slide-sm: 60cqi;
-  --spacing-triple: 300%;
   --spacing-slide-lg: calc(50cqi - 1.25rem);
-  --spacing-lift: 0.175rem;
+  --spacing-triple: 300%;
 
   --breakpoint-3xl: 100rem;
   --breakpoint-4xl: 120rem;
 
+  --radius-control: 0.25rem;
+  --radius-surface: 0.5rem;
   --blur-bar: 10px;
   --shadow-card: 0 var(--spacing-lift) 0 var(--color-abyss);
 
-  --ease-standard: ease;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-in-soft: cubic-bezier(0.32, 0, 0.67, 0);

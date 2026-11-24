@@ -32,13 +32,13 @@ const reveal = letterIndex + 6;
   class="scroll-mt-nav relative z-10 overflow-x-clip bg-white"
 >
   <SectionFrame edge={false} />
-  <div data-guide class="border-ink/10 relative overflow-clip border-t">
+  <div data-guide class="border-line relative overflow-clip border-t">
     <Container class="@container py-48 lg:py-80">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
       <div data-parallax class="translate-y-(--shift)">
         <p
           data-reveal
-          class="max-w-mission text-statement lg:text-mission 4xl:text-mission-xl text-ink leading-none font-extralight text-balance"
+          class="max-w-mission text-statement lg:text-statement-lg 4xl:text-statement-xl text-ink leading-none font-extralight text-balance"
           style={`--n: ${reveal}`}
         >
           <span class="sr-only">{fullText}</span>

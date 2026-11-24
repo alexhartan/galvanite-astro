@@ -18,7 +18,7 @@ const Tag = data.href ? 'a' : 'div';
   data-slide
   aria-hidden={copy ? 'true' : undefined}
   class:list={['group shrink-0', className]}
-  style={`--delay: ${Math.min(index, 3) * 160}ms`}
+  style={`--delay: ${Math.min(index, 3) * 150}ms`}
 >
   <Tag
     href={data.href}
@@ -59,7 +59,7 @@ const Tag = data.href ? 'a' : 'div';
       <p class="relative text-ink/80 ease-out-soft flex items-center font-medium gap-2.5 px-3 py-3.5 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
         <span
           aria-hidden="true"
-          class="bg-ink/10 absolute bottom-0 left-0 -right-12 h-px lg:-right-20"
+          class="bg-line absolute bottom-0 left-0 -right-12 h-px lg:-right-20"
         />
         <SparkIcon class="text-signal size-5 shrink-0" />
         <span data-rotator class="grid">
@@ -88,11 +88,11 @@ const Tag = data.href ? 'a' : 'div';
           {data.title}
         </h4>
         <ul
-          class="reveal-after ease-out-soft mt-4 flex -translate-y-2 flex-wrap gap-2.25 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0"
+          class="reveal-after ease-out-soft mt-4 flex -translate-y-2 flex-wrap gap-2 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0"
           aria-label="Scope"
         >
           {data.scope.map((item) => (
-            <li class="bg-ocean-50 text-azure-deep text-tag rounded-sm px-2.5 py-1.25 font-medium tracking-wider uppercase">
+            <li class="bg-ocean-50 text-azure-deep text-2xs rounded-control px-2.5 py-1.25 font-medium tracking-wider uppercase">
               {item}
             </li>
           ))}
