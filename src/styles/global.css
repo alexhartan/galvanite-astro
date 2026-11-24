@@ -24,7 +24,11 @@
   --color-line: color-mix(in oklab, var(--color-ink) 10%, transparent);
   --color-line-solid: color-mix(in srgb, var(--color-ink) 10%, white);
   --color-line-dark: color-mix(in oklab, white 10%, transparent);
-  --color-line-control: color-mix(in oklab, var(--color-midnight) 15%, transparent);
+  --color-line-control: color-mix(
+    in oklab,
+    var(--color-midnight) 15%,
+    transparent
+  );
   --color-tint: color-mix(in oklab, var(--color-navy) 3%, transparent);
   --color-grid: color-mix(
     in srgb,

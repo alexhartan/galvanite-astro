@@ -47,7 +47,8 @@ const tiers = {
     rule: 'border-b border-line -mx-8 px-8',
     item: 'text-ocean font-medium',
   },
-};---
+};
+---
 
 <Section id={id} tone="dark" data-scene-path={JSON.stringify(camera)}>
   <SectionFrame inverted />
@@ -105,11 +106,7 @@ const tiers = {
                       <span class="font-light">{data.pricePrefix} </span>
                     )}
                     {data.price}
-                    <span
-                      class:list={[
-                        'text-sky mt-3 block text-sm caps',
-                      ]}
-                    >
+                    <span class:list={['text-sky mt-3 block text-sm caps']}>
                       {data.duration}
                     </span>
                   </p>

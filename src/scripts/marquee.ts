@@ -50,7 +50,9 @@ export function initMarquee(root: HTMLElement) {
     if (!drag) {
       boost *= Math.exp(-BOOST_DECAY * dt);
       const target =
-        paused || reducedMotion.matches ? 0 : BASE_SPEED * (1 + boost * SCROLL_BOOST);
+        paused || reducedMotion.matches
+          ? 0
+          : BASE_SPEED * (1 + boost * SCROLL_BOOST);
       speed += (target - speed) * (1 - Math.exp(-SPEED_EASE * dt));
       x -= speed * dt;
       paint();
