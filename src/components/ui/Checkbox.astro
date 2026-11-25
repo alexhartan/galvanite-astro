@@ -5,7 +5,7 @@ interface Props {
   size?: 'md' | 'sm';
 }
 const { name, value, size = 'md' } = Astro.props;
-const box = size === 'sm' ? 'size-4 border' : 'size-6 border-2';
+const box = size === 'sm' ? 'size-4' : 'size-6';
 ---
 
 <span
@@ -16,7 +16,7 @@ const box = size === 'sm' ? 'size-4 border' : 'size-6 border-2';
     name={name}
     value={value}
     class:list={[
-      'peer border-line-control group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean rounded-control motion-ui focus-ring cursor-pointer appearance-none bg-white transition-colors',
+      'peer border-2 border-line-control group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean rounded-control motion-ui focus-ring cursor-pointer appearance-none bg-white transition-colors',
       box,
     ]}
   />

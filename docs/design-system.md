@@ -39,7 +39,7 @@ Primitives are the brand palette. Use roles for lines and tints.
 | `line` | ink 10% | rules and borders on light |
 | `line-dark` | white 10% | rules and borders on dark |
 | `line-solid` | opaque ink 10% on white | hover borders that overlap other lines |
-| `line-control` | midnight 15% | form field and checkbox borders |
+| `line-control` | midnight 20% | form field and checkbox borders |
 | `tint` | navy 3% | panel gradients (`from-tint to-transparent`) |
 | `grid` | white to ink, set by `hero-scene.ts` | grid marks and hero lines |
 

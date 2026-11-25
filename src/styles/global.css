@@ -26,7 +26,7 @@
   --color-line-dark: color-mix(in oklab, white 10%, transparent);
   --color-line-control: color-mix(
     in oklab,
-    var(--color-midnight) 15%,
+    var(--color-midnight) 20%,
     transparent
   );
   --color-tint: color-mix(in oklab, var(--color-navy) 3%, transparent);
