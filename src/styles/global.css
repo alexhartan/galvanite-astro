@@ -57,7 +57,7 @@
   --text-benefit: clamp(1.2rem, 1.25vw, 1.55rem);
   --text-benefit--line-height: 1.04;
   --text-benefit--letter-spacing: var(--tracking-snug);
-  --text-card: clamp(1.625rem, 6.7cqw, 3rem);
+  --text-card: clamp(1.25rem, 5cqw, 2.25rem);
   --text-card--line-height: 1.13;
   --text-card--letter-spacing: var(--tracking-title);
   --text-price: clamp(1.75rem, 2.1vw, 2.5rem);
@@ -425,7 +425,7 @@
   --case-pad: 5.2cqw;
   --case-media: calc(100cqw * 7 / 8);
   --case-lift: 1.2cqw;
-  --case-open: 600ms var(--ease-out-expo);
+  --case-open: 800ms var(--ease-out-expo);
   @variant 4xl {
     --case-media: 100cqw;
   }
@@ -471,7 +471,7 @@
   transition: opacity 200ms var(--ease-out-soft);
   @variant case-open {
     opacity: 1;
-    transition-duration: 500ms;
+    transition-duration: 700ms;
   }
 }
 
@@ -484,8 +484,8 @@
   @variant case-open {
     opacity: 1;
     translate: 0;
-    transition-duration: 400ms, 600ms;
-    transition-delay: 120ms;
+    transition-duration: 500ms, 800ms;
+    transition-delay: 260ms;
     transition-timing-function: var(--ease-out-soft), var(--ease-out-expo);
   }
 }
@@ -496,7 +496,7 @@
   transition: scale 200ms var(--ease-out-soft);
   @variant case-open {
     scale: 1;
-    transition: scale var(--case-open) 80ms;
+    transition: scale 1200ms var(--ease-in-out-soft) 360ms;
   }
 }
 
@@ -531,7 +531,7 @@
 
 @utility case-stats {
   margin-bottom: 1.5cqw;
-  font-size: clamp(0.875rem, 3.08cqw, 1.25rem);
+  font-size: clamp(0.75rem, 2.3cqw, 0.9375rem);
 }
 
 @utility case-fade {
@@ -540,6 +540,6 @@
   transition: opacity 200ms var(--ease-out-soft);
   @variant case-open {
     opacity: 1;
-    transition-duration: 500ms;
+    transition-duration: 700ms;
   }
 }
