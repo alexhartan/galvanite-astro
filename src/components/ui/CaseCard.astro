@@ -1,8 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { Picture } from 'astro:assets';
-import ArrowIcon from './ArrowIcon.astro';
-import SparkIcon from './SparkIcon.astro';
+import { Image, Picture } from 'astro:assets';
 
 interface Props {
   data: CollectionEntry<'caseStudies'>['data'];
@@ -17,93 +15,68 @@ const Tag = data.href ? 'a' : 'div';
 <article
   data-slide
   aria-hidden={copy ? 'true' : undefined}
-  class:list={['group shrink-0', className]}
+  class:list={['group/case case-card case-motion-none shrink-0', className]}
   style={`--delay: ${Math.min(index, 3) * 150}ms`}
 >
   <Tag
     href={data.href}
     tabindex={copy && data.href ? -1 : undefined}
-    class="block"
+    class="relative block focus-visible:outline-none"
   >
-    <div class="relative overflow-hidden">
-      <div class="reveal-mask">
-        <div class="reveal-zoom">
-          <Picture
-            src={data.image}
-            alt={data.imageAlt}
-            formats={['avif', 'webp']}
-            widths={[400, 600, 800, 1200]}
-            sizes="(min-width: 1024px) 40vw, (min-width: 640px) 60vw, 85vw"
-            quality={78}
-            draggable="false"
-            class="ease-out-soft 4xl:aspect-square aspect-4/3 w-full object-cover transition-transform duration-700 group-hover:scale-104"
-          />
+    <div class="case-frame">
+      <div class="case-photo">
+        <div class="reveal-mask size-full">
+          <div class="reveal-zoom size-full">
+            <Picture
+              src={data.image}
+              alt={data.imageAlt}
+              formats={['avif', 'webp']}
+              widths={[400, 600, 800, 1200]}
+              sizes="(min-width: 1024px) 45vw, (min-width: 640px) 65vw, 90vw"
+              quality={78}
+              draggable="false"
+              pictureAttributes={{ class: 'block size-full' }}
+              class="size-full object-cover"
+            />
+          </div>
         </div>
+        <div
+          aria-hidden="true"
+          class="case-fade absolute inset-x-0 bottom-0 h-1/4"
+        ></div>
       </div>
-      <div
-        aria-hidden="true"
-        class="ease-in-soft absolute top-8 right-8 opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:top-10 lg:right-10"
-      >
-        <svg
-          viewBox="0 0 56 56"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="3"
-          class="ease-out-soft size-10 -translate-x-1/2 translate-y-1/2 text-white transition-transform duration-700 group-hover:translate-0 motion-reduce:translate-0 lg:size-14"
-        >
-          <path d="M2 54 54 2M14 2h40v40"></path>
-        </svg>
-      </div>
+      <div aria-hidden="true" class="case-shade absolute inset-0"></div>
     </div>
-    <div class="relative">
-      <p class="relative text-ink/80 flex items-center font-medium gap-2.5 px-3 py-3.5 opacity-90 transition-opacity group-hover:opacity-100 motion-ui">
+    <div class="4xl:aspect-square relative aspect-8/7">
+      {data.logo && (
+        <Image src={data.logo} alt="" class="case-reveal case-logo" />
+      )}
+      <div class="absolute inset-x-0 bottom-0 text-white">
+        <p
+          data-rotator
+          class="case-reveal case-stats grid leading-tight font-medium"
+        >
+          {data.stats.map((stat, i) => (
+            <span
+              data-active={i === 0 ? '' : undefined}
+              aria-hidden={i === 0 ? undefined : 'true'}
+              class="motion-slow col-start-1 row-start-1 translate-y-2 opacity-0 transition data-active:translate-y-0 data-active:opacity-100 motion-reduce:translate-y-0"
+            >
+              {stat}
+            </span>
+          ))}
+        </p>
         <span
           aria-hidden="true"
-          class="bg-line absolute bottom-0 left-0 -right-12 h-px lg:-right-20"
-        />
-        <SparkIcon class="text-signal size-5 shrink-0" />
-        <span data-rotator class="grid">
-          {data.stats.map((stat, i) => {
-            const cut = stat.indexOf(',') + 1;
-            return (
-              <span
-                data-active={i === 0 ? '' : undefined}
-                aria-hidden={i === 0 ? undefined : 'true'}
-                class="col-start-1 row-start-1 translate-y-2 opacity-0 transition data-active:translate-y-0 data-active:opacity-100 motion-reduce:translate-y-0 motion-slow"
-              >
-                <span class="font-semibold">
-                  {cut ? stat.slice(0, cut) : stat}
-                </span>
-                {cut > 0 && <span class="font-normal">{stat.slice(cut)}</span>}
-              </span>
-            );
-          })}
-        </span>
-      </p>
-      <div>
-        <h3
-          data-split
-          class="text-card text-ink mt-3 font-normal text-balance opacity-90 transition-opacity group-hover:opacity-100 motion-ui"
-        >
-          {data.title}
-        </h3>
-        <ul
-          class="reveal-after mt-4 flex -translate-y-2 flex-wrap gap-2 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0 motion-slow"
-          aria-label="Scope"
-        >
-          {data.scope.map((item) => (
-            <li class="bg-ocean-50 text-azure-deep text-2xs rounded-control px-2.5 py-1.25 font-medium tracking-wider uppercase">
-              {item}
-            </li>
-          ))}
-        </ul>
-        {data.href && (
-          <span class="text-ink border-ink mt-6 inline-flex items-center gap-2 border-b-2 pb-1 text-sm font-semibold">
-            Read the case study
-            <ArrowIcon />
-          </span>
-        )}
+          class="case-rule block h-px bg-white/50"
+        ></span>
       </div>
     </div>
+    <h3
+      data-split
+      class="case-title text-card text-ocean relative font-normal text-balance"
+    >
+      {data.title}
+    </h3>
   </Tag>
 </article>
