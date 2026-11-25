@@ -12,17 +12,27 @@ interface Props {
 const { id = 'intro', label, statement } = Astro.props;
 const fullText = statement.map(({ text }) => text).join('');
 let letterIndex = 0;
-const segments = statement.map(({ text, strong }) => ({
-  strong,
-  words: text.split(/(\s+)/).map((part) =>
-    /^\s+$/.test(part)
-      ? { space: part, letters: [] }
-      : {
-          space: '',
-          letters: [...part].map((char) => ({ char, index: letterIndex++ })),
-        },
-  ),
-}));
+type Run = { strong?: boolean; letters: { char: string; index: number }[] };
+const words: ({ space: string } | { runs: Run[] })[] = [];
+let word: { runs: Run[] } | null = null;
+for (const { text, strong } of statement) {
+  for (const part of text.split(/(\s+)/).filter(Boolean)) {
+    if (/^\s+$/.test(part)) {
+      words.push({ space: part });
+      word = null;
+      continue;
+    }
+    const run = {
+      strong,
+      letters: [...part].map((char) => ({ char, index: letterIndex++ })),
+    };
+    if (word) word.runs.push(run);
+    else {
+      word = { runs: [run] };
+      words.push(word);
+    }
+  }
+}
 const reveal = letterIndex + 6;
 ---
 
@@ -38,26 +48,26 @@ const reveal = letterIndex + 6;
           style={`--n: ${reveal}`}
         >
           <span class="sr-only">{fullText}</span>
-          {segments.map(({ strong, words }) => {
-            const Tag = strong ? 'strong' : 'span';
-            return (
-              <Tag class:list={[strong && 'font-medium']} aria-hidden="true">
-                {words.map(({ space, letters }) =>
-                  space ? (
-                    space
-                  ) : (
-                    <span class="inline-block whitespace-nowrap">
+          {words.map((item) =>
+            'space' in item ? (
+              item.space
+            ) : (
+              <span class="inline-block whitespace-nowrap" aria-hidden="true">
+                {item.runs.map(({ strong, letters }) => {
+                  const Tag = strong ? 'strong' : 'span';
+                  return (
+                    <Tag class:list={[strong && 'font-medium']}>
                       {letters.map(({ char, index }) => (
                         <span class="reveal-letter" style={`--i: ${index}`}>
                           {char}
                         </span>
                       ))}
-                    </span>
-                  ),
-                )}
-              </Tag>
-            );
-          })}
+                    </Tag>
+                  );
+                })}
+              </span>
+            ),
+          )}
         </p>
       </div>
     </Container>

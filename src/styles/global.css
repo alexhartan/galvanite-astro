@@ -611,3 +611,34 @@
   background-color: var(--color-abyss);
   box-shadow: 0 0 10px var(--color-abyss);
 }
+
+@utility page-hero {
+  min-height: 40svh;
+}
+
+@utility prose-body {
+  & > * + * {
+    margin-top: --spacing(5);
+  }
+  & h3 {
+    padding-top: --spacing(4);
+    color: var(--color-ocean);
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+    font-weight: var(--font-weight-medium);
+  }
+  & ol {
+    list-style: decimal;
+    padding-left: --spacing(5);
+  }
+  & li + li {
+    margin-top: --spacing(2);
+  }
+  & li {
+    padding-left: --spacing(1);
+  }
+  & strong {
+    color: var(--color-ink);
+    font-weight: var(--font-weight-medium);
+  }
+}

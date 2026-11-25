@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ClosingCta from '../components/sections/ClosingCta.astro';
+import FeatureGrid from '../components/sections/FeatureGrid.astro';
+import Intro from '../components/sections/Intro.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import TextBlock from '../components/sections/TextBlock.astro';
+import SectionLink from '../components/ui/SectionLink.astro';
+import { closing } from '../data/home';
+import {
+  hero,
+  label,
+  overview,
+  process,
+  sections,
+  services,
+  type SectionId,
+} from '../data/sandbox';
+
+const link = (id: SectionId) => {
+  const index = sections.findIndex((section) => section.id === id);
+  return {
+    href: `#${id}`,
+    label: sections[index]!.label,
+    position: sections.length - 1 - index,
+  };
+};
+---
+
+<BaseLayout title="Services | Galvanite" description={hero.description} noindex>
+  <SiteHeader slot="header" />
+  <PageHero {...hero} />
+  <SectionLink {...link('overview')} />
+  <Intro id="overview" label={label('overview')} {...overview} />
+  <SectionLink {...link('services')} />
+  <FeatureGrid id="services" label={label('services')} {...services} />
+  <SectionLink {...link('process')} />
+  <TextBlock id="process" label={label('process')} {...process}>
+    <p>
+      Every engagement starts with a 30-minute call. We look at your current
+      site together, agree on what is not working and decide whether a sprint or
+      a full program fits.
+    </p>
+    <h3>What a typical project looks like</h3>
+    <ol>
+      <li>
+        <strong>Discovery.</strong> Interviews with your team and customers, and
+        a review of competitors and existing material.
+      </li>
+      <li>
+        <strong>Positioning.</strong> One workshop to agree on audience, problem
+        and proof, then a short messaging document.
+      </li>
+      <li>
+        <strong>Design.</strong> Identity and key pages, reviewed weekly with
+        your team.
+      </li>
+      <li>
+        <strong>Build and launch.</strong> Development, CMS setup, QA and a
+        handoff session so your team owns the result.
+      </li>
+    </ol>
+    <p>
+      Most projects take four to eight weeks. See the{' '}
+      <a href={`${import.meta.env.BASE_URL}#engagements`}>
+        pricing on the homepage
+      </a>{' '}
+      for the details of each engagement.
+    </p>
+  </TextBlock>
+  <ClosingCta {...closing} />
+</BaseLayout>

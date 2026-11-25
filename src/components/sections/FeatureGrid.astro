@@ -1,0 +1,53 @@
+---
+import ColumnLines from '../ui/ColumnLines.astro';
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Section from '../ui/Section.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
+
+interface Props {
+  id: string;
+  label: string;
+  heading: string;
+  items: { title: string; summary: string }[];
+}
+const { id, label, heading, items } = Astro.props;
+---
+
+<Section id={id} labelledby={`${id}-heading`} class="py-20 lg:py-36">
+  <SectionFrame edge={false} top={false} />
+  <Container class="@container">
+    <h2
+      id={`${id}-heading`}
+      class="text-intent lg:text-intent-lg 4xl:text-intent-xl text-ocean text-center leading-none font-light text-balance"
+    >
+      {heading}
+    </h2>
+  </Container>
+  <div data-guide class="border-line relative mt-6 border-t">
+    <Container>
+      <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
+      <div class="relative grid sm:grid-cols-2 lg:grid-cols-3">
+        <ColumnLines
+          class="sm:grid-cols-2 lg:grid-cols-3"
+          columns={['hidden lg:block', 'hidden sm:block', '']}
+          mark="z-10 -mt-px"
+        />
+        {items.map(({ title, summary }) => (
+          <article class="group relative px-10 pt-10 pb-12">
+            <div
+              aria-hidden="true"
+              class="from-tint motion-ui pointer-events-none absolute inset-0 bg-linear-to-b to-transparent opacity-0 transition-opacity group-hover:opacity-100"
+            />
+            <h3 class="text-azure-deep text-benefit group-hover:text-ink motion-ui relative font-medium whitespace-pre-line transition-colors">
+              {title}
+            </h3>
+            <p class="text-graphite/80 relative mt-2 text-sm text-balance">
+              {summary}
+            </p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </div>
+</Section>

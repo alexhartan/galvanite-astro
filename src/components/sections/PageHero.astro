@@ -1,0 +1,80 @@
+---
+import camera from '../../scripts/pricing-camera.json';
+import Container from '../ui/Container.astro';
+import SplitHeading from '../ui/SplitHeading.astro';
+
+interface Props {
+  crumbs: { label: string; href?: string }[];
+  lead: string;
+  emphasis?: string;
+  description: string;
+}
+const { crumbs, lead, emphasis, description } = Astro.props;
+---
+
+<div
+  data-hero
+  aria-hidden="true"
+  class="from-space-950 to-space-900 fixed inset-0 bg-linear-to-br"
+>
+  <canvas
+    data-hero-canvas
+    class="ease-out-soft absolute inset-0 size-full opacity-0 transition-opacity duration-700 data-ready:opacity-100"
+  ></canvas>
+</div>
+<section
+  aria-labelledby="page-title"
+  data-scene-path={JSON.stringify(camera)}
+  class="page-hero relative flex flex-col justify-end text-white"
+>
+  <Container class="pointer-events-none absolute inset-0">
+    <div class="top-nav left-gutter bg-grid/10 absolute bottom-0 w-px"></div>
+  </Container>
+  <Container class="@container pt-nav relative pb-12 lg:pb-14">
+    <nav aria-label="Breadcrumb" class="pt-10">
+      <ol class="text-sky caps flex flex-wrap gap-2 text-2xs font-semibold">
+        {crumbs.map(({ label, href }, index) => (
+          <li class="flex items-center gap-2">
+            {index > 0 && (
+              <span aria-hidden="true" class="text-sky/50">
+                /
+              </span>
+            )}
+            {href ? (
+              <a
+                href={href}
+                class="hover:text-white focus-visible:outline-sky motion-ui focus-ring transition-colors"
+              >
+                {label}
+              </a>
+            ) : (
+              <span aria-current="page">{label}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <SplitHeading
+      as="h1"
+      id="page-title"
+      lead={lead}
+      emphasis={emphasis}
+      emphasisClass="font-semibold"
+      class="text-statement lg:text-section mt-4 leading-none font-extralight text-balance text-white"
+    />
+    <p class="max-w-lead text-lead mt-5 text-white/85">{description}</p>
+  </Container>
+</section>
+
+<script>
+  import { initHeroScene } from '../../scripts/hero-scene';
+
+  const canvas = document.querySelector<HTMLCanvasElement>(
+    '[data-hero] [data-hero-canvas]',
+  );
+  if (canvas)
+    initHeroScene(
+      canvas,
+      document.querySelector<HTMLCanvasElement>('[data-nav-window]'),
+    );
+</script>
