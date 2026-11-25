@@ -76,7 +76,7 @@
   --text-section--font-weight: 200;
   --text-stat: clamp(2.9rem, 3.6vw, 4.2rem);
   --text-stat--line-height: var(--leading-heading);
-  --text-stat--letter-spacing: var(--tracking-display);
+  --text-stat--letter-spacing: -0.06em;
   --text-statement: clamp(2rem, 3.23vw, 3.875rem);
   --text-statement--line-height: var(--leading-statement);
   --text-statement--letter-spacing: var(--tracking-headline);
