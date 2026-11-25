@@ -143,11 +143,19 @@
 
   --animate-marquee: marquee 120s linear infinite;
   --animate-marquee-slow: marquee 168s linear infinite;
+  --animate-marquee-up: marquee-y 90s linear infinite;
+  --animate-marquee-down: marquee-y 90s linear infinite reverse;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
 
   @keyframes marquee {
     to {
       transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes marquee-y {
+    to {
+      transform: translate3d(0, -50%, 0);
     }
   }
 

@@ -89,6 +89,7 @@ Each `text-*` token carries its own line-height and letter-spacing. Do not add `
 | `ease-in-soft` | CaseCard arrow fade-in |
 | `duration-200`, `duration-700` | section links; image zoom, canvas fade, carousel |
 | `animate-marquee`, `animate-marquee-slow` | logo marquees |
+| `animate-marquee-up`, `animate-marquee-down` | slant gallery columns (90s loop) |
 
 Both motion utilities stop transitions when the user prefers reduced motion.
 
@@ -119,6 +120,7 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `ReportDialog` | `id`, `action` | modal opened by the self-check form on a valid submit; filled by `assess.ts` |
 | `GridMark`, `ColumnLines` | | grid decoration |
 | `LogoMarquee` | `large`, `class` | client logo marquee |
+| `SlantGallery` | `class` (position) | two skewed (-15°) columns of portrait tiles, marquee up and down; placeholder fills for now |
 | `CaseCard` | `data`, `index`, `copy`, `class` | case study thumbnail with the hover expansion (see below) |
 | `ArrowIcon`, `SparkIcon`, `Logo` | `class` | icons |
 
