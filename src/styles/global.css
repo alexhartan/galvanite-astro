@@ -425,7 +425,6 @@
   --case-pad: 5.2cqw;
   --case-media: 90cqw;
   --case-gap: 4.2cqw;
-  --case-lift: 1.6cqw;
   --case-rule-rise: 0;
   --case-open: 800ms var(--ease-out-expo);
   @variant 4xl {
@@ -438,7 +437,7 @@
   top: 0;
   left: calc(-1 * var(--case-pad));
   right: calc(-1 * var(--case-pad));
-  bottom: calc(var(--case-lift) + 0.22 * var(--text-card) - var(--case-pad));
+  bottom: calc(0.32 * var(--text-card) - var(--case-gap));
   clip-path: inset(
     0 var(--case-pad) calc(100% - var(--case-media)) var(--case-pad)
   );
@@ -495,13 +494,10 @@
 }
 
 @utility case-title {
-  margin-top: calc(var(--case-gap) - 0.21em);
-  transition:
-    color 300ms var(--ease-out-soft),
-    translate var(--case-open);
+  margin-top: calc(var(--case-gap) - 0.2em);
+  transition: color 300ms var(--ease-out-soft);
   @variant case-open {
     color: white;
-    translate: 0 calc(-1 * var(--case-lift));
   }
 }
 
