@@ -54,7 +54,7 @@
   --text-question--line-height: 1.35;
   --text-lead: clamp(1.125rem, 1.25vw, 1.5rem);
   --text-lead--line-height: 1.42;
-  --text-benefit: clamp(1.2rem, 1.25vw, 1.55rem);
+  --text-benefit: clamp(1.475rem, 1.53vw, 1.9rem);
   --text-benefit--line-height: 1.04;
   --text-benefit--letter-spacing: var(--tracking-snug);
   --text-card: clamp(1.3125rem, 5.4cqw, 2.4rem);
@@ -526,7 +526,7 @@
 
 @utility case-stats {
   margin-bottom: 1.6cqw;
-  font-size: clamp(0.75rem, 2.3cqw, 0.9375rem);
+  font-size: clamp(0.8125rem, calc(2.3cqw + 1px), 1rem);
 }
 
 @utility case-media {
