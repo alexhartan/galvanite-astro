@@ -425,8 +425,8 @@
   --case-pad: 5.2cqw;
   --case-media: 90cqw;
   --case-gap: 4.2cqw;
-  --case-lift: 2.4cqw;
-  --case-rule-rise: 2.7cqw;
+  --case-lift: 1.6cqw;
+  --case-rule-rise: 0;
   --case-open: 800ms var(--ease-out-expo);
   @variant 4xl {
     --case-media: 100cqw;
@@ -524,7 +524,7 @@
 }
 
 @utility case-stats {
-  margin-bottom: 1.9cqw;
+  margin-bottom: 1.6cqw;
   font-size: clamp(0.75rem, 2.3cqw, 0.9375rem);
 }
 
