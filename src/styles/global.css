@@ -343,7 +343,7 @@
   --t: clamp(0, (var(--p, 1) * var(--n) - var(--i)) / 10, 1);
   --wave: color-mix(
     in oklab,
-    var(--color-signal) calc(clamp(0, var(--t) * 2.5, 1) * 100%),
+    var(--color-sky) calc(clamp(0, var(--t) * 2.5, 1) * 100%),
     transparent
   );
   color: color-mix(
