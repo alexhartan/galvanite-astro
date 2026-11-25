@@ -521,10 +521,10 @@
 @utility case-logo {
   --case-reveal-from: -0.5rem;
   position: absolute;
-  top: 4.75cqw;
+  top: calc(8.1cqw - var(--logo-h) / 2);
   right: 0;
   width: auto;
-  height: 7.3cqw;
+  height: var(--logo-h);
 }
 
 @utility case-stats {
