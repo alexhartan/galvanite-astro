@@ -126,7 +126,7 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 
 ## Mission globe
 
-`Intro` with `globe` draws a dotted sphere on a canvas (`scripts/dot-globe.ts`): 4,000 Fibonacci points, front hemisphere only, `text-graphite` at 6 to 85% opacity. Edge-on and back-lit dots are brightest, so the visible left limb reads as a crescent echoing the hero planet. Center sits right of and low in the section, so only the limb crosses the box; the section clips the rest. Spins slowly, tilts toward the mouse and brightens dots near it; pauses off-screen, static with reduced motion, hidden below lg.
+`Intro` with `globe` draws a dotted continuation of the background planet (`scripts/dot-globe.ts`). `hero-scene.ts` writes the planet's live screen centre, radius and sun direction to `scripts/planet.ts` every frame, using the shader's camera math. The globe reads it each frame and draws relative to the section, so it stays locked to the fixed planet while the section scrolls. 3,200 Fibonacci points, front hemisphere, `text-graphite` at 3 to 32% opacity (light gray to transparent), lit on the sun side. Spins slowly, tilts toward the mouse and brightens dots near it; pauses off-screen, no spin with reduced motion, hidden below lg.
 
 ## Secondary pages
 
