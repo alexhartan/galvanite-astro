@@ -75,7 +75,7 @@ Each `text-*` token carries its own line-height and letter-spacing. Do not add `
 
 ### Radius, shadow, blur
 
-`rounded-control` (checkbox, pills), `rounded-surface` (cards, fields). Buttons are square. `shadow-card`, `backdrop-blur-bar`.
+`rounded-control` (checkbox, pills), `rounded-surface` (cards, fields). Buttons are square. `backdrop-blur-bar`. No shadows.
 
 ### Motion
 
