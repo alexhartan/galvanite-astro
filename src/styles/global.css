@@ -523,8 +523,8 @@
   position: absolute;
   top: 4.75cqw;
   right: 0;
-  width: 30.6cqw;
-  height: auto;
+  width: auto;
+  height: 7.3cqw;
 }
 
 @utility case-stats {
