@@ -109,7 +109,7 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | Component | Props | Use |
 |---|---|---|
 | `Section` | `id`, `tone`, `labelledby`, `clip`, any section attribute | every section except Hero |
-| `SectionFrame` | `inverted`, `edge` (`true`, `false`, `'always'`), `top`, `bottom`, `class` | page rules and grid marks |
+| `SectionFrame` | `inverted`, `edge` (`true`, `false`, `'always'`), `top`, `bottom`, `markRight`, `class` | page rules and grid marks |
 | `Container` | `class` | page width and gutter |
 | `Eyebrow` | `id`, `inverted`, `class` | section label (aligned to the statement cap height) |
 | `SplitHeading` | `as`, `id`, `lead`, `emphasis`, `class`, `leadClass`, `emphasisClass` | heading with a bold second part |
