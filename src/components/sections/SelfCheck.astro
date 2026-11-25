@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import Checkbox from '../ui/Checkbox.astro';
 import Container from '../ui/Container.astro';
+import InlineField from '../ui/InlineField.astro';
+import ReportDialog from '../ui/ReportDialog.astro';
 import Section from '../ui/Section.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 
@@ -23,78 +25,67 @@ const checks = (await getCollection('checks')).sort(
     data-guide
     class="border-line from-tint to-transparent relative border-t bg-linear-to-b"
   >
-    <Container class="grid gap-12 pt-20 pb-30 lg:grid-cols-2 lg:items-start lg:gap-0 lg:pt-28 lg:pb-42">
-      <div>
-        <h2
-          id={`${id}-heading`}
-          class="text-assess text-ocean font-normal whitespace-pre-line"
-        >
-          {heading}
-        </h2>
-        <p class="text-graphite/80 mt-3 max-w-sm text-base">{description}</p>
-      </div>
-      <form action={action} novalidate data-assess class="lg:px-5">
-        <fieldset aria-describedby={`${id}-issues-error`}>
-          <legend class="sr-only">Select the issues that ring true</legend>
-          <ul class="grid gap-3 sm:grid-cols-2" role="list">
-            {checks.map(({ id: key, data }) => (
-              <li>
-                <label class="group border-line-control hover:border-glacier hover:bg-white has-checked:border-glacier has-checked:bg-glacier-tint issues-error:border-alert/60 flex h-full cursor-pointer items-center gap-4 rounded-surface border bg-white px-4 py-5 transition-colors motion-ui">
-                  <Checkbox name="issues" value={key} />
-                  <span class="text-ocean text-base leading-tight font-medium text-balance italic">
-                    {data.statement}
-                  </span>
-                </label>
-              </li>
-            ))}
-          </ul>
-          <p
-            id={`${id}-issues-error`}
-            data-issues-message
-            hidden
-            class="text-alert mt-3 text-sm"
-          >
-            Please select at least one item from the list
+    <Container class="pt-20 pb-30 lg:pt-28 lg:pb-42">
+      <div class="mx-auto w-full lg:w-2/3 xl:w-1/2">
+        <div class="text-center">
+          <h2 id={`${id}-heading`} class="text-assess text-ocean font-normal">
+            {heading}
+          </h2>
+          <p class="text-graphite/80 mt-3 text-base text-balance">
+            {description}
           </p>
-        </fieldset>
-        <div class="border-line-control hover:border-sky/50 focus-within:border-sky field-error:border-alert/60 mt-5 flex flex-col gap-1.5 rounded-surface border bg-white p-1.5 transition-colors sm:flex-row motion-ui">
-          <label for={`${id}-url`} class="sr-only">
-            Company website
-          </label>
-          <input
-            id={`${id}-url`}
-            type="text"
-            name="website"
-            required
-            aria-describedby={`${id}-url-error`}
-            autocomplete="url"
-            inputmode="url"
-            placeholder="yourwebsite.com"
-            class="text-ocean placeholder:text-ocean/33 min-h-11 min-w-0 flex-1 bg-transparent px-2.5 text-2xl font-normal outline-none"
-          />
-          <button
-            type="submit"
-            class="bg-signal text-ink focus-visible:outline-ocean min-h-11 cursor-pointer px-12 text-sm font-semibold transition-opacity hover:opacity-90 motion-ui focus-ring"
-          >
-            Get the Report
-          </button>
         </div>
-        <p
-          id={`${id}-url-error`}
-          data-url-message
-          hidden
-          class="text-alert mt-2 text-sm"
-        >
-          Please enter a valid website URL
-        </p>
-        <label class="group mt-5 flex min-h-11 w-fit cursor-pointer items-center gap-4">
-          <Checkbox name="audit" value="yes" />
-          <span class="text-ocean text-base leading-tight font-medium">
-            Include a free technical audit
-          </span>
-        </label>
-      </form>
+        <form action={action} novalidate data-assess class="mt-8">
+          <fieldset aria-describedby={`${id}-issues-error`}>
+            <legend class="sr-only">Select the issues that ring true</legend>
+            <ul class="grid gap-3 sm:grid-cols-2" role="list">
+              {checks.map(({ id: key, data }) => (
+                <li>
+                  <label class="group border-line-control hover:border-glacier has-checked:border-glacier has-checked:bg-glacier-tint issues-error:border-alert/60 rounded-surface motion-ui flex h-full cursor-pointer items-center gap-4 border bg-white px-4 py-5 transition-colors hover:bg-white">
+                    <Checkbox name="issues" value={key} />
+                    <span
+                      data-statement
+                      class="text-ocean text-base leading-tight font-medium text-balance italic"
+                    >
+                      {data.statement}
+                    </span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+            <p
+              id={`${id}-issues-error`}
+              data-issues-message
+              hidden
+              class="text-alert mt-3 text-sm"
+            >
+              Please select at least one item from the list
+            </p>
+          </fieldset>
+          <div class="mt-5">
+            <InlineField
+              id={`${id}-url`}
+              name="website"
+              label="Company website"
+              placeholder="yourwebsite.com"
+              autocomplete="url"
+              inputmode="url"
+              describedby={`${id}-url-error`}
+              action="Get the Report"
+            />
+          </div>
+          <p
+            id={`${id}-url-error`}
+            data-url-message
+            hidden
+            class="text-alert mt-2 text-sm"
+          >
+            Please enter a valid website URL
+          </p>
+        </form>
+      </div>
     </Container>
+    <ReportDialog id={`${id}-report`} action={action} />
   </div>
 </Section>
 
@@ -104,6 +95,9 @@ const checks = (await getCollection('checks')).sort(
   for (const form of document.querySelectorAll<HTMLFormElement>(
     '[data-assess]',
   )) {
-    initAssess(form);
+    const dialog = form
+      .closest('section')
+      ?.querySelector<HTMLDialogElement>('[data-report-dialog]');
+    initAssess(form, dialog ?? null);
   }
 </script>

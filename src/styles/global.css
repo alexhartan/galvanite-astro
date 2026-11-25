@@ -539,3 +539,60 @@
   inset-inline: 0;
   bottom: var(--case-rule-rise);
 }
+
+@utility report-dialog {
+  width: min(36rem, 100% - 2rem);
+  max-width: none;
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  opacity: 0;
+  translate: 0 1rem;
+  transition:
+    opacity 200ms var(--ease-out-soft),
+    translate 200ms var(--ease-out-soft),
+    overlay 200ms allow-discrete,
+    display 200ms allow-discrete;
+  &[open] {
+    opacity: 1;
+    translate: 0;
+    transition-duration: 400ms;
+    @starting-style {
+      opacity: 0;
+      translate: 0 1rem;
+    }
+  }
+  &::backdrop {
+    background-color: color-mix(
+      in oklab,
+      var(--color-space-950) 70%,
+      transparent
+    );
+    backdrop-filter: blur(var(--blur-bar));
+    opacity: 0;
+    transition:
+      opacity 200ms var(--ease-out-soft),
+      overlay 200ms allow-discrete,
+      display 200ms allow-discrete;
+  }
+  &[open]::backdrop {
+    opacity: 1;
+    transition-duration: 400ms;
+    @starting-style {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    &::backdrop {
+      transition: none;
+    }
+  }
+}
+
+@layer base {
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+}

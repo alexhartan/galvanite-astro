@@ -59,9 +59,9 @@ export const testimonials = { heading: 'Don’t take our word for it' };
 export const why = { heading: 'Built with intent' };
 
 export const check = {
-  heading: 'Let’s assess your\nbrand & website',
+  heading: 'Assess your brand & website',
   description:
-    'Select the issues that ring true, and enter your company’s website to get started.',
+    'Select everything that rings true, and enter your company’s website to get started.',
 };
 
 export const faq = { heading: 'Questions,\nanswered' };

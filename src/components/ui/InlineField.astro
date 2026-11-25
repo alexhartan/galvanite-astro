@@ -1,0 +1,49 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  action: string;
+  type?: HTMLAttributes<'input'>['type'];
+  placeholder?: string;
+  autocomplete?: HTMLAttributes<'input'>['autocomplete'];
+  inputmode?: HTMLAttributes<'input'>['inputmode'];
+  describedby?: string;
+}
+const {
+  id,
+  name,
+  label,
+  action,
+  type = 'text',
+  placeholder,
+  autocomplete,
+  inputmode,
+  describedby,
+} = Astro.props;
+---
+
+<div class="border-line-control hover:border-sky/50 focus-within:border-sky field-error:border-alert/60 rounded-surface motion-ui flex flex-col gap-1.5 border bg-white p-1.5 transition-colors sm:flex-row">
+  <label for={id} class="sr-only">
+    {label}
+  </label>
+  <input
+    id={id}
+    type={type}
+    name={name}
+    required
+    aria-describedby={describedby}
+    autocomplete={autocomplete}
+    inputmode={inputmode}
+    placeholder={placeholder}
+    class="text-ocean placeholder:text-ocean/33 min-h-11 min-w-0 flex-1 bg-transparent px-2.5 text-2xl font-normal outline-none"
+  />
+  <button
+    type="submit"
+    class="bg-signal text-ink focus-visible:outline-ocean motion-ui focus-ring min-h-11 cursor-pointer px-12 text-sm font-semibold transition-opacity hover:opacity-90"
+  >
+    {action}
+  </button>
+</div>
