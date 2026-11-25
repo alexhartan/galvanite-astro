@@ -8,9 +8,8 @@ interface Props {
   id?: string;
   label: string;
   statement: { text: string; strong?: boolean }[];
-  globe?: boolean;
 }
-const { id = 'intro', label, statement, globe = false } = Astro.props;
+const { id = 'intro', label, statement } = Astro.props;
 const fullText = statement.map(({ text }) => text).join('');
 let letterIndex = 0;
 type Run = { strong?: boolean; letters: { char: string; index: number }[] };
@@ -40,13 +39,6 @@ const reveal = letterIndex + 6;
 <Section id={id}>
   <SectionFrame edge={false} />
   <div data-guide class="border-line relative overflow-clip border-t">
-    {globe && (
-      <canvas
-        data-dot-globe
-        aria-hidden="true"
-        class="text-graphite pointer-events-none absolute inset-0 size-full max-lg:hidden"
-      />
-    )}
     <Container class="@container 4xl:pb-60 py-48 lg:py-80">
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
       <div data-parallax="0.25" class="translate-y-(--shift)">
@@ -84,12 +76,7 @@ const reveal = letterIndex + 6;
 
 <script>
   import '../../scripts/parallax';
-  import { initDotGlobe } from '../../scripts/dot-globe';
   import { initReveal } from '../../scripts/letter-reveal';
-
-  document
-    .querySelectorAll<HTMLCanvasElement>('[data-dot-globe]')
-    .forEach((canvas) => initDotGlobe(canvas));
 
   for (const element of document.querySelectorAll<HTMLElement>(
     '[data-reveal]',

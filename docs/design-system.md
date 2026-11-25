@@ -124,10 +124,6 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `CaseCard` | `data`, `index`, `copy`, `class` | case study thumbnail with the hover expansion (see below) |
 | `ArrowIcon`, `SparkIcon`, `Logo` | `class` | icons |
 
-## Mission globe
-
-`Intro` with `globe` draws a dotted sphere on a canvas (`scripts/dot-globe.ts`): 4,000 Fibonacci points, front hemisphere only, `text-graphite` at 6 to 85% opacity. Edge-on and back-lit dots are brightest, so the visible left limb reads as a crescent echoing the hero planet. Center sits right of and low in the section, so only the limb crosses the box; the section clips the rest. Spins slowly, tilts toward the mouse and brightens dots near it; pauses off-screen, static with reduced motion, hidden below lg.
-
 ## Secondary pages
 
 Template: `src/pages/sandbox.astro` (noindex, out of the sitemap), copy in `src/data/sandbox.ts`.
