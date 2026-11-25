@@ -20,7 +20,7 @@ export function initAssess(
     url.setAttribute('aria-invalid', String(error));
     urlMessage.hidden = !error;
   };
-  const report = dialog ? initReport(dialog, url) : null;
+  const report = dialog ? initReport(dialog) : null;
   form.addEventListener('submit', (event) => {
     const noIssues = !boxes.some((box) => box.checked);
     const badUrl = !DOMAIN.test(url.value.trim());
@@ -54,7 +54,7 @@ export function initAssess(
   url.addEventListener('input', () => setUrl(false));
 }
 
-function initReport(dialog: HTMLDialogElement, url: HTMLInputElement) {
+function initReport(dialog: HTMLDialogElement) {
   const list = dialog.querySelector<HTMLElement>('[data-report-issues]');
   const template = dialog.querySelector<HTMLTemplateElement>(
     '[data-report-issue]',
@@ -64,10 +64,6 @@ function initReport(dialog: HTMLDialogElement, url: HTMLInputElement) {
   dialog
     .querySelector('[data-report-close]')
     ?.addEventListener('click', () => dialog.close());
-  dialog.querySelector('[data-report-edit]')?.addEventListener('click', () => {
-    dialog.close();
-    url.focus();
-  });
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog) dialog.close();
   });
@@ -82,7 +78,13 @@ function initReport(dialog: HTMLDialogElement, url: HTMLInputElement) {
         }),
       );
     }
-    if (website) website.textContent = site.replace(/^https?:\/\//i, '');
+    const domain = site
+      .replace(/^https?:\/\//i, '')
+      .replace(/^www\./i, '')
+      .split(/[/?#]/)[0]
+      ?.toLowerCase();
+    if (website && domain) website.textContent = domain;
+    if (email && domain) email.placeholder = `you@${domain}`;
     dialog.showModal();
     email?.focus();
   };

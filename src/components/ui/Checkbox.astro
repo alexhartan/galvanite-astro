@@ -2,16 +2,23 @@
 interface Props {
   name: string;
   value: string;
+  size?: 'md' | 'sm';
 }
-const { name, value } = Astro.props;
+const { name, value, size = 'md' } = Astro.props;
+const box = size === 'sm' ? 'size-4 border' : 'size-6 border-2';
 ---
 
-<span class="relative flex size-6 shrink-0">
+<span
+  class:list={['relative flex shrink-0', size === 'sm' ? 'size-4' : 'size-6']}
+>
   <input
     type="checkbox"
     name={name}
     value={value}
-    class="peer border-line-control group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean rounded-control motion-ui focus-ring size-6 cursor-pointer appearance-none border-2 bg-white transition-colors"
+    class:list={[
+      'peer border-line-control group-hover:border-glacier checked:border-glacier focus-visible:outline-ocean rounded-control motion-ui focus-ring cursor-pointer appearance-none bg-white transition-colors',
+      box,
+    ]}
   />
   <svg
     aria-hidden="true"
