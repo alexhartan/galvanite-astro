@@ -340,10 +340,16 @@
 }
 
 @utility reveal-letter {
-  opacity: clamp(
-    0.15,
-    calc(0.15 + 0.85 * (var(--p, 1) * var(--n) - var(--i)) / 6),
-    1
+  --t: clamp(0, (var(--p, 1) * var(--n) - var(--i)) / 10, 1);
+  --wave: color-mix(
+    in oklab,
+    var(--color-signal) calc(clamp(0, var(--t) * 2.5, 1) * 100%),
+    transparent
+  );
+  color: color-mix(
+    in oklab,
+    currentColor calc(clamp(0, var(--t) * 5 - 3, 1) * 100%),
+    var(--wave)
   );
 }
 
