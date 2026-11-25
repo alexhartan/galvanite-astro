@@ -57,7 +57,7 @@
   --text-benefit: clamp(1.2rem, 1.25vw, 1.55rem);
   --text-benefit--line-height: 1.04;
   --text-benefit--letter-spacing: var(--tracking-snug);
-  --text-card: clamp(1.25rem, 5cqw, 2.25rem);
+  --text-card: clamp(1.3125rem, 5.4cqw, 2.4rem);
   --text-card--line-height: 1.13;
   --text-card--letter-spacing: var(--tracking-title);
   --text-price: clamp(1.75rem, 2.1vw, 2.5rem);
@@ -423,8 +423,10 @@
 @utility case-card {
   container-type: inline-size;
   --case-pad: 5.2cqw;
-  --case-media: calc(100cqw * 7 / 8);
-  --case-lift: 1.2cqw;
+  --case-media: 90cqw;
+  --case-gap: 4.2cqw;
+  --case-lift: 2.4cqw;
+  --case-rule-rise: 2.7cqw;
   --case-open: 800ms var(--ease-out-expo);
   @variant 4xl {
     --case-media: 100cqw;
@@ -488,12 +490,12 @@
   transition: scale 200ms var(--ease-out-soft);
   @variant case-open {
     scale: 1;
-    transition: scale 700ms var(--ease-out-soft) 360ms;
+    transition: scale 1000ms var(--ease-out-soft);
   }
 }
 
 @utility case-title {
-  margin-top: calc(var(--case-pad) - 0.21em);
+  margin-top: calc(var(--case-gap) - 0.21em);
   transition:
     color 300ms var(--ease-out-soft),
     translate var(--case-open);
@@ -522,6 +524,17 @@
 }
 
 @utility case-stats {
-  margin-bottom: 1.5cqw;
+  margin-bottom: 1.9cqw;
   font-size: clamp(0.75rem, 2.3cqw, 0.9375rem);
+}
+
+@utility case-media {
+  position: relative;
+  height: var(--case-media);
+}
+
+@utility case-meta {
+  position: absolute;
+  inset-inline: 0;
+  bottom: var(--case-rule-rise);
 }
