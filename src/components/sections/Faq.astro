@@ -30,23 +30,23 @@ const faqs = await Promise.all(
           aria-hidden="true"
           class="from-abyss bleed-x absolute inset-y-0 bg-linear-to-b to-transparent"
         ></div>
-        <div class="relative mx-auto w-full pt-12 lg:w-2/3 lg:pt-16 xl:w-1/2">
-          <h3 class="text-section pb-10 text-center lg:pb-12">{heading}</h3>
+        <div class="relative mx-auto w-full pt-24 lg:w-2/3 lg:pt-32 xl:w-1/2">
+          <h3 class="text-section pb-5 lg:pb-6">{heading}</h3>
           <ul role="list">
             {faqs.map(({ data, Content }) => (
-              <li class="group relative pointer-fine:hover:z-20">
+              <li class="group border-line-dark relative border-t pointer-fine:hover:z-20">
                 <div
                   aria-hidden="true"
                   class="shadow-card bg-space-950/50 backdrop-blur-bar pointer-events-none absolute inset-0 rounded-surface border border-white/15 opacity-0 transition group-has-open:opacity-100 pointer-fine:group-hover:-translate-y-lift pointer-fine:group-hover:opacity-100 motion-ui"
                 />
                 <details
                   name="faq"
-                  class="details-expand relative pb-3 transition pointer-fine:group-hover:-translate-y-lift motion-ui"
+                  class="details-expand relative transition pointer-fine:group-hover:-translate-y-lift motion-ui"
                 >
-                  <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none text-balance items-center pr-16 pl-6 pt-5 pb-3 text-lg font-light tracking-tight lg:text-question transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
+                  <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none text-balance items-center px-4 py-5 text-lg font-light tracking-tight lg:text-question transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
                     {data.question}
                   </summary>
-                  <div class="text-frost/80 pr-16 pb-3 pl-6 text-base text-pretty prose-links">
+                  <div class="text-frost/80 -mt-2 px-4 pb-5 text-base text-pretty prose-links">
                     <Content />
                   </div>
                 </details>
