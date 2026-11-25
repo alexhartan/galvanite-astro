@@ -114,8 +114,8 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `Eyebrow` | `id`, `inverted`, `class` | section label (aligned to the statement cap height) |
 | `SplitHeading` | `as`, `id`, `lead`, `emphasis`, `class`, `leadClass`, `emphasisClass` | heading with a bold second part |
 | `CtaButton` | `href`, `variant`, `link`, `class` | primary and secondary actions |
-| `Checkbox` | `name`, `value` | custom checkbox; place inside a `label.group` |
-| `InlineField` | `id`, `name`, `label`, `action`, `type`, `placeholder`, `autocomplete`, `inputmode`, `describedby` | input with an attached submit button (website field, report email) |
+| `Checkbox` | `name`, `value`, `size` (`md`, `sm`) | custom checkbox; place inside a `label.group` |
+| `InlineField` | `id`, `name`, `label`, `action`, `type`, `placeholder`, `autocomplete`, `inputmode`, `describedby`, `compact` | input with an attached submit button (website field, report email) |
 | `ReportDialog` | `id`, `action` | modal opened by the self-check form on a valid submit; filled by `assess.ts` |
 | `GridMark`, `ColumnLines` | | grid decoration |
 | `LogoMarquee` | `large`, `class` | client logo marquee |

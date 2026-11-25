@@ -7,13 +7,11 @@ interface Props {
   action: string;
 }
 const { id, action } = Astro.props;
-const check = 'M6 12.5l4 4 8-9';
 ---
 
 <dialog
   data-report-dialog
   aria-labelledby={`${id}-title`}
-  aria-describedby={`${id}-lead`}
   class="report-dialog rounded-surface bg-white p-0 text-left"
 >
   <div class="relative p-6 sm:p-10">
@@ -21,66 +19,55 @@ const check = 'M6 12.5l4 4 8-9';
       type="button"
       data-report-close
       aria-label="Close"
-      class="text-ocean/60 hover:text-ocean focus-visible:outline-ocean motion-ui focus-ring absolute top-3 right-3 flex size-11 cursor-pointer items-center justify-center transition-colors sm:top-4 sm:right-4"
+      class="text-ocean/50 hover:text-ocean focus-visible:outline-ocean motion-ui focus-ring absolute top-2 right-1.5 flex size-11 cursor-pointer items-center justify-center transition-colors"
     >
       <svg
         aria-hidden="true"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
+        stroke-width="1.5"
         stroke-linecap="round"
-        class="size-5"
+        class="size-6"
       >
-        <path d="M6 6l12 12M18 6 6 18"></path>
+        <path d="M4 4l16 16M20 4 4 20"></path>
       </svg>
     </button>
-    <h2 id={`${id}-title`} class="text-ocean pr-10 text-3xl font-normal">
+    <h2
+      id={`${id}-title`}
+      class="text-ocean sm:text-dialog pr-10 text-4xl leading-none font-normal tracking-display"
+    >
       Get your report
     </h2>
-    <p id={`${id}-lead`} class="text-graphite/80 mt-2 text-base">
-      We review your website against the issues you picked and send the findings
-      to your inbox.
-    </p>
-    <div class="border-line-control rounded-surface from-tint mt-6 border bg-linear-to-b to-transparent p-5">
+    <div class="border-line-control rounded-surface from-tint mt-7 border bg-linear-to-b to-transparent p-5">
       <p class="text-ink/60 caps text-xs font-semibold">Selected issues</p>
-      <ul data-report-issues role="list" class="mt-3 space-y-2.5"></ul>
+      <ul data-report-issues role="list" class="mt-2.5 space-y-2"></ul>
       <template data-report-issue>
-        <li class="flex gap-3">
+        <li class="flex gap-2">
           <span aria-hidden="true" class="flex h-lh shrink-0 items-center">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="text-azure-deep size-4"
-            >
-              <path d={check}></path>
+            <svg viewBox="0 0 16 16" class="text-ink/35 size-4">
+              <circle cx="8" cy="8" r="8" fill="currentColor"></circle>
+              <path
+                d="M8 4.5v4"
+                stroke="white"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              ></path>
+              <circle cx="8" cy="11.4" r="1" fill="white"></circle>
             </svg>
           </span>
-          <span class="text-ocean text-base leading-snug font-medium italic"></span>
+          <span class="text-ocean text-base leading-normal"></span>
         </li>
       </template>
-      <div class="border-line mt-5 flex items-end justify-between gap-4 border-t pt-5">
-        <div class="min-w-0">
-          <p class="text-ink/60 caps text-xs font-semibold">Website</p>
-          <p
-            data-report-website
-            class="text-ocean mt-1 truncate text-base font-medium"
-          ></p>
-        </div>
-        <button
-          type="button"
-          data-report-edit
-          class="text-azure-deep hover:text-ocean focus-visible:outline-ocean motion-ui focus-ring -mb-3 min-h-11 shrink-0 cursor-pointer text-sm font-semibold underline underline-offset-4 transition-colors"
-        >
-          Edit
-        </button>
+      <div class="border-line mt-3 border-t pt-5">
+        <p class="text-ink/60 caps text-xs font-semibold">Website</p>
+        <p
+          data-report-website
+          class="text-ocean mt-0.5 truncate text-2xl leading-tight"
+        ></p>
       </div>
     </div>
-    <form action={action} data-report-form class="mt-6">
+    <form action={action} data-report-form class="mt-5">
       <InlineField
         id={`${id}-email`}
         name="email"
@@ -90,12 +77,11 @@ const check = 'M6 12.5l4 4 8-9';
         autocomplete="email"
         inputmode="email"
         action="Send the Report"
+        compact
       />
-      <label class="group mt-5 flex min-h-11 w-fit cursor-pointer items-center gap-4">
-        <Checkbox name="audit" value="yes" />
-        <span class="text-ocean text-base leading-tight font-medium">
-          Include a free technical audit
-        </span>
+      <label class="group mt-0.5 flex min-h-11 w-fit cursor-pointer items-center gap-2.5">
+        <Checkbox name="audit" value="yes" size="sm" />
+        <span class="text-ocean text-base">Include a free technical audit</span>
       </label>
     </form>
   </div>

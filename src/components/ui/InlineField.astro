@@ -11,6 +11,7 @@ interface Props {
   autocomplete?: HTMLAttributes<'input'>['autocomplete'];
   inputmode?: HTMLAttributes<'input'>['inputmode'];
   describedby?: string;
+  compact?: boolean;
 }
 const {
   id,
@@ -22,6 +23,7 @@ const {
   autocomplete,
   inputmode,
   describedby,
+  compact = false,
 } = Astro.props;
 ---
 
@@ -42,7 +44,10 @@ const {
   />
   <button
     type="submit"
-    class="bg-signal text-ink focus-visible:outline-ocean motion-ui focus-ring min-h-11 cursor-pointer px-12 text-sm font-semibold transition-opacity hover:opacity-90"
+    class:list={[
+      'bg-signal text-ink focus-visible:outline-ocean motion-ui focus-ring min-h-11 cursor-pointer text-sm font-semibold transition-opacity hover:opacity-90',
+      compact ? 'px-7' : 'px-12',
+    ]}
   >
     {action}
   </button>
