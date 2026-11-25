@@ -1,6 +1,7 @@
 import savedCamera from './hero-camera.json';
 import { reducedMotion } from './env';
 import { FRAGMENT, VERTEX } from './hero-shader';
+import { updatePlanet } from './planet';
 
 const SMOOTHING_MS = 140;
 const INTRO_MS = 2200;
@@ -271,18 +272,26 @@ export function initHeroScene(
       const mix = (key: keyof CameraPose) =>
         start[key] + (end[key] - start[key]) * t;
       const intro = still ? 1 : clamp01((now - started) / INTRO_MS);
+      const pose = {
+        x: mix('x'),
+        y: mix('y'),
+        rotation: mix('rotation'),
+        zoom: mix('zoom'),
+        sunrise: mix('sunrise'),
+      };
+      updatePlanet(
+        canvas.clientWidth,
+        canvas.clientHeight,
+        pose,
+        pointer.x,
+        pointer.y,
+      );
       renderer.draw(
         1 - Math.pow(1 - intro, 3),
         still ? 0 : (now - started) / 1000,
         pointer.x,
         pointer.y,
-        {
-          x: mix('x'),
-          y: mix('y'),
-          rotation: mix('rotation'),
-          zoom: mix('zoom'),
-          sunrise: mix('sunrise'),
-        },
+        pose,
         path.stars,
       );
       mirror?.();
