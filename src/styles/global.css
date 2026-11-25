@@ -471,7 +471,7 @@
 
 @utility case-reveal {
   opacity: 0;
-  translate: 0 0.5rem;
+  translate: 0 var(--case-reveal-from, 0.5rem);
   transition:
     opacity 150ms var(--ease-out-soft),
     translate 150ms var(--ease-out-soft);
@@ -516,6 +516,7 @@
 }
 
 @utility case-logo {
+  --case-reveal-from: -0.5rem;
   position: absolute;
   top: 4.75cqw;
   right: 0;

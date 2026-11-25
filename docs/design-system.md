@@ -132,9 +132,9 @@ Content: `logo` (optional, white SVG) and `stats` (rotates when there is more th
 These values stay in their component. Do not make global tokens from them.
 
 - Container-query type sizes (`cqi`) and `3xl:` / `4xl:` overrides: tuned to each composition.
-- Section padding other than `*-section`: each section has its own rhythm. FeaturedWork and Pricing padding also absorbs parallax travel.
+- Section padding other than `*-section`: each section has its own rhythm. FeaturedWork padding also absorbs parallax travel.
 - Eyebrow cap offsets and the featured price baseline: optical math tied to specific type sizes.
-- Parallax rates: set per element with `data-parallax="0.25"` (and `data-parallax-from="enter"`).
+- Parallax rates: set per element with `data-parallax="0.25"` (and `data-parallax-from="enter"`). Used on Intro, FeaturedWork and ClosingCta; Pricing has none.
 - SectionLink positions: measured at runtime.
 - Layering: sections `z-10` (they scroll over the fixed hero), section links `z-20`, header and skip link `z-30`.
 - Art SVG geometry (`art/kit.ts`): illustration coordinates in px.
