@@ -120,7 +120,7 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `ReportDialog` | `id`, `action` | modal opened by the self-check form on a valid submit; filled by `assess.ts` |
 | `GridMark`, `ColumnLines` | | grid decoration |
 | `LogoMarquee` | `large`, `class` | client logo marquee |
-| `SlantGallery` | `class` (position) | two skewed (-15°) columns of square tiles, marquee up and down, column pauses on hover, tile lifts with a shadow; placeholder fills for now |
+| `SlantGallery` | `class` (position) | two skewed (-15°) columns of square tiles, marquee up and down, column eases to a stop on hover and ramps back (scripts/gallery.ts), tile lifts 8px with a shadow; bottom and right edges; placeholder fills for now |
 | `CaseCard` | `data`, `index`, `copy`, `class` | case study thumbnail with the hover expansion (see below) |
 | `ArrowIcon`, `SparkIcon`, `Logo` | `class` | icons |
 

@@ -13,14 +13,14 @@ const columns = [
     tiles: ['bg-ink', 'bg-space-800', 'bg-ocean'],
   },
 ];
-const ease = 'ease-out-expo duration-500 motion-reduce:transition-none';
+const ease = 'ease-out-expo duration-700 motion-reduce:transition-none';
 ---
 
 <div aria-hidden="true" class:list={['absolute inset-y-0', className]}>
   <div class="flex h-full -skew-x-15 gap-8">
     {columns.map(({ motion, tiles }) => (
       <div class="flex-1">
-        <div class:list={['pause-on-hover flex flex-col', motion]}>
+        <div data-gallery-track class:list={['flex flex-col', motion]}>
           {[...tiles, ...tiles].map((tile) => (
             <div class="group/tile relative mb-8 aspect-square w-full shrink-0">
               <div
@@ -31,7 +31,7 @@ const ease = 'ease-out-expo duration-500 motion-reduce:transition-none';
               />
               <div
                 class:list={[
-                  'border-sky/25 relative size-full border-b border-l transition-transform group-hover/tile:-translate-x-2.5 group-hover/tile:-translate-y-2.5',
+                  'border-sky/25 relative size-full border-r border-b transition-transform group-hover/tile:-translate-x-2 group-hover/tile:-translate-y-2',
                   tile,
                   ease,
                 ]}
@@ -43,3 +43,11 @@ const ease = 'ease-out-expo duration-500 motion-reduce:transition-none';
     ))}
   </div>
 </div>
+
+<script>
+  import { initGallery } from '../../scripts/gallery';
+
+  document
+    .querySelectorAll<HTMLElement>('[data-gallery-track]')
+    .forEach((track) => initGallery(track));
+</script>
