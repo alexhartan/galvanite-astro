@@ -3,6 +3,7 @@ title: Building trust around an innovative business model
 order: 3
 scope: [Positioning, Identity Design, Full Website Revamp, Marketing Kit]
 image: ../../assets/case-studies/lumenstream.jpg
+logo: ../../assets/case-studies/logos/lumenstream.svg
 imageAlt: LumenStream homepage on a laptop, reading “Smarter lighting that pays for itself”
 stats:
   - 3.6× Organic Search Traffic, within the first 2 months
