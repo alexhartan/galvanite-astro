@@ -19,7 +19,7 @@ const faqs = await Promise.all(
 ---
 
 <Section id={id} tone="dark">
-  <SectionFrame inverted />
+  <SectionFrame inverted class="z-10" />
   <div data-guide class="relative border-t border-line-dark">
     <Container>
       <Eyebrow id={`${id}-label`} inverted>
@@ -28,13 +28,11 @@ const faqs = await Promise.all(
       <div class="relative pb-section">
         <div
           aria-hidden="true"
-          class="from-abyss to-transparent absolute inset-0 border-x border-line-dark bg-linear-to-b"
+          class="from-abyss bleed-x absolute inset-y-0 bg-linear-to-b to-transparent"
         ></div>
-        <div class="relative grid items-start pt-12 lg:grid-cols-3 lg:pt-16">
-          <h3 class="text-section px-8 pb-12 whitespace-pre-line lg:pb-0">
-            {heading}
-          </h3>
-          <ul role="list" class="lg:col-span-2">
+        <div class="relative mx-auto w-full pt-12 lg:w-2/3 lg:pt-16 xl:w-1/2">
+          <h3 class="text-section pb-10 text-center lg:pb-12">{heading}</h3>
+          <ul role="list">
             {faqs.map(({ data, Content }) => (
               <li class="group relative pointer-fine:hover:z-20">
                 <div
