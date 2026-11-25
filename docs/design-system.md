@@ -51,7 +51,7 @@ DM Sans variable. Weights: 200, 300, 400, 500, 600.
 |---|---|
 | UI | `text-2xs`, `text-xs` (no line-height, inherits), `text-sm`, `text-link-sm`, `text-base` |
 | Body | `text-lead`, `text-question` |
-| Titles | `text-benefit`, `text-card`, `text-price`, `text-price-lg` |
+| Titles | `text-benefit`, `text-card` (scales with the case card width, `cqw`), `text-price`, `text-price-lg` |
 | Headings | `text-assess`, `text-section`, `text-stat` |
 | Statements | `text-statement`, `text-statement-lg`, `text-statement-xl`, `text-intent`, `text-intent-lg`, `text-intent-xl` |
 | Display | `text-display`, `text-display-half`, `text-display-hero`, `text-lead-hero`, `text-lead-hero-xl` |
@@ -115,8 +115,17 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `CtaButton` | `href`, `variant`, `link`, `class` | primary and secondary actions |
 | `Checkbox` | `name`, `value` | custom checkbox; place inside a `label.group` |
 | `GridMark`, `ColumnLines` | | grid decoration |
-| `LogoMarquee`, `CaseCard` | | content-driven UI |
+| `LogoMarquee` | `large`, `class` | client logo marquee |
+| `CaseCard` | `data`, `index`, `copy`, `class` | case study thumbnail with the hover expansion (see below) |
 | `ArrowIcon`, `SparkIcon`, `Logo` | `class` | icons |
+
+## Case card
+
+Neutral: 8:7 photo (square at `4xl`) and the title in `ocean` below it. Hover or keyboard focus (`case-open` variant, fine pointers only): the frame grows 5.2% of the card width left and right and down past the title. The photo scales 1.104 from the top center, so its edges stay on the frame edges. A multiply gradient (black 0%, white 25%, white 65%, black 90%) darkens the top and bottom. The title turns white and lifts. The logo, stats and the 1px white/50 rule fade in.
+
+All sizes are in `cqw` of the card (`case-card` sets `container-type`), so the composition stays the same at every width. Timing: frame, photo and title 600ms `ease-out-expo`; shade 500ms; details 400ms with a 120ms delay; everything closes faster (150 to 200ms). The utilities `case-frame`, `case-photo`, `case-shade`, `case-fade`, `case-reveal`, `case-rule`, `case-title`, `case-logo`, `case-stats` and `case-motion-none` live in `global.css`, because Tailwind cannot express the `cqw` math and the group state in classes.
+
+Content: `logo` (optional, white SVG) and `stats` (rotates when there is more than one) in `src/content/case-studies`.
 
 ## Context rules (keep local)
 

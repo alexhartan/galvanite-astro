@@ -57,8 +57,8 @@
   --text-benefit: clamp(1.2rem, 1.25vw, 1.55rem);
   --text-benefit--line-height: 1.04;
   --text-benefit--letter-spacing: var(--tracking-snug);
-  --text-card: clamp(1.625rem, 2.08vw, 2.1125rem);
-  --text-card--line-height: 1.25;
+  --text-card: clamp(1.625rem, 6.7cqw, 3rem);
+  --text-card--line-height: 1.13;
   --text-card--letter-spacing: var(--tracking-title);
   --text-price: clamp(1.75rem, 2.1vw, 2.5rem);
   --text-price--line-height: var(--leading-heading);
@@ -406,5 +406,140 @@
   padding-block: --spacing(40);
   @variant lg {
     padding-block: --spacing(56);
+  }
+}
+
+@custom-variant case-open {
+  @media (hover: hover) and (pointer: fine) {
+    &:is(:where(.group\/case):hover *) {
+      @slot;
+    }
+  }
+  &:is(:where(.group\/case):has(:focus-visible) *) {
+    @slot;
+  }
+}
+
+@utility case-card {
+  container-type: inline-size;
+  --case-pad: 5.2cqw;
+  --case-media: calc(100cqw * 7 / 8);
+  --case-lift: 1.2cqw;
+  --case-open: 600ms var(--ease-out-expo);
+  @variant 4xl {
+    --case-media: 100cqw;
+  }
+}
+
+@utility case-frame {
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--case-pad));
+  right: calc(-1 * var(--case-pad));
+  bottom: calc(var(--case-lift) + 0.22 * var(--text-card) - var(--case-pad));
+  clip-path: inset(
+    0 var(--case-pad) calc(100% - var(--case-media)) var(--case-pad)
+  );
+  pointer-events: none;
+  transition:
+    clip-path var(--case-open),
+    background-color 300ms var(--ease-out-soft);
+  @variant case-open {
+    clip-path: inset(0);
+    pointer-events: auto;
+    background-color: black;
+  }
+}
+
+@utility case-photo {
+  position: absolute;
+  top: 0;
+  left: var(--case-pad);
+  width: 100cqw;
+  height: var(--case-media);
+  transform-origin: top;
+  transition: scale var(--case-open);
+  @variant case-open {
+    scale: 1.104;
+  }
+}
+
+@utility case-shade {
+  background-image: linear-gradient(#000 0%, #fff 25%, #fff 65%, #000 90%);
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 200ms var(--ease-out-soft);
+  @variant case-open {
+    opacity: 1;
+    transition-duration: 500ms;
+  }
+}
+
+@utility case-reveal {
+  opacity: 0;
+  translate: 0 0.5rem;
+  transition:
+    opacity 150ms var(--ease-out-soft),
+    translate 150ms var(--ease-out-soft);
+  @variant case-open {
+    opacity: 1;
+    translate: 0;
+    transition-duration: 400ms, 600ms;
+    transition-delay: 120ms;
+    transition-timing-function: var(--ease-out-soft), var(--ease-out-expo);
+  }
+}
+
+@utility case-rule {
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale 200ms var(--ease-out-soft);
+  @variant case-open {
+    scale: 1;
+    transition: scale var(--case-open) 80ms;
+  }
+}
+
+@utility case-title {
+  margin-top: calc(var(--case-pad) - 0.21em);
+  transition:
+    color 300ms var(--ease-out-soft),
+    translate var(--case-open);
+  @variant case-open {
+    color: white;
+    translate: 0 calc(-1 * var(--case-lift));
+  }
+}
+
+@utility case-motion-none {
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    & * {
+      transition-duration: 0s !important;
+      transition-delay: 0s !important;
+    }
+  }
+}
+
+@utility case-logo {
+  position: absolute;
+  top: 4.75cqw;
+  right: 0;
+  width: 30.6cqw;
+  height: auto;
+}
+
+@utility case-stats {
+  margin-bottom: 1.5cqw;
+  font-size: clamp(0.875rem, 3.08cqw, 1.25rem);
+}
+
+@utility case-fade {
+  background-image: linear-gradient(transparent, #000);
+  opacity: 0;
+  transition: opacity 200ms var(--ease-out-soft);
+  @variant case-open {
+    opacity: 1;
+    transition-duration: 500ms;
   }
 }
