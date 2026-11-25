@@ -1,0 +1,38 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+const columns = [
+  {
+    motion: 'motion-safe:animate-marquee-up',
+    tiles: ['bg-space-800', 'bg-ocean/60', 'bg-azure-deep/40'],
+  },
+  {
+    motion: 'motion-safe:animate-marquee-down',
+    tiles: ['bg-ocean/40', 'bg-space-800', 'bg-azure-deep/60'],
+  },
+];
+---
+
+<div
+  aria-hidden="true"
+  class:list={['pointer-events-none absolute inset-y-0', className]}
+>
+  <div class="flex h-full -skew-x-15 gap-8">
+    {columns.map(({ motion, tiles }) => (
+      <div class="flex-1 overflow-clip">
+        <div class:list={['flex flex-col', motion]}>
+          {[...tiles, ...tiles].map((tile) => (
+            <div
+              class:list={[
+                'ring-sky/25 mb-8 aspect-4/5 w-full shrink-0 ring-1 ring-inset',
+                tile,
+              ]}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
