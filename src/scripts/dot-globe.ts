@@ -1,10 +1,15 @@
 import { reducedMotion } from './env';
-import { planet } from './planet';
 
-const COUNT = 3200;
+const COUNT = 4000;
 const SPIN = 0.035;
 const TILT = 0.38;
+const LIGHT = normalize([-0.85, -0.35, -0.4]);
 const GOLDEN = Math.PI * (3 - Math.sqrt(5));
+
+function normalize([x, y, z]: number[]) {
+  const l = Math.hypot(x!, y!, z!);
+  return [x! / l, y! / l, z! / l] as const;
+}
 
 const points = Array.from({ length: COUNT }, (_, i) => {
   const y = 1 - (i / (COUNT - 1)) * 2;
@@ -41,16 +46,10 @@ export function initDotGlobe(canvas: HTMLCanvasElement) {
   const draw = () => {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, width, height);
-    if (!planet.ready) return;
-    const box = canvas.getBoundingClientRect();
-    const cx = planet.x - box.left;
-    const cy = planet.y - box.top;
-    const radius = planet.r;
-    if (cy - radius > height || cy + radius < 0) return;
-    const sun = Math.hypot(planet.sunX, planet.sunY) || 1;
-    const lx = planet.sunX / sun;
-    const ly = planet.sunY / sun;
     ctx.fillStyle = color;
+    const radius = Math.min(width * 0.52, height * 1.05, 1100);
+    const cx = width + radius * 0.24;
+    const cy = height * 0.92;
     const ry = angle + tiltY;
     const rx = TILT + tiltX;
     const [sy, cyR] = [Math.sin(ry), Math.cos(ry)];
@@ -61,26 +60,24 @@ export function initDotGlobe(canvas: HTMLCanvasElement) {
       const y2 = py * cxR - z1 * sx;
       const z2 = py * sx + z1 * cxR;
       if (z2 < 0) continue;
-      const dotX = cx + x1 * radius;
-      const dotY = cy + y2 * radius;
-      if (dotY < -8 || dotY > height + 8 || dotX < -8 || dotX > width + 8)
-        continue;
-      const lit = Math.max(0, x1 * lx + y2 * ly) * (1 - z2 * 0.6);
+      const lit = Math.max(0, -(x1 * LIGHT[0] + y2 * LIGHT[1] + z2 * LIGHT[2]));
       const rim = 1 - z2;
+      const sxp = cx + x1 * radius;
+      const syp = cy + y2 * radius;
       let glow = 0;
       if (pointer.glow > 0.01) {
-        const d = Math.hypot(dotX - pointer.x, dotY - pointer.y) / 160;
+        const d = Math.hypot(sxp - pointer.x, syp - pointer.y) / 140;
         glow = d < 1 ? (1 - d) * (1 - d) * pointer.glow : 0;
       }
       const alpha = Math.min(
-        0.32,
-        rim ** 3 * 0.14 + lit ** 1.5 * 0.3 + glow * 0.22,
+        0.85,
+        0.06 + rim ** 3 * 0.5 + lit ** 1.5 * 0.55 + glow * 0.5,
       );
-      if (alpha < 0.03) continue;
-      const size = 1.8 + z2 * 2 + lit * 1.6 + glow * 2.4;
+      if (alpha < 0.07) continue;
+      const size = 0.9 + z2 * 1.1 + lit * 0.9 + glow * 1.4;
       ctx.globalAlpha = alpha;
       ctx.beginPath();
-      ctx.arc(dotX, dotY, size, 0, Math.PI * 2);
+      ctx.arc(sxp, syp, size, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.globalAlpha = 1;
@@ -90,20 +87,19 @@ export function initDotGlobe(canvas: HTMLCanvasElement) {
     frame = 0;
     const dt = Math.min((now - (last || now)) / 1000, 0.05);
     last = now;
-    if (!reducedMotion.matches) {
-      angle += dt * SPIN;
-      const ease = 1 - Math.exp(-dt * 3);
-      tiltX += (pointer.ty * 0.12 - tiltX) * ease;
-      tiltY += (pointer.tx * 0.18 - tiltY) * ease;
-      pointer.glow += ((pointer.inside ? 1 : 0) - pointer.glow) * ease;
-    }
+    angle += dt * SPIN;
+    const ease = 1 - Math.exp(-dt * 3);
+    tiltX += (pointer.ty * 0.12 - tiltX) * ease;
+    tiltY += (pointer.tx * 0.18 - tiltY) * ease;
+    pointer.glow += ((pointer.inside ? 1 : 0) - pointer.glow) * ease;
     draw();
-    if (visible) frame = requestAnimationFrame(tick);
+    if (visible && !reducedMotion.matches) frame = requestAnimationFrame(tick);
     else last = 0;
   };
 
   const start = () => {
-    if (!frame && visible) frame = requestAnimationFrame(tick);
+    if (!frame && visible && !reducedMotion.matches)
+      frame = requestAnimationFrame(tick);
   };
 
   host.addEventListener('pointermove', (event) => {
@@ -125,5 +121,8 @@ export function initDotGlobe(canvas: HTMLCanvasElement) {
     start();
   }).observe(canvas);
   new ResizeObserver(resize).observe(canvas);
+  reducedMotion.addEventListener('change', () =>
+    reducedMotion.matches ? draw() : start(),
+  );
   resize();
 }
