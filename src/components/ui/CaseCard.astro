@@ -43,11 +43,11 @@ const Tag = data.href ? 'a' : 'div';
       </div>
       <div aria-hidden="true" class="case-shade absolute inset-0"></div>
     </div>
-    <div class="4xl:aspect-square relative aspect-8/7">
+    <div class="case-media">
       {data.logo && (
         <Image src={data.logo} alt="" class="case-reveal case-logo" />
       )}
-      <div class="absolute inset-x-0 bottom-0 text-white">
+      <div class="case-meta text-white">
         <p
           data-rotator
           class="case-reveal case-stats grid leading-tight font-medium"
