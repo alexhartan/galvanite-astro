@@ -21,9 +21,9 @@ const {
 } = Astro.props;
 ---
 
-<Section id={id} labelledby={`${id}-heading`}>
-  <SectionFrame edge={false} top={false} />
-  <div class="relative overflow-clip">
+<Section id={id} labelledby={`${id}-heading`} tone="dark">
+  <SectionFrame inverted edge={false} markRight />
+  <div class="border-line-dark relative overflow-clip border-t">
     <Container class="@container py-48 lg:py-60">
       <div data-parallax="0.125" class="translate-y-(--shift)">
         <SplitHeading
@@ -31,9 +31,9 @@ const {
           lead={lead}
           emphasis={emphasis}
           emphasisClass="block font-medium"
-          class="text-statement lg:text-statement-lg text-ink leading-none font-extralight"
+          class="text-statement lg:text-statement-lg leading-none font-extralight text-white"
         />
-        <p class="text-ink/70 mt-4 max-w-lead">{description}</p>
+        <p class="max-w-lead mt-4 text-white/80">{description}</p>
         <CtaButton href={ctaHref} class="relative mt-8 w-full max-w-80">
           Book a Call with Alex
         </CtaButton>

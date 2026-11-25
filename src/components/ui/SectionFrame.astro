@@ -7,6 +7,7 @@ interface Props {
   bottom?: boolean;
   edge?: boolean | 'always';
   top?: boolean;
+  markRight?: boolean;
   class?: string;
 }
 const {
@@ -14,6 +15,7 @@ const {
   bottom = false,
   edge = true,
   top = true,
+  markRight = false,
   class: className,
 } = Astro.props;
 const line = inverted ? 'bg-line-dark' : 'bg-line';
@@ -22,6 +24,7 @@ const right = {
   true: '3xl:block lg:hidden',
   false: 'hidden',
 }[String(edge) as 'always' | 'true' | 'false'];
+const mark = markRight ? '' : right;
 ---
 
 <Container class:list={['pointer-events-none absolute inset-0', className]}>
@@ -32,7 +35,7 @@ const right = {
       <GridMark inverted={inverted} class="left-gutter absolute top-0" />
       <GridMark
         inverted={inverted}
-        class:list={[right, 'right-gutter absolute top-0 translate-x-1.25']}
+        class:list={[mark, 'right-gutter absolute top-0 translate-x-1.25']}
       />
     </>
   )}
@@ -45,7 +48,7 @@ const right = {
       <GridMark
         inverted={inverted}
         class:list={[
-          right,
+          mark,
           'right-gutter absolute bottom-0 translate-x-1.25 translate-y-1.25',
         ]}
       />
