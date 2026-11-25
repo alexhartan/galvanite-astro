@@ -22,9 +22,9 @@ const {
 ---
 
 <Section id={id} labelledby={`${id}-heading`}>
-  <SectionFrame />
-  <div class="border-line relative overflow-clip border-t">
-    <Container class="@container py-40 lg:py-60">
+  <SectionFrame edge={false} top={false} />
+  <div class="relative overflow-clip">
+    <Container class="@container pt-24 pb-40 lg:pt-36 lg:pb-60">
       <div data-parallax="0.25" class="translate-y-(--shift)">
         <SplitHeading
           id={`${id}-heading`}
