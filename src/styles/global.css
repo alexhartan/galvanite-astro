@@ -453,15 +453,7 @@
 
 @utility case-photo {
   position: absolute;
-  top: 0;
-  left: var(--case-pad);
-  width: 100cqw;
-  height: var(--case-media);
-  transform-origin: top;
-  transition: scale var(--case-open);
-  @variant case-open {
-    scale: 1.104;
-  }
+  inset: 0;
 }
 
 @utility case-shade {
@@ -496,7 +488,7 @@
   transition: scale 200ms var(--ease-out-soft);
   @variant case-open {
     scale: 1;
-    transition: scale 1200ms var(--ease-in-out-soft) 360ms;
+    transition: scale 700ms var(--ease-out-soft) 360ms;
   }
 }
 
@@ -532,14 +524,4 @@
 @utility case-stats {
   margin-bottom: 1.5cqw;
   font-size: clamp(0.75rem, 2.3cqw, 0.9375rem);
-}
-
-@utility case-fade {
-  background-image: linear-gradient(transparent, #000);
-  opacity: 0;
-  transition: opacity 200ms var(--ease-out-soft);
-  @variant case-open {
-    opacity: 1;
-    transition-duration: 700ms;
-  }
 }
