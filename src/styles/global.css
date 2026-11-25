@@ -606,3 +606,16 @@
     overflow: hidden;
   }
 }
+
+@utility pause-on-hover {
+  @media (hover: hover) {
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+}
+
+@utility tile-shadow {
+  background-color: var(--color-abyss);
+  box-shadow: 0 0 10px var(--color-abyss);
+}
