@@ -236,7 +236,7 @@
   stroke-dashoffset: 35;
   transition:
     stroke-dashoffset 0.6s var(--ease-out-soft),
-    stroke 0.3s var(--ease-standard);
+    stroke 0.3s var(--ease-in-out-soft);
 }
 
 @utility gauge-full {
