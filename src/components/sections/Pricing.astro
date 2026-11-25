@@ -40,7 +40,7 @@ const tiers = {
   premium: { ...standard, mark: 'text-signal' },
   featured: {
     box: 'bg-white z-10 ease-in-out-soft origin-(--origin) transition-transform duration-300 hover:scale-103',
-    name: 'text-ink',
+    name: 'text-ocean',
     muted: 'text-ink',
     price: 'text-price-lg text-ink mt-price-featured font-semibold',
     mark: 'text-signal',
@@ -139,7 +139,7 @@ const tiers = {
                 </div>
                 {data.tier === 'featured' ? (
                   <CtaButton href={ctaHref} class="relative mt-auto">
-                    Book a Call with Alex
+                    Explore this Solution
                   </CtaButton>
                 ) : (
                   <CtaButton
@@ -147,7 +147,7 @@ const tiers = {
                     variant="secondary"
                     class="relative mt-auto transition-opacity motion-ui reveal-on-hover"
                   >
-                    Book a Call with Alex
+                    Explore this Solution
                   </CtaButton>
                 )}
               </article>

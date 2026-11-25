@@ -157,7 +157,7 @@ Letter-spacing (referenced by the `--text-*--letter-spacing` sub-properties):
 
 | Token | Value | Used by |
 |---|---|---|
-| `--tracking-display` | -0.04em | display, statement-lg/xl, intent-lg/xl, stat |
+| `--tracking-display` | -0.04em | display, statement-lg/xl, intent-lg/xl (stat uses -0.06em) |
 | `--tracking-headline` | -0.035em | statement, intent, section, assess |
 | `--tracking-title` | -0.03em | card, price |
 | `--tracking-snug` | -0.02em | benefit |
