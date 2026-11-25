@@ -121,7 +121,7 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 
 ## Case card
 
-Neutral: photo mask 90% of the card width tall (square at `4xl`) and the title in `ocean` below it. Hover or keyboard focus (`case-open` variant, fine pointers only): the frame grows 5.2% of the card width left and right and down past the title. The photo fills the whole frame and does not scale; neutral shows a crop of it and the mask grows to reveal the rest. A multiply gradient (black 0%, white 25%, white 65%, black 90%) at 50% opacity darkens the top and bottom. The title turns white and stays in place; the space from the rule to the title equals the space from the title to the frame bottom (`--case-gap`). The logo, stats and the 1px white/30 rule fade in.
+Neutral: photo mask 90% of the card width tall (square at `4xl`) and the title in `ocean` below it. Hover or keyboard focus (`case-open` variant, fine pointers only): the frame grows 5.2% of the card width left and right and down past the title. The photo fills the whole frame and does not scale; neutral shows a crop of it and the mask grows to reveal the rest. A multiply gradient (black 0%, white 25%, white 65%, black 90%) at 50% opacity darkens the top and bottom. The title turns white and lifts. The logo, stats and the 1px white/30 rule fade in.
 
 All sizes are in `cqw` of the card (`case-card` sets `container-type`), so the composition stays the same at every width. Timing: frame, photo and title 800ms `ease-out-expo`; shade 700ms; details 500 to 800ms after a 260ms delay; rule 1000ms `ease-out-soft` from the start of the hover (white 30%); everything closes faster (150 to 200ms). The utilities `case-frame`, `case-photo`, `case-shade`, `case-fade`, `case-reveal`, `case-rule`, `case-title`, `case-logo`, `case-stats` and `case-motion-none` live in `global.css`, because Tailwind cannot express the `cqw` math and the group state in classes.
 
@@ -132,9 +132,9 @@ Content: `logo` (optional, white SVG) and `stats` (rotates when there is more th
 These values stay in their component. Do not make global tokens from them.
 
 - Container-query type sizes (`cqi`) and `3xl:` / `4xl:` overrides: tuned to each composition.
-- Section padding other than `*-section`: each section has its own rhythm. FeaturedWork and Pricing padding also absorbs parallax travel.
+- Section padding other than `*-section`: each section has its own rhythm. FeaturedWork padding also absorbs parallax travel.
 - Eyebrow cap offsets and the featured price baseline: optical math tied to specific type sizes.
-- Parallax rates: set per element with `data-parallax="0.25"` (and `data-parallax-from="enter"`).
+- Parallax rates: set per element with `data-parallax="0.25"` (and `data-parallax-from="enter"`). Used on Intro, FeaturedWork and ClosingCta; Pricing has none.
 - SectionLink positions: measured at runtime.
 - Layering: sections `z-10` (they scroll over the fixed hero), section links `z-20`, header and skip link `z-30`.
 - Art SVG geometry (`art/kit.ts`): illustration coordinates in px.
