@@ -124,10 +124,6 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `CaseCard` | `data`, `index`, `copy`, `class` | case study thumbnail with the hover expansion (see below) |
 | `ArrowIcon`, `SparkIcon`, `Logo` | `class` | icons |
 
-## Mission globe
-
-`Intro` with `globe` draws a dotted continuation of the background planet (`scripts/dot-globe.ts`). `hero-scene.ts` writes the planet's live screen centre, radius and sun direction to `scripts/planet.ts` every frame, using the shader's camera math. The globe reads it each frame and draws relative to the section, so it stays locked to the fixed planet while the section scrolls. 3,200 Fibonacci points, front hemisphere, `text-graphite` at 3 to 32% opacity (light gray to transparent), lit on the sun side. Spins slowly, tilts toward the mouse and brightens dots near it; pauses off-screen, no spin with reduced motion, hidden below lg.
-
 ## Secondary pages
 
 Template: `src/pages/sandbox.astro` (noindex, out of the sitemap), copy in `src/data/sandbox.ts`.
