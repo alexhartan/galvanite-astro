@@ -98,6 +98,7 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 |---|---|
 | `focus-ring` | 2px solid outline, 2px offset on `:focus-visible`. Set the color with `focus-visible:outline-*`. |
 | `caps` | uppercase + widest tracking. Set the size separately. |
+| `report-dialog` | dialog size, backdrop and open/close transition (`@starting-style`, falls back to no animation) |
 | `reveal-on-hover` | at lg: hidden until the parent `.group` is hovered or focused |
 | `reveal-*` | scroll reveal choreography, driven by `data-reveal-state` |
 | `details-expand` | animated `<details>` (progressive enhancement) |
@@ -114,6 +115,8 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `SplitHeading` | `as`, `id`, `lead`, `emphasis`, `class`, `leadClass`, `emphasisClass` | heading with a bold second part |
 | `CtaButton` | `href`, `variant`, `link`, `class` | primary and secondary actions |
 | `Checkbox` | `name`, `value` | custom checkbox; place inside a `label.group` |
+| `InlineField` | `id`, `name`, `label`, `action`, `type`, `placeholder`, `autocomplete`, `inputmode`, `describedby` | input with an attached submit button (website field, report email) |
+| `ReportDialog` | `id`, `action` | modal opened by the self-check form on a valid submit; filled by `assess.ts` |
 | `GridMark`, `ColumnLines` | | grid decoration |
 | `LogoMarquee` | `large`, `class` | client logo marquee |
 | `CaseCard` | `data`, `index`, `copy`, `class` | case study thumbnail with the hover expansion (see below) |
