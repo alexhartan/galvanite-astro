@@ -6,30 +6,37 @@ const { class: className } = Astro.props;
 const columns = [
   {
     motion: 'motion-safe:animate-marquee-up',
-    tiles: ['bg-space-800', 'bg-ocean/60', 'bg-azure-deep/40'],
+    tiles: ['bg-space-800', 'bg-ocean', 'bg-ink'],
   },
   {
     motion: 'motion-safe:animate-marquee-down',
-    tiles: ['bg-ocean/40', 'bg-space-800', 'bg-azure-deep/60'],
+    tiles: ['bg-ink', 'bg-space-800', 'bg-ocean'],
   },
 ];
+const ease = 'ease-out-expo duration-500 motion-reduce:transition-none';
 ---
 
-<div
-  aria-hidden="true"
-  class:list={['pointer-events-none absolute inset-y-0', className]}
->
+<div aria-hidden="true" class:list={['absolute inset-y-0', className]}>
   <div class="flex h-full -skew-x-15 gap-8">
     {columns.map(({ motion, tiles }) => (
-      <div class="flex-1 overflow-clip">
-        <div class:list={['flex flex-col', motion]}>
+      <div class="flex-1">
+        <div class:list={['pause-on-hover flex flex-col', motion]}>
           {[...tiles, ...tiles].map((tile) => (
-            <div
-              class:list={[
-                'ring-sky/25 mb-8 aspect-4/5 w-full shrink-0 ring-1 ring-inset',
-                tile,
-              ]}
-            />
+            <div class="group/tile relative mb-8 aspect-square w-full shrink-0">
+              <div
+                class:list={[
+                  'tile-shadow absolute inset-0 opacity-0 transition-opacity group-hover/tile:opacity-100',
+                  ease,
+                ]}
+              />
+              <div
+                class:list={[
+                  'border-sky/25 relative size-full border-b border-l transition-transform group-hover/tile:-translate-x-2.5 group-hover/tile:-translate-y-2.5',
+                  tile,
+                  ease,
+                ]}
+              />
+            </div>
           ))}
         </div>
       </div>
