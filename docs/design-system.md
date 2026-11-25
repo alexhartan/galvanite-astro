@@ -121,7 +121,7 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 
 ## Case card
 
-Neutral: 8:7 photo (square at `4xl`) and the title in `ocean` below it. Hover or keyboard focus (`case-open` variant, fine pointers only): the frame grows 5.2% of the card width left and right and down past the title. The photo scales 1.104 from the top center, so its edges stay on the frame edges. A multiply gradient (black 0%, white 25%, white 65%, black 90%) darkens the top and bottom. The title turns white and lifts. The logo, stats and the 1px white/50 rule fade in.
+Neutral: 8:7 photo (square at `4xl`) and the title in `ocean` below it. Hover or keyboard focus (`case-open` variant, fine pointers only): the frame grows 5.2% of the card width left and right and down past the title. The photo scales 1.104 from the top center, so its edges stay on the frame edges. A multiply gradient (black 0%, white 25%, white 65%, black 90%) at 50% opacity darkens the top and bottom. The title turns white and lifts. The logo, stats and the 1px white/50 rule fade in.
 
 All sizes are in `cqw` of the card (`case-card` sets `container-type`), so the composition stays the same at every width. Timing: frame, photo and title 800ms `ease-out-expo`; shade 700ms; details 500 to 800ms after a 260ms delay; rule 1200ms `ease-in-out-soft` after 360ms; everything closes faster (150 to 200ms). The utilities `case-frame`, `case-photo`, `case-shade`, `case-fade`, `case-reveal`, `case-rule`, `case-title`, `case-logo`, `case-stats` and `case-motion-none` live in `global.css`, because Tailwind cannot express the `cqw` math and the group state in classes.
 

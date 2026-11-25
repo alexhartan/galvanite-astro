@@ -470,7 +470,7 @@
   opacity: 0;
   transition: opacity 200ms var(--ease-out-soft);
   @variant case-open {
-    opacity: 1;
+    opacity: 0.5;
     transition-duration: 700ms;
   }
 }
