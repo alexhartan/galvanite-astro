@@ -124,6 +124,14 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `CaseCard` | `data`, `index`, `copy`, `class` | case study thumbnail with the hover expansion (see below) |
 | `ArrowIcon`, `SparkIcon`, `Logo` | `class` | icons |
 
+## Secondary pages
+
+Template: `src/pages/sandbox.astro` (noindex, out of the sitemap), copy in `src/data/sandbox.ts`.
+
+- `PageHero`: fixed cosmic scene behind a transparent hero (`page-hero`, min 40svh incl. the nav) with breadcrumb, H1 (`SplitHeading`) and lead. It sets the dark scene path so later dark sections (closing CTA) stay dark.
+- Then white grid sections: `Intro` (statement), `FeatureGrid` (3-column items with `ColumnLines`), `TextBlock` (label + centered half-width prose, `prose-body`), `ClosingCta`.
+- Section rail labels come from the page's own `sections` list, like the homepage.
+
 ## Case card
 
 Neutral: photo mask 90% of the card width tall (square at `4xl`) and the title in `ocean` below it. Hover or keyboard focus (`case-open` variant, fine pointers only): the frame grows 5.2% of the card width left and right and down past the title. The photo fills the whole frame and does not scale; neutral shows a crop of it and the mask grows to reveal the rest. A multiply gradient (black 0%, white 25%, white 65%, black 90%) at 50% opacity darkens the top and bottom. The title turns white and lifts. The logo, stats and the 1px white/30 rule fade in.

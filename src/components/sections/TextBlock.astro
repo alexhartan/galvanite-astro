@@ -1,0 +1,28 @@
+---
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Section from '../ui/Section.astro';
+import SectionFrame from '../ui/SectionFrame.astro';
+
+interface Props {
+  id: string;
+  label: string;
+  heading: string;
+}
+const { id, label, heading } = Astro.props;
+---
+
+<Section id={id}>
+  <SectionFrame edge={false} />
+  <div data-guide class="border-line relative border-t">
+    <Container class="pt-20 pb-28 lg:pt-28 lg:pb-40">
+      <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
+      <div class="mx-auto w-full lg:w-2/3 xl:w-1/2">
+        <h2 class="text-section text-ocean">{heading}</h2>
+        <div class="text-graphite/80 prose-links prose-body mt-8 text-base text-pretty">
+          <slot />
+        </div>
+      </div>
+    </Container>
+  </div>
+</Section>
