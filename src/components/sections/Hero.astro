@@ -8,8 +8,9 @@ interface Props {
   lead: string;
   emphasis: string;
   description: string;
+  logos?: boolean;
 }
-const { eyebrow, lead, emphasis, description } = Astro.props;
+const { eyebrow, lead, emphasis, description, logos = true } = Astro.props;
 ---
 
 <section
@@ -50,14 +51,16 @@ const { eyebrow, lead, emphasis, description } = Astro.props;
           <div class="bg-space-950/50 3xl:-right-page-bleed absolute inset-y-0 right-0 left-gutter"></div>
           <div class="bg-grid/5 absolute inset-x-gutter top-0 h-px"></div>
         </Container>
-        <div class="relative opacity-50 pt-4 pb-6">
-          <Container class="relative">
-            <p class="text-frost text-2xs leading-snug font-normal caps">
-              Trusted by technical teams at:
-            </p>
-            <LogoMarquee class="clip-left mt-1" />
-          </Container>
-        </div>
+        {logos && (
+          <div class="relative opacity-50 pt-4 pb-6">
+            <Container class="relative">
+              <p class="text-frost text-2xs leading-snug font-normal caps">
+                Trusted by technical teams at:
+              </p>
+              <LogoMarquee class="clip-left mt-1" />
+            </Container>
+          </div>
+        )}
       </div>
     </div>
   </div>
