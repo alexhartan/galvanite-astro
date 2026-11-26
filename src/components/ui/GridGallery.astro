@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import billboard from '../../assets/cta/lumen-billboard.png';
+import start2coin from '../../assets/cta/start2coin.webp';
 import scroll3 from '../../assets/cta/scroll3.png';
 import scroll4 from '../../assets/cta/scroll4.png';
 import scroll42 from '../../assets/cta/scroll4-2.png';
 import scroll43 from '../../assets/cta/scroll4-3.png';
 import scroll6 from '../../assets/cta/scroll6.png';
-import scroll61 from '../../assets/cta/scroll6-1.png';
+import lsLogo from '../../assets/cta/ls-logo.webp';
 import scroll62 from '../../assets/cta/scroll6-2.png';
 import scroll63 from '../../assets/cta/scroll6-3.png';
 
@@ -20,12 +20,12 @@ const columns: { motion: string; duration: number; tiles: ImageMetadata[] }[] =
     {
       motion: 'motion-safe:animate-marquee-up',
       duration: 70,
-      tiles: [scroll3, scroll61, scroll43],
+      tiles: [scroll3, lsLogo, scroll43],
     },
     {
       motion: 'motion-safe:animate-marquee-down',
       duration: 95,
-      tiles: [scroll4, scroll63, billboard],
+      tiles: [scroll4, scroll63, start2coin],
     },
     {
       motion: 'motion-safe:animate-marquee-up',
