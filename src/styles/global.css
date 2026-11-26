@@ -653,3 +653,11 @@
     font-weight: var(--font-weight-medium);
   }
 }
+
+@layer base {
+  @media (min-width: 120rem) {
+    html {
+      font-size: min(calc(100% + (100vw - 120rem) * 0.005), 120%);
+    }
+  }
+}
