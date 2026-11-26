@@ -667,7 +667,7 @@
     transition: opacity 500ms var(--ease-out-soft);
   }
   & [data-tile-window] {
-    clip-path: inset(--spacing(3));
+    clip-path: inset(--spacing(4.25));
     transition: clip-path 700ms var(--ease-out-expo);
   }
   @media (hover: hover) and (pointer: fine) {
