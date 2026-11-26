@@ -1,6 +1,6 @@
 import { reducedMotion } from './env';
 
-const BASE_SPEED = 60;
+const BASE_SPEED = 40;
 const SCROLL_BOOST = 0.8;
 const SPEED_EASE = 2.5;
 const BOOST_DECAY = 1.5;
