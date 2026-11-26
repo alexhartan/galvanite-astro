@@ -277,6 +277,16 @@
   mask-image: linear-gradient(rgb(0 0 0 / 0.1), black 30%, black 70%, rgb(0 0 0 / 0.1));
 }
 
+@utility mask-edge-x {
+  mask-image: linear-gradient(
+    to right,
+    rgb(0 0 0 / 0.4),
+    black 15%,
+    black 85%,
+    rgb(0 0 0 / 0.4)
+  );
+}
+
 @utility mask-fade-x {
   mask-image: linear-gradient(
     to right,
