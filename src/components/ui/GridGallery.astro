@@ -33,10 +33,12 @@ const columns: { motion: string; duration: number; tiles: ImageMetadata[] }[] =
       tiles: [scroll62, scroll42, scroll6],
     },
   ];
-const ease = 'ease-out-expo duration-700 motion-reduce:transition-none';
 ---
 
-<div aria-hidden="true" class:list={['absolute inset-y-0', className]}>
+<div
+  aria-hidden="true"
+  class:list={['gallery-hover absolute inset-y-0', className]}
+>
   <div class="flex h-full gap-5">
     {columns.map(({ motion, duration, tiles }) => (
       <div class="flex-1">
@@ -46,25 +48,14 @@ const ease = 'ease-out-expo duration-700 motion-reduce:transition-none';
           style={`--duration: ${duration}s`}
         >
           {[...tiles, ...tiles, ...tiles, ...tiles].map((tile) => (
-            <div class="group/tile relative mb-5 aspect-square w-full shrink-0">
-              <div
-                class:list={[
-                  'tile-shadow absolute inset-0 opacity-0 transition-opacity group-hover/tile:opacity-100',
-                  ease,
-                ]}
-              />
-              <div
-                class:list={[
-                  'border-sky/25 bg-space-800 relative size-full overflow-hidden border-r border-b transition-transform group-hover/tile:-translate-x-2 group-hover/tile:-translate-y-2',
-                  ease,
-                ]}
-              >
+            <div data-tile class="relative mb-5 aspect-square w-full shrink-0">
+              <div data-tile-window class="absolute -inset-3">
                 <Image
                   src={tile}
                   alt=""
                   format="webp"
                   widths={[240, 360, 480, 640]}
-                  sizes="(min-width: 1024px) 13vw, 1px"
+                  sizes="(min-width: 1280px) 14vw, 1px"
                   quality={72}
                   draggable="false"
                   class="size-full object-cover"
