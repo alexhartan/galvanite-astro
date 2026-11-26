@@ -1,6 +1,6 @@
 import { reducedMotion } from './env';
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
-const OMEGA = 5;
+const OMEGA = 3;
 
 export function initReveal(element: HTMLElement) {
   const section = element.closest('section');

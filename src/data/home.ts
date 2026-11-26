@@ -62,7 +62,7 @@ export const check = {
     'Select everything that rings true, and enter your company’s website to get started.',
 };
 
-export const faq = { heading: 'Frequent Questions' };
+export const faq = { heading: 'Common Questions' };
 
 export const closing = {
   lead: 'It’s time to build a brand',
