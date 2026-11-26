@@ -617,10 +617,6 @@
   }
 }
 
-@utility tile-shadow {
-  background-color: var(--color-abyss);
-  box-shadow: 0 0 10px var(--color-abyss);
-}
 
 @utility page-hero {
   min-height: 40svh;
@@ -663,4 +659,33 @@
 
 [data-gallery-track] {
   animation-duration: var(--duration, 90s);
+}
+
+@utility gallery-hover {
+  & [data-tile] {
+    opacity: 0.75;
+    transition: opacity 500ms var(--ease-out-soft);
+  }
+  & [data-tile-window] {
+    clip-path: inset(--spacing(3));
+    transition: clip-path 700ms var(--ease-out-expo);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:has([data-tile]:hover) [data-tile] {
+      opacity: 0.5;
+    }
+    &:has([data-tile]:hover) [data-tile]:hover {
+      z-index: 10;
+      opacity: 1;
+    }
+    & [data-tile]:hover [data-tile-window] {
+      clip-path: inset(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    & [data-tile],
+    & [data-tile-window] {
+      transition: none;
+    }
+  }
 }
