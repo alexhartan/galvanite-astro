@@ -1,16 +1,28 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import scroll3 from '../../assets/cta/scroll3.png';
+import scroll4 from '../../assets/cta/scroll4.png';
+import scroll41 from '../../assets/cta/scroll4-1.png';
+import scroll42 from '../../assets/cta/scroll4-2.png';
+import scroll43 from '../../assets/cta/scroll4-3.png';
+import scroll6 from '../../assets/cta/scroll6.png';
+import scroll61 from '../../assets/cta/scroll6-1.png';
+import scroll62 from '../../assets/cta/scroll6-2.png';
+import scroll63 from '../../assets/cta/scroll6-3.png';
+
 interface Props {
   class?: string;
 }
 const { class: className } = Astro.props;
-const columns = [
+const columns: { motion: string; tiles: ImageMetadata[] }[] = [
   {
     motion: 'motion-safe:animate-marquee-up',
-    tiles: ['bg-space-800', 'bg-ocean', 'bg-ink'],
+    tiles: [scroll3, scroll4, scroll42, scroll61, scroll41],
   },
   {
     motion: 'motion-safe:animate-marquee-down',
-    tiles: ['bg-ink', 'bg-space-800', 'bg-ocean'],
+    tiles: [scroll63, scroll62, scroll43, scroll6],
   },
 ];
 const ease = 'ease-out-expo duration-700 motion-reduce:transition-none';
@@ -31,11 +43,21 @@ const ease = 'ease-out-expo duration-700 motion-reduce:transition-none';
               />
               <div
                 class:list={[
-                  'border-sky/25 relative size-full border-r border-b transition-transform group-hover/tile:-translate-x-2 group-hover/tile:-translate-y-2',
-                  tile,
+                  'border-sky/25 bg-space-800 relative size-full overflow-hidden border-r border-b transition-transform group-hover/tile:-translate-x-2 group-hover/tile:-translate-y-2',
                   ease,
                 ]}
-              />
+              >
+                <Image
+                  src={tile}
+                  alt=""
+                  format="webp"
+                  widths={[320, 480, 640, 800]}
+                  sizes="(min-width: 1024px) 26vw, 1px"
+                  quality={72}
+                  draggable="false"
+                  class="absolute inset-0 size-full skew-x-15 scale-130 object-cover"
+                />
+              </div>
             </div>
           ))}
         </div>
