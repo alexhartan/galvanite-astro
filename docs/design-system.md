@@ -50,7 +50,7 @@ DM Sans variable. Weights: 200, 300, 400, 500, 600.
 | Group | Tokens |
 |---|---|
 | UI | `text-2xs`, `text-xs` (no line-height, inherits), `text-sm`, `text-link-sm`, `text-base` |
-| Body | `text-lead`, `text-question` |
+| Body | `text-lead`, `text-answer` |
 | Titles | `text-benefit`, `text-card` (scales with the case card width, `cqw`), `text-price`, `text-price-lg` |
 | Headings | `text-assess`, `text-section`, `text-stat` |
 | Statements | `text-statement`, `text-statement-lg`, `text-statement-xl`, `text-intent`, `text-intent-lg`, `text-intent-xl` |

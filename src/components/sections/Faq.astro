@@ -39,11 +39,11 @@ const faqs = await Promise.all(
                   aria-hidden="true"
                   class="bg-space-950/50 backdrop-blur-bar rounded-surface motion-ui pointer-events-none absolute inset-x-0 top-0 -bottom-px border border-white/15 opacity-0 transition-opacity group-has-open:opacity-100 pointer-fine:group-hover:opacity-100"
                 />
-                <details name="faq" class="details-expand relative">
-                  <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none text-balance items-center px-5 py-5 text-lg font-light tracking-tight lg:text-question transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
+                <details name="faq" class="details-expand relative pb-2">
+                  <summary class="text-frost/80 group-has-open:text-white focus-visible:outline-signal flex min-h-11 cursor-pointer list-none text-balance items-center px-5 pt-5 pb-3 text-base font-normal tracking-tight lg:text-xl transition-colors duration-300 group-hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2">
                     {data.question}
                   </summary>
-                  <div class="text-frost/80 px-5 pb-5 text-base text-pretty prose-links">
+                  <div class="text-frost/80 text-answer px-7 pb-3 text-pretty prose-links">
                     <Content />
                   </div>
                 </details>
