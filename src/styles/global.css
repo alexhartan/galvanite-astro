@@ -267,7 +267,7 @@
 @custom-variant issues-error (:where([data-issues-error]) &);
 
 @utility mask-fade-y {
-  mask-image: linear-gradient(transparent, black 20%, black 80%, transparent);
+  mask-image: linear-gradient(rgb(0 0 0 / 0.1), black 30%, black 70%, rgb(0 0 0 / 0.1));
 }
 
 @utility mask-fade-x {
