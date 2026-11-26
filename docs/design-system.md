@@ -73,6 +73,10 @@ Each `text-*` token carries its own line-height and letter-spacing. Do not add `
 | `max-w-lead`, `max-w-lead-hero`, `max-w-headline`, `max-w-mission` | text measures |
 | `3xl` (100rem), `4xl` (120rem) | ultra-wide breakpoints |
 
+### Large screens
+
+From 1920px (`4xl`) the root font size grows 0.005px per pixel of viewport, capped at 120% (19.2px at 2560px). Everything in rem (type, spacing, container, nav) scales together. 1px lines and the hero scene do not. Defined in the base layer of `global.css`.
+
 ### Radius, shadow, blur
 
 `rounded-control` (checkbox, pills), `rounded-surface` (cards, fields). Buttons are square. `backdrop-blur-bar`. No shadows.
