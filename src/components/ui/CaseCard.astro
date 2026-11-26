@@ -10,7 +10,7 @@ interface Props {
 }
 const { data, index, class: className, copy = false } = Astro.props;
 const Tag = data.href ? 'a' : 'div';
-const LOGO_AREA = 130;
+const LOGO_AREA = 187;
 const logoHeight = data.logo
   ? Math.sqrt(LOGO_AREA / (data.logo.width / data.logo.height)).toFixed(2)
   : 0;
