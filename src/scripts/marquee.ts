@@ -142,13 +142,9 @@ export function initMarquee(root: HTMLElement) {
     rampStart ||= performance.now();
   };
   setTimeout(() => {
-    if (
-      root.dataset.revealState !== 'hidden' &&
-      root.dataset.revealState !== 'shown'
-    )
-      return startRamp();
+    if (root.dataset.revealState !== 'hidden') return startRamp();
     new MutationObserver((_, observer) => {
-      if (root.dataset.revealState !== 'done') return;
+      if (root.dataset.revealState === 'hidden') return;
       observer.disconnect();
       startRamp();
     }).observe(root, {
