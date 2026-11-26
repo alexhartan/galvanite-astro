@@ -663,16 +663,16 @@
 
 @utility gallery-hover {
   & [data-tile] {
-    opacity: 0.75;
+    opacity: 0.7;
     transition: opacity 500ms var(--ease-out-soft);
   }
   & [data-tile-window] {
-    clip-path: inset(--spacing(4.25));
+    clip-path: inset(--spacing(5));
     transition: clip-path 700ms var(--ease-out-expo);
   }
   @media (hover: hover) and (pointer: fine) {
     &:has([data-tile]:hover) [data-tile] {
-      opacity: 0.5;
+      opacity: 0.4;
     }
     &:has([data-tile]:hover) [data-tile]:hover {
       z-index: 10;

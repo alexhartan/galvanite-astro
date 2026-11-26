@@ -49,7 +49,7 @@ const columns: { motion: string; duration: number; tiles: ImageMetadata[] }[] =
         >
           {[...tiles, ...tiles, ...tiles, ...tiles].map((tile) => (
             <div data-tile class="relative mb-5 aspect-square w-full shrink-0">
-              <div data-tile-window class="absolute -inset-4.25">
+              <div data-tile-window class="absolute -inset-5">
                 <Image
                   src={tile}
                   alt=""
