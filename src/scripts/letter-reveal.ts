@@ -1,6 +1,7 @@
 import { reducedMotion } from './env';
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
 const OMEGA = 3;
+const large = window.matchMedia('(min-width: 120rem)');
 
 export function initReveal(element: HTMLElement) {
   const section = element.closest('section');
@@ -15,7 +16,8 @@ export function initReveal(element: HTMLElement) {
     const height = window.innerHeight;
     const top = section.getBoundingClientRect().top;
     const start = height * 0.75;
-    target = ease(Math.min(1, Math.max(0, (start - top) / start)));
+    const range = start * (large.matches ? 0.55 : 1);
+    target = ease(Math.min(1, Math.max(0, (start - top) / range)));
   };
   const paint = () => element.style.setProperty('--p', position.toFixed(4));
   const step = (now: number) => {
