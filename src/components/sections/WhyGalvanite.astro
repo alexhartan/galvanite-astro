@@ -5,8 +5,8 @@ import Container from '../ui/Container.astro';
 import Section from '../ui/Section.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import ContactArt from '../ui/art/ContactArt.astro';
 import BuildArt from '../ui/art/BuildArt.astro';
-import ConsistencyArt from '../ui/art/ConsistencyArt.astro';
 import PerformanceArt from '../ui/art/PerformanceArt.astro';
 import ProcessArt from '../ui/art/ProcessArt.astro';
 import StrategyArt from '../ui/art/StrategyArt.astro';
@@ -23,7 +23,7 @@ const benefits = (await getCollection('benefits')).sort(
 );
 const art = {
   strategy: StrategyArt,
-  consistency: ConsistencyArt,
+  contact: ContactArt,
   build: BuildArt,
   performance: PerformanceArt,
   process: ProcessArt,

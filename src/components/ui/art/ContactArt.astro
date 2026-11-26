@@ -1,0 +1,42 @@
+---
+import ArtStack from './ArtStack.astro';
+import { ink, motion, outline } from './kit';
+
+const frames = [
+  {
+    x: 100,
+    y: 88,
+    w: 100,
+    h: 84,
+    lift: 'group-hover:-translate-y-2',
+    bare: true,
+  },
+];
+const node = [outline, motion];
+---
+
+<ArtStack id="art-contact" frames={frames}>
+  <g
+    slot="a"
+    class:list={['transform-fill origin-center group-hover:scale-115', motion]}
+  >
+    <g class="transform-fill origin-center group-hover:motion-safe:animate-art-orbit">
+      <path
+        d="M50.0 16.0L72.5 29.0L72.5 55.0L50.0 68.0L27.5 55.0L27.5 29.0Z"
+        stroke-width="1.5"
+        class:list={[ink, motion]}
+      />
+      <circle cx="50.0" cy="16.0" r="4" class:list={node} />
+      <circle cx="72.5" cy="29.0" r="4" class:list={node} />
+      <circle cx="72.5" cy="55.0" r="4" class:list={node} />
+      <circle cx="50.0" cy="68.0" r="4" class:list={node} />
+      <circle cx="27.5" cy="55.0" r="4" class:list={node} />
+      <circle cx="27.5" cy="29.0" r="4" class:list={node} />
+    </g>
+    <circle cx="50" cy="38" r="5" class:list={[ink, motion]} />
+    <path
+      d="M40 54C40 48 44 45 50 45C56 45 60 48 60 54"
+      class:list={[ink, motion]}
+    />
+  </g>
+</ArtStack>
