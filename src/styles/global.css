@@ -340,7 +340,7 @@
 }
 
 @utility reveal-letter {
-  --t: clamp(0, (var(--p, 1) * var(--n) - var(--i)) / 10, 1);
+  --t: clamp(0, (var(--p, 1) * var(--n) - var(--i)) / 6, 1);
   --edge: color-mix(
     in oklab,
     var(--color-signal) calc(clamp(0, var(--t) / 0.12, 1) * 100%),
@@ -348,7 +348,7 @@
   );
   --wave: color-mix(
     in oklab,
-    var(--color-sky) calc(clamp(0, (var(--t) - 0.12) / 0.13, 1) * 100%),
+    var(--color-azure-deep) calc(clamp(0, (var(--t) - 0.12) / 0.13, 1) * 100%),
     var(--edge)
   );
   color: color-mix(
