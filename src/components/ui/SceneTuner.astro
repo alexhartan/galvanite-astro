@@ -69,6 +69,10 @@ const row = 'grid grid-cols-[4.5rem_1fr_3rem] items-center gap-2';
           Apply at this step
         </button>
       </div>
+      <label class="mt-3 flex min-h-11 cursor-pointer items-center gap-2">
+        <input data-ghost type="checkbox" class="size-4 accent-white" />
+        Ghost mode
+      </label>
       <p
         data-status
         role="status"
@@ -322,6 +326,11 @@ const row = 'grid grid-cols-[4.5rem_1fr_3rem] items-center gap-2';
         ? 'Publishing, live in about 1 minute.'
         : 'Could not publish.';
     });
+
+    const ghost = root.querySelector<HTMLInputElement>('[data-ghost]')!;
+    ghost.addEventListener('change', () =>
+      document.documentElement.toggleAttribute('data-ghost', ghost.checked),
+    );
 
     setSceneSteps(steps);
     window.addEventListener('scroll', sync, { passive: true });

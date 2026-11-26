@@ -668,6 +668,10 @@
   }
 }
 
+[data-ghost] [data-tone='light'] {
+  background: transparent;
+}
+
 [data-gallery-track] {
   animation-duration: var(--duration, 90s);
 }
