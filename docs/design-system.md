@@ -27,7 +27,7 @@ Primitives are the brand palette. Use roles for lines and tints.
 | `ocean`, `ocean-50` | headings on light, pills |
 | `azure-deep` | accent text on light |
 | `sky` | accent text on dark, links |
-| `glacier`, `glacier-tint` | form hover and checked states |
+| `glacier`, `glacier-tint` | form hover and checked states, mission reveal leading edge |
 | `frost` | text on dark |
 | `signal` | primary action, accent bar |
 | `alert` | errors |
@@ -56,7 +56,7 @@ DM Sans variable. Weights: 200, 300, 400, 500, 600.
 | Statements | `text-statement`, `text-statement-lg`, `text-statement-xl`, `text-intent`, `text-intent-lg`, `text-intent-xl` |
 | Display | `text-display`, `text-display-half`, `text-display-hero`, `text-lead-hero`, `text-lead-hero-xl` |
 
-Letter-spacing: `tracking-display` (-0.04em), `tracking-headline` (-0.035em), `tracking-title` (-0.03em), `tracking-snug` (-0.02em).
+Letter-spacing: `tracking-display` (-0.05em), `tracking-headline` (-0.035em), `tracking-title` (-0.03em), `tracking-snug` (-0.02em).
 Line height: `leading-display` (0.9), `leading-heading` (1), `leading-statement` (1.113), `leading-lead-hero` (1.456).
 
 Each `text-*` token carries its own line-height and letter-spacing. Do not add `tracking-*` or `leading-*` to a heading unless the context needs it.

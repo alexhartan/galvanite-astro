@@ -14,7 +14,7 @@
   --color-ocean-50: #ecf2f9;
   --color-azure-deep: #2e6aa3;
   --color-sky: #76b1db;
-  --color-glacier: #92c9eb;
+  --color-glacier: #8ccbf2;
   --color-glacier-tint: color-mix(in oklab, var(--color-glacier) 40%, white);
   --color-frost: #ccecff;
   --color-signal: #ffd23f;
@@ -36,7 +36,7 @@
     #fff
   );
 
-  --tracking-display: -0.04em;
+  --tracking-display: -0.05em;
   --tracking-headline: -0.035em;
   --tracking-title: -0.03em;
   --tracking-snug: -0.02em;
@@ -343,7 +343,7 @@
   --t: clamp(0, (var(--p, 1) * var(--n) - var(--i)) / 6, 1);
   --edge: color-mix(
     in oklab,
-    var(--color-signal) calc(clamp(0, var(--t) / 0.12, 1) * 100%),
+    var(--color-glacier) calc(clamp(0, var(--t) / 0.12, 1) * 100%),
     transparent
   );
   --wave: color-mix(
