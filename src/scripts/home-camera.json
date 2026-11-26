@@ -6,7 +6,7 @@
     "zoom": 0.72,
     "sunrise": 0.23
   },
-  "end": { "x": -0.91, "y": 0.33, "rotation": 0, "zoom": 1, "sunrise": 0.3 },
+  "end": { "x": -1.57, "y": 0.33, "rotation": 0, "zoom": 1, "sunrise": 0.3 },
   "easing": "linear",
   "stars": { "x": 0, "y": 0, "rotation": 1 }
 }
