@@ -25,7 +25,7 @@ const benefits = defineCollection({
     summary: z.string(),
     art: z.enum([
       'strategy',
-      'consistency',
+      'contact',
       'build',
       'performance',
       'process',

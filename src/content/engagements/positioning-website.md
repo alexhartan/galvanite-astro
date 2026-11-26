@@ -3,7 +3,7 @@ name: Positioning & Full Website
 order: 2
 tier: featured
 audience: For teams whose website no longer matches their product and their ambitions.
-price: '$16,000'
+price: '$15,000'
 duration: 4-6 weeks
 features:
   - 'Everything included in the Homepage Sprint'

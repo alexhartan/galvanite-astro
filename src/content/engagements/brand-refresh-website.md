@@ -4,7 +4,7 @@ order: 3
 tier: premium
 audience: For teams heading into a round or a category push, rebuilding from the ground up.
 pricePrefix: From
-price: '$30,000'
+price: '$25,000'
 duration: 8+ weeks
 features:
   - 'Everything in the Positioning & Full Website'
