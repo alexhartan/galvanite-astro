@@ -1,6 +1,6 @@
 ---
-title: "One expert\npoint of contact"
+title: "We work together,\nstart to finish"
 art: contact
 order: 1
-summary: 'You work only with me, no junior hand-offs. Vetted specialists join for production, while strategy, project management, and creative direction stay with me.'
+summary: 'No junior hand-offs: just direct collaboration to make sure we get it right. Vetted specialists join for production when needed.'
 ---
