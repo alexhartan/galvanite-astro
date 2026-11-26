@@ -1,9 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import billboard from '../../assets/cta/lumen-billboard.png';
 import scroll3 from '../../assets/cta/scroll3.png';
 import scroll4 from '../../assets/cta/scroll4.png';
-import scroll41 from '../../assets/cta/scroll4-1.png';
 import scroll42 from '../../assets/cta/scroll4-2.png';
 import scroll43 from '../../assets/cta/scroll4-3.png';
 import scroll6 from '../../assets/cta/scroll6.png';
@@ -15,26 +15,38 @@ interface Props {
   class?: string;
 }
 const { class: className } = Astro.props;
-const columns: { motion: string; tiles: ImageMetadata[] }[] = [
-  {
-    motion: 'motion-safe:animate-marquee-up',
-    tiles: [scroll3, scroll4, scroll42, scroll61, scroll41],
-  },
-  {
-    motion: 'motion-safe:animate-marquee-down',
-    tiles: [scroll63, scroll62, scroll43, scroll6],
-  },
-];
+const columns: { motion: string; duration: number; tiles: ImageMetadata[] }[] =
+  [
+    {
+      motion: 'motion-safe:animate-marquee-up',
+      duration: 70,
+      tiles: [scroll3, scroll61, scroll43],
+    },
+    {
+      motion: 'motion-safe:animate-marquee-down',
+      duration: 95,
+      tiles: [scroll4, scroll63, billboard],
+    },
+    {
+      motion: 'motion-safe:animate-marquee-up',
+      duration: 82,
+      tiles: [scroll62, scroll42, scroll6],
+    },
+  ];
 const ease = 'ease-out-expo duration-700 motion-reduce:transition-none';
 ---
 
 <div aria-hidden="true" class:list={['absolute inset-y-0', className]}>
-  <div class="flex h-full -skew-x-15 gap-8">
-    {columns.map(({ motion, tiles }) => (
+  <div class="flex h-full gap-5">
+    {columns.map(({ motion, duration, tiles }) => (
       <div class="flex-1">
-        <div data-gallery-track class:list={['flex flex-col', motion]}>
-          {[...tiles, ...tiles].map((tile) => (
-            <div class="group/tile relative mb-8 aspect-square w-full shrink-0">
+        <div
+          data-gallery-track
+          class:list={['flex flex-col', motion]}
+          style={`--duration: ${duration}s`}
+        >
+          {[...tiles, ...tiles, ...tiles, ...tiles].map((tile) => (
+            <div class="group/tile relative mb-5 aspect-square w-full shrink-0">
               <div
                 class:list={[
                   'tile-shadow absolute inset-0 opacity-0 transition-opacity group-hover/tile:opacity-100',
@@ -51,11 +63,11 @@ const ease = 'ease-out-expo duration-700 motion-reduce:transition-none';
                   src={tile}
                   alt=""
                   format="webp"
-                  widths={[320, 480, 640, 800]}
-                  sizes="(min-width: 1024px) 26vw, 1px"
+                  widths={[240, 360, 480, 640]}
+                  sizes="(min-width: 1024px) 13vw, 1px"
                   quality={72}
                   draggable="false"
-                  class="absolute inset-0 size-full skew-x-15 scale-130 object-cover"
+                  class="size-full object-cover"
                 />
               </div>
             </div>

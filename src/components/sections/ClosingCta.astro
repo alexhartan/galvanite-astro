@@ -4,7 +4,7 @@ import Container from '../ui/Container.astro';
 import SplitHeading from '../ui/SplitHeading.astro';
 import Section from '../ui/Section.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
-import SlantGallery from '../ui/SlantGallery.astro';
+import GridGallery from '../ui/GridGallery.astro';
 
 interface Props {
   id?: string;
@@ -25,7 +25,7 @@ const {
 <Section id={id} labelledby={`${id}-heading`} tone="dark">
   <SectionFrame inverted edge={false} markRight />
   <div class="border-line-dark relative overflow-clip border-t">
-    <SlantGallery class="-right-24 left-2/3 max-lg:hidden xl:left-3/5" />
+    <GridGallery class="right-gutter left-3/5 max-xl:hidden" />
     <Container class="@container py-48 lg:py-60">
       <div data-parallax="0.125" class="w-fit translate-y-(--shift)">
         <SplitHeading
