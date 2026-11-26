@@ -660,3 +660,7 @@
     }
   }
 }
+
+[data-gallery-track] {
+  animation-duration: var(--duration, 90s);
+}

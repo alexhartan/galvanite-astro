@@ -93,7 +93,7 @@ From 1920px (`4xl`) the root font size grows 0.0025px per pixel of viewport, cap
 | `ease-in-soft` | CaseCard arrow fade-in |
 | `duration-200`, `duration-700` | section links; image zoom, canvas fade, carousel |
 | `animate-marquee`, `animate-marquee-slow` | logo marquees |
-| `animate-marquee-up`, `animate-marquee-down` | slant gallery columns (90s loop) |
+| `animate-marquee-up`, `animate-marquee-down` | gallery columns (90s default, per-track `--duration`) |
 
 Both motion utilities stop transitions when the user prefers reduced motion.
 
@@ -124,7 +124,7 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `ReportDialog` | `id`, `action` | modal opened by the self-check form on a valid submit; filled by `assess.ts` |
 | `GridMark`, `ColumnLines` | | grid decoration |
 | `LogoMarquee` | `large`, `class` | client logo marquee |
-| `SlantGallery` | `class` (position) | two skewed (-15°) columns of square tiles, marquee up and down, column eases to a stop on hover and ramps back (scripts/gallery.ts), tile lifts 8px with a shadow; bottom and right edges; 9 project images (src/assets/cta) as WebP, counter-skewed upright inside the slanted tiles |
+| `GridGallery` | `class` (position) | 3 flat columns of 3 square project images (src/assets/cta, WebP), looping up/down/up at 70s/95s/82s (`--duration` per track); column eases to a stop on hover (scripts/gallery.ts), tile lifts 8px with a shadow; bottom and right edges; shown from xl |
 | `CaseCard` | `data`, `index`, `copy`, `class` | case study thumbnail with the hover expansion (see below) |
 | `ArrowIcon`, `SparkIcon`, `Logo` | `class` | icons |
 
