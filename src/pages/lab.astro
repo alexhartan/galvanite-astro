@@ -2,9 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CameraLab from '../components/ui/CameraLab.astro';
 import Hero from '../components/sections/Hero.astro';
-import Intro from '../components/sections/Intro.astro';
 import SiteHeader from '../components/sections/SiteHeader.astro';
-import { hero, label, mission } from '../data/home';
+import { hero } from '../data/home';
 ---
 
 <BaseLayout
@@ -14,6 +13,6 @@ import { hero, label, mission } from '../data/home';
 >
   <SiteHeader slot="header" />
   <Hero {...hero} />
-  <Intro label={label('intro')} {...mission} />
+  <div aria-hidden="true" class="h-[150svh]"></div>
   <CameraLab />
 </BaseLayout>
