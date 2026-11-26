@@ -1,6 +1,6 @@
 ---
-title: "One point\nof contact"
+title: "One expert\npoint of contact"
 art: contact
 order: 1
-summary: 'One senior person from start to finish, no junior handoffs. Vetted specialists join for production, while strategy, design direction and accountability stay with me.'
+summary: 'You work only with me, no junior hand-offs. Vetted specialists join for production, while strategy, project management, and creative direction stay with me.'
 ---
