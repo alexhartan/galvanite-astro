@@ -5,6 +5,7 @@ const SCROLL_BOOST = 0.8;
 const SPEED_EASE = 2.5;
 const BOOST_DECAY = 1.5;
 const DRAG_PX = 5;
+const RAMP_MS = 1800;
 
 export function initMarquee(root: HTMLElement) {
   const track = root.querySelector<HTMLElement>('[data-track]');
@@ -15,7 +16,8 @@ export function initMarquee(root: HTMLElement) {
   const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
   let loop = 0;
   let x = 0;
-  let speed = reducedMotion.matches ? 0 : BASE_SPEED;
+  let speed = 0;
+  let rampStart = 0;
   let boost = 0;
   let paused = false;
   let visible = false;
@@ -49,10 +51,12 @@ export function initMarquee(root: HTMLElement) {
     last = now;
     if (!drag) {
       boost *= Math.exp(-BOOST_DECAY * dt);
+      const t = rampStart ? Math.min((now - rampStart) / RAMP_MS, 1) : 0;
+      const ramp = t * t * (3 - 2 * t);
       const target =
         paused || reducedMotion.matches
           ? 0
-          : BASE_SPEED * (1 + boost * SCROLL_BOOST);
+          : BASE_SPEED * ramp * (1 + boost * SCROLL_BOOST);
       speed += (target - speed) * (1 - Math.exp(-SPEED_EASE * dt));
       x -= speed * dt;
       paint();
@@ -134,4 +138,22 @@ export function initMarquee(root: HTMLElement) {
     start();
   }).observe(root);
   measure();
+  const startRamp = () => {
+    rampStart ||= performance.now();
+  };
+  setTimeout(() => {
+    if (
+      root.dataset.revealState !== 'hidden' &&
+      root.dataset.revealState !== 'shown'
+    )
+      return startRamp();
+    new MutationObserver((_, observer) => {
+      if (root.dataset.revealState !== 'done') return;
+      observer.disconnect();
+      startRamp();
+    }).observe(root, {
+      attributes: true,
+      attributeFilter: ['data-reveal-state'],
+    });
+  });
 }
