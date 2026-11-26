@@ -1,42 +1,79 @@
 ---
-import ArtStack from './ArtStack.astro';
-import { ink, motion, outline } from './kit';
-
-const frames = [
-  {
-    x: 100,
-    y: 88,
-    w: 100,
-    h: 84,
-    lift: 'group-hover:-translate-y-2',
-    bare: true,
-  },
-];
-const node = [outline, motion];
+import { ink, motion } from './kit';
 ---
 
-<ArtStack id="art-contact" frames={frames}>
+<svg
+  class="absolute top-1/2 left-1/2 -translate-1/2 overflow-visible"
+  width="300"
+  height="180"
+  viewBox="0 0 300 180"
+  fill="none"
+  stroke-linecap="round"
+>
   <g
-    slot="a"
     class:list={['transform-fill origin-center group-hover:scale-115', motion]}
   >
     <g class="transform-fill origin-center group-hover:motion-safe:animate-art-orbit">
       <path
-        d="M50.0 16.0L72.5 29.0L72.5 55.0L50.0 68.0L27.5 55.0L27.5 29.0Z"
+        d="M155.98 89.46A39 39 0 0 1 180.38 103.55M186.37 113.91A39 39 0 0 1 186.37 142.09M180.38 152.45A39 39 0 0 1 155.98 166.54M144.02 166.54A39 39 0 0 1 119.62 152.45M113.63 142.09A39 39 0 0 1 113.63 113.91M119.62 103.55A39 39 0 0 1 144.02 89.46"
         stroke-width="1.5"
         class:list={[ink, motion]}
       />
-      <circle cx="50.0" cy="16.0" r="4" class:list={node} />
-      <circle cx="72.5" cy="29.0" r="4" class:list={node} />
-      <circle cx="72.5" cy="55.0" r="4" class:list={node} />
-      <circle cx="50.0" cy="68.0" r="4" class:list={node} />
-      <circle cx="27.5" cy="55.0" r="4" class:list={node} />
-      <circle cx="27.5" cy="29.0" r="4" class:list={node} />
+      <circle
+        cx="150.00"
+        cy="89.00"
+        r="6"
+        stroke-width="2.5"
+        class:list={[ink, motion]}
+      />
+      <circle
+        cx="183.77"
+        cy="108.50"
+        r="6"
+        stroke-width="2.5"
+        class:list={[ink, motion]}
+      />
+      <circle
+        cx="183.77"
+        cy="147.50"
+        r="6"
+        stroke-width="2.5"
+        class:list={[ink, motion]}
+      />
+      <circle
+        cx="150.00"
+        cy="167.00"
+        r="6"
+        stroke-width="2.5"
+        class:list={[ink, motion]}
+      />
+      <circle
+        cx="116.23"
+        cy="147.50"
+        r="6"
+        stroke-width="2.5"
+        class:list={[ink, motion]}
+      />
+      <circle
+        cx="116.23"
+        cy="108.50"
+        r="6"
+        stroke-width="2.5"
+        class:list={[ink, motion]}
+      />
     </g>
-    <circle cx="50" cy="38" r="5" class:list={[ink, motion]} />
-    <path
-      d="M40 54C40 48 44 45 50 45C56 45 60 48 60 54"
-      class:list={[ink, motion]}
+    <rect
+      x="133"
+      y="111"
+      width="34"
+      height="34"
+      rx="4"
+      stroke-width="2.5"
+      class="fill-white stroke-sky"
     />
+    <g stroke-width="2.5" class="stroke-azure-deep">
+      <circle cx="150" cy="123" r="5" />
+      <path d="M141 140C141 134.5 144.5 131.5 150 131.5C155.5 131.5 159 134.5 159 140" />
+    </g>
   </g>
-</ArtStack>
+</svg>
