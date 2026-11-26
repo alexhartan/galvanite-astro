@@ -266,6 +266,10 @@
 @custom-variant field-error (&:has([aria-invalid='true']));
 @custom-variant issues-error (:where([data-issues-error]) &);
 
+@utility mask-fade-y {
+  mask-image: linear-gradient(transparent, black 20%, black 80%, transparent);
+}
+
 @utility mask-fade-x {
   mask-image: linear-gradient(
     to right,
