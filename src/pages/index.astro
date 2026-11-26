@@ -9,6 +9,7 @@ import Results from '../components/sections/Results.astro';
 import Pricing from '../components/sections/Pricing.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import SelfCheck from '../components/sections/SelfCheck.astro';
+import SceneTuner from '../components/ui/SceneTuner.astro';
 import SectionLink from '../components/ui/SectionLink.astro';
 import SiteHeader from '../components/sections/SiteHeader.astro';
 import WhyGalvanite from '../components/sections/WhyGalvanite.astro';
@@ -44,7 +45,7 @@ const link = (id: SectionId) => {
   description={hero.description}
 >
   <SiteHeader slot="header" />
-  <Hero {...hero} />
+  <Hero {...hero} steps />
   <SectionLink {...link('intro')} />
   <Intro label={label('intro')} {...mission} />
   <SectionLink {...link('work')} />
@@ -60,4 +61,5 @@ const link = (id: SectionId) => {
   <SelfCheck {...check} />
   <SectionLink {...link('faq')} />
   <Faq label={label('faq')} {...faq} />
+  <SceneTuner />
 </BaseLayout>

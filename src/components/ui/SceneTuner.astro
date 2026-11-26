@@ -1,0 +1,311 @@
+---
+const poseControls = [
+  { key: 'sunrise', label: 'Sunrise', min: -1, max: 1, step: 0.01 },
+  { key: 'x', label: 'Pan X', min: -2, max: 2, step: 0.01 },
+  { key: 'y', label: 'Pan Y', min: -2, max: 2, step: 0.01 },
+  { key: 'rotation', label: 'Rotation', min: -180, max: 180, step: 1 },
+  { key: 'zoom', label: 'Zoom', min: 0.3, max: 3, step: 0.01 },
+];
+const starControls = [
+  { key: 'x', label: 'Stars X' },
+  { key: 'y', label: 'Stars Y' },
+  { key: 'rotation', label: 'Stars rot.' },
+];
+const button =
+  'min-h-11 rounded-lg bg-white/10 px-3 transition-colors duration-200 ease-out-soft hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white';
+const row = 'grid grid-cols-[4.5rem_1fr_3rem] items-center gap-2';
+---
+
+<div data-scene-tuner hidden>
+  <nav aria-label="Scene steps" class="fixed top-nav right-2 bottom-4 z-30 w-4">
+    <ol data-markers class="relative h-full"></ol>
+  </nav>
+  <aside
+    aria-label="Scene tuner"
+    class="bg-space-950/85 fixed right-8 bottom-4 z-30 max-h-[calc(100svh-2rem)] w-80 overflow-y-auto rounded-xl p-4 text-sm text-white backdrop-blur-md"
+  >
+    <details open>
+      <summary class="flex min-h-11 cursor-pointer items-center justify-between font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+        Scene tuner
+        <span data-where class="text-2xs font-normal text-white/70"></span>
+      </summary>
+      {poseControls.map(({ key, label, ...range }) => (
+        <label class:list={[row, 'mt-1']}>
+          {label}
+          <input data-pose={key} type="range" class="accent-white" {...range} />
+          <output class="text-right tabular-nums" />
+        </label>
+      ))}
+      <div class="mt-2 border-t border-white/15 pt-2">
+        {starControls.map(({ key, label }) => (
+          <label class:list={[row, 'mt-1']}>
+            {label}
+            <input
+              data-stars={key}
+              type="range"
+              min="-2"
+              max="2"
+              step="0.01"
+              class="accent-white"
+            />
+            <output class="text-right tabular-nums" />
+          </label>
+        ))}
+      </div>
+      <button
+        type="button"
+        data-step-action
+        class="text-ink bg-signal hover:bg-signal/85 data-remove:bg-alert data-remove:hover:bg-alert/85 mt-3 min-h-11 w-full rounded-lg px-3 font-semibold transition-colors duration-200 ease-out-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white data-remove:text-white"
+      >
+        Apply at this step
+      </button>
+      <p
+        data-status
+        role="status"
+        class="mt-2 min-h-5 text-2xs text-white/70"
+      ></p>
+      <div class="mt-1 grid grid-cols-2 gap-2">
+        <button type="button" data-copy class={button}>
+          Copy steps
+        </button>
+        <button type="button" data-reset class={button}>
+          Reset
+        </button>
+      </div>
+      <button type="button" data-publish class:list={[button, 'mt-2 w-full']}>
+        Push live
+      </button>
+    </details>
+  </aside>
+</div>
+
+<script>
+  import {
+    defaultSteps,
+    poseAt,
+    setScenePreview,
+    setSceneSteps,
+    stepAt,
+    stepScroll,
+    type CameraPose,
+    type SceneStep,
+    type Stars,
+  } from '../../scripts/hero-scene';
+
+  const STORAGE_KEY = 'scene-steps';
+  const TOKEN_KEY = 'github-token';
+  const DISPATCH_URL =
+    'https://api.github.com/repos/alexhartan/galvanite-astro/actions/workflows/camera-default.yml/dispatches';
+  const SNAP = 4;
+
+  const root = document.querySelector<HTMLElement>('[data-scene-tuner]');
+  if (root && new URLSearchParams(location.search).has('tune')) {
+    root.hidden = false;
+    const poseInputs = [
+      ...root.querySelectorAll<HTMLInputElement>('input[data-pose]'),
+    ];
+    const starInputs = [
+      ...root.querySelectorAll<HTMLInputElement>('input[data-stars]'),
+    ];
+    const markers = root.querySelector<HTMLOListElement>('[data-markers]')!;
+    const action = root.querySelector<HTMLButtonElement>('[data-step-action]')!;
+    const where = root.querySelector('[data-where]')!;
+    const status = root.querySelector('[data-status]')!;
+    const valid = (list: unknown): list is SceneStep[] =>
+      Array.isArray(list) &&
+      list.length > 0 &&
+      list.every(
+        (step) =>
+          typeof step?.section === 'string' &&
+          Number.isFinite(step.at) &&
+          [step.pose, step.stars].every(
+            (group) =>
+              group && Object.values(group).every((v) => Number.isFinite(v)),
+          ),
+      );
+
+    let steps: SceneStep[] = structuredClone(defaultSteps);
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
+      if (valid(saved)) steps = saved;
+    } catch {}
+    let previewAt: number | null = null;
+
+    const sorted = () =>
+      steps
+        .map((step, index) => ({ index, y: stepScroll(step) }))
+        .sort((a, b) => a.y - b.y);
+    const current = () =>
+      sorted().find(({ y }) => Math.abs(y - window.scrollY) < SNAP) ?? null;
+
+    const fill = (pose: CameraPose, stars: Stars) => {
+      for (const input of poseInputs) {
+        const value = pose[input.dataset.pose as keyof CameraPose];
+        input.value = String(value);
+        input.nextElementSibling!.textContent = value.toFixed(2);
+      }
+      for (const input of starInputs) {
+        const value = stars[input.dataset.stars as keyof Stars];
+        input.value = String(value);
+        input.nextElementSibling!.textContent = value.toFixed(2);
+      }
+    };
+    const read = () => {
+      const pose = {} as CameraPose;
+      for (const input of poseInputs)
+        pose[input.dataset.pose as keyof CameraPose] = input.valueAsNumber;
+      const stars = {} as Stars;
+      for (const input of starInputs)
+        stars[input.dataset.stars as keyof Stars] = input.valueAsNumber;
+      return { pose, stars };
+    };
+    const changed = () =>
+      JSON.stringify(steps) !== JSON.stringify(defaultSteps);
+    const save = () => {
+      try {
+        if (changed()) localStorage.setItem(STORAGE_KEY, JSON.stringify(steps));
+        else localStorage.removeItem(STORAGE_KEY);
+      } catch {}
+      setSceneSteps(steps);
+    };
+
+    const renderMarkers = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const active = current();
+      markers.replaceChildren(
+        ...sorted().map(({ index, y }, order) => {
+          const item = document.createElement('li');
+          item.className = 'absolute right-0 -translate-y-1/2';
+          item.style.setProperty(
+            'top',
+            `${(Math.min(Math.max(y, 0), max) / max) * 100}%`,
+          );
+          const link = document.createElement('button');
+          link.type = 'button';
+          link.setAttribute('aria-label', `Go to step ${order + 1}`);
+          link.className =
+            'flex size-4 items-center justify-center focus-visible:outline-2 focus-visible:outline-white';
+          const dot = document.createElement('span');
+          dot.className = `block size-2.5 rounded-full border-2 border-white ${active?.index === index ? 'bg-signal border-signal' : 'bg-space-950'}`;
+          link.append(dot);
+          link.addEventListener('click', () =>
+            window.scrollTo({
+              top: stepScroll(steps[index]!),
+              behavior: 'instant',
+            }),
+          );
+          item.append(link);
+          return item;
+        }),
+      );
+    };
+
+    const sync = () => {
+      const list = sorted();
+      const active = current();
+      if (previewAt !== null && Math.abs(window.scrollY - previewAt) > SNAP) {
+        previewAt = null;
+        setScenePreview(null);
+      }
+      if (previewAt === null) {
+        const shot = active
+          ? steps[active.index]!
+          : poseAt(steps, window.scrollY);
+        fill(shot.pose, shot.stars);
+      }
+      const order = active
+        ? list.findIndex((p) => p.index === active.index)
+        : -1;
+      where.textContent = active
+        ? `Step ${order + 1} of ${list.length}`
+        : `Between steps, ${list.length} total`;
+      action.toggleAttribute('data-remove', !!active);
+      action.textContent = active ? 'Remove this step' : 'Apply at this step';
+      action.disabled = !!active && steps.length < 2;
+      renderMarkers();
+    };
+
+    for (const input of [...poseInputs, ...starInputs]) {
+      input.addEventListener('input', () => {
+        input.nextElementSibling!.textContent = input.valueAsNumber.toFixed(2);
+        const active = current();
+        if (active) {
+          Object.assign(steps[active.index]!, read());
+          save();
+          status.textContent = 'Step updated. Push live to publish.';
+        } else {
+          previewAt = window.scrollY;
+          setScenePreview(read());
+          status.textContent = 'Preview. Apply at this step to keep it.';
+        }
+      });
+    }
+
+    action.addEventListener('click', () => {
+      const active = current();
+      if (active) {
+        steps.splice(active.index, 1);
+        status.textContent = 'Step removed.';
+      } else {
+        steps.push({ ...stepAt(window.scrollY), ...read() });
+        status.textContent = 'Step added. Push live to publish.';
+      }
+      previewAt = null;
+      setScenePreview(null);
+      save();
+      sync();
+    });
+
+    root
+      .querySelector<HTMLButtonElement>('[data-reset]')
+      ?.addEventListener('click', () => {
+        steps = structuredClone(defaultSteps);
+        previewAt = null;
+        setScenePreview(null);
+        save();
+        sync();
+        status.textContent = 'Back to the published steps.';
+      });
+
+    const copy = root.querySelector<HTMLButtonElement>('[data-copy]')!;
+    copy.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(JSON.stringify(steps, null, 2));
+      status.textContent = 'Steps copied.';
+    });
+
+    const publish = root.querySelector<HTMLButtonElement>('[data-publish]')!;
+    publish.addEventListener('click', async () => {
+      let token = '';
+      try {
+        token = localStorage.getItem(TOKEN_KEY) ?? '';
+      } catch {}
+      if (!token) {
+        token = prompt('GitHub token (Actions: read and write)')?.trim() ?? '';
+        if (!token) return;
+      }
+      const response = await fetch(DISPATCH_URL, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/vnd.github+json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          ref: 'main',
+          inputs: { steps: JSON.stringify(steps) },
+        }),
+      }).catch(() => null);
+      try {
+        if (response?.ok) localStorage.setItem(TOKEN_KEY, token);
+        else if (response) localStorage.removeItem(TOKEN_KEY);
+      } catch {}
+      status.textContent = response?.ok
+        ? 'Publishing, live in about 1 minute.'
+        : 'Could not publish.';
+    });
+
+    setSceneSteps(steps);
+    window.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync, { passive: true });
+    sync();
+  }
+</script>

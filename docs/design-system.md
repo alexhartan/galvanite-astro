@@ -125,6 +125,7 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `GridMark`, `ColumnLines` | | grid decoration |
 | `LogoMarquee` | `large`, `class` | client logo marquee |
 | `GridGallery` | `class` (position) | 3 flat columns of 3 square project images (src/assets/cta, WebP), looping up/down/up at 70s/95s/82s (`--duration` per track); column eases to a stop on hover (scripts/gallery.ts); tiles at 70%, hovered 100% and its window unmasks 20px (the gap) on each side at the same image scale (`gallery-hover`), others dim to 40%; shown from xl |
+| `SceneTuner` | | homepage scene step editor, shown with `?tune`: sliders, apply/remove step, step markers, push live (writes `scripts/home-steps.json`) |
 | `CaseCard` | `data`, `index`, `copy`, `class` | case study thumbnail with the hover expansion (see below) |
 | `ArrowIcon`, `SparkIcon`, `Logo` | `class` | icons |
 

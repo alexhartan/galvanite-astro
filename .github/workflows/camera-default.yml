@@ -4,7 +4,10 @@ on:
     inputs:
       camera:
         description: Camera path JSON
-        required: true
+        required: false
+      steps:
+        description: Homepage scene steps JSON
+        required: false
 permissions:
   contents: write
   actions: write
@@ -15,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CAMERA: ${{ inputs.camera }}
+      STEPS: ${{ inputs.steps }}
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
@@ -23,6 +27,15 @@ jobs:
       - name: Validate and write
         run: |
           node -e '
+            const fs = require("fs");
+            const finite = (g) => g && Object.values(g).every(Number.isFinite);
+            if (process.env.STEPS) {
+              const s = JSON.parse(process.env.STEPS);
+              const ok = Array.isArray(s) && s.length > 0 && s.every((t) => typeof t.section === "string" && Number.isFinite(t.at) && finite(t.pose) && finite(t.stars));
+              if (!ok) process.exit(1);
+              fs.writeFileSync("src/scripts/home-steps.json", JSON.stringify(s, null, 2) + "\n");
+            }
+            if (!process.env.CAMERA) process.exit(0);
             const c = JSON.parse(process.env.CAMERA);
             const poses = [c.start, c.end, c.stars];
             const ok = poses.every((p) => p && Object.values(p).every(Number.isFinite));
@@ -35,6 +48,6 @@ jobs:
           if git diff --quiet; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "Update hero animation default"
+          git commit -am "Update hero animation"
           git push origin main
           gh workflow run pages.yml --ref main
