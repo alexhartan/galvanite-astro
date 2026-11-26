@@ -9,12 +9,21 @@ interface Props {
   emphasis: string;
   description: string;
   logos?: boolean;
+  steps?: boolean;
 }
-const { eyebrow, lead, emphasis, description, logos = true } = Astro.props;
+const {
+  eyebrow,
+  lead,
+  emphasis,
+  description,
+  logos = true,
+  steps = false,
+} = Astro.props;
 ---
 
 <section
   data-hero
+  data-scene-steps={steps ? '' : undefined}
   class="group from-space-950 to-space-900 fixed inset-0 bg-linear-to-br"
 >
   <div class="h-full overflow-hidden">

@@ -1,4 +1,5 @@
 import savedCamera from './hero-camera.json';
+import savedSteps from './home-steps.json';
 import { reducedMotion } from './env';
 import { FRAGMENT, VERTEX } from './hero-shader';
 
@@ -31,6 +32,17 @@ export interface CameraPath {
 
 export const defaultCamera = savedCamera as CameraPath;
 
+export type Stars = CameraPath['stars'];
+
+export interface SceneStep {
+  section: string;
+  at: number;
+  pose: CameraPose;
+  stars: Stars;
+}
+
+export const defaultSteps = savedSteps as SceneStep[];
+
 const easings: Record<CameraEasing, (t: number) => number> = {
   linear: (t) => t,
   'ease-in': (t) => t * t,
@@ -44,6 +56,68 @@ let invalidate = () => {};
 export function setHeroCamera(path: CameraPath) {
   camera = path;
   invalidate();
+}
+
+let steps: SceneStep[] | null = null;
+let preview: { pose: CameraPose; stars: Stars } | null = null;
+
+export function setSceneSteps(next: SceneStep[]) {
+  steps = next;
+  invalidate();
+}
+
+export function setScenePreview(next: typeof preview) {
+  preview = next;
+  invalidate();
+}
+
+export function stepScroll({ section, at }: Pick<SceneStep, 'section' | 'at'>) {
+  const height = window.innerHeight;
+  if (section === 'page') return at * height - height / 2;
+  const box = document.getElementById(section)?.getBoundingClientRect();
+  if (!box) return 0;
+  return box.top + window.scrollY + at * box.height - height / 2;
+}
+
+export function stepAt(scroll: number) {
+  const height = window.innerHeight;
+  const line = scroll + height / 2;
+  if (line < height) return { section: 'page', at: line / height };
+  for (const el of document.querySelectorAll<HTMLElement>('main section[id]')) {
+    const box = el.getBoundingClientRect();
+    const top = box.top + window.scrollY;
+    if (line >= top && line < top + box.height)
+      return { section: el.id, at: (line - top) / box.height };
+  }
+  return { section: 'page', at: line / height };
+}
+
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+export function poseAt(list: SceneStep[], scroll: number) {
+  const points = list
+    .map((step) => ({ step, y: stepScroll(step) }))
+    .sort((a, b) => a.y - b.y);
+  const first = points[0]!;
+  const last = points[points.length - 1]!;
+  if (scroll <= first.y)
+    return { pose: first.step.pose, stars: first.step.stars };
+  if (scroll >= last.y) return { pose: last.step.pose, stars: last.step.stars };
+  const index = points.findIndex((point) => point.y > scroll);
+  const a = points[index - 1]!;
+  const b = points[index]!;
+  const t = (scroll - a.y) / (b.y - a.y);
+  const pose = {} as CameraPose;
+  for (const key of Object.keys(a.step.pose) as (keyof CameraPose)[])
+    pose[key] = lerp(a.step.pose[key], b.step.pose[key], t);
+  return {
+    pose,
+    stars: {
+      x: lerp(a.step.stars.x, b.step.stars.x, t),
+      y: lerp(a.step.stars.y, b.step.stars.y, t),
+      rotation: lerp(a.step.stars.rotation, b.step.stars.rotation, t),
+    },
+  };
 }
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
@@ -184,6 +258,8 @@ export function initHeroScene(
   const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
   let target = 0;
   let progress = 0;
+  let scrollTarget = window.scrollY;
+  let scroll = scrollTarget;
   let visible = true;
   let frame = 0;
   let last = 0;
@@ -194,6 +270,7 @@ export function initHeroScene(
   let throttled = false;
 
   const hero = canvas.closest<HTMLElement>('[data-hero]');
+  if (hero?.hasAttribute('data-scene-steps')) steps ??= defaultSteps;
   const zone = document.querySelector<HTMLElement>('[data-scene-path]');
   const zonePath = zone
     ? (JSON.parse(zone.dataset.scenePath ?? '') as CameraPath)
@@ -235,6 +312,7 @@ export function initHeroScene(
       visible = target < 1;
     }
     if (progress < 0) progress = target;
+    scrollTarget = window.scrollY;
   };
 
   const render = (now: number) => {
@@ -265,6 +343,7 @@ export function initHeroScene(
       }
     }
     progress += (target - progress) * (still ? 1 : Math.max(ease, 0.02));
+    scroll += (scrollTarget - scroll) * (still ? 1 : Math.max(ease, 0.02));
     pointer.x += (pointer.targetX - pointer.x) * ease;
     pointer.y += (pointer.targetY - pointer.y) * ease;
 
@@ -275,30 +354,39 @@ export function initHeroScene(
 
     if (renderer) {
       const path = zoneActive && zonePath ? zonePath : camera;
-      const { start, end } = path;
       const t = easings[path.easing](progress);
       const mix = (key: keyof CameraPose) =>
-        start[key] + (end[key] - start[key]) * t;
+        path.start[key] + (path.end[key] - path.start[key]) * t;
+      const shot =
+        preview ??
+        (steps?.length
+          ? poseAt(steps, scroll)
+          : {
+              pose: {
+                x: mix('x'),
+                y: mix('y'),
+                rotation: mix('rotation'),
+                zoom: mix('zoom'),
+                sunrise: mix('sunrise'),
+              },
+              stars: path.stars,
+            });
       const intro = still ? 1 : clamp01((now - started) / INTRO_MS);
       renderer.draw(
         1 - Math.pow(1 - intro, 3),
         still ? 0 : (now - started) / 1000,
         pointer.x,
         pointer.y,
-        {
-          x: mix('x'),
-          y: mix('y'),
-          rotation: mix('rotation'),
-          zoom: mix('zoom'),
-          sunrise: mix('sunrise'),
-        },
-        path.stars,
+        shot.pose,
+        shot.stars,
       );
       mirror?.();
       canvas.toggleAttribute('data-ready', true);
     }
 
-    const settled = Math.abs(target - progress) < 0.0002;
+    const settled =
+      Math.abs(target - progress) < 0.0002 &&
+      Math.abs(scrollTarget - scroll) < 0.5;
     if (visible && !document.hidden && !(settled && (still || !renderer))) {
       schedule();
     } else {

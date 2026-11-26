@@ -1,0 +1,38 @@
+[
+  {
+    "section": "page",
+    "at": 0.5,
+    "pose": {
+      "x": 0,
+      "y": 0.09,
+      "rotation": 10,
+      "zoom": 0.72,
+      "sunrise": 0.03
+    },
+    "stars": { "x": 0, "y": 0, "rotation": 1 }
+  },
+  {
+    "section": "page",
+    "at": 1.5,
+    "pose": { "x": -0.94, "y": 0.17, "rotation": 0, "zoom": 1, "sunrise": 1 },
+    "stars": { "x": 0, "y": 0, "rotation": 1 }
+  },
+  {
+    "section": "work",
+    "at": 0,
+    "pose": {
+      "x": -0.48,
+      "y": -0.26,
+      "rotation": 125,
+      "zoom": 0.72,
+      "sunrise": 0.23
+    },
+    "stars": { "x": -0.65, "y": -0.49, "rotation": 1 }
+  },
+  {
+    "section": "why",
+    "at": 0,
+    "pose": { "x": -1.18, "y": 0.33, "rotation": 0, "zoom": 1, "sunrise": 0.3 },
+    "stars": { "x": -0.65, "y": -0.49, "rotation": 1 }
+  }
+]
