@@ -200,6 +200,9 @@ export function initHeroScene(
     : null;
   const start =
     document.querySelector<HTMLElement>('[data-scene-start]') ?? zone;
+  const end = zone
+    ? document.querySelector<HTMLElement>('[data-scene-end]')
+    : null;
   let zoneActive = false;
 
   const content = hero?.querySelector<HTMLElement>('[data-hero-content]');
@@ -219,7 +222,13 @@ export function initHeroScene(
       progress = -1;
     }
     if (active) {
-      target = 0;
+      if (box && end) {
+        const from = box.top - height * 1.25;
+        const to = end.getBoundingClientRect().top - height * 0.5;
+        target = clamp01(from / (from - to));
+      } else {
+        target = 0;
+      }
       visible = true;
     } else {
       target = clamp01(window.scrollY / height);
