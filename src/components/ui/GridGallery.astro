@@ -37,7 +37,7 @@ const columns: { motion: string; duration: number; tiles: ImageMetadata[] }[] =
 
 <div
   aria-hidden="true"
-  class:list={['gallery-hover absolute inset-y-0', className]}
+  class:list={['gallery-hover mask-fade-y absolute inset-y-0', className]}
 >
   <div class="flex h-full gap-5">
     {columns.map(({ motion, duration, tiles }) => (
