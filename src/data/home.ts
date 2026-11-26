@@ -22,9 +22,7 @@ export const hero = {
 
 export const mission = {
   statement: [
-    { text: 'Premium brands and websites for ' },
-    { text: 'technical products ', strong: true },
-    { text: 'that ' },
+    { text: 'Brands and websites for deeply technical products that ' },
     { text: 'outgrew their story', strong: true },
     { text: '.' },
   ],
