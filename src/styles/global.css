@@ -142,6 +142,7 @@
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-in-soft: cubic-bezier(0.32, 0, 0.67, 0);
+  --ease-in-out-sine: cubic-bezier(0.37, 0, 0.63, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-marquee: marquee 120s linear infinite;
@@ -291,8 +292,8 @@
   transform: translate(var(--zx, 0), var(--zy, 0)) scale(var(--zs, 1));
   transition:
     translate 350ms var(--ease-out-soft),
-    transform 700ms var(--ease-out-soft),
-    scale 450ms var(--ease-out-soft),
+    transform 900ms var(--ease-in-out-sine),
+    scale 600ms var(--ease-in-out-sine),
     box-shadow 600ms var(--ease-out-soft);
   font-size: var(--s);
   padding: 0.042em;
