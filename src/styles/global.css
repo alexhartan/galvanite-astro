@@ -73,6 +73,9 @@
   --text-section--line-height: var(--leading-heading);
   --text-section--letter-spacing: var(--tracking-headline);
   --text-section--font-weight: 200;
+  --text-panel: calc(var(--text-section) * 0.8333);
+  --text-panel--line-height: var(--leading-heading);
+  --text-panel--letter-spacing: var(--tracking-headline);
   --text-stat: clamp(2.9rem, 3.6vw, 4.2rem);
   --text-stat--line-height: var(--leading-heading);
   --text-stat--letter-spacing: -0.05em;
@@ -288,7 +291,7 @@
   padding: 0.042em;
   border-radius: 0.083em;
   box-shadow: 0 0 0.167em var(--color-azure-deep);
-  opacity: calc(1 - var(--d) * 0.5);
+  opacity: calc(1 - var(--d) * 0.625);
   filter: blur(calc(var(--d) * 0.6cqh));
   & img {
     width: 1em;

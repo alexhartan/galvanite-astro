@@ -44,7 +44,7 @@ const tiles: {
 
 <div
   class:list={[
-    'bg-radial-[ellipse_50%_133%_at_50%_0%] from-space-800 via-space-900 to-space-950 relative aspect-3/5 overflow-clip rounded-3xl sm:aspect-1600/809',
+    'bg-radial-[ellipse_50%_133%_at_50%_0%] from-space-800 via-space-900 to-space-950 relative aspect-3/5 overflow-clip rounded-3xl sm:aspect-1600/720',
     className,
   ]}
 >
@@ -53,7 +53,7 @@ const tiles: {
       <div
         data-parallax={(-0.08 + Math.sqrt(depth) * 0.26).toFixed(3)}
         class="depth-tile bg-azure-deep/60 border border-white/15"
-        style={`--x: ${(x / 1600) * 100}%; --y: ${(y / STAGE) * 100}%; --s: ${(size / STAGE) * 100}cqh; --d: ${depth}`}
+        style={`--x: ${(x / 1600) * 100}%; --y: ${(y / STAGE) * 100}%; --s: ${(size / 720) * 100}cqh; --d: ${depth}`}
       >
         <Image
           src={src}
@@ -66,10 +66,10 @@ const tiles: {
     ))}
   </div>
   <div class="pointer-events-none relative p-8 lg:p-12">
-    <h3 class="text-section font-normal text-white lg:whitespace-nowrap">
+    <h3 class="text-panel font-normal text-white lg:whitespace-nowrap">
       {heading}
     </h3>
-    <p class="text-answer text-frost/75 mt-5 max-w-sm font-medium">{text}</p>
+    <p class="text-answer text-frost/75 mt-5 max-w-sm font-normal">{text}</p>
   </div>
 </div>
 
