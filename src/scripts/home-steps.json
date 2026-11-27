@@ -6,7 +6,7 @@
       "sunrise": 0.06,
       "x": -0.1,
       "y": 0.36,
-      "rotation": 5,
+      "rotation": 0,
       "zoom": 0.83
     },
     "stars": {
@@ -36,15 +36,15 @@
     "at": 0.6176022587955567,
     "pose": {
       "sunrise": 1,
-      "x": -0.34,
+      "x": -0.24,
       "y": 0.74,
-      "rotation": -60,
+      "rotation": -26,
       "zoom": 1.23
     },
     "stars": {
       "x": -0.07,
       "y": -0.05,
-      "rotation": 1
+      "rotation": -2
     }
   },
   {
@@ -55,19 +55,19 @@
       "x": -0.15,
       "y": -0.28,
       "rotation": 108,
-      "zoom": 1.17
+      "zoom": 0.99
     },
     "stars": {
       "x": -0.2,
       "y": -0.15,
-      "rotation": 1
+      "rotation": 0.18
     }
   },
   {
     "section": "why",
     "at": 0.5309078646633445,
     "pose": {
-      "sunrise": 0.3,
+      "sunrise": 0.2,
       "x": -0.93,
       "y": 0.03,
       "rotation": -6,
@@ -83,15 +83,31 @@
     "section": "testimonials",
     "at": 0.12371455019776151,
     "pose": {
-      "sunrise": 0.28,
+      "sunrise": 0.3,
       "x": -1.65,
       "y": -0.3,
       "rotation": 32,
       "zoom": 0.66
     },
     "stars": {
-      "x": -0.33,
-      "y": -0.25,
+      "x": -0.19,
+      "y": -0.13,
+      "rotation": 0.21
+    }
+  },
+  {
+    "section": "faq",
+    "at": 0.47878332228961723,
+    "pose": {
+      "sunrise": 0.36,
+      "x": -0.37,
+      "y": 0.32,
+      "rotation": -27,
+      "zoom": 0.86
+    },
+    "stars": {
+      "x": -0.64,
+      "y": -0.48,
       "rotation": 1
     }
   }
