@@ -278,6 +278,25 @@
   mask-image: linear-gradient(rgb(0 0 0 / 0.1), black 30%, black 70%, rgb(0 0 0 / 0.1));
 }
 
+@utility depth-tile {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  translate: -50% calc(-50% + var(--shift, 0px));
+  font-size: var(--s);
+  padding: 0.042em;
+  border-radius: 0.083em;
+  box-shadow: 0 0 0.167em var(--color-azure-deep);
+  opacity: calc(1 - var(--d) * 0.5);
+  filter: blur(calc(var(--d) * 0.6cqh));
+  & img {
+    width: 1em;
+    height: 1em;
+    border-radius: 0.052em;
+    box-shadow: 0 0 0.0625em var(--color-sky);
+  }
+}
+
 @utility mask-fade-x-soft {
   mask-image: linear-gradient(
     to right,

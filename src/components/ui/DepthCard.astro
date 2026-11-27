@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import alex from '../../assets/team/alex.png';
+import far1 from '../../assets/team/far1.png';
+import far2 from '../../assets/team/far1-1.png';
+import far3 from '../../assets/team/far1-2.png';
+import far4 from '../../assets/team/far1-3.png';
+import far5 from '../../assets/team/far1-4.png';
+import mid1 from '../../assets/team/mid1.png';
+import mid2 from '../../assets/team/mid1-1.png';
+import mid3 from '../../assets/team/mid1-2.png';
+import mid4 from '../../assets/team/mid1-3.png';
+import mid5 from '../../assets/team/mid1-4.png';
+
+interface Props {
+  heading: string;
+  text: string;
+  alt: string;
+  class?: string;
+}
+const { heading, text, alt, class: className } = Astro.props;
+const STAGE = 809;
+const tiles: {
+  src: ImageMetadata;
+  x: number;
+  y: number;
+  size: number;
+  depth: number;
+}[] = [
+  { src: far5, x: 1400, y: 300, size: 54, depth: 1 },
+  { src: far1, x: 724, y: 89, size: 60, depth: 0.95 },
+  { src: far2, x: 90, y: 430, size: 60, depth: 0.95 },
+  { src: far3, x: 1244, y: 497, size: 70, depth: 0.85 },
+  { src: far4, x: 457, y: 799, size: 70, depth: 0.85 },
+  { src: mid4, x: 560, y: 480, size: 100, depth: 0.6 },
+  { src: mid5, x: 893, y: 675, size: 100, depth: 0.6 },
+  { src: mid3, x: 1508, y: 591, size: 116, depth: 0.45 },
+  { src: mid2, x: 237, y: 610, size: 130, depth: 0.4 },
+  { src: mid1, x: 1165, y: 190, size: 140, depth: 0.35 },
+  { src: alex, x: 800, y: 405, size: 240, depth: 0 },
+];
+---
+
+<div
+  class:list={[
+    'bg-radial-[ellipse_50%_133%_at_50%_0%] from-space-800 via-space-900 to-space-950 relative aspect-3/5 overflow-clip rounded-3xl sm:aspect-1600/809',
+    className,
+  ]}
+>
+  <div class="absolute inset-x-0 top-2/5 bottom-0 @container-size sm:inset-0">
+    {tiles.map(({ src, x, y, size, depth }) => (
+      <div
+        data-parallax={(-0.05 + depth * 0.17).toFixed(3)}
+        class="depth-tile bg-azure-deep/60 border border-white/15"
+        style={`--x: ${(x / 1600) * 100}%; --y: ${(y / STAGE) * 100}%; --s: ${(size / STAGE) * 100}cqh; --d: ${depth}`}
+      >
+        <Image
+          src={src}
+          alt={depth === 0 ? alt : ''}
+          widths={[size, size * 2].map((w) => Math.min(w, src.width))}
+          sizes={`${size}px`}
+          class="object-cover"
+        />
+      </div>
+    ))}
+  </div>
+  <div class="pointer-events-none relative p-8 lg:p-12">
+    <h3 class="text-section font-normal text-white lg:whitespace-nowrap">
+      {heading}
+    </h3>
+    <p class="text-answer text-frost/75 mt-5 max-w-sm font-medium">{text}</p>
+  </div>
+</div>
+
+<script>
+  import '../../scripts/parallax';
+</script>
