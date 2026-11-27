@@ -298,8 +298,8 @@
   padding: 0.042em;
   border-radius: 0.083em;
   box-shadow: 0 0 0.167em var(--color-azure-deep);
-  opacity: calc(1 - var(--d) * 0.625);
-  filter: blur(calc(var(--d) * 0.6cqh));
+  opacity: calc(1 - var(--d) * 0.7);
+  filter: blur(calc(var(--d) * 0.45cqh));
   & img {
     width: 1em;
     max-width: none;
