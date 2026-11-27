@@ -58,7 +58,7 @@ export const why = {
   heading: 'Built with intent',
   contact: {
     heading: 'One point of contact',
-    text: 'From the kick-off call to launch, you’ll work directly with me. Depending on the needs of the project, I may bring in vetted specialists, but I’ll remain your main point of contact, managing communication, quality, and timelines.',
+    text: 'From kick-off to launch, you’ll work directly with me. Depending on the scope, I may bring in vetted specialists, but I’ll remain your main point of contact, managing communication, quality, and timelines.',
     alt: 'Alex Hartan, founder of Galvanite',
   },
 };
