@@ -27,7 +27,49 @@ const row = 'grid grid-cols-[4.5rem_1fr_3rem] items-center gap-2';
     <details open>
       <summary class="flex min-h-11 cursor-pointer items-center justify-between font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
         Scene tuner
-        <span data-where class="text-2xs font-normal text-white/70"></span>
+        <span class="flex items-center gap-1 tabular-nums">
+          <button
+            type="button"
+            data-step-prev
+            aria-label="Previous step"
+            class="flex size-8 items-center justify-center rounded-md transition-colors duration-200 ease-out-soft hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-white disabled:opacity-30"
+          >
+            <svg
+              aria-hidden="true"
+              width="8"
+              height="12"
+              viewBox="0 0 8 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 1L1 6l5 5" />
+            </svg>
+          </button>
+          <span data-where></span>
+          <button
+            type="button"
+            data-step-next
+            aria-label="Next step"
+            class="flex size-8 items-center justify-center rounded-md transition-colors duration-200 ease-out-soft hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-white disabled:opacity-30"
+          >
+            <svg
+              aria-hidden="true"
+              width="8"
+              height="12"
+              viewBox="0 0 8 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M2 1l5 5-5 5" />
+            </svg>
+          </button>
+        </span>
       </summary>
       {poseControls.map(({ key, label, ...range }) => (
         <label class:list={[row, 'mt-1']}>
@@ -128,6 +170,21 @@ const row = 'grid grid-cols-[4.5rem_1fr_3rem] items-center gap-2';
     )!;
     const where = root.querySelector('[data-where]')!;
     const status = root.querySelector('[data-status]')!;
+    const prev = root.querySelector<HTMLButtonElement>('[data-step-prev]')!;
+    const next = root.querySelector<HTMLButtonElement>('[data-step-next]')!;
+    const go = (event: Event, dir: 1 | -1) => {
+      event.preventDefault();
+      const list = sorted().map(({ y }) => y);
+      const y = window.scrollY;
+      const target =
+        dir > 0
+          ? list.find((v) => v > y + SNAP)
+          : list.reverse().find((v) => v < y - SNAP);
+      if (target !== undefined)
+        window.scrollTo({ top: target, behavior: 'instant' });
+    };
+    prev.addEventListener('click', (event) => go(event, -1));
+    next.addEventListener('click', (event) => go(event, 1));
     const valid = (list: unknown): list is SceneStep[] =>
       Array.isArray(list) &&
       list.length > 0 &&
@@ -233,9 +290,9 @@ const row = 'grid grid-cols-[4.5rem_1fr_3rem] items-center gap-2';
       const order = active
         ? list.findIndex((p) => p.index === active.index)
         : -1;
-      where.textContent = active
-        ? `Step ${order + 1} of ${list.length}`
-        : `Between steps, ${list.length} total`;
+      where.textContent = `${active ? order + 1 : '–'} / ${list.length}`;
+      prev.disabled = !list.some(({ y }) => y < window.scrollY - SNAP);
+      next.disabled = !list.some(({ y }) => y > window.scrollY + SNAP);
       action.toggleAttribute('data-remove', !!active);
       action.textContent = active ? 'Remove this step' : 'Apply at this step';
       action.disabled = !!active && steps.length < 2;
