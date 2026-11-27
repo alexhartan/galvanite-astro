@@ -290,9 +290,10 @@
   will-change: transform;
   transform: translate(var(--zx, 0), var(--zy, 0)) scale(var(--zs, 1));
   transition:
-    translate 700ms var(--ease-out-soft),
-    transform 1400ms var(--ease-in-out-soft),
-    scale 900ms var(--ease-in-out-soft);
+    translate 350ms var(--ease-out-soft),
+    transform 700ms var(--ease-out-soft),
+    scale 450ms var(--ease-out-soft),
+    box-shadow 600ms var(--ease-out-soft);
   font-size: var(--s);
   padding: 0.042em;
   border-radius: 0.083em;
@@ -305,6 +306,19 @@
     height: 1em;
     border-radius: 0.052em;
     box-shadow: 0 0 0.0625em var(--color-sky);
+    transition: box-shadow 600ms var(--ease-out-soft);
+  }
+}
+
+@utility depth-card {
+  & [data-depth-light] {
+    opacity: 0;
+    transition: opacity 700ms var(--ease-out-soft);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:has([data-focus]:hover) [data-depth-light] {
+      opacity: 1;
+    }
   }
 }
 
@@ -315,6 +329,10 @@
     }
     & [data-focus]:hover {
       scale: 1.1;
+      box-shadow: 0 0 0.35em var(--color-azure-deep);
+      & img {
+        box-shadow: 0 0 0.15em var(--color-sky);
+      }
     }
     &:has([data-focus]:hover) .depth-tile:not([data-focus]) {
       --zx: var(--ox);
