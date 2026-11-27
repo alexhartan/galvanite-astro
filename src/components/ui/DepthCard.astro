@@ -21,6 +21,7 @@ interface Props {
 }
 const { heading, text, alt, class: className } = Astro.props;
 const STAGE = 809;
+const zoom = (depth: number) => 0.06 + (1 - depth) * 0.22;
 const tiles: {
   src: ImageMetadata;
   x: number;
@@ -48,15 +49,13 @@ const tiles: {
     className,
   ]}
 >
-  <div class="absolute inset-x-0 top-2/5 bottom-0 @container-size sm:inset-0">
+  <div class="depth-stage absolute inset-x-0 top-2/5 bottom-0 @container-size sm:inset-0">
     {tiles.map(({ src, x, y, size, depth }) => (
       <div
         data-parallax={depth ? (Math.sqrt(depth) * 0.3).toFixed(3) : undefined}
-        class:list={[
-          'depth-tile bg-azure-deep/60 border border-white/15',
-          depth === 0 && 'cursor-pointer motion-safe:hover:animate-pinch',
-        ]}
-        style={`--x: ${(x / 1600) * 100}%; --y: ${(y / STAGE) * 100}%; --s: ${(size / 720) * 100}cqh; --d: ${depth}`}
+        class="depth-tile bg-azure-deep/60 border border-white/15"
+        data-focus={depth ? undefined : ''}
+        style={`--x: ${(x / 1600) * 100}%; --y: ${(y / STAGE) * 100}%; --s: ${(size / 720) * 100}cqh; --d: ${depth}; --ox: ${(((x - 800) / 1600) * 100 * zoom(depth)).toFixed(2)}cqw; --oy: ${(((y - 405) / STAGE) * 100 * zoom(depth)).toFixed(2)}cqh; --os: ${(1 + zoom(depth) * 0.6).toFixed(3)}`}
       >
         <Image
           src={src}
