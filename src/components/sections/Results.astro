@@ -37,16 +37,13 @@ const motion = 'transition motion-slow';
       <div data-results class="relative mt-9 lg:mt-11">
         <div
           aria-hidden="true"
-          class="from-white/5 to-transparent bleed-x absolute inset-y-0 bg-linear-to-b"
-        ></div>
-        <div
-          aria-hidden="true"
           class="bg-line-dark pointer-events-none z-10 bleed-x absolute top-0 h-px"
         ></div>
         <ColumnLines
           class="sm:grid-cols-3"
           columns={['hidden sm:block', 'hidden sm:block', '']}
           inverted
+          edge="bg-line-dark -bottom-16 lg:-bottom-20"
           line="z-10"
           mark="z-20"
         />
@@ -56,7 +53,7 @@ const motion = 'transition motion-slow';
               <a
                 href={href}
                 class:list={[
-                  'peer group hover:bg-white/5 focus-visible:bg-white/5 focus-visible:outline-white relative flex h-full flex-col overflow-clip px-8 py-15 focus-visible:outline-2 focus-visible:-outline-offset-2 lg:px-14 lg:py-21',
+                  'peer group isolate before:from-space-950/50 before:to-space-950/0 before:absolute before:inset-0 before:-z-10 before:bg-linear-to-b before:opacity-0 before:transition-opacity before:duration-500 before:ease-out-soft hover:before:opacity-100 focus-visible:before:opacity-100 motion-reduce:before:transition-none focus-visible:outline-white relative flex h-full flex-col overflow-clip px-8 py-15 focus-visible:outline-2 focus-visible:-outline-offset-2 lg:px-14 lg:py-21',
                   motion,
                 ]}
               >
