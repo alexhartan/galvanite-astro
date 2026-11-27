@@ -2,7 +2,7 @@ export const sections = [
   { id: 'intro', label: 'Our Mission' },
   { id: 'work', label: 'Featured Work' },
   { id: 'engagements', label: 'Pricing', dark: true },
-  { id: 'testimonials', label: 'Testimonials', dark: true },
+  { id: 'testimonials', label: 'Testimonials' },
   { id: 'why', label: 'Why Galvanite' },
   { id: 'faq', label: 'FAQ', dark: true },
 ] as const;
