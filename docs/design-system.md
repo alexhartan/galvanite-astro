@@ -91,6 +91,7 @@ From 1920px (`4xl`) the root font size grows 0.0025px per pixel of viewport, cap
 | `ease-out-expo` | scroll reveals (`reveal-*` utilities) |
 | `ease-in-out-soft` | CTA fill, art hover, featured price card |
 | `ease-in-soft` | CaseCard arrow fade-in |
+| `ease-in-out-sine` | DepthCard hover spread and grow |
 | `duration-200`, `duration-700` | section links; image zoom, canvas fade, carousel |
 | `animate-marquee`, `animate-marquee-slow` | logo marquees |
 | `animate-marquee-up`, `animate-marquee-down` | gallery columns (90s default, per-track `--duration`) |
