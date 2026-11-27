@@ -126,7 +126,7 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `LogoMarquee` | `large`, `class` | client logo marquee |
 | `GridGallery` | `class` (position) | 3 flat columns of 3 square project images (src/assets/cta, WebP), looping up/down/up at 70s/95s/82s (`--duration` per track); column eases to a stop on hover (scripts/gallery.ts); tiles at 70%, hovered 100% and its window unmasks 20px (the gap) on each side at the same image scale (`gallery-hover`), others dim to 40%; shown from xl |
 | `SceneTuner` | | homepage scene step editor, shown with `?tune`: sliders, apply/remove step, step markers, push live (writes `scripts/home-steps.json`) |
-| `DepthCard` | `heading`, `text`, `alt`, `class` | rounded dark card with portrait tiles (src/assets/team) placed by depth: `depth-tile` sets size, frame and image glow, opacity (1 to 0.5) and blur from `--d`; each tile has its own parallax rate (-0.05 near to 0.12 far). Tiles sit below the copy on mobile |
+| `DepthCard` | `heading`, `text`, `alt`, `class` | rounded dark card with portrait tiles (src/assets/team) placed by depth: `depth-tile` sets size, frame and image glow, opacity (1 to 0.5) and blur from `--d`; each tile has its own parallax rate (-0.08 near, 0.07 to 0.12 mid, 0.16 to 0.18 far). Tiles sit below the copy on mobile |
 | `CaseCard` | `data`, `index`, `copy`, `class` | case study thumbnail with the hover expansion (see below) |
 | `ArrowIcon`, `SparkIcon`, `Logo` | `class` | icons |
 

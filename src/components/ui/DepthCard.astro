@@ -33,11 +33,11 @@ const tiles: {
   { src: far2, x: 90, y: 430, size: 60, depth: 0.95 },
   { src: far3, x: 1244, y: 497, size: 70, depth: 0.85 },
   { src: far4, x: 457, y: 799, size: 70, depth: 0.85 },
-  { src: mid4, x: 560, y: 480, size: 100, depth: 0.6 },
+  { src: mid1, x: 560, y: 480, size: 100, depth: 0.6 },
   { src: mid5, x: 893, y: 675, size: 100, depth: 0.6 },
   { src: mid3, x: 1508, y: 591, size: 116, depth: 0.45 },
   { src: mid2, x: 237, y: 610, size: 130, depth: 0.4 },
-  { src: mid1, x: 1165, y: 190, size: 140, depth: 0.35 },
+  { src: mid4, x: 1165, y: 190, size: 140, depth: 0.35 },
   { src: alex, x: 800, y: 405, size: 240, depth: 0 },
 ];
 ---
@@ -51,7 +51,7 @@ const tiles: {
   <div class="absolute inset-x-0 top-2/5 bottom-0 @container-size sm:inset-0">
     {tiles.map(({ src, x, y, size, depth }) => (
       <div
-        data-parallax={(-0.05 + depth * 0.17).toFixed(3)}
+        data-parallax={(-0.08 + Math.sqrt(depth) * 0.26).toFixed(3)}
         class="depth-tile bg-azure-deep/60 border border-white/15"
         style={`--x: ${(x / 1600) * 100}%; --y: ${(y / STAGE) * 100}%; --s: ${(size / STAGE) * 100}cqh; --d: ${depth}`}
       >
