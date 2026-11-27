@@ -290,8 +290,9 @@
   will-change: transform;
   transform: translate(var(--zx, 0), var(--zy, 0)) scale(var(--zs, 1));
   transition:
-    transform 900ms var(--ease-out-expo),
-    scale 500ms var(--ease-out-soft);
+    translate 700ms var(--ease-out-soft),
+    transform 1400ms var(--ease-in-out-soft),
+    scale 900ms var(--ease-in-out-soft);
   font-size: var(--s);
   padding: 0.042em;
   border-radius: 0.083em;
