@@ -75,7 +75,7 @@
   --text-section--font-weight: 200;
   --text-stat: clamp(2.9rem, 3.6vw, 4.2rem);
   --text-stat--line-height: var(--leading-heading);
-  --text-stat--letter-spacing: -0.02em;
+  --text-stat--letter-spacing: -0.05em;
   --text-stat-label: 0.9rem;
   --text-statement: clamp(2rem, 3.23vw, 3.875rem);
   --text-statement--line-height: var(--leading-statement);
@@ -276,6 +276,16 @@
 
 @utility mask-fade-y {
   mask-image: linear-gradient(rgb(0 0 0 / 0.1), black 30%, black 70%, rgb(0 0 0 / 0.1));
+}
+
+@utility mask-fade-x-soft {
+  mask-image: linear-gradient(
+    to right,
+    rgb(0 0 0 / 0.35),
+    black 15%,
+    black 85%,
+    rgb(0 0 0 / 0.35)
+  );
 }
 
 @utility mask-fade-x {
