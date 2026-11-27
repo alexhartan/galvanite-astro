@@ -26,14 +26,14 @@ const pages = Array.from(
 const icon =
   'opacity-80 transition-opacity duration-200 ease-out-soft group-hover:opacity-100';
 const arrow =
-  'group relative flex size-8 cursor-pointer items-center justify-center border border-line-dark text-sky before:absolute before:-inset-1.5 focus-visible:outline-white focus-ring';
+  'group relative flex size-8 cursor-pointer items-center justify-center border border-line text-azure-deep before:absolute before:-inset-1.5 focus-visible:outline-ocean focus-ring';
 ---
 
-<Section id={id} tone="dark" class="pt-section">
-  <SectionFrame inverted top={false} />
+<Section id={id} class="pt-section">
+  <SectionFrame top={false} />
   <div data-testimonials>
     <Container class="flex items-end justify-between gap-6 pb-4">
-      <h2 class="text-section">{heading}</h2>
+      <h2 class="text-section text-ocean">{heading}</h2>
       <div class="relative z-10 -mb-4 flex shrink-0">
         <button
           type="button"
@@ -53,14 +53,12 @@ const arrow =
         </button>
       </div>
     </Container>
-    <div data-guide class="relative border-t border-line-dark">
+    <div data-guide class="border-line relative border-t">
       <Container class="pointer-events-none absolute inset-0">
-        <GridMark inverted class="absolute top-0 left-gutter" />
+        <GridMark class="absolute top-0 left-gutter" />
       </Container>
       <Container class="@container">
-        <Eyebrow id={`${id}-label`} inverted>
-          {label}
-        </Eyebrow>
+        <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
         <div
           role="region"
           aria-roledescription="carousel"
@@ -79,7 +77,7 @@ const arrow =
               >
                 {page.map(({ data }) => (
                   <figure class="group pt-12 pr-10 transition-opacity pointer-fine:opacity-90 pointer-fine:hover:opacity-100 lg:pr-16 motion-ui">
-                    <blockquote class="text-frost text-xl font-extralight text-balance">
+                    <blockquote class="text-ink text-xl font-light text-balance">
                       <p>{data.quote}</p>
                     </blockquote>
                     <figcaption class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-6">
@@ -93,10 +91,10 @@ const arrow =
                         class="size-11 object-cover"
                       />
                       <div class="flex-1">
-                        <p class="text-sm font-semibold tracking-wider uppercase">
+                        <p class="text-ink text-sm font-semibold tracking-wider uppercase">
                           {data.name}
                         </p>
-                        <p class="text-sky text-2xs mt-1 font-medium tracking-wider uppercase">
+                        <p class="text-azure-deep text-2xs mt-1 font-medium tracking-wider uppercase">
                           {data.role}
                         </p>
                       </div>
@@ -117,8 +115,8 @@ const arrow =
             ))}
           </div>
         </div>
-        <div class="mt-12 pb-48 opacity-50 lg:mt-16 lg:pb-56">
-          <LogoMarquee class="mask-fade-x overflow-clip" large />
+        <div class="mt-16 pb-12 lg:mt-24 lg:pb-16">
+          <LogoMarquee class="mask-fade-x overflow-clip" large dark />
         </div>
       </Container>
     </div>
