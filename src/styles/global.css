@@ -148,7 +148,7 @@
   --animate-marquee-slow: marquee 168s linear infinite;
   --animate-marquee-up: marquee-y 90s linear infinite;
   --animate-marquee-down: marquee-y 90s linear infinite reverse;
-  --animate-pinch: pinch 480ms var(--ease-out-soft);
+  --animate-pinch: pinch 560ms var(--ease-out-soft);
   --animate-art-orbit: art-orbit 24s linear infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
 
@@ -303,6 +303,7 @@
   left: var(--x);
   translate: -50% calc(-50% + var(--shift, 0px));
   width: max-content;
+  will-change: transform;
   font-size: var(--s);
   padding: 0.042em;
   border-radius: 0.083em;
