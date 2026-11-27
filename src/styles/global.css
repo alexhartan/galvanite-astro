@@ -379,6 +379,13 @@
   }
 }
 
+@utility bleed-r {
+  margin-right: calc(-1 * var(--spacing-gutter));
+  @variant 3xl {
+    margin-right: calc(-1 * (var(--spacing-gutter) + var(--spacing-page-bleed)));
+  }
+}
+
 @utility bleed-x {
   left: -100vw;
   right: -100vw;
