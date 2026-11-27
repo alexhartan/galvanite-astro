@@ -58,7 +58,7 @@ const tiles: {
     {tiles.map(({ src, x, y, size, depth }) => (
       <div
         data-parallax={depth ? (Math.sqrt(depth) * 0.3).toFixed(3) : undefined}
-        class="depth-tile bg-azure-deep/60 border border-white/15"
+        class="depth-tile bg-azure-deep/35 border border-white/15"
         data-focus={depth ? undefined : ''}
         style={`--x: ${(x / 1600) * 100}%; --y: ${(y / STAGE) * 100}%; --s: ${(size / 720) * 100}cqh; --d: ${depth}; --ox: ${(((x - 800) / 1600) * 100 * zoom(depth)).toFixed(2)}cqw; --oy: ${(((y - 405) / STAGE) * 100 * zoom(depth)).toFixed(2)}cqh; --os: ${(1 + zoom(depth) * 0.6).toFixed(3)}`}
       >
