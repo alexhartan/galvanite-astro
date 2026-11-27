@@ -148,7 +148,6 @@
   --animate-marquee-slow: marquee 168s linear infinite;
   --animate-marquee-up: marquee-y 90s linear infinite;
   --animate-marquee-down: marquee-y 90s linear infinite reverse;
-  --animate-pinch: pinch 560ms var(--ease-out-soft);
   --animate-art-orbit: art-orbit 24s linear infinite;
   --animate-art-blink: art-blink 1s var(--ease-in-out-soft) infinite;
 
@@ -161,21 +160,6 @@
   @keyframes marquee-y {
     to {
       transform: translate3d(0, -50%, 0);
-    }
-  }
-
-  @keyframes pinch {
-    0% {
-      scale: 1;
-    }
-    35% {
-      scale: 1.025;
-    }
-    70% {
-      scale: 0.99;
-    }
-    100% {
-      scale: 1;
     }
   }
 
@@ -304,6 +288,10 @@
   translate: -50% calc(-50% + var(--shift, 0px));
   width: max-content;
   will-change: transform;
+  transform: translate(var(--zx, 0), var(--zy, 0)) scale(var(--zs, 1));
+  transition:
+    transform 900ms var(--ease-out-expo),
+    scale 500ms var(--ease-out-soft);
   font-size: var(--s);
   padding: 0.042em;
   border-radius: 0.083em;
@@ -316,6 +304,32 @@
     height: 1em;
     border-radius: 0.052em;
     box-shadow: 0 0 0.0625em var(--color-sky);
+  }
+}
+
+@utility depth-stage {
+  @media (hover: hover) and (pointer: fine) {
+    & [data-focus] {
+      cursor: pointer;
+    }
+    & [data-focus]:hover {
+      scale: 1.1;
+    }
+    &:has([data-focus]:hover) .depth-tile:not([data-focus]) {
+      --zx: var(--ox);
+      --zy: var(--oy);
+      --zs: var(--os);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    & .depth-tile {
+      transition: none;
+    }
+    &:has([data-focus]:hover) .depth-tile:not([data-focus]) {
+      --zx: 0;
+      --zy: 0;
+      --zs: 1;
+    }
   }
 }
 
