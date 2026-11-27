@@ -54,7 +54,14 @@ export const pricing = { heading: 'How we', emphasis: 'work together' };
 
 export const testimonials = { heading: 'Don’t take our word for it' };
 
-export const why = { heading: 'Built with intent' };
+export const why = {
+  heading: 'Built with intent',
+  contact: {
+    heading: 'One point of contact',
+    text: 'From the kick-off call to launch, you’ll work directly with me. Depending on the needs of the project, I may bring in vetted specialists, but I’ll remain your main point of contact, managing communication, quality, and timelines.',
+    alt: 'Alex Hartan, founder of Galvanite',
+  },
+};
 
 export const check = {
   heading: 'Assess your brand & website',

@@ -5,6 +5,7 @@ import Container from '../ui/Container.astro';
 import Section from '../ui/Section.astro';
 import SectionFrame from '../ui/SectionFrame.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import DepthCard from '../ui/DepthCard.astro';
 import ContactArt from '../ui/art/ContactArt.astro';
 import BuildArt from '../ui/art/BuildArt.astro';
 import PerformanceArt from '../ui/art/PerformanceArt.astro';
@@ -16,8 +17,9 @@ interface Props {
   id?: string;
   label: string;
   heading: string;
+  contact: { heading: string; text: string; alt: string };
 }
-const { id = 'why', label, heading } = Astro.props;
+const { id = 'why', label, heading, contact } = Astro.props;
 const benefits = (await getCollection('benefits')).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -93,4 +95,7 @@ const art = {
       </div>
     </Container>
   </div>
+  <Container class="mt-28 lg:mt-44">
+    <DepthCard {...contact} />
+  </Container>
 </Section>
