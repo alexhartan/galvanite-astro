@@ -25,7 +25,7 @@ const motion = 'transition motion-slow';
 <Section id={id} tone="dark" labelledby={`${id}-heading`}>
   <SectionFrame class="z-10" inverted edge={false} top={false} />
   <div class="border-line-dark relative border-t">
-    <Container class="pt-36 pb-16 lg:pt-48 lg:pb-20 4xl:pt-44">
+    <Container class="pt-36 pb-16 lg:pt-64 lg:pb-36 4xl:pt-56">
       <SplitHeading
         id={`${id}-heading`}
         lead={lead}
@@ -43,7 +43,7 @@ const motion = 'transition motion-slow';
           class="sm:grid-cols-3"
           columns={['hidden sm:block', 'hidden sm:block', '']}
           inverted
-          edge="bg-line-dark -bottom-16 lg:-bottom-20"
+          edge="bg-line-dark -bottom-16 lg:-bottom-36"
           line="z-10"
           mark="z-20"
         />
@@ -65,7 +65,7 @@ const motion = 'transition motion-slow';
                 >
                   <span
                     class:list={[
-                      'text-stat text-white origin-bottom-left font-light pointer-fine:group-hover:scale-110 pointer-fine:group-focus-visible:scale-110',
+                      'text-stat text-frost group-hover:text-white group-focus-visible:text-white origin-bottom-left font-extralight pointer-fine:group-hover:scale-110 pointer-fine:group-focus-visible:scale-110',
                       motion,
                     ]}
                   >
@@ -76,7 +76,7 @@ const motion = 'transition motion-slow';
                   <span class="reveal-fade">
                     <span
                       class:list={[
-                        'text-base leading-tight block text-sky whitespace-pre-line',
+                        'text-stat-label leading-tight block text-sky group-hover:text-frost group-focus-visible:text-frost whitespace-pre-line',
                         motion,
                       ]}
                     >
@@ -86,7 +86,7 @@ const motion = 'transition motion-slow';
                 </span>
                 <span
                   class:list={[
-                    'text-white absolute bottom-3 left-8 lg:left-14 text-link-sm font-medium pointer-fine:translate-y-4 pointer-fine:opacity-0 pointer-fine:group-hover:translate-y-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-visible:translate-y-0 pointer-fine:group-focus-visible:opacity-100',
+                    'text-frost hover:text-white absolute bottom-3 left-8 lg:left-14 text-link-sm font-medium pointer-fine:translate-y-4 pointer-fine:opacity-0 pointer-fine:group-hover:translate-y-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-visible:translate-y-0 pointer-fine:group-focus-visible:opacity-100',
                     motion,
                   ]}
                 >

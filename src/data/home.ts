@@ -44,7 +44,7 @@ export const results = {
     },
     {
       value: '3.62x',
-      label: 'Boost in organic search traffic,\nwithin the first month',
+      label: 'Boost in organic search traffic,\nwithin the first two months',
       href: '#',
     },
   ],
