@@ -51,7 +51,7 @@ const tiles: {
   <div class="absolute inset-x-0 top-2/5 bottom-0 @container-size sm:inset-0">
     {tiles.map(({ src, x, y, size, depth }) => (
       <div
-        data-parallax={(-0.1 + Math.sqrt(depth) * 0.325).toFixed(3)}
+        data-parallax={(Math.sqrt(depth) * 0.3).toFixed(3)}
         class:list={[
           'depth-tile bg-azure-deep/60 border border-white/15',
           depth === 0 && 'cursor-pointer motion-safe:hover:animate-pinch',

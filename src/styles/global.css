@@ -169,10 +169,10 @@
       scale: 1;
     }
     35% {
-      scale: 0.975;
+      scale: 1.025;
     }
     70% {
-      scale: 1.01;
+      scale: 0.99;
     }
     100% {
       scale: 1;
@@ -332,8 +332,8 @@
   mask-image: linear-gradient(
     to right,
     transparent,
-    black 25%,
-    black 75%,
+    black 10%,
+    black 90%,
     transparent
   );
 }
