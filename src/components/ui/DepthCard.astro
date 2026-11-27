@@ -45,10 +45,15 @@ const tiles: {
 
 <div
   class:list={[
-    'bg-radial-[ellipse_50%_133%_at_50%_0%] from-space-800 via-space-900 to-space-950 relative aspect-3/5 overflow-clip rounded-3xl sm:aspect-1600/720',
+    'bg-radial-[ellipse_50%_133%_at_50%_0%] from-space-800 via-space-900 to-space-950 depth-card relative aspect-3/5 overflow-clip rounded-3xl sm:aspect-1600/720',
     className,
   ]}
 >
+  <div
+    data-depth-light
+    aria-hidden="true"
+    class="from-azure-deep/45 pointer-events-none absolute inset-0 bg-radial to-transparent to-70%"
+  ></div>
   <div class="depth-stage absolute inset-x-0 top-2/5 bottom-0 @container-size sm:inset-0">
     {tiles.map(({ src, x, y, size, depth }) => (
       <div
