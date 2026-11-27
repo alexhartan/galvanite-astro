@@ -51,8 +51,8 @@ const tiers = {
 ---
 
 <Section id={id} tone="dark" data-scene-path={JSON.stringify(camera)}>
-  <SectionFrame inverted />
-  <div data-guide class="relative border-t border-line-dark">
+  <SectionFrame inverted top={false} />
+  <div data-guide class="relative">
     <Container class="pb-14 lg:pb-16">
       <Eyebrow id={`${id}-label`} inverted>
         {label}
