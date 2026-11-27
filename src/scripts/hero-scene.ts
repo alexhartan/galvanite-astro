@@ -3,7 +3,7 @@ import savedSteps from './home-steps.json';
 import { reducedMotion } from './env';
 import { FRAGMENT, VERTEX } from './hero-shader';
 
-const SMOOTHING_MS = 140;
+const SMOOTHING_MS = 320;
 const INTRO_MS = 2200;
 const MAX_DPR = 1.5;
 const SLOW_FRAME_MS = 40;
