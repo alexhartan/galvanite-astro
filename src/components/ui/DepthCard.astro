@@ -22,6 +22,16 @@ interface Props {
 const { heading, text, alt, class: className } = Astro.props;
 const STAGE = 809;
 const zoom = (depth: number) => 0.06 + (1 - depth) * 0.22;
+let seed = 7;
+const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const sparks = Array.from({ length: 14 }, () => ({
+  l: 8 + rand() * 84,
+  b: rand() * 12,
+  dx: (rand() - 0.5) * 8,
+  rise: 30 + rand() * 40,
+  t: 5 + rand() * 5,
+  delay: -rand() * 10,
+}));
 const tiles: {
   src: ImageMetadata;
   x: number;
@@ -60,7 +70,7 @@ const tiles: {
         data-parallax={depth ? (Math.sqrt(depth) * 0.3).toFixed(3) : undefined}
         class="depth-tile bg-azure-deep/35 border border-white/30"
         data-focus={depth ? undefined : ''}
-        style={`--x: ${(x / 1600) * 100}%; --y: ${(y / STAGE) * 100}%; --s: ${(size / 720) * 100}cqh; --d: ${depth}; --ox: ${(((x - 800) / 1600) * 100 * zoom(depth)).toFixed(2)}cqw; --oy: ${(((y - 405) / STAGE) * 100 * zoom(depth)).toFixed(2)}cqh; --os: ${(1 + zoom(depth) * 0.6).toFixed(3)}`}
+        style={`--x: ${(x / 1600) * 100}%; --y: ${(y / STAGE) * 100}%; --s: ${((size * (depth ? 0.85 : 1)) / 720) * 100}cqh; --d: ${depth}; --ox: ${(((x - 800) / 1600) * 100 * zoom(depth)).toFixed(2)}cqw; --oy: ${(((y - 405) / STAGE) * 100 * zoom(depth)).toFixed(2)}cqh; --os: ${(1 + zoom(depth) * 0.6).toFixed(3)}`}
       >
         <Image
           src={src}
@@ -70,6 +80,18 @@ const tiles: {
           class="object-cover"
         />
       </div>
+    ))}
+  </div>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 overflow-hidden @container-size"
+  >
+    <div class="from-sky/40 via-azure-deep/25 motion-safe:animate-depth-glow absolute inset-x-0 -bottom-1/4 h-3/5 origin-bottom bg-radial-[ellipse_at_50%_100%] to-transparent to-70% mix-blend-screen"></div>
+    {sparks.map(({ l, b, dx, rise, t, delay }) => (
+      <span
+        class="depth-spark"
+        style={`--l: ${l.toFixed(1)}%; --b: ${b.toFixed(1)}%; --dx: ${dx.toFixed(1)}cqw; --rise: ${rise.toFixed(1)}cqh; --t: ${t.toFixed(1)}s; --delay: ${delay.toFixed(1)}s`}
+      ></span>
     ))}
   </div>
   <div class="pointer-events-none relative p-8 lg:p-12">
