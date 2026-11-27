@@ -22,94 +22,97 @@ const {
 const motion = 'transition motion-slow';
 ---
 
-<Section id={id} labelledby={`${id}-heading`}>
-  <SectionFrame class="z-10" edge={false} top={false} />
-  <Container class="pt-44 pb-40 lg:pt-64 lg:pb-52 4xl:pt-56">
-    <SplitHeading
-      id={`${id}-heading`}
-      lead={lead}
-      emphasis={emphasis}
-      leadClass="text-sky block"
-      emphasisClass="text-ink block font-normal"
-      class="text-section text-center"
-    />
-    <div data-results class="relative mt-9 lg:mt-11">
-      <div
-        aria-hidden="true"
-        class="from-tint to-transparent bleed-x absolute inset-y-0 bg-linear-to-b"
-      ></div>
-      <div
-        aria-hidden="true"
-        class="bg-line pointer-events-none z-10 bleed-x absolute top-0 h-px"
-      ></div>
-      <ColumnLines
-        class="sm:grid-cols-3"
-        columns={['hidden sm:block', 'hidden sm:block', '']}
-        line="z-10"
-        mark="z-20"
+<Section id={id} tone="dark" labelledby={`${id}-heading`}>
+  <SectionFrame class="z-10" inverted edge={false} top={false} />
+  <div class="border-line-dark relative border-t">
+    <Container class="pt-36 pb-16 lg:pt-48 lg:pb-20 4xl:pt-44">
+      <SplitHeading
+        id={`${id}-heading`}
+        lead={lead}
+        emphasis={emphasis}
+        leadClass="text-sky block"
+        emphasisClass="text-white block font-normal"
+        class="text-section text-center"
       />
-      <ul role="list" class="grid sm:grid-cols-3">
-        {stats.map(({ value, label, href }, index) => (
-          <li class="relative" style={`--delay: ${index * 150}ms`}>
-            <a
-              href={href}
-              class:list={[
-                'peer group hover:bg-white focus-visible:bg-white focus-visible:outline-ocean relative flex h-full flex-col overflow-clip px-8 py-15 focus-visible:outline-2 focus-visible:-outline-offset-2 lg:px-14 lg:py-21',
-                motion,
-              ]}
-            >
-              <span
+      <div data-results class="relative mt-9 lg:mt-11">
+        <div
+          aria-hidden="true"
+          class="from-white/5 to-transparent bleed-x absolute inset-y-0 bg-linear-to-b"
+        ></div>
+        <div
+          aria-hidden="true"
+          class="bg-line-dark pointer-events-none z-10 bleed-x absolute top-0 h-px"
+        ></div>
+        <ColumnLines
+          class="sm:grid-cols-3"
+          columns={['hidden sm:block', 'hidden sm:block', '']}
+          inverted
+          line="z-10"
+          mark="z-20"
+        />
+        <ul role="list" class="grid sm:grid-cols-3">
+          {stats.map(({ value, label, href }, index) => (
+            <li class="relative" style={`--delay: ${index * 150}ms`}>
+              <a
+                href={href}
                 class:list={[
-                  'pointer-fine:group-hover:-translate-y-2 pointer-fine:group-focus-visible:-translate-y-2 flex flex-col gap-1',
+                  'peer group hover:bg-white/5 focus-visible:bg-white/5 focus-visible:outline-white relative flex h-full flex-col overflow-clip px-8 py-15 focus-visible:outline-2 focus-visible:-outline-offset-2 lg:px-14 lg:py-21',
                   motion,
                 ]}
               >
                 <span
                   class:list={[
-                    'text-stat text-azure-deep group-hover:text-ocean group-focus-visible:text-ocean origin-bottom-left font-light pointer-fine:group-hover:scale-110 pointer-fine:group-focus-visible:scale-110',
+                    'pointer-fine:group-hover:-translate-y-2 pointer-fine:group-focus-visible:-translate-y-2 flex flex-col gap-1',
                     motion,
                   ]}
                 >
-                  <span class="reveal-line-mask block">
-                    <span class="reveal-rise block">{value}</span>
-                  </span>
-                </span>
-                <span class="reveal-fade">
                   <span
                     class:list={[
-                      'text-base leading-tight block text-graphite/70 group-hover:text-graphite group-focus-visible:text-graphite whitespace-pre-line',
+                      'text-stat text-white origin-bottom-left font-light pointer-fine:group-hover:scale-110 pointer-fine:group-focus-visible:scale-110',
                       motion,
                     ]}
                   >
-                    {label}
+                    <span class="reveal-line-mask block">
+                      <span class="reveal-rise block">{value}</span>
+                    </span>
+                  </span>
+                  <span class="reveal-fade">
+                    <span
+                      class:list={[
+                        'text-base leading-tight block text-sky whitespace-pre-line',
+                        motion,
+                      ]}
+                    >
+                      {label}
+                    </span>
                   </span>
                 </span>
-              </span>
-              <span
-                class:list={[
-                  'text-ink absolute bottom-3 left-8 lg:left-14 text-link-sm font-medium pointer-fine:translate-y-4 pointer-fine:opacity-0 pointer-fine:group-hover:translate-y-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-visible:translate-y-0 pointer-fine:group-focus-visible:opacity-100',
-                  motion,
-                ]}
-              >
-                {linkLabel}
-              </span>
+                <span
+                  class:list={[
+                    'text-white absolute bottom-3 left-8 lg:left-14 text-link-sm font-medium pointer-fine:translate-y-4 pointer-fine:opacity-0 pointer-fine:group-hover:translate-y-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-visible:translate-y-0 pointer-fine:group-focus-visible:opacity-100',
+                    motion,
+                  ]}
+                >
+                  {linkLabel}
+                </span>
+                <span
+                  aria-hidden="true"
+                  class:list={[
+                    'bg-signal absolute right-0 bottom-0 left-8 h-1 pointer-fine:translate-y-full pointer-fine:group-hover:translate-y-0 pointer-fine:group-focus-visible:translate-y-0 lg:left-14',
+                    motion,
+                  ]}
+                ></span>
+              </a>
               <span
                 aria-hidden="true"
-                class:list={[
-                  'bg-signal mix-blend-multiply absolute right-0 bottom-0 left-8 h-1 pointer-fine:translate-y-full pointer-fine:group-hover:translate-y-0 pointer-fine:group-focus-visible:translate-y-0 lg:left-14',
-                  motion,
-                ]}
+                class="border-line-dark pointer-events-none absolute top-0 -right-px bottom-0 left-0 z-10 border opacity-0 transition-opacity peer-hover:opacity-100 peer-focus-visible:opacity-100 motion-ui"
               ></span>
-            </a>
-            <span
-              aria-hidden="true"
-              class="border-line-solid pointer-events-none absolute top-0 -right-px bottom-0 left-0 z-10 border opacity-0 transition-opacity peer-hover:opacity-100 peer-focus-visible:opacity-100 motion-ui"
-            ></span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </Container>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Container>
+  </div>
 </Section>
 
 <script>
