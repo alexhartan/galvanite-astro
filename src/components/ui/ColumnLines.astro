@@ -8,6 +8,7 @@ interface Props {
   mark?: string;
   inverted?: boolean;
   edge?: string;
+  lead?: boolean;
 }
 const {
   columns,
@@ -16,6 +17,7 @@ const {
   mark,
   inverted = false,
   edge,
+  lead = false,
 } = Astro.props;
 ---
 
@@ -23,6 +25,15 @@ const {
   aria-hidden="true"
   class:list={['pointer-events-none absolute inset-0 grid', className]}
 >
+  {lead && (
+    <div
+      class:list={[
+        inverted ? 'from-line-dark' : 'from-line',
+        'to-transparent absolute inset-y-0 left-0 w-px bg-linear-to-b from-50%',
+        line,
+      ]}
+    />
+  )}
   <GridMark inverted={inverted} class:list={['absolute top-0 left-0', mark]} />
   {columns.map((column, index) => (
     <div class:list={['relative', column]}>

@@ -38,24 +38,27 @@ const art = {
   labelledby={`${id}-heading`}
   data-scene-end
   clip="all"
-  class="py-28 lg:py-44"
+  class="pb-28 lg:pb-44"
 >
-  <SectionFrame edge={false} top={false} bottom markRight />
-  <Container class="@container">
-    <h2
-      id={`${id}-heading`}
-      class="text-intent lg:text-intent-lg 4xl:text-intent-xl text-ocean text-center leading-none font-light text-balance"
-    >
-      {heading}
-    </h2>
-  </Container>
-  <div data-guide class="border-line relative mt-6 border-t">
+  <div class="relative pt-28 pb-6 lg:pt-44">
+    <SectionFrame edge={false} top={false} />
+    <Container class="@container">
+      <h2
+        id={`${id}-heading`}
+        class="text-intent lg:text-intent-lg 4xl:text-intent-xl text-ocean text-center leading-none font-light text-balance"
+      >
+        {heading}
+      </h2>
+    </Container>
+  </div>
+  <div data-guide class="border-line relative border-t">
     <Container>
       <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
       <div class="relative grid sm:grid-cols-2 lg:grid-cols-3">
         <ColumnLines
           class="sm:grid-cols-2 lg:grid-cols-3"
           columns={['hidden lg:block', 'hidden sm:block', '']}
+          lead
           mark="z-10 -mt-px"
         />
         {benefits.map(({ data }) => {

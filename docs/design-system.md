@@ -107,7 +107,7 @@ Both motion utilities stop transitions when the user prefers reduced motion.
 | `reveal-on-hover` | at lg: hidden until the parent `.group` is hovered or focused |
 | `reveal-*` | scroll reveal choreography, driven by `data-reveal-state` |
 | `details-expand` | animated `<details>` (progressive enhancement) |
-| `clip-left`, `bleed-x`, `mask-fade-x`, `mask-fade-x-soft`, `mask-fade-y` | layout hacks for marquees and full-bleed backgrounds |
+| `clip-left`, `bleed-x`, `bleed-r`, `mask-fade-x`, `mask-fade-x-soft`, `mask-fade-y` | layout hacks for marquees and full-bleed backgrounds |
 
 ## Primitives
 
