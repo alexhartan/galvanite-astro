@@ -381,16 +381,16 @@
     top: 0.09em;
     right: 0.09em;
     display: block;
-    width: 0.075em;
-    height: 0.075em;
+    width: 0.09em;
+    height: 0.09em;
     z-index: 1;
-    color: var(--color-sky);
+    color: var(--color-azure-deep);
     pointer-events: none;
     cursor: pointer;
     transition:
       translate 500ms var(--ease-in-out-sine),
       rotate 500ms var(--ease-in-out-sine),
-      scale 300ms var(--ease-out-soft);
+      scale 450ms var(--ease-in-out-sine);
   }
   @media (hover: hover) and (pointer: fine) {
     &:not([data-open]):hover .depth-toggle {
@@ -430,7 +430,8 @@
     }
     cursor: auto;
     & .depth-toggle {
-      translate: calc((var(--pw) - 1.084em) / 2) var(--lift);
+      translate: calc((var(--pw) - 1.084em) / 2 + 0.035em)
+        calc(var(--lift) - 0.035em);
       rotate: 45deg;
       pointer-events: auto;
     }
