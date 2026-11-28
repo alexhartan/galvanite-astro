@@ -92,11 +92,8 @@ const tiles: {
               />
             </button>
             <div id="contact-copy" class="depth-copy" inert>
-              <p class="text-graphite/80 text-xs font-normal 2xl:text-sm">
-                {greeting}
-              </p>
-              <p class="text-ink mt-2 text-sm font-normal text-pretty sm:text-xs lg:text-sm 2xl:text-base">
-                {text}
+              <p class="text-graphite/80 text-sm font-normal text-pretty sm:text-xs lg:text-sm 2xl:text-base">
+                {greeting} {text}
               </p>
             </div>
           </>
@@ -124,6 +121,14 @@ const tiles: {
     const button = tile.querySelector('button');
     const copy = tile.querySelector<HTMLElement>('.depth-copy');
     if (!button || !copy) continue;
+    const size = () => {
+      const em = parseFloat(getComputedStyle(tile).fontSize);
+      const height = Math.max(copy.offsetHeight, em * 0.584);
+      tile.style.setProperty('--ph', `${height}px`);
+      tile.style.setProperty('--py', String(tile.offsetHeight / height));
+    };
+    size();
+    new ResizeObserver(size).observe(copy);
     const set = (open: boolean) => {
       tile.toggleAttribute('data-open', open);
       button.setAttribute('aria-expanded', String(open));
