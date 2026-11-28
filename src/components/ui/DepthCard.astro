@@ -91,6 +91,23 @@ const tiles: {
                 class="object-cover"
               />
             </button>
+            <button
+              type="button"
+              aria-label="Close"
+              tabindex="-1"
+              class="depth-toggle before:absolute before:-inset-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky"
+            >
+              <svg
+                aria-hidden="true"
+                class="size-full"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="M12 2v20M2 12h20" />
+              </svg>
+            </button>
             <div id="contact-copy" class="depth-copy" inert>
               <p class="text-graphite/80 text-sm font-normal text-pretty sm:text-xs lg:text-sm 2xl:text-base">
                 {greeting} {text}
@@ -136,14 +153,25 @@ const tiles: {
     addEventListener('resize', size);
     size();
     new ResizeObserver(size).observe(copy);
-    const set = (open: boolean) => {
+    const close = tile.querySelector<HTMLButtonElement>('.depth-toggle');
+    if (!close) continue;
+    const set = (open: boolean, focus = false) => {
       tile.toggleAttribute('data-open', open);
       button.setAttribute('aria-expanded', String(open));
       copy.inert = !open;
+      close.tabIndex = open ? 0 : -1;
+      if (focus) (open ? close : button).focus();
     };
-    tile.addEventListener('click', () => set(!tile.hasAttribute('data-open')));
+    tile.addEventListener('click', (event) => {
+      if (!tile.hasAttribute('data-open')) set(true, event.detail === 0);
+    });
+    close.addEventListener('click', (event) => {
+      event.stopPropagation();
+      set(false, event.detail === 0);
+    });
     tile.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') set(false);
+      if (event.key === 'Escape' && tile.hasAttribute('data-open'))
+        set(false, true);
     });
   }
 </script>
