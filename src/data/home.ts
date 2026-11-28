@@ -60,6 +60,7 @@ export const why = {
     heading: 'One point of contact',
     text: 'From kick-off to launch, you’ll work directly with me. Depending on the scope, I may bring in vetted specialists, but I’ll remain your main point of contact, managing communication, quality, and timelines.',
     alt: 'Alex Hartan, founder of Galvanite',
+    greeting: 'Hi, I am Alex Hartan, founder of Galvanite.',
   },
 };
 
