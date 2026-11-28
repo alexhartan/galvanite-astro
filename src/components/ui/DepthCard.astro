@@ -60,7 +60,7 @@ const tiles: {
       <div
         data-parallax={depth ? (Math.sqrt(depth) * 0.3).toFixed(3) : undefined}
         class:list={[
-          'depth-tile bg-azure-deep/35 border border-white/30',
+          'depth-tile bg-azure-deep/50 border border-white/30',
           !depth && 'depth-contact',
         ]}
         data-focus={depth ? undefined : ''}
@@ -102,7 +102,7 @@ const tiles: {
     ))}
   </div>
   <div class="pointer-events-none relative p-8 lg:p-12">
-    <h3 class="text-panel font-normal text-white lg:whitespace-nowrap">
+    <h3 class="text-intent lg:text-intent-lg 4xl:text-intent-xl leading-none font-light whitespace-pre-line text-white">
       {heading}
     </h3>
   </div>
@@ -120,7 +120,20 @@ const tiles: {
       const height = Math.max(copy.offsetHeight, em * 0.584);
       tile.style.setProperty('--ph', `${height}px`);
       tile.style.setProperty('--py', String(tile.offsetHeight / height));
+      const card = tile.closest<HTMLElement>('.depth-card');
+      const title = card?.querySelector('h3');
+      if (!card || !title) return;
+      const box = card.getBoundingClientRect();
+      const rect = tile.getBoundingClientRect();
+      const top = rect.top + rect.height / 2 - height / 2;
+      const room = box.bottom - 12 - (top + height);
+      const push = Math.min(
+        Math.max(title.getBoundingClientRect().bottom + 16 - top, 0),
+        Math.max(room, 0),
+      );
+      tile.style.setProperty('--dy', `${push}px`);
     };
+    addEventListener('resize', size);
     size();
     new ResizeObserver(size).observe(copy);
     const set = (open: boolean) => {

@@ -336,7 +336,8 @@
   --sx: 0.42;
   --ph: 1.084em;
   --py: 1;
-  --lift: calc((1.084em - var(--ph)) / 2);
+  --dy: 0px;
+  --lift: calc((1.084em - var(--ph)) / 2 + var(--dy));
   cursor: pointer;
   &.depth-tile {
     transition:
@@ -348,8 +349,8 @@
       border-color 500ms var(--ease-in-out-sine);
   }
   @media (width < 96rem) {
-    --pw: 3.2em;
-    --sx: 0.339;
+    --pw: 3.8em;
+    --sx: 0.285;
   }
   @media (width < 64rem) {
     --pw: 5.5em;
@@ -365,7 +366,7 @@
     left: 50%;
     width: var(--pw);
     height: var(--ph);
-    translate: -50% -50%;
+    translate: -50% calc(-50% + var(--dy));
     scale: var(--sx) var(--py);
     opacity: 0;
     background: white;
@@ -389,8 +390,8 @@
   & .depth-copy {
     position: absolute;
     top: var(--lift);
-    left: calc(0.622em - (var(--pw) - 1.084em) / 2);
-    width: calc(var(--pw) - 0.622em);
+    left: calc(0.642em - (var(--pw) - 1.084em) / 2);
+    width: calc(var(--pw) - 0.642em);
     padding: 0.084em 0.168em 0.084em 0;
     opacity: 0;
     translate: -0.04em 0;
