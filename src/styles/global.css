@@ -337,9 +337,9 @@
 @utility depth-contact {
   --pw: 2.584em;
   --sx: 0.42;
+  --ph: 1.084em;
   --py: 1;
-  --ph: calc(1.084em / var(--py));
-  --lift: calc(1.084em - var(--ph));
+  --lift: calc((1.084em - var(--ph)) / 2);
   @media (width < 96rem) {
     --pw: 3.2em;
     --sx: 0.339;
@@ -351,16 +351,14 @@
   @media (width < 40rem) {
     --pw: 2.584em;
     --sx: 0.42;
-    --py: 0.45;
   }
   & .depth-panel {
     position: absolute;
-    bottom: 0;
+    top: 50%;
     left: 50%;
     width: var(--pw);
     height: var(--ph);
-    translate: -50% 0;
-    transform-origin: 50% 100%;
+    translate: -50% -50%;
     scale: var(--sx) var(--py);
     opacity: 0;
     background: white;
@@ -383,11 +381,10 @@
   }
   & .depth-copy {
     position: absolute;
-    top: calc(var(--lift) + 0.042em);
-    left: calc(0.602em - (var(--pw) - 1.084em) / 2);
-    width: calc(var(--pw) - 0.644em);
-    height: calc(var(--ph) - 0.084em);
-    overflow: hidden;
+    top: var(--lift);
+    left: calc(0.662em - (var(--pw) - 1.084em) / 2);
+    width: calc(var(--pw) - 0.662em);
+    padding: 0.084em 0.084em 0.084em 0;
     opacity: 0;
     translate: -0.04em 0;
     transition:
@@ -395,6 +392,9 @@
       translate 400ms var(--ease-out-soft);
   }
   &[data-open] {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
     & .depth-panel {
       scale: 1;
       opacity: 1;
