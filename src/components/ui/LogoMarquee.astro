@@ -5,9 +5,8 @@ import { getCollection } from 'astro:content';
 interface Props {
   class?: string;
   large?: boolean;
-  dark?: boolean;
 }
-const { class: className, large = false, dark = false } = Astro.props;
+const { class: className, large = false } = Astro.props;
 const size = large
   ? { height: 90, class: 'h-22.5 w-auto' }
   : { height: 80, class: 'h-20 w-auto' };
@@ -37,7 +36,7 @@ const clients = (
               alt={copy === 0 ? data.name : ''}
               height={size.height}
               densities={[1, 2]}
-              class:list={[size.class, dark && 'brightness-30']}
+              class={size.class}
             />
           </li>
         ))}

@@ -29,9 +29,12 @@ const arrow =
   'group relative flex size-8 cursor-pointer items-center justify-center border border-line text-azure-deep before:absolute before:-inset-1.5 focus-visible:outline-ocean focus-ring';
 ---
 
-<Section id={id} class="pt-section">
-  <SectionFrame top={false} />
-  <div data-testimonials>
+<Section id={id}>
+  <SectionFrame top={false} edge={false} />
+  <div data-testimonials data-guide class="relative pt-20 lg:pt-28">
+    <Container>
+      <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
+    </Container>
     <Container class="flex items-end justify-between gap-6 pb-4">
       <h2 class="text-section text-ocean">{heading}</h2>
       <div class="relative z-10 -mb-4 flex shrink-0">
@@ -53,12 +56,11 @@ const arrow =
         </button>
       </div>
     </Container>
-    <div data-guide class="border-line relative border-t">
+    <div class="border-line relative border-t">
       <Container class="pointer-events-none absolute inset-0">
         <GridMark class="absolute top-0 left-gutter" />
       </Container>
       <Container class="@container">
-        <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
         <div
           role="region"
           aria-roledescription="carousel"
@@ -77,7 +79,7 @@ const arrow =
               >
                 {page.map(({ data }) => (
                   <figure class="group pt-12 pr-10 transition-opacity pointer-fine:opacity-90 pointer-fine:hover:opacity-100 lg:pr-16 motion-ui">
-                    <blockquote class="text-ink text-xl font-light text-balance">
+                    <blockquote class="text-graphite/80 text-xl font-light text-balance">
                       <p>{data.quote}</p>
                     </blockquote>
                     <figcaption class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-6">
@@ -116,7 +118,7 @@ const arrow =
           </div>
         </div>
         <div class="mt-16 pb-12 lg:mt-24 lg:pb-16">
-          <LogoMarquee class="mask-fade-x overflow-clip" large dark />
+          <LogoMarquee class="mask-fade-x overflow-clip" large />
         </div>
       </Container>
     </div>
