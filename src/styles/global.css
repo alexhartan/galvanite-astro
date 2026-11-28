@@ -114,7 +114,6 @@
   --text-lead-hero-xl--line-height: var(--leading-lead-hero);
 
   --container-page: 83rem;
-  --container-page-inset: min(83rem, calc(100% - 8.5rem));
   --container-headline: 8.5em;
   --container-lead: 30rem;
   --container-lead-hero: 25em;
@@ -129,7 +128,8 @@
   --spacing-price-featured: calc(
     var(--spacing-price) - 0.84 * (var(--text-price-lg) - var(--text-price))
   );
-  --spacing-page-bleed: min(
+  --spacing-page-bleed: clamp(
+    0px,
     calc((100vw - var(--container-page)) / 2 + var(--spacing-gutter)),
     25rem
   );
@@ -138,6 +138,7 @@
   --spacing-slide-lg: calc(50cqi - 1.25rem);
   --spacing-triple: 300%;
 
+  --breakpoint-rail: 98rem;
   --breakpoint-3xl: 100rem;
   --breakpoint-4xl: 120rem;
 
@@ -576,12 +577,7 @@
 }
 
 @utility bleed-r {
-  margin-right: calc(-1 * var(--spacing-gutter));
-  @variant 3xl {
-    margin-right: calc(
-      -1 * (var(--spacing-gutter) + var(--spacing-page-bleed))
-    );
-  }
+  margin-right: calc(-1 * (var(--spacing-gutter) + var(--spacing-page-bleed)));
 }
 
 @utility bleed-x {
