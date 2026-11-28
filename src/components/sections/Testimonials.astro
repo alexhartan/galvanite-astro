@@ -31,10 +31,7 @@ const arrow =
 
 <Section id={id}>
   <SectionFrame top={false} edge={false} />
-  <div data-testimonials data-guide class="relative pt-20 lg:pt-28">
-    <Container>
-      <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
-    </Container>
+  <div data-testimonials class="pt-20 lg:pt-28">
     <Container class="flex items-end justify-between gap-6 pb-4">
       <h2 class="text-section text-ocean">{heading}</h2>
       <div class="relative z-10 -mb-4 flex shrink-0">
@@ -56,11 +53,12 @@ const arrow =
         </button>
       </div>
     </Container>
-    <div class="border-line relative border-t">
+    <div data-guide class="border-line relative border-t">
       <Container class="pointer-events-none absolute inset-0">
         <GridMark class="absolute top-0 left-gutter" />
       </Container>
       <Container class="@container">
+        <Eyebrow id={`${id}-label`}>{label}</Eyebrow>
         <div
           role="region"
           aria-roledescription="carousel"
