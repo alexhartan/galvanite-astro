@@ -105,12 +105,6 @@ const tiles: {
     <h3 class="text-panel font-normal text-white lg:whitespace-nowrap">
       {heading}
     </h3>
-    <p
-      data-contact-text
-      class="text-answer text-frost/75 mt-5 max-w-sm font-normal transition-opacity motion-ui"
-    >
-      {text}
-    </p>
   </div>
 </div>
 
@@ -134,9 +128,7 @@ const tiles: {
       button.setAttribute('aria-expanded', String(open));
       copy.inert = !open;
     };
-    button.addEventListener('click', () =>
-      set(!tile.hasAttribute('data-open')),
-    );
+    tile.addEventListener('click', () => set(!tile.hasAttribute('data-open')));
     tile.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') set(false);
     });
