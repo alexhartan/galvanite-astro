@@ -332,8 +332,8 @@
 }
 
 @utility depth-contact {
-  --pw: 2.584em;
-  --sx: 0.42;
+  --pw: 2.4em;
+  --sx: 0.452;
   --ph: 1.084em;
   --py: 1;
   --dy: 0px;
@@ -357,8 +357,8 @@
     --sx: 0.197;
   }
   @media (width < 40rem) {
-    --pw: 2.584em;
-    --sx: 0.42;
+    --pw: 2.4em;
+    --sx: 0.452;
   }
   & .depth-panel {
     position: absolute;
@@ -375,6 +375,27 @@
     transition:
       scale 500ms var(--ease-in-out-sine),
       opacity 500ms var(--ease-in-out-sine);
+  }
+  & .depth-toggle {
+    position: absolute;
+    top: 0.09em;
+    right: 0.09em;
+    display: block;
+    width: 0.075em;
+    height: 0.075em;
+    z-index: 1;
+    color: var(--color-sky);
+    pointer-events: none;
+    cursor: pointer;
+    transition:
+      translate 500ms var(--ease-in-out-sine),
+      rotate 500ms var(--ease-in-out-sine),
+      scale 300ms var(--ease-out-soft);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:not([data-open]):hover .depth-toggle {
+      scale: 1.35;
+    }
   }
   & .depth-portrait {
     position: relative;
@@ -406,6 +427,12 @@
     & .depth-panel {
       scale: 1;
       opacity: 1;
+    }
+    cursor: auto;
+    & .depth-toggle {
+      translate: calc((var(--pw) - 1.084em) / 2) var(--lift);
+      rotate: 45deg;
+      pointer-events: auto;
     }
     & .depth-portrait {
       transform: translate(calc((1.084em - var(--pw)) / 2), var(--lift))
