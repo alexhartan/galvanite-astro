@@ -93,6 +93,12 @@
   --text-intent-lg--letter-spacing: var(--tracking-display);
   --text-intent-xl: calc(78cqi / 15);
   --text-intent-xl--letter-spacing: var(--tracking-display);
+  --text-contact: calc(var(--text-intent) * 0.88);
+  --text-contact--letter-spacing: var(--tracking-headline);
+  --text-contact-lg: calc(var(--text-intent-lg) * 0.88);
+  --text-contact-lg--letter-spacing: var(--tracking-display);
+  --text-contact-xl: calc(var(--text-intent-xl) * 0.88);
+  --text-contact-xl--letter-spacing: var(--tracking-display);
   --text-display: clamp(3.25rem, 6.77vw, 8.125rem);
   --text-display--line-height: var(--leading-display);
   --text-display--letter-spacing: var(--tracking-display);

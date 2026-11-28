@@ -46,7 +46,7 @@ const tiles: {
 
 <div
   class:list={[
-    'bg-radial-[ellipse_50%_133%_at_50%_0%] from-space-800 via-space-900 to-space-950 depth-card relative aspect-3/5 overflow-clip rounded-3xl sm:aspect-1600/720',
+    'bg-radial-[ellipse_50%_133%_at_50%_0%] from-space-800 via-space-900 to-space-950 depth-card relative aspect-2/3 overflow-clip rounded-3xl sm:aspect-1600/648',
     className,
   ]}
 >
@@ -119,7 +119,7 @@ const tiles: {
     ))}
   </div>
   <div class="pointer-events-none relative p-8 lg:p-12">
-    <h3 class="text-intent lg:text-intent-lg 4xl:text-intent-xl leading-none font-light whitespace-pre-line text-white">
+    <h3 class="text-contact lg:text-contact-lg 4xl:text-contact-xl leading-display font-light whitespace-pre-line text-white">
       {heading}
     </h3>
   </div>
@@ -143,11 +143,12 @@ const tiles: {
       const box = card.getBoundingClientRect();
       const rect = tile.getBoundingClientRect();
       const top = rect.top + rect.height / 2 - height / 2;
-      const room = box.bottom - 12 - (top + height);
-      const push = Math.min(
-        Math.max(title.getBoundingClientRect().bottom + 16 - top, 0),
-        Math.max(room, 0),
-      );
+      const floor = box.bottom - 12 - height;
+      const push =
+        Math.min(
+          Math.max(top, title.getBoundingClientRect().bottom + 16),
+          floor,
+        ) - top;
       tile.style.setProperty('--dy', `${push}px`);
     };
     addEventListener('resize', size);
