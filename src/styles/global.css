@@ -279,7 +279,12 @@
 @custom-variant issues-error (:where([data-issues-error]) &);
 
 @utility mask-fade-y {
-  mask-image: linear-gradient(rgb(0 0 0 / 0.1), black 30%, black 70%, rgb(0 0 0 / 0.1));
+  mask-image: linear-gradient(
+    rgb(0 0 0 / 0.1),
+    black 30%,
+    black 70%,
+    rgb(0 0 0 / 0.1)
+  );
 }
 
 @utility depth-tile {
@@ -316,6 +321,12 @@
     opacity: 0;
     transition: opacity 400ms var(--ease-out-soft);
   }
+  &:has([data-open]) [data-depth-light] {
+    opacity: 1;
+  }
+  &:has([data-open]) [data-contact-text] {
+    opacity: 0;
+  }
   @media (hover: hover) and (pointer: fine) {
     &:has([data-focus]:hover) [data-depth-light] {
       opacity: 1;
@@ -323,12 +334,103 @@
   }
 }
 
-@utility depth-stage {
-  @media (hover: hover) and (pointer: fine) {
-    & [data-focus] {
-      cursor: pointer;
+@utility depth-contact {
+  --pw: 2.584em;
+  --sx: 0.42;
+  --py: 1;
+  --ph: calc(1.084em / var(--py));
+  --lift: calc(1.084em - var(--ph));
+  @media (width < 96rem) {
+    --pw: 3.2em;
+    --sx: 0.339;
+  }
+  @media (width < 64rem) {
+    --pw: 5.5em;
+    --sx: 0.197;
+  }
+  @media (width < 40rem) {
+    --pw: 2.584em;
+    --sx: 0.42;
+    --py: 0.45;
+  }
+  & .depth-panel {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: var(--pw);
+    height: var(--ph);
+    translate: -50% 0;
+    transform-origin: 50% 100%;
+    scale: var(--sx) var(--py);
+    opacity: 0;
+    background: white;
+    border-radius: 0.083em;
+    box-shadow: 0 0 0.167em var(--color-azure-deep);
+    transition:
+      scale 500ms var(--ease-in-out-sine),
+      opacity 300ms var(--ease-out-soft);
+  }
+  & .depth-portrait {
+    position: relative;
+    display: block;
+    transform-origin: 0 0;
+    transition: transform 500ms var(--ease-in-out-sine);
+  }
+  & .depth-portrait img {
+    transition:
+      box-shadow 400ms var(--ease-out-soft),
+      border-radius 500ms var(--ease-in-out-sine);
+  }
+  & .depth-copy {
+    position: absolute;
+    top: calc(var(--lift) + 0.042em);
+    left: calc(0.602em - (var(--pw) - 1.084em) / 2);
+    width: calc(var(--pw) - 0.644em);
+    height: calc(var(--ph) - 0.084em);
+    overflow: hidden;
+    opacity: 0;
+    translate: -0.04em 0;
+    transition:
+      opacity 250ms var(--ease-out-soft),
+      translate 400ms var(--ease-out-soft);
+  }
+  &[data-open] {
+    & .depth-panel {
+      scale: 1;
+      opacity: 1;
     }
-    & [data-focus]:hover {
+    & .depth-portrait {
+      transform: translate(calc((1.084em - var(--pw)) / 2), var(--lift))
+        scale(0.5);
+    }
+    & .depth-portrait img {
+      border-radius: 0.104em;
+      box-shadow: none;
+    }
+    & .depth-copy {
+      opacity: 1;
+      translate: 0 0;
+      transition-delay: 250ms;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    &[data-open] {
+      & * {
+        transition: none;
+      }
+    }
+  }
+}
+
+@utility depth-stage {
+  &:has([data-open]) .depth-tile:not([data-focus]) {
+    --zx: var(--ox);
+    --zy: var(--oy);
+    --zs: var(--os);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    & [data-focus]:not([data-open]):hover {
       scale: 1.1;
       box-shadow: 0 0 0.35em var(--color-azure-deep);
       & img {
@@ -345,7 +447,8 @@
     & .depth-tile {
       transition: none;
     }
-    &:has([data-focus]:hover) .depth-tile:not([data-focus]) {
+    &:has([data-focus]:hover) .depth-tile:not([data-focus]),
+    &:has([data-open]) .depth-tile:not([data-focus]) {
       --zx: 0;
       --zy: 0;
       --zs: 1;
@@ -433,7 +536,9 @@
 @utility bleed-r {
   margin-right: calc(-1 * var(--spacing-gutter));
   @variant 3xl {
-    margin-right: calc(-1 * (var(--spacing-gutter) + var(--spacing-page-bleed)));
+    margin-right: calc(
+      -1 * (var(--spacing-gutter) + var(--spacing-page-bleed))
+    );
   }
 }
 
@@ -720,7 +825,6 @@
     overflow: hidden;
   }
 }
-
 
 @utility page-hero {
   min-height: 40svh;

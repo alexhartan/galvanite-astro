@@ -17,9 +17,10 @@ interface Props {
   heading: string;
   text: string;
   alt: string;
+  greeting: string;
   class?: string;
 }
-const { heading, text, alt, class: className } = Astro.props;
+const { heading, text, alt, greeting, class: className } = Astro.props;
 const STAGE = 809;
 const zoom = (depth: number) => 0.06 + (1 - depth) * 0.22;
 const tiles: {
@@ -58,17 +59,48 @@ const tiles: {
     {tiles.map(({ src, x, y, size, depth }) => (
       <div
         data-parallax={depth ? (Math.sqrt(depth) * 0.3).toFixed(3) : undefined}
-        class="depth-tile bg-azure-deep/35 border border-white/30"
+        class:list={[
+          'depth-tile bg-azure-deep/35 border border-white/30',
+          !depth && 'depth-contact',
+        ]}
         data-focus={depth ? undefined : ''}
         style={`--x: ${(x / 1600) * 100}%; --y: ${(y / STAGE) * 100}%; --s: ${((size * (depth ? 0.85 : 1)) / 720) * 100}cqh; --d: ${depth}; --ox: ${(((x - 800) / 1600) * 100 * zoom(depth)).toFixed(2)}cqw; --oy: ${(((y - 405) / STAGE) * 100 * zoom(depth)).toFixed(2)}cqh; --os: ${(1 + zoom(depth) * 0.6).toFixed(3)}`}
       >
-        <Image
-          src={src}
-          alt={depth === 0 ? alt : ''}
-          widths={[size, size * 2].map((w) => Math.min(w, src.width))}
-          sizes={`${size}px`}
-          class="object-cover"
-        />
+        {depth ? (
+          <Image
+            src={src}
+            alt=""
+            widths={[size, size * 2].map((w) => Math.min(w, src.width))}
+            sizes={`${size}px`}
+            class="object-cover"
+          />
+        ) : (
+          <>
+            <div aria-hidden="true" class="depth-panel" />
+            <button
+              type="button"
+              aria-expanded="false"
+              aria-controls="contact-copy"
+              class="depth-portrait cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              <Image
+                src={src}
+                alt={alt}
+                widths={[size, size * 2].map((w) => Math.min(w, src.width))}
+                sizes={`${size}px`}
+                class="object-cover"
+              />
+            </button>
+            <div id="contact-copy" class="depth-copy" inert>
+              <p class="text-graphite/80 text-xs font-normal 2xl:text-sm">
+                {greeting}
+              </p>
+              <p class="text-ink mt-2 text-sm font-normal text-pretty sm:text-xs lg:text-sm 2xl:text-base">
+                {text}
+              </p>
+            </div>
+          </>
+        )}
       </div>
     ))}
   </div>
@@ -76,10 +108,32 @@ const tiles: {
     <h3 class="text-panel font-normal text-white lg:whitespace-nowrap">
       {heading}
     </h3>
-    <p class="text-answer text-frost/75 mt-5 max-w-sm font-normal">{text}</p>
+    <p
+      data-contact-text
+      class="text-answer text-frost/75 mt-5 max-w-sm font-normal transition-opacity motion-ui"
+    >
+      {text}
+    </p>
   </div>
 </div>
 
 <script>
   import '../../scripts/parallax';
+
+  for (const tile of document.querySelectorAll<HTMLElement>('.depth-contact')) {
+    const button = tile.querySelector('button');
+    const copy = tile.querySelector<HTMLElement>('.depth-copy');
+    if (!button || !copy) continue;
+    const set = (open: boolean) => {
+      tile.toggleAttribute('data-open', open);
+      button.setAttribute('aria-expanded', String(open));
+      copy.inert = !open;
+    };
+    button.addEventListener('click', () =>
+      set(!tile.hasAttribute('data-open')),
+    );
+    tile.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') set(false);
+    });
+  }
 </script>
